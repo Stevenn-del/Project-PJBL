@@ -1,0 +1,442 @@
+/* ==========================================================================
+   KARSA POTRET - JEJAK SEJARAH JAWA TENGAH
+   Desktop Web Experience (1366px, 1440px, 1920px)
+   ========================================================================== */
+
+/* Design Tokens */
+:root {
+  /* Color Palette */
+  --kp-color-cream: #F8F3E6;
+  --kp-color-cream-hover: #FFFFFF;
+  --kp-color-cream-active: #E8E0CE;
+  --kp-color-dark: #1C1917;
+  --kp-color-white: #FFFFFF;
+  --kp-color-text-subtle: rgba(255, 255, 255, 0.96);
+
+  /* Typography */
+  --kp-font-serif: 'Playfair Display', Georgia, serif;
+  --kp-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Shadows */
+  --kp-shadow-button: 0 4px 16px rgba(0, 0, 0, 0.22);
+  --kp-shadow-button-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --kp-shadow-heading: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.85);
+  --kp-shadow-body: 0 1px 8px rgba(0, 0, 0, 0.75);
+
+  /* Transitions */
+  --kp-transition-smooth: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --kp-transition-crossfade: 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles & Desktop Minimum Width */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #0E1116;
+  font-family: var(--kp-font-sans);
+  color: var(--kp-color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 1200px; /* Desktop only - prevents mobile collapsing */
+}
+
+/* ==========================================================================
+   HERO VIEWPORT & SLIDESHOW
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slideshow Container */
+.slideshow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Slides */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--kp-transition-crossfade), visibility var(--kp-transition-crossfade);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: scale(1.0);
+  will-change: opacity, transform;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  animation: subtleSlowZoom 7.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Subtle, cinematic slow zoom (Ken Burns) */
+@keyframes subtleSlowZoom {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+
+/* Hero Overlay Scrim (Ensures typography legibility without dimming cultural details) */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: 
+    linear-gradient(180deg, 
+      rgba(10, 14, 20, 0.40) 0%, 
+      rgba(10, 14, 20, 0.10) 30%, 
+      rgba(10, 14, 20, 0.24) 65%, 
+      rgba(10, 14, 20, 0.58) 100%),
+    linear-gradient(90deg, 
+      rgba(10, 14, 20, 0.52) 0%, 
+      rgba(10, 14, 20, 0.28) 45%, 
+      rgba(10, 14, 20, 0.04) 85%);
+}
+
+/* ==========================================================================
+   DESKTOP NAVBAR
+   ========================================================================== */
+
+.desktop-header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 20px;
+}
+
+.desktop-header .container-fluid {
+  max-width: 1820px;
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Left: Logo */
+.brand-wrapper {
+  flex: 0 0 auto;
+}
+
+.brand-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform var(--kp-transition-smooth);
+}
+
+.brand-link:hover {
+  transform: scale(1.025);
+}
+
+.brand-logo-img {
+  height: 74px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+/* Center: Navigation Links */
+.nav-center-wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links-list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item-link {
+  color: var(--kp-color-white);
+  font-family: var(--kp-font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  padding: 6px 2px;
+  text-shadow: var(--kp-shadow-body);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-item-link:hover {
+  color: var(--kp-color-cream);
+  opacity: 0.9;
+}
+
+.nav-item-link.active {
+  color: var(--kp-color-cream);
+  position: relative;
+}
+
+.nav-item-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #D4AF37;
+  border-radius: 2px;
+}
+
+/* Right: Photobooth Button */
+.nav-right-wrapper {
+  flex: 0 0 auto;
+}
+
+.btn-photobooth {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background-color: var(--kp-color-cream);
+  color: var(--kp-color-dark);
+  font-family: var(--kp-font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 11px 25px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--kp-shadow-button);
+  transition: transform var(--kp-transition-smooth), 
+              box-shadow var(--kp-transition-smooth), 
+              background-color var(--kp-transition-smooth);
+}
+
+.btn-photobooth i {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.btn-photobooth:hover {
+  background-color: var(--kp-color-cream-hover);
+  color: var(--kp-color-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--kp-shadow-button-hover);
+}
+
+.btn-photobooth:active {
+  transform: translateY(0);
+  background-color: var(--kp-color-cream-active);
+}
+
+/* ==========================================================================
+   HERO MAIN CONTENT (STATIONARY & ANCHORED)
+   ========================================================================== */
+
+.hero-main {
+  position: relative;
+  z-index: 10;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  padding-bottom: 80px;
+}
+
+.hero-main .container-fluid {
+  max-width: 1820px;
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+.hero-content-box {
+  max-width: 660px;
+}
+
+/* Editorial Serif Main Heading */
+.hero-heading {
+  font-family: var(--kp-font-serif);
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: 0.015em;
+  color: var(--kp-color-white);
+  text-transform: uppercase;
+  margin: 0 0 22px 0;
+  text-shadow: var(--kp-shadow-heading);
+}
+
+/* Supporting Description */
+.hero-description {
+  font-family: var(--kp-font-sans);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.58;
+  color: var(--kp-color-text-subtle);
+  margin: 0 0 34px 0;
+  text-shadow: var(--kp-shadow-body);
+  max-width: 500px;
+}
+
+/* Start Exploring CTA Button */
+.btn-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--kp-color-cream);
+  color: var(--kp-color-dark);
+  font-family: var(--kp-font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 13px 32px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: var(--kp-shadow-button);
+  transition: transform var(--kp-transition-smooth), 
+              box-shadow var(--kp-transition-smooth), 
+              background-color var(--kp-transition-smooth);
+}
+
+.btn-explore .arrow {
+  font-family: var(--kp-font-sans);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--kp-transition-smooth);
+}
+
+.btn-explore:hover {
+  background-color: var(--kp-color-cream-hover);
+  color: var(--kp-color-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--kp-shadow-button-hover);
+}
+
+.btn-explore:hover .arrow {
+  transform: translateX(4px);
+}
+
+.btn-explore:active {
+  transform: translateY(0);
+  background-color: var(--kp-color-cream-active);
+}
+
+/* ==========================================================================
+   DESKTOP RESOLUTION TUNING (1366px, 1440px, 1920px)
+   ========================================================================== */
+
+/* 1366px viewport optimizations */
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .desktop-header .container-fluid,
+  .hero-main .container-fluid {
+    padding-left: 52px;
+    padding-right: 52px;
+  }
+  
+  .brand-logo-img {
+    height: 66px;
+  }
+  
+  .nav-links-list {
+    gap: 32px;
+  }
+  
+  .nav-item-link {
+    font-size: 15px;
+  }
+  
+  .hero-heading {
+    font-size: 58px;
+  }
+  
+  .hero-description {
+    font-size: 18px;
+  }
+}
+
+/* 1920px (Full HD & widescreen) */
+@media (min-width: 1750px) {
+  .desktop-header {
+    padding-top: 40px;
+    padding-bottom: 28px;
+  }
+  
+  .desktop-header .container-fluid,
+  .hero-main .container-fluid {
+    padding-left: 92px;
+    padding-right: 92px;
+  }
+  
+  .brand-logo-img {
+    height: 84px;
+  }
+  
+  .nav-links-list {
+    gap: 48px;
+  }
+  
+  .nav-item-link {
+    font-size: 18px;
+  }
+  
+  .btn-photobooth {
+    font-size: 16px;
+    padding: 13px 28px;
+  }
+  
+  .hero-heading {
+    font-size: 78px;
+  }
+  
+  .hero-description {
+    font-size: 22px;
+    max-width: 580px;
+  }
+  
+  .btn-explore {
+    font-size: 19px;
+    padding: 15px 36px;
+  }
+}

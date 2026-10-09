@@ -1,0 +1,16 @@
+{
+  "name": "project-pjbl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/run-playwright-tests.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  }
+}
