@@ -1,0 +1,293 @@
+/**
+ * ==============================================================================
+ * KARSA POTRET — REDESIGN DESIGN SYSTEM & MANDATORY COLOR PALETTE
+ * ==============================================================================
+ * Applied strictly to redesigned non-Home pages:
+ * (timeline.html, peta.html, photobooth.html, wayang-motion.html)
+ * 
+ * MANDATORY FIVE-COLOR PALETTE:
+ * 1. Deep brown   : #611F0A (Primary text, strong headings, dark backgrounds, navigation elements)
+ * 2. Warm brown   : #8D4B1F (Secondary headings, emphasized elements, selected component backgrounds)
+ * 3. Terracotta   : #B46F39 (Accent colors, links, interactive elements, selected highlights)
+ * 4. Sand         : #D6AE7C (Secondary backgrounds, subtle surface differentiation, decorative accents)
+ * 5. Cream        : #F0D9A7 (Main light surfaces, highlighted areas, warm background sections)
+ * ==============================================================================
+ */
+
+:root {
+  /* Mandatory Core Five-Color Palette */
+  --color-deep-brown: #611F0A;
+  --color-warm-brown: #8D4B1F;
+  --color-terracotta: #B46F39;
+  --color-sand: #D6AE7C;
+  --color-cream: #F0D9A7;
+
+  /* Semantic Color Mappings */
+  --kp-bg-main: #F7EBD2;              /* Warmest ivory/cream canvas */
+  --kp-bg-cream: #F0D9A7;             /* Main light surface */
+  --kp-bg-sand: #D6AE7C;              /* Secondary accent surface */
+  --kp-bg-dark: #611F0A;              /* Primary dark grounding surface */
+  --kp-bg-dark-alt: #4D1807;          /* Deepest contrast anchor */
+  --kp-bg-warm-brown: #8D4B1F;        /* Secondary dark / component container */
+  --kp-bg-card-light: #FFF8EB;        /* Luminous cream card background */
+  
+  --kp-text-primary: #611F0A;         /* Primary high-contrast text on light */
+  --kp-text-secondary: #8D4B1F;       /* Secondary descriptive text on light */
+  --kp-text-muted: #9E653D;           /* Muted caption text on light */
+  
+  --kp-text-on-dark: #F0D9A7;         /* Primary text on dark surfaces */
+  --kp-text-on-dark-dim: #D6AE7C;     /* Secondary text on dark surfaces */
+  --kp-text-on-dark-muted: #B89A78;   /* Muted text on dark surfaces */
+  
+  --kp-accent: #B46F39;               /* Terracotta accent for buttons, active state */
+  --kp-accent-hover: #965324;         /* Deepened terracotta on hover */
+  --kp-border-sand: rgba(214, 174, 124, 0.45);
+  --kp-border-warm: rgba(141, 75, 31, 0.35);
+  --kp-border-dark: rgba(97, 31, 10, 0.25);
+  
+  /* Typography Tokens */
+  --kp-font-serif: 'Playfair Display', Georgia, serif;
+  --kp-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  /* Radii Tokens */
+  --kp-radius-xs: 4px;
+  --kp-radius-sm: 8px;
+  --kp-radius-md: 14px;
+  --kp-radius-lg: 20px;
+  --kp-radius-pill: 9999px;
+  
+  /* Elevation Shadows */
+  --kp-shadow-soft: 0 4px 18px rgba(97, 31, 10, 0.08);
+  --kp-shadow-md: 0 8px 28px rgba(97, 31, 10, 0.14);
+  --kp-shadow-dark: 0 12px 36px rgba(45, 12, 3, 0.35);
+  
+  /* Transitions */
+  --kp-transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --kp-transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==============================================================================
+   SHARED EDITORIAL NAVBAR (FOR REDESIGNED NON-HOME PAGES)
+   ============================================================================== */
+.desktop-header-timeline,
+.desktop-header-karsa {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(97, 31, 10, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(214, 174, 124, 0.3);
+  padding: 12px 0;
+  transition: background var(--kp-transition-fast);
+}
+
+.desktop-header-timeline .container-fluid,
+.desktop-header-karsa .container-fluid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.navbar-inner-timeline,
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Brand Emblem */
+.brand-wrapper .brand-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-wrapper .brand-logo-img {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  transition: transform var(--kp-transition-fast);
+}
+
+.brand-wrapper .brand-link:hover .brand-logo-img {
+  transform: scale(1.03);
+}
+
+/* Primary Nav Links */
+.nav-center-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  background: rgba(77, 24, 7, 0.6);
+  border: 1px solid rgba(214, 174, 124, 0.2);
+  border-radius: var(--kp-radius-pill);
+}
+
+.nav-links-list li {
+  margin: 0;
+}
+
+.nav-links-list .nav-item-link {
+  display: inline-block;
+  padding: 8px 18px;
+  font-family: var(--kp-font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-cream);
+  text-decoration: none;
+  border-radius: var(--kp-radius-pill);
+  transition: all var(--kp-transition-fast);
+  white-space: nowrap;
+}
+
+.nav-links-list .nav-item-link:hover {
+  color: #FFFFFF;
+  background: rgba(180, 111, 57, 0.3);
+}
+
+.nav-links-list .nav-item-link.active {
+  color: var(--color-deep-brown);
+  background: var(--color-sand);
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Photobooth Button */
+.btn-photobooth {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background: var(--color-terracotta);
+  color: #FFFFFF !important;
+  font-family: var(--kp-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--kp-radius-pill);
+  border: 1px solid rgba(240, 217, 167, 0.35);
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
+  transition: all var(--kp-transition-fast);
+}
+
+.btn-photobooth:hover {
+  background: var(--color-warm-brown);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(141, 75, 31, 0.45);
+}
+
+.btn-photobooth.active {
+  background: var(--color-sand);
+  color: var(--color-deep-brown) !important;
+  border-color: var(--color-cream);
+}
+
+/* ==============================================================================
+   SHARED EDITORIAL FOOTER
+   ============================================================================== */
+.desktop-footer-timeline,
+.desktop-footer-karsa {
+  background: var(--color-deep-brown);
+  color: var(--color-cream);
+  border-top: 1px solid rgba(214, 174, 124, 0.25);
+  padding: 60px 0 28px;
+  font-family: var(--kp-font-sans);
+}
+
+.desktop-footer-timeline .container-fluid,
+.desktop-footer-karsa .container-fluid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(214, 174, 124, 0.18);
+}
+
+.footer-brand-col .footer-logo-img {
+  height: 52px;
+  width: auto;
+  margin-bottom: 18px;
+}
+
+.footer-tagline {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-sand);
+  max-width: 380px;
+}
+
+.footer-nav-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footer-nav-group-title {
+  font-family: var(--kp-font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-sand);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.footer-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav-link {
+  color: rgba(240, 217, 167, 0.8);
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: color var(--kp-transition-fast);
+}
+
+.footer-nav-link:hover,
+.footer-nav-link.active {
+  color: var(--color-sand);
+}
+
+.footer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  font-size: 12.5px;
+  color: rgba(214, 174, 124, 0.7);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-bottom-link {
+  color: rgba(214, 174, 124, 0.7);
+  text-decoration: none;
+  transition: color var(--kp-transition-fast);
+}
+
+.footer-bottom-link:hover {
+  color: var(--color-cream);
+}

@@ -98,7 +98,11 @@ server.listen(PORT, HOST, () => {
   console.log('----------------------------------------------------');
   console.log(`   Halaman Utama:  http://${localIp}:${PORT}/index.html`);
   console.log(`   Timeline:       http://${localIp}:${PORT}/timeline.html`);
+  console.log(`   Tokoh:          http://${localIp}:${PORT}/tokoh.html`);
+  console.log(`   Warisan Budaya: http://${localIp}:${PORT}/warisan-budaya.html`);
+  console.log(`   Peta:           http://${localIp}:${PORT}/peta.html`);
   console.log(`   Wayang Motion:  http://${localIp}:${PORT}/wayang-motion.html`);
+  console.log(`   Photobooth:     http://${localIp}:${PORT}/photobooth.html`);
   console.log('====================================================');
   console.log('Tekan Ctrl + C di terminal jika ingin menghentikan server.');
 });

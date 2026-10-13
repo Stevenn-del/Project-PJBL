@@ -1,0 +1,892 @@
+/**
+ * ==============================================================================
+ * KARSA POTRET — TOKOH BERSEJARAH DEDICATED EDITORIAL STYLESHEET
+ * ==============================================================================
+ * Layout: Portrait-Led Editorial Presentation (Museum Monograph & Archival Profile)
+ * Strict 5-Color Palette:
+ * - Deep brown  : #611F0A (Headings, primary text, dark backgrounds)
+ * - Warm brown  : #8D4B1F (Secondary titles, metadata, subtle borders)
+ * - Terracotta  : #B46F39 (Accents, active pills, action buttons)
+ * - Sand        : #D6AE7C (Frames, borders, dividers, secondary tags)
+ * - Cream       : #F0D9A7 (Light surfaces, placards, soft highlights)
+ * ==============================================================================
+ */
+
+/* ------------------------------------------------------------------------------
+   1. RESET & BASE VARIABLES FOR TOKOH
+   ------------------------------------------------------------------------------ */
+:root {
+  --tk-deep-brown: #611F0A;
+  --tk-warm-brown: #8D4B1F;
+  --tk-terracotta: #B46F39;
+  --tk-sand: #D6AE7C;
+  --tk-cream: #F0D9A7;
+
+  --tk-bg-canvas: #FBF7EE;
+  --tk-bg-surface: #FFFDF9;
+  --tk-bg-card: #FFFFFF;
+  --tk-bg-muted: #F5E8D0;
+  
+  --tk-font-serif: 'Playfair Display', Georgia, serif;
+  --tk-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  --tk-radius-sm: 6px;
+  --tk-radius-md: 12px;
+  --tk-radius-lg: 18px;
+  --tk-radius-pill: 9999px;
+  
+  --tk-shadow-subtle: 0 4px 16px rgba(97, 31, 10, 0.06);
+  --tk-shadow-editorial: 0 10px 30px rgba(97, 31, 10, 0.09);
+  --tk-shadow-hover: 0 16px 40px rgba(97, 31, 10, 0.14);
+}
+
+body.tokoh-page-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--tk-bg-canvas);
+  color: var(--tk-deep-brown);
+  font-family: var(--tk-font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------------------------------------------------------
+   2. EDITORIAL NAVBAR
+   ------------------------------------------------------------------------------ */
+.desktop-header-tokoh {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(97, 31, 10, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(214, 174, 124, 0.35);
+  padding: 12px 0;
+  transition: all 0.25s ease;
+}
+
+.desktop-header-tokoh .container-fluid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.navbar-inner-tokoh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand-wrapper .brand-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.nav-links-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+}
+
+.nav-links-list li a.nav-item-link {
+  color: var(--tk-cream);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 6px 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-links-list li a.nav-item-link:hover,
+.nav-links-list li a.nav-item-link.active {
+  color: #FFFFFF;
+}
+
+.nav-links-list li a.nav-item-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--tk-terracotta);
+  border-radius: 2px;
+}
+
+.btn-wayang-action {
+  background: var(--tk-terracotta);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--tk-radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(240, 217, 167, 0.3);
+}
+
+.btn-wayang-action:hover {
+  background: #A05E2A;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
+}
+
+/* ------------------------------------------------------------------------------
+   3. EDITORIAL HERO & SIGNPOST
+   ------------------------------------------------------------------------------ */
+.tokoh-hero-section {
+  padding: 64px 0 48px;
+  background: linear-gradient(180deg, #F5EBD7 0%, var(--tk-bg-canvas) 100%);
+  border-bottom: 1px solid rgba(214, 174, 124, 0.4);
+  text-align: center;
+  position: relative;
+}
+
+.tokoh-hero-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.editorial-signpost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--tk-terracotta);
+  background: rgba(180, 111, 57, 0.09);
+  padding: 6px 18px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(180, 111, 57, 0.22);
+  margin-bottom: 20px;
+}
+
+.tokoh-main-title {
+  font-family: var(--tk-font-serif);
+  font-size: clamp(34px, 4.2vw, 52px);
+  font-weight: 700;
+  color: var(--tk-deep-brown);
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+
+.tokoh-main-title .gold-accent {
+  color: var(--tk-terracotta);
+  font-style: italic;
+}
+
+.tokoh-main-lead {
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.65;
+  color: var(--tk-warm-brown);
+  max-width: 760px;
+  margin: 0 auto 32px;
+}
+
+/* ------------------------------------------------------------------------------
+   4. TOKOH FILTER BAR (SPACIOUS PILLS)
+   ------------------------------------------------------------------------------ */
+.tokoh-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tokoh-filter-pill {
+  background: #FFFFFF;
+  border: 1px solid var(--tk-sand);
+  color: var(--tk-deep-brown);
+  font-family: var(--tk-font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--tk-radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.22s ease;
+  box-shadow: 0 2px 6px rgba(97, 31, 10, 0.04);
+}
+
+.tokoh-filter-pill:hover {
+  background: #FFF8EB;
+  border-color: var(--tk-terracotta);
+  color: var(--tk-terracotta);
+  transform: translateY(-1px);
+}
+
+.tokoh-filter-pill.active {
+  background: var(--tk-terracotta);
+  border-color: var(--tk-terracotta);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.3);
+}
+
+.tokoh-filter-pill.active i {
+  color: var(--tk-cream);
+}
+
+/* ------------------------------------------------------------------------------
+   5. FEATURED SPOTLIGHT SHOWCASE (LARGE PORTRAIT + DESCRIPTIVE TEXT)
+   ------------------------------------------------------------------------------ */
+.tokoh-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 56px 28px 80px;
+}
+
+.tokoh-spotlight-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(214, 174, 124, 0.55);
+  border-radius: var(--tk-radius-lg);
+  box-shadow: var(--tk-shadow-editorial);
+  overflow: hidden;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.tokoh-spotlight-inner {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  align-items: center;
+}
+
+.spotlight-portrait-frame {
+  position: relative;
+  height: 100%;
+  min-height: 480px;
+  background-color: #2D0F05;
+  overflow: hidden;
+  border-right: 1px solid rgba(214, 174, 124, 0.35);
+}
+
+.spotlight-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tokoh-spotlight-card:hover .spotlight-portrait-img {
+  transform: scale(1.03);
+}
+
+.spotlight-era-plaque {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(97, 31, 10, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--tk-cream);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.4);
+}
+
+.spotlight-narrative-box {
+  padding: 44px 48px;
+}
+
+.spotlight-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.spotlight-role-tag {
+  color: var(--tk-terracotta);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.spotlight-region-pill {
+  font-size: 12px;
+  color: var(--tk-warm-brown);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.spotlight-figure-name {
+  font-family: var(--tk-font-serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  color: var(--tk-deep-brown);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.spotlight-concise-desc {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #4A1A0C;
+  margin: 0 0 24px;
+  max-width: 680px;
+}
+
+.spotlight-quote-box {
+  background: #FFF9ED;
+  border-left: 3px solid var(--tk-terracotta);
+  padding: 16px 20px;
+  border-radius: 0 var(--tk-radius-sm) var(--tk-radius-sm) 0;
+  margin-bottom: 28px;
+}
+
+.spotlight-quote-text {
+  font-family: var(--tk-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--tk-deep-brown);
+  margin: 0;
+}
+
+.spotlight-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.btn-read-tokoh-primary {
+  background: var(--tk-deep-brown);
+  color: #FFFFFF;
+  border: none;
+  font-family: var(--tk-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: var(--tk-radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(97, 31, 10, 0.2);
+}
+
+.btn-read-tokoh-primary:hover {
+  background: var(--tk-terracotta);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.35);
+}
+
+.spotlight-years-meta {
+  font-size: 13px;
+  color: var(--tk-warm-brown);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------------------
+   6. CURATED EDITORIAL SEQUENCE (SPACIOUS 2-COLUMN PRESENTATION)
+   ------------------------------------------------------------------------------ */
+.tokoh-editorial-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(214, 174, 124, 0.45);
+  padding-bottom: 14px;
+  margin-bottom: 36px;
+}
+
+.editorial-section-title {
+  font-family: var(--tk-font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--tk-deep-brown);
+  margin: 0;
+}
+
+.editorial-count-badge {
+  font-size: 13px;
+  color: var(--tk-warm-brown);
+  font-weight: 600;
+}
+
+/* Spacious 2-Column Grid for Editorial Profiles */
+.tokoh-editorial-sequence {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.tokoh-profile-card {
+  background: var(--tk-bg-card);
+  border: 1px solid rgba(214, 174, 124, 0.45);
+  border-radius: var(--tk-radius-md);
+  box-shadow: var(--tk-shadow-subtle);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.tokoh-profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tk-shadow-hover);
+  border-color: var(--tk-terracotta);
+}
+
+.tokoh-card-portrait-wrap {
+  position: relative;
+  background-color: #2D0F05;
+  height: 100%;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.tokoh-card-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.tokoh-profile-card:hover .tokoh-card-portrait-img {
+  transform: scale(1.05);
+}
+
+.tokoh-card-era-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(97, 31, 10, 0.88);
+  backdrop-filter: blur(6px);
+  color: var(--tk-cream);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.3);
+}
+
+.tokoh-card-content {
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tokoh-card-header-meta {
+  margin-bottom: 8px;
+}
+
+.tokoh-card-role {
+  color: var(--tk-terracotta);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.tokoh-card-name {
+  font-family: var(--tk-font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--tk-deep-brown);
+  line-height: 1.25;
+  margin: 0 0 6px;
+}
+
+.tokoh-card-origin {
+  font-size: 12px;
+  color: var(--tk-warm-brown);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tokoh-card-concise-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #4A1A0C;
+  margin: 10px 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tokoh-card-action-bar {
+  border-top: 1px solid rgba(214, 174, 124, 0.3);
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-read-tokoh {
+  background: transparent;
+  border: none;
+  color: var(--tk-terracotta);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-read-tokoh:hover {
+  color: var(--tk-deep-brown);
+  transform: translateX(4px);
+}
+
+.tokoh-card-period-year {
+  font-size: 11.5px;
+  color: #8D4B1F;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------------------
+   7. EDITORIAL BIOGRAPHICAL DETAIL MODAL
+   ------------------------------------------------------------------------------ */
+.modal-backdrop-editorial {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(45, 12, 3, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.modal-backdrop-editorial.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tokoh-modal-card {
+  background: #FFFFFF;
+  border: 1px solid var(--tk-sand);
+  border-radius: var(--tk-radius-lg);
+  max-width: 780px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(45, 12, 3, 0.45);
+  position: relative;
+  transform: scale(0.96) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 36px 40px;
+}
+
+.modal-backdrop-editorial.is-open .tokoh-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.tokoh-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: #F5E8D0;
+  border: 1px solid var(--tk-sand);
+  border-radius: 50%;
+  color: var(--tk-deep-brown);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tokoh-modal-close:hover {
+  background: var(--tk-terracotta);
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+.tokoh-modal-header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(214, 174, 124, 0.35);
+  padding-bottom: 20px;
+}
+
+.tokoh-modal-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--tk-sand);
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(97, 31, 10, 0.15);
+}
+
+.tokoh-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-era-badge {
+  display: inline-block;
+  background: rgba(180, 111, 57, 0.12);
+  color: var(--tk-terracotta);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--tk-radius-pill);
+  margin-bottom: 6px;
+}
+
+.tokoh-modal-name {
+  font-family: var(--tk-font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--tk-deep-brown);
+  margin: 0 0 4px;
+}
+
+.tokoh-modal-title-tag {
+  color: var(--tk-terracotta);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.tokoh-modal-loc {
+  font-size: 12.5px;
+  color: var(--tk-warm-brown);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tokoh-modal-quote {
+  background: #FFF9ED;
+  border-left: 3px solid var(--tk-terracotta);
+  padding: 16px 20px;
+  font-family: var(--tk-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--tk-deep-brown);
+  border-radius: 0 var(--tk-radius-sm) var(--tk-radius-sm) 0;
+  margin: 0 0 24px;
+}
+
+.tokoh-modal-section {
+  margin-bottom: 24px;
+}
+
+.modal-section-title {
+  font-family: var(--tk-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tk-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tokoh-modal-bio {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: #381206;
+  margin: 0;
+}
+
+.tokoh-modal-achieve-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tokoh-modal-achieve-list li {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #381206;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tokoh-modal-achieve-list li i {
+  color: var(--tk-terracotta);
+  font-size: 15px;
+  margin-top: 1px;
+}
+
+/* ------------------------------------------------------------------------------
+   8. EDITORIAL FOOTER
+   ------------------------------------------------------------------------------ */
+.tokoh-footer-section {
+  background-color: var(--tk-deep-brown);
+  color: var(--tk-cream);
+  padding: 56px 0 32px;
+  border-top: 1px solid rgba(214, 174, 124, 0.3);
+}
+
+.tokoh-footer-section .container-fluid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.tokoh-footer-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+
+.tokoh-footer-brand img {
+  height: 38px;
+  margin-bottom: 16px;
+}
+
+.tokoh-footer-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--tk-sand);
+  margin: 0;
+}
+
+.tokoh-footer-nav-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footer-nav-group-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+
+.footer-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-links a {
+  color: var(--tk-sand);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-links a:hover {
+  color: #FFFFFF;
+}
+
+.tokoh-footer-bottom {
+  border-top: 1px solid rgba(214, 174, 124, 0.2);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--tk-sand);
+}
+
+/* ------------------------------------------------------------------------------
+   9. RESPONSIVE BREAKPOINTS (1366, 1440, 1920 & MOBILE REFLOW)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .tokoh-spotlight-inner {
+    grid-template-columns: 1fr;
+  }
+  
+  .spotlight-portrait-frame {
+    min-height: 360px;
+    border-right: none;
+    border-bottom: 1px solid rgba(214, 174, 124, 0.35);
+  }
+  
+  .spotlight-narrative-box {
+    padding: 32px 28px;
+  }
+  
+  .tokoh-editorial-sequence {
+    grid-template-columns: 1fr;
+  }
+  
+  .tokoh-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .tokoh-profile-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .tokoh-card-portrait-wrap {
+    min-height: 220px;
+  }
+  
+  .nav-links-list {
+    display: none;
+  }
+  
+  .tokoh-modal-card {
+    padding: 24px;
+  }
+  
+  .tokoh-modal-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}

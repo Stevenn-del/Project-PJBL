@@ -2,6 +2,7 @@
  * ==========================================================================
  * KARSA POTRET — WAYANG MOTION CONTROLLER
  * Real-time Hand-Tracking Puppet Interaction using MediaPipe Hands
+ * Reference-Accurate Redesign with Fullscreen & Cultural Kelir Environment
  * ==========================================================================
  */
 
@@ -13,12 +14,11 @@
     lerpFactor: 0.18,          // Smooth interpolation speed (0.1 = slow/fluid, 0.3 = snappy)
     maxRotationDeg: 22,        // Max tilt angle for puppets in degrees
     pinchThreshold: 0.065,     // Normalized distance between thumb & index for gesture
-    stagePaddingX: 80,         // Stage left/right horizontal boundary margin
+    stagePaddingX: 90,         // Stage left/right horizontal boundary margin
     stagePaddingY: 60,         // Stage top/bottom vertical boundary margin
-    defaultGatotkacaXRatio: 0.30,
-    defaultGatotkacaYRatio: 0.52,
-    defaultArjunaXRatio: 0.70,
-    defaultArjunaYRatio: 0.54,
+    defaultLeftXRatio: 0.28,   // Left puppet default X position ratio
+    defaultRightXRatio: 0.72,  // Right puppet default X position ratio
+    defaultYRatio: 0.52,       // Default Y position ratio
   };
 
   // --- DOM Elements ---
@@ -27,6 +27,7 @@
     ctx: null,
     blencongLight: document.getElementById('blencong-light'),
     stageViewport: document.getElementById('stage-viewport'),
+    stageContainer: document.getElementById('wayang-experience-container'),
     statusDot: document.getElementById('status-dot'),
     statusText: document.getElementById('tracking-status-text'),
     handCountBadge: document.getElementById('hand-count-badge'),
@@ -35,6 +36,8 @@
     btnReset: document.getElementById('btn-reset-puppets'),
     btnTogglePip: document.getElementById('btn-toggle-pip'),
     btnToggleShadow: document.getElementById('btn-toggle-shadow'),
+    btnToggleFullscreen: document.getElementById('btn-toggle-fullscreen'),
+    selectPuppetMode: document.getElementById('select-puppet-mode'),
     btnOpenGuide: document.getElementById('btn-open-guide'),
     btnCloseGuide: document.getElementById('btn-close-guide'),
     btnUnderstoodGuide: document.getElementById('btn-understood-guide'),
@@ -53,6 +56,16 @@
     btnMinimizePip: document.getElementById('btn-minimize-pip'),
     btnClosePip: document.getElementById('btn-close-pip'),
     pipGuideText: document.getElementById('pip-guide-text'),
+    puppetBadgeLeft: document.getElementById('puppet-badge-left'),
+    puppetBadgeRight: document.getElementById('puppet-badge-right'),
+    puppetBadgeCenter: document.getElementById('puppet-badge-center'),
+    badgeLeftRole: document.getElementById('badge-left-role'),
+    badgeLeftName: document.getElementById('badge-left-name'),
+    badgeRightRole: document.getElementById('badge-right-role'),
+    badgeRightName: document.getElementById('badge-right-name'),
+    debogLabelLeft: document.getElementById('debog-label-left'),
+    debogLabelRight: document.getElementById('debog-label-right'),
+    fullscreenHudHelper: document.getElementById('fullscreen-hud-helper'),
   };
 
   if (!els.canvas) {
@@ -65,21 +78,32 @@
     els.webcamCtx = els.webcamCanvas.getContext('2d');
   }
 
-  // --- Images for Puppets ---
+  // --- Preloaded Puppet Assets ---
   const puppetAssets = {
+    // Reference Wayang from Instagram Reel (Primary Faithful Artwork)
+    reference: {
+      img: new Image(),
+      loaded: false,
+      src: 'assets/images/wayang-reference.png',
+      aspectRatio: 587 / 1208, // 0.485927
+    },
+    // Classic Javanese Characters
     gatotkaca: {
       img: new Image(),
       loaded: false,
       src: 'assets/images/wayang-gatotkaca.png',
-      aspectRatio: 765 / 1136,
+      aspectRatio: 765 / 1136, // 0.673415
     },
     arjuna: {
       img: new Image(),
       loaded: false,
       src: 'assets/images/wayang-arjuna.png',
-      aspectRatio: 559 / 1129,
+      aspectRatio: 559 / 1129, // 0.495128
     },
   };
+
+  puppetAssets.reference.img.onload = () => { puppetAssets.reference.loaded = true; };
+  puppetAssets.reference.img.src = puppetAssets.reference.src;
 
   puppetAssets.gatotkaca.img.onload = () => { puppetAssets.gatotkaca.loaded = true; };
   puppetAssets.gatotkaca.img.src = puppetAssets.gatotkaca.src;
@@ -93,6 +117,9 @@
     isCameraRunning: false,
     isSimulationMode: false,
     shadowMode: false,
+    isFullscreen: false,
+    isFullscreenFallback: false,
+    characterMode: 'reference', // 'reference' (default Reel puppet) or 'gatotkaca-arjuna'
     pipVisible: true,
     pipMinimized: false,
     handsInstance: null,
@@ -101,50 +128,74 @@
     detectedHandsCount: 0,
     activePointerDragging: null, // For mouse/touch interactive simulation
     blencongFlicker: 1.0,
+    puppetBaseHeight: 480,       // Base height in pixels (scales up in fullscreen)
     particles: [],
-    // Puppet States
+    // Left Puppet State (Controls Left side)
     gatotkaca: {
-      name: 'Raden Gatotkaca',
+      name: 'Wayang Kulit Utama (Kiri)',
       targetX: 0,
       targetY: 0,
       targetAngle: 0,
       currentX: 0,
       currentY: 0,
       currentAngle: 0,
-      scale: 0.42,
-      baseHeight: 460,
       isPinching: false,
       lastSeen: 0,
     },
+    // Right Puppet State (Controls Right side)
     arjuna: {
-      name: 'Raden Arjuna',
+      name: 'Wayang Kulit Utama (Kanan)',
       targetX: 0,
       targetY: 0,
       targetAngle: 0,
       currentX: 0,
       currentY: 0,
       currentAngle: 0,
-      scale: 0.42,
-      baseHeight: 460,
       isPinching: false,
       lastSeen: 0,
     },
   };
+
+  // --- Set Character Mode & Update Stage Badges ---
+  function setCharacterMode(mode) {
+    state.characterMode = mode;
+    if (mode === 'reference') {
+      state.gatotkaca.name = 'Wayang Kulit Utama (Kiri)';
+      state.arjuna.name = 'Wayang Kulit Utama (Kanan)';
+      if (els.badgeLeftRole) els.badgeLeftRole.textContent = 'Wayang Kulit Tradisional';
+      if (els.badgeLeftName) els.badgeLeftName.textContent = 'Tokoh Referensi (Kiri)';
+      if (els.badgeRightRole) els.badgeRightRole.textContent = 'Wayang Kulit Tradisional';
+      if (els.badgeRightName) els.badgeRightName.textContent = 'Tokoh Referensi (Kanan)';
+      if (els.debogLabelLeft) els.debogLabelLeft.textContent = 'Gedebog Kiwa (Tangan Kiri)';
+      if (els.debogLabelRight) els.debogLabelRight.textContent = 'Gedebog Tengen (Tangan Kanan)';
+      if (els.puppetBadgeCenter) els.puppetBadgeCenter.style.display = 'block';
+    } else {
+      state.gatotkaca.name = 'Raden Gatotkaca';
+      state.arjuna.name = 'Raden Arjuna';
+      if (els.badgeLeftRole) els.badgeLeftRole.textContent = 'Ksatria Pringgodani';
+      if (els.badgeLeftName) els.badgeLeftName.textContent = 'Raden Gatotkaca';
+      if (els.badgeRightRole) els.badgeRightRole.textContent = 'Ksatria Madukara';
+      if (els.badgeRightName) els.badgeRightName.textContent = 'Raden Arjuna';
+      if (els.debogLabelLeft) els.debogLabelLeft.textContent = 'Gedebog Kiwa (Gatotkaca)';
+      if (els.debogLabelRight) els.debogLabelRight.textContent = 'Gedebog Tengen (Arjuna)';
+      if (els.puppetBadgeCenter) els.puppetBadgeCenter.style.display = 'none';
+    }
+  }
 
   // --- Initialize Puppet Coordinate Bounds ---
   function initPuppetPositions() {
     const w = els.canvas.width;
     const h = els.canvas.height;
 
-    state.gatotkaca.targetX = w * CONFIG.defaultGatotkacaXRatio;
-    state.gatotkaca.targetY = h * CONFIG.defaultGatotkacaYRatio;
+    state.gatotkaca.targetX = w * CONFIG.defaultLeftXRatio;
+    state.gatotkaca.targetY = h * CONFIG.defaultYRatio;
     state.gatotkaca.currentX = state.gatotkaca.targetX;
     state.gatotkaca.currentY = state.gatotkaca.targetY;
     state.gatotkaca.targetAngle = 0;
     state.gatotkaca.currentAngle = 0;
 
-    state.arjuna.targetX = w * CONFIG.defaultArjunaXRatio;
-    state.arjuna.targetY = h * CONFIG.defaultArjunaYRatio;
+    state.arjuna.targetX = w * CONFIG.defaultRightXRatio;
+    state.arjuna.targetY = h * CONFIG.defaultYRatio;
     state.arjuna.currentX = state.arjuna.targetX;
     state.arjuna.currentY = state.arjuna.targetY;
     state.arjuna.targetAngle = 0;
@@ -162,7 +213,7 @@
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 1.5,
         life: 1.0,
-        color: Math.random() > 0.4 ? '#D4AF37' : '#F4E0A5',
+        color: Math.random() > 0.4 ? '#D6AE7C' : '#F0D9A7',
         size: Math.random() * 3 + 2,
       });
     }
@@ -194,42 +245,69 @@
   }
 
   // --- Puppet Rendering Engine ---
-  function drawPuppet(ctx, puppet, asset, isFlipped = false) {
-    if (!asset.loaded) return;
+  function drawPuppet(ctx, puppet, isLeftPuppet) {
+    // Select asset based on active character mode
+    let asset;
+    let isFlipped = false;
 
-    const w = puppet.baseHeight * asset.aspectRatio;
-    const h = puppet.baseHeight;
+    if (state.characterMode === 'reference') {
+      asset = puppetAssets.reference;
+      // In reference artwork (wayang-reference.png), puppet faces right.
+      // Left puppet faces right (isFlipped = false) towards center.
+      // Right puppet faces left (isFlipped = true) towards center.
+      isFlipped = !isLeftPuppet;
+    } else {
+      if (isLeftPuppet) {
+        asset = puppetAssets.gatotkaca;
+        isFlipped = false; // Gatotkaca faces right
+      } else {
+        asset = puppetAssets.arjuna;
+        isFlipped = false; // Arjuna naturally faces left in its asset
+      }
+    }
+
+    if (!asset || !asset.loaded) return;
+
+    // Strict preservation of original aspect ratio without distortion
+    const h = state.puppetBaseHeight;
+    const w = h * asset.aspectRatio;
 
     ctx.save();
     ctx.translate(puppet.currentX, puppet.currentY);
     ctx.rotate(puppet.currentAngle);
 
-    // Puppet stick (Tuding) extending downwards to banana trunk base (Debog)
+    // Realistic puppet stick extension downwards to Gedebog base
     ctx.save();
-    ctx.strokeStyle = '#2B1E12';
+    ctx.strokeStyle = '#281408';
     ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.moveTo(0, h * 0.45);
-    ctx.lineTo(0, h * 0.95);
+    ctx.moveTo(0, h * 0.44);
+    ctx.lineTo(0, h * 0.94);
     ctx.stroke();
-    // Tuding handle ring
-    ctx.fillStyle = '#8C6F23';
+
+    // Tuding brass connector ring
+    ctx.fillStyle = '#C89B3C';
     ctx.beginPath();
-    ctx.arc(0, h * 0.7, 4, 0, Math.PI * 2);
+    ctx.arc(0, h * 0.72, 3.5, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
-    // Traditional Shadow behind the puppet on the Kelir screen
+    // Traditional Shadow on Kelir Screen behind the Puppet (Faithful to Instagram Reel)
     ctx.save();
-    ctx.shadowColor = state.shadowMode ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.65)';
-    ctx.shadowBlur = state.shadowMode ? 28 : 18;
-    ctx.shadowOffsetX = isFlipped ? -12 : 12;
-    ctx.shadowOffsetY = 14;
-
-    // Filter for Shadow mode vs Full color mode
     if (state.shadowMode) {
-      // Silhouette shadow puppet look
-      ctx.filter = 'brightness(0.08) drop-shadow(0 0 10px rgba(0,0,0,0.8))';
+      // Silhouette shadow puppet look with crisp dark projection
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.96)';
+      ctx.shadowBlur = 28;
+      ctx.shadowOffsetX = isFlipped ? -22 : 22;
+      ctx.shadowOffsetY = 14;
+      ctx.filter = 'brightness(0.06) contrast(1.4)';
+    } else {
+      // Warm, natural diffuse drop shadow on linen kelir cloth
+      ctx.shadowColor = 'rgba(65, 30, 10, 0.42)';
+      ctx.shadowBlur = 20;
+      ctx.shadowOffsetX = isFlipped ? -20 : 20;
+      ctx.shadowOffsetY = 16;
+      ctx.filter = 'none';
     }
 
     if (isFlipped) {
@@ -242,7 +320,7 @@
     // Pulse aura when gesture / pinch is triggered
     if (puppet.isPinching) {
       ctx.save();
-      ctx.strokeStyle = 'rgba(212, 175, 55, 0.65)';
+      ctx.strokeStyle = 'rgba(214, 174, 124, 0.75)';
       ctx.lineWidth = 3;
       ctx.setLineDash([6, 6]);
       ctx.beginPath();
@@ -267,26 +345,36 @@
 
     // 2. Simulate traditional oil lamp flame flicker (Blencong)
     state.blencongFlicker += (Math.random() - 0.5) * 0.02;
-    state.blencongFlicker = Math.max(0.92, Math.min(1.08, state.blencongFlicker));
+    state.blencongFlicker = Math.max(0.94, Math.min(1.06, state.blencongFlicker));
 
-    // Dynamic Blencong warm ambient background
+    // Dynamic Blencong warm ambient background over traditional linen kelir
     const lampX = w * 0.5;
-    const lampY = h * 0.22;
+    const lampY = h * 0.20;
+    const lampRadius = Math.max(w, h) * 0.65 * state.blencongFlicker;
+
     const lampGradient = ctx.createRadialGradient(
       lampX, lampY, 30,
-      lampX, lampY, w * 0.65 * state.blencongFlicker
+      lampX, lampY, lampRadius
     );
 
     if (state.shadowMode) {
-      lampGradient.addColorStop(0, 'rgba(255, 248, 230, 0.92)');
-      lampGradient.addColorStop(0.35, 'rgba(240, 222, 185, 0.65)');
-      lampGradient.addColorStop(0.7, 'rgba(60, 45, 25, 0.85)');
-      lampGradient.addColorStop(1, 'rgba(15, 12, 10, 0.98)');
+      // Deep backlit shadow play atmosphere
+      ctx.fillStyle = '#170903';
+      ctx.fillRect(0, 0, w, h);
+
+      lampGradient.addColorStop(0, 'rgba(255, 248, 225, 0.96)');
+      lampGradient.addColorStop(0.32, 'rgba(240, 195, 110, 0.72)');
+      lampGradient.addColorStop(0.68, 'rgba(65, 24, 7, 0.92)');
+      lampGradient.addColorStop(1, 'rgba(20, 7, 2, 0.99)');
     } else {
-      lampGradient.addColorStop(0, 'rgba(255, 235, 170, 0.22)');
-      lampGradient.addColorStop(0.4, 'rgba(212, 175, 55, 0.08)');
-      lampGradient.addColorStop(0.8, 'rgba(12, 16, 22, 0.7)');
-      lampGradient.addColorStop(1, 'rgba(6, 8, 11, 0.95)');
+      // Authentic illuminated linen kelir cloth (warm cream / sand parchment)
+      ctx.fillStyle = '#F5EADB';
+      ctx.fillRect(0, 0, w, h);
+
+      lampGradient.addColorStop(0, 'rgba(255, 253, 245, 0.98)');
+      lampGradient.addColorStop(0.28, 'rgba(248, 238, 218, 0.82)');
+      lampGradient.addColorStop(0.62, 'rgba(228, 203, 162, 0.55)');
+      lampGradient.addColorStop(1, 'rgba(185, 142, 95, 0.35)');
     }
 
     ctx.fillStyle = lampGradient;
@@ -295,23 +383,21 @@
     // 3. Smooth Puppet Movement Interpolation (Lerp / Exponential smoothing)
     const lerp = CONFIG.lerpFactor;
 
-    // Gatotkaca
+    // Left Puppet (Gatotkaca / Reference Left)
     state.gatotkaca.currentX += (state.gatotkaca.targetX - state.gatotkaca.currentX) * lerp;
     state.gatotkaca.currentY += (state.gatotkaca.targetY - state.gatotkaca.currentY) * lerp;
     state.gatotkaca.currentAngle += (state.gatotkaca.targetAngle - state.gatotkaca.currentAngle) * lerp;
 
-    // Arjuna
+    // Right Puppet (Arjuna / Reference Right)
     state.arjuna.currentX += (state.arjuna.targetX - state.arjuna.currentX) * lerp;
     state.arjuna.currentY += (state.arjuna.targetY - state.arjuna.currentY) * lerp;
     state.arjuna.currentAngle += (state.arjuna.targetAngle - state.arjuna.currentAngle) * lerp;
 
-    // 4. Draw Puppets
-    // Gatotkaca is on the left facing right
-    drawPuppet(ctx, state.gatotkaca, puppetAssets.gatotkaca, false);
-    // Arjuna is on the right facing left
-    drawPuppet(ctx, state.arjuna, puppetAssets.arjuna, false);
+    // 4. Draw Both Puppets Facing Center (Duel / Dialogue Pose)
+    drawPuppet(ctx, state.gatotkaca, true);
+    drawPuppet(ctx, state.arjuna, false);
 
-    // 5. Update & Draw Particles
+    // 5. Update & Draw Interactive Particles
     updateParticles();
     drawParticles(ctx);
 
@@ -332,13 +418,13 @@
         for (const landmarks of results.multiHandLandmarks) {
           if (window.drawConnectors && window.HAND_CONNECTIONS) {
             window.drawConnectors(pCtx, landmarks, window.HAND_CONNECTIONS, {
-              color: '#D4AF37',
+              color: '#D6AE7C',
               lineWidth: 2,
             });
           }
           if (window.drawLandmarks) {
             window.drawLandmarks(pCtx, landmarks, {
-              color: '#F4E0A5',
+              color: '#F0D9A7',
               lineWidth: 1,
               radius: 2.5,
             });
@@ -359,12 +445,13 @@
       return;
     }
 
+    // Dynamic Stage Bounds based on current canvas dimensions
     const stageW = els.canvas.width;
     const stageH = els.canvas.height;
     const minX = CONFIG.stagePaddingX;
     const maxX = stageW - CONFIG.stagePaddingX;
-    const minY = CONFIG.stagePaddingY + 80;
-    const maxY = stageH - CONFIG.stagePaddingY - 40;
+    const minY = CONFIG.stagePaddingY + 70;
+    const maxY = stageH - CONFIG.stagePaddingY - 30;
 
     // Process Hand Positions
     if (count === 1) {
@@ -378,7 +465,7 @@
       const tilt = calculateHandTilt(lm);
       const isPinch = checkPinchGesture(lm);
 
-      // If hand is on the left half of the frame -> Gatotkaca, else -> Arjuna
+      // If hand is on the left half of the frame -> Left Puppet, else -> Right Puppet
       if (normX < 0.5) {
         state.gatotkaca.targetX = clamp(normX * 1.8 * stageW, minX, stageW * 0.55);
         state.gatotkaca.targetY = clamp(normY * stageH, minY, maxY);
@@ -394,14 +481,13 @@
       }
     } else if (count >= 2) {
       // Two hands detected: sort by mirrored X coordinate
-      // Hand 0 vs Hand 1: whichever has smaller (1 - x) is left, larger is right
       const handA = { lm: landmarksList[0], normX: 1.0 - getPalmCenter(landmarksList[0]).x };
       const handB = { lm: landmarksList[1], normX: 1.0 - getPalmCenter(landmarksList[1]).x };
 
       const leftHand = handA.normX <= handB.normX ? handA.lm : handB.lm;
       const rightHand = handA.normX > handB.normX ? handA.lm : handB.lm;
 
-      // Control Gatotkaca with Left Hand
+      // Control Left Puppet with Left Hand
       const leftCenter = getPalmCenter(leftHand);
       const leftNormX = 1.0 - leftCenter.x;
       const leftNormY = leftCenter.y;
@@ -411,7 +497,7 @@
       state.gatotkaca.isPinching = checkPinchGesture(leftHand);
       if (state.gatotkaca.isPinching) emitParticles(state.gatotkaca.currentX, state.gatotkaca.currentY, 2);
 
-      // Control Arjuna with Right Hand
+      // Control Right Puppet with Right Hand
       const rightCenter = getPalmCenter(rightHand);
       const rightNormX = 1.0 - rightCenter.x;
       const rightNormY = rightCenter.y;
@@ -476,19 +562,20 @@
       els.statusText.textContent = 'Mencari Tangan di Depan Kamera...';
       els.handCountBadge.style.display = 'inline-block';
       els.handCountBadge.textContent = '0 Tangan';
-      els.pipGuideText.textContent = 'Arahkan telapak tangan ke kamera';
+      if (els.pipGuideText) els.pipGuideText.textContent = 'Arahkan telapak tangan ke kamera';
     } else if (handCount === 1) {
       els.statusDot.className = 'status-dot active';
       els.statusText.textContent = '1 Tangan Terdeteksi — Tokoh Mengikuti Gerakan';
       els.handCountBadge.style.display = 'inline-block';
       els.handCountBadge.textContent = '1 Tangan Terdeteksi';
-      els.pipGuideText.textContent = 'Angkat kedua tangan untuk kendali penuh';
+      if (els.pipGuideText) els.pipGuideText.textContent = 'Angkat kedua tangan untuk kendali penuh';
     } else {
       els.statusDot.className = 'status-dot active';
-      els.statusText.textContent = '2 Tangan Terdeteksi — Gatotkaca & Arjuna Siap!';
+      const label = state.characterMode === 'reference' ? 'Dua Wayang Siap!' : 'Gatotkaca & Arjuna Siap!';
+      els.statusText.textContent = `2 Tangan Terdeteksi — ${label}`;
       els.handCountBadge.style.display = 'inline-block';
       els.handCountBadge.textContent = '2 Tangan Siap';
-      els.pipGuideText.textContent = 'Kedua wayang terhubung!';
+      if (els.pipGuideText) els.pipGuideText.textContent = 'Kedua wayang terhubung!';
     }
   }
 
@@ -646,6 +733,148 @@
     updateStatusBadge(1);
   }
 
+  // --- Fullscreen Engine ---
+  function toggleFullscreen() {
+    const container = els.stageContainer;
+    if (!container) return;
+
+    const isCurrentlyFs = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      state.isFullscreenFallback
+    );
+
+    if (!isCurrentlyFs) {
+      enterFullscreen(container);
+    } else {
+      exitFullscreen();
+    }
+  }
+
+  function enterFullscreen(container) {
+    if (container.requestFullscreen) {
+      container.requestFullscreen().catch((err) => {
+        console.warn('Native requestFullscreen failed, using in-window fallback:', err);
+        enterFullscreenFallback();
+      });
+    } else if (container.webkitRequestFullscreen) {
+      container.webkitRequestFullscreen();
+    } else {
+      enterFullscreenFallback();
+    }
+  }
+
+  function exitFullscreen() {
+    if (state.isFullscreenFallback) {
+      exitFullscreenFallback();
+      return;
+    }
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch((err) => {
+        console.warn('Native exitFullscreen error:', err);
+        exitFullscreenFallback();
+      });
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else {
+      exitFullscreenFallback();
+    }
+  }
+
+  function enterFullscreenFallback() {
+    state.isFullscreenFallback = true;
+    updateFullscreenLayout(true);
+  }
+
+  function exitFullscreenFallback() {
+    state.isFullscreenFallback = false;
+    updateFullscreenLayout(false);
+  }
+
+  function handleFullscreenChange() {
+    const isFs = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      state.isFullscreenFallback
+    );
+    updateFullscreenLayout(isFs);
+  }
+
+  function updateFullscreenLayout(isFs) {
+    state.isFullscreen = isFs;
+
+    if (!els.stageContainer) return;
+
+    if (isFs) {
+      els.stageContainer.classList.add('is-fullscreen');
+      document.body.classList.add('is-fullscreen-active');
+    } else {
+      els.stageContainer.classList.remove('is-fullscreen', 'is-fullscreen-fallback');
+      document.body.classList.remove('is-fullscreen-active');
+    }
+
+    // Update Fullscreen button state and accessibility
+    if (els.btnToggleFullscreen) {
+      const icon = els.btnToggleFullscreen.querySelector('i');
+      const text = els.btnToggleFullscreen.querySelector('span');
+
+      if (isFs) {
+        if (icon) icon.className = 'bi bi-fullscreen-exit';
+        if (text) text.textContent = 'Keluar Layar Penuh';
+        els.btnToggleFullscreen.title = 'Keluar dari layar penuh (Tekan Esc)';
+        els.btnToggleFullscreen.setAttribute('aria-pressed', 'true');
+        els.btnToggleFullscreen.setAttribute('aria-label', 'Keluar Layar Penuh');
+      } else {
+        if (icon) icon.className = 'bi bi-arrows-fullscreen';
+        if (text) text.textContent = 'Layar Penuh';
+        els.btnToggleFullscreen.title = 'Tampilkan panggung kelir layar penuh (Fullscreen)';
+        els.btnToggleFullscreen.setAttribute('aria-pressed', 'false');
+        els.btnToggleFullscreen.setAttribute('aria-label', 'Layar Penuh');
+      }
+    }
+
+    // Show Esc helper toast briefly in Fullscreen
+    if (els.fullscreenHudHelper) {
+      if (isFs) {
+        els.fullscreenHudHelper.classList.remove('hidden');
+        setTimeout(() => {
+          if (els.fullscreenHudHelper) els.fullscreenHudHelper.classList.add('hidden');
+        }, 5000);
+      } else {
+        els.fullscreenHudHelper.classList.add('hidden');
+      }
+    }
+
+    // Resize canvas to match new viewport without resetting tracking or camera
+    resizeCanvas(isFs);
+  }
+
+  function resizeCanvas(isFs) {
+    if (!els.canvas) return;
+
+    if (isFs) {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      els.canvas.width = w;
+      els.canvas.height = h;
+      // In fullscreen, puppet becomes prominent (~70% of screen height)
+      state.puppetBaseHeight = Math.min(Math.round(h * 0.72), 850);
+    } else {
+      els.canvas.width = 1680;
+      els.canvas.height = 640;
+      state.puppetBaseHeight = 480;
+    }
+
+    // Smoothly recalibrate puppet targets to fit new dimensions
+    const curW = els.canvas.width;
+    const curH = els.canvas.height;
+    state.gatotkaca.targetX = curW * CONFIG.defaultLeftXRatio;
+    state.gatotkaca.targetY = curH * CONFIG.defaultYRatio;
+    state.arjuna.targetX = curW * CONFIG.defaultRightXRatio;
+    state.arjuna.targetY = curH * CONFIG.defaultYRatio;
+  }
+
   // --- Mouse / Pointer Control Handlers (For Simulation & Accessibility) ---
   function setupPointerHandlers() {
     const canvas = els.canvas;
@@ -661,13 +890,13 @@
       // In simulation mode, or if user drags on canvas
       if (state.isSimulationMode || state.activePointerDragging) {
         if (x < canvas.width * 0.5) {
-          state.gatotkaca.targetX = clamp(x, CONFIG.stagePaddingX, canvas.width * 0.5);
-          state.gatotkaca.targetY = clamp(y, CONFIG.stagePaddingY + 80, canvas.height - CONFIG.stagePaddingY);
-          state.gatotkaca.targetAngle = (x - canvas.width * 0.25) * 0.0008;
+          state.gatotkaca.targetX = clamp(x, CONFIG.stagePaddingX, canvas.width * 0.52);
+          state.gatotkaca.targetY = clamp(y, CONFIG.stagePaddingY + 70, canvas.height - CONFIG.stagePaddingY);
+          state.gatotkaca.targetAngle = (x - canvas.width * 0.28) * 0.0008;
         } else {
-          state.arjuna.targetX = clamp(x, canvas.width * 0.5, canvas.width - CONFIG.stagePaddingX);
-          state.arjuna.targetY = clamp(y, CONFIG.stagePaddingY + 80, canvas.height - CONFIG.stagePaddingY);
-          state.arjuna.targetAngle = (x - canvas.width * 0.75) * 0.0008;
+          state.arjuna.targetX = clamp(x, canvas.width * 0.48, canvas.width - CONFIG.stagePaddingX);
+          state.arjuna.targetY = clamp(y, CONFIG.stagePaddingY + 70, canvas.height - CONFIG.stagePaddingY);
+          state.arjuna.targetAngle = (x - canvas.width * 0.72) * 0.0008;
         }
       }
     }
@@ -712,6 +941,29 @@
         initPuppetPositions();
       });
     }
+
+    // Fullscreen Toggle Button
+    if (els.btnToggleFullscreen) {
+      els.btnToggleFullscreen.addEventListener('click', toggleFullscreen);
+    }
+
+    // Character Mode Selector
+    if (els.selectPuppetMode) {
+      els.selectPuppetMode.addEventListener('change', (e) => {
+        setCharacterMode(e.target.value);
+      });
+    }
+
+    // Native Fullscreen Change Listeners
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+    // Window Resize Handler (Recalculate canvas when in Fullscreen)
+    window.addEventListener('resize', () => {
+      if (state.isFullscreen || state.isFullscreenFallback) {
+        resizeCanvas(true);
+      }
+    });
 
     // Shadow Mode Toggle
     if (els.btnToggleShadow) {
@@ -775,30 +1027,30 @@
       });
     }
 
-    // Escape Key to Close Modal
+    // Escape Key Handler (Closes Guide Modal and Exits Fullscreen)
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && els.guideModal && els.guideModal.classList.contains('open')) {
-        els.guideModal.classList.remove('open');
+      if (e.key === 'Escape') {
+        if (els.guideModal && els.guideModal.classList.contains('open')) {
+          els.guideModal.classList.remove('open');
+        } else if (state.isFullscreenFallback) {
+          exitFullscreenFallback();
+        }
       }
     });
 
     // Cleanup Camera on page unload / navigation
     window.addEventListener('beforeunload', stopCameraTracks);
     window.addEventListener('pagehide', stopCameraTracks);
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && state.isCameraRunning) {
-        // Pause or stop tracks if tab is hidden
-      }
-    });
   }
 
   // --- Initial Mount ---
   function init() {
+    setCharacterMode('reference');
     initPuppetPositions();
     setupEventListeners();
     setupPointerHandlers();
     renderLoop();
-    console.log('Wayang Motion initialized successfully.');
+    console.log('Wayang Motion initialized successfully with reference wayang asset & fullscreen support.');
   }
 
   // Boot on DOM ready

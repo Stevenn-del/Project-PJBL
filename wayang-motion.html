@@ -20,6 +20,9 @@
   <!-- Base Project Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Redesign 5-Color System Stylesheet -->
+  <link rel="stylesheet" href="css/redesign-palette.css">
+  
   <!-- Wayang Motion Dedicated Stylesheet -->
   <link rel="stylesheet" href="css/wayang-motion.css">
 </head>
@@ -28,9 +31,9 @@
   <!-- ==========================================================================
        STICKY DESKTOP HEADER NAVBAR
        ========================================================================== -->
-  <header class="desktop-header-motion" id="header-motion">
+  <header class="desktop-header-karsa desktop-header-motion" id="header-navbar">
     <div class="container-fluid">
-      <div class="navbar-inner-motion">
+      <div class="navbar-inner">
         
         <!-- Left: Karsa Potret Logo -->
         <div class="brand-wrapper">
@@ -45,16 +48,16 @@
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
             <li><a href="timeline.html#tokoh" class="nav-item-link">Tokoh</a></li>
+            <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="timeline.html#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
-            <li><a href="wayang-motion.html" class="nav-item-link active" aria-current="page">Wayang Motion</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Photobooth Button -->
+        <!-- Right: Wayang Motion Active Button -->
         <div class="nav-right-wrapper">
-          <a href="#photobooth" class="btn-photobooth" id="btn-photobooth" aria-label="Buka Fitur Photobooth">
-            <i class="bi bi-camera-fill" aria-hidden="true"></i>
-            <span>Photobooth</span>
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion active" id="btn-wayang-motion" aria-label="Fitur Wayang Motion Aktif" aria-current="page">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Wayang Motion</span>
           </a>
         </div>
 
@@ -69,87 +72,165 @@
     
     <!-- Meta Header -->
     <div class="motion-header-meta">
-      <div class="motion-meta-tag">Jejak Warisan Adiluhung &bull; Seni Pedalangan Digital</div>
-      <h1 class="motion-title">Wayang Motion</h1>
+      <div class="provenance-badge">
+        <span class="badge-dot"></span>
+        <span>Seni Pedalangan Digital · Panggung Kelir Interaktif</span>
+      </div>
+      <h1 class="motion-title">Wayang Motion <span>Digital Kelir</span></h1>
       <p class="motion-subtitle">
         Rasakan pengalaman menjadi dalang kontemporer. Gerakkan tokoh wayang legendaris Jawa Tengah secara langsung melalui deteksi gestur tangan webcam Anda di panggung kelir digital.
       </p>
+      <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
 
-    <!-- Stage Control & Status Bar -->
-    <div class="stage-control-bar" id="stage-control-bar" role="toolbar" aria-label="Kontrol Interaksi Wayang Motion">
-      <div class="control-left-status">
-        <div class="tracking-status-indicator" id="tracking-status-box" aria-live="polite">
-          <span class="status-dot" id="status-dot"></span>
-          <span id="tracking-status-text">Kamera Belum Aktif</span>
-        </div>
-        <span class="badge bg-dark border border-secondary text-light px-2 py-1" id="hand-count-badge" style="font-size: 12px; display: none;">
-          0 Tangan
-        </span>
-      </div>
-
-      <div class="control-actions-group">
-        <button type="button" class="btn-wm-control" id="btn-toggle-shadow" title="Ubah tampilan layar antara warna asli atau siluet bayangan tradisi">
-          <i class="bi bi-moon-stars" aria-hidden="true"></i>
-          <span>Mode Bayangan</span>
-        </button>
-
-        <button type="button" class="btn-wm-control" id="btn-reset-puppets" title="Kembalikan wayang ke posisi awal panggung">
-          <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
-          <span>Atur Ulang Posisi</span>
-        </button>
-
-        <button type="button" class="btn-wm-control" id="btn-toggle-pip" title="Tampilkan atau sembunyikan kotak kamera dalang">
-          <i class="bi bi-camera-video" aria-hidden="true"></i>
-          <span>Kamera Dalang</span>
-        </button>
-
-        <button type="button" class="btn-wm-control" id="btn-open-guide" title="Buka panduan gestur tangan">
-          <i class="bi bi-question-circle" aria-hidden="true"></i>
-          <span>Panduan Gerakan</span>
-        </button>
-
-        <button type="button" class="btn-wm-control danger" id="btn-stop-camera" style="display: none;" title="Hentikan pelacakan kamera">
-          <i class="bi bi-stop-circle" aria-hidden="true"></i>
-          <span>Hentikan Kamera</span>
-        </button>
-      </div>
+    <!-- Cultural Ambient Corner Clouds (Traditional Mega Mendung SVG Motifs) -->
+    <div class="cultural-ambient-clouds" aria-hidden="true">
+      <svg class="cloud-motif cloud-motif-tl" viewBox="0 0 280 180" fill="none">
+        <path d="M0 0 C60 20 100 70 80 110 C120 80 180 90 200 130 C230 110 260 135 280 170 L0 180 Z" fill="rgba(214, 174, 124, 0.07)"/>
+        <path d="M0 20 C45 35 75 75 60 105 C95 80 145 90 160 120 C185 105 210 125 225 155 L0 165 Z" stroke="rgba(214, 174, 124, 0.14)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <svg class="cloud-motif cloud-motif-tr" viewBox="0 0 280 180" fill="none">
+        <path d="M280 0 C220 20 180 70 200 110 C160 80 100 90 80 130 C50 110 20 135 0 170 L280 180 Z" fill="rgba(214, 174, 124, 0.07)"/>
+        <path d="M280 20 C235 35 205 75 220 105 C185 80 135 90 120 120 C95 105 70 125 55 155 L280 165 Z" stroke="rgba(214, 174, 124, 0.14)" stroke-width="1.5" fill="none"/>
+      </svg>
     </div>
 
-    <!-- The Interactive Wayang Stage (Panggung Kelir) -->
-    <div class="stage-viewport-wrapper" id="stage-viewport" role="region" aria-label="Panggung Kelir Wayang Kulit">
-      
-      <!-- Traditional Top Valance / Langse Ornament -->
-      <div class="stage-pelmet-top" aria-hidden="true">
-        <span class="stage-pelmet-ornament">✦ PANGGUNG KELIR DIGITAL ADILUHUNG ✦</span>
-      </div>
+    <!-- ======================================================================
+         PRIMARY WAYANG EXPERIENCE CONTAINER (Normal & Fullscreen Target)
+         ====================================================================== -->
+    <div class="wayang-experience-container" id="wayang-experience-container" role="region" aria-label="Area Interaksi Wayang Motion">
 
-      <!-- Background Blencong Light Glow -->
-      <div class="blencong-light-glow" id="blencong-light" aria-hidden="true"></div>
-
-      <!-- Main Interactive HTML5 Canvas (Puppet Stage) -->
-      <canvas id="kelir-canvas" class="kelir-canvas-stage" width="1680" height="640" aria-label="Kanvas Pergerakan Wayang Kulit"></canvas>
-
-      <!-- Stage Bottom Banana Trunk (Debog / Gedebog) -->
-      <div class="stage-debog-base" aria-hidden="true">
-        <span class="debog-label">Gedebog Kiwa (Sisi Kiri)</span>
-        <span class="debog-label text-center" style="color: rgba(212, 175, 55, 0.45);">— Batas Panggung Pedalangan —</span>
-        <span class="debog-label">Gedebog Tengen (Sisi Kanan)</span>
-      </div>
-
-      <!-- Puppet Name / Role Badges on Stage -->
-      <div class="stage-puppet-badges" aria-hidden="true">
-        <div class="puppet-badge">
-          <span class="puppet-badge-role">Ksatria Pringgodani</span>
-          <span class="puppet-badge-name">Raden Gatotkaca</span>
-          <span class="puppet-badge-hand"><i class="bi bi-hand-index"></i> Dikendalikan Tangan Kiri</span>
+      <!-- Stage Control & Status Bar -->
+      <div class="stage-control-bar" id="stage-control-bar" role="toolbar" aria-label="Kontrol Interaksi Wayang Motion">
+        <div class="control-left-status">
+          <div class="tracking-status-indicator" id="tracking-status-box" aria-live="polite">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="tracking-status-text">Kamera Belum Aktif</span>
+          </div>
+          <span class="badge bg-dark border border-secondary text-light px-2 py-1" id="hand-count-badge" style="font-size: 12px; display: none;">
+            0 Tangan
+          </span>
         </div>
-        <div class="puppet-badge text-end">
-          <span class="puppet-badge-role">Ksatria Madukara</span>
-          <span class="puppet-badge-name">Raden Arjuna</span>
-          <span class="puppet-badge-hand"><i class="bi bi-hand-index"></i> Dikendalikan Tangan Kanan</span>
+
+        <div class="control-actions-group">
+          <!-- Character / Puppet Selector -->
+          <div class="puppet-select-wrapper" title="Pilih karakter wayang yang ingin dimainkan">
+            <label for="select-puppet-mode" class="visually-hidden">Pilihan Karakter Wayang</label>
+            <i class="bi bi-person-badge puppet-select-icon" aria-hidden="true"></i>
+            <select id="select-puppet-mode" class="select-wm-control" aria-label="Pilih Karakter Wayang">
+              <option value="reference" selected>Tokoh Referensi (Reel)</option>
+              <option value="gatotkaca-arjuna">Raden Gatotkaca &amp; Arjuna</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-wm-control" id="btn-toggle-shadow" title="Ubah tampilan layar antara warna asli atau siluet bayangan tradisi">
+            <i class="bi bi-moon-stars" aria-hidden="true"></i>
+            <span>Mode Bayangan</span>
+          </button>
+
+          <button type="button" class="btn-wm-control" id="btn-reset-puppets" title="Kembalikan wayang ke posisi awal panggung">
+            <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+            <span>Atur Ulang Posisi</span>
+          </button>
+
+          <button type="button" class="btn-wm-control" id="btn-toggle-pip" title="Tampilkan atau sembunyikan kotak kamera dalang">
+            <i class="bi bi-camera-video" aria-hidden="true"></i>
+            <span>Kamera Dalang</span>
+          </button>
+
+          <!-- Dedicated Fullscreen Control -->
+          <button type="button" class="btn-wm-control btn-wm-fullscreen" id="btn-toggle-fullscreen" title="Tampilkan panggung kelir layar penuh (Fullscreen)" aria-label="Layar Penuh" aria-pressed="false">
+            <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+            <span>Layar Penuh</span>
+          </button>
+
+          <button type="button" class="btn-wm-control" id="btn-open-guide" title="Buka panduan gestur tangan">
+            <i class="bi bi-question-circle" aria-hidden="true"></i>
+            <span>Panduan Gerakan</span>
+          </button>
+
+          <button type="button" class="btn-wm-control danger" id="btn-stop-camera" style="display: none;" title="Hentikan pelacakan kamera">
+            <i class="bi bi-stop-circle" aria-hidden="true"></i>
+            <span>Hentikan Kamera</span>
+          </button>
         </div>
       </div>
+
+      <!-- The Interactive Wayang Stage (Panggung Kelir) -->
+      <div class="stage-viewport-wrapper" id="stage-viewport" role="region" aria-label="Panggung Kelir Wayang Kulit">
+        
+        <!-- Authentic Scalloped Langse / Pelmet Valance Curtain with Tassel Motif -->
+        <div class="stage-pelmet-top" aria-hidden="true">
+          <div class="pelmet-drape-bg"></div>
+          <svg class="pelmet-scallop-svg" viewBox="0 0 1200 48" preserveAspectRatio="none">
+            <!-- Scalloped drapery curves with gold hem trim -->
+            <path d="M0,0 L1200,0 L1200,24 
+                     C1140,42 1080,42 1020,24 
+                     C960,42 900,42 840,24 
+                     C780,42 720,42 660,24 
+                     C600,44 600,44 540,24 
+                     C480,42 420,42 360,24 
+                     C300,42 240,42 180,24 
+                     C120,42 60,42 0,24 Z" 
+                  fill="#4D1807"/>
+            <path d="M0,24 
+                     C60,42 120,42 180,24 
+                     C240,42 300,42 360,24 
+                     C420,42 480,42 540,24 
+                     C600,44 600,44 660,24 
+                     C720,42 780,42 840,24 
+                     C900,42 960,42 1020,24 
+                     C1080,42 1140,42 1200,24" 
+                  stroke="#D6AE7C" stroke-width="2.5" fill="none"/>
+          </svg>
+          <div class="pelmet-center-tassel">
+            <div class="tassel-ring"></div>
+            <div class="tassel-body"></div>
+            <div class="tassel-threads"></div>
+          </div>
+          <span class="stage-pelmet-ornament">✦ PANGGUNG KELIR DIGITAL ADILUHUNG ✦</span>
+        </div>
+
+        <!-- Background Blencong Light Glow -->
+        <div class="blencong-light-glow" id="blencong-light" aria-hidden="true"></div>
+
+        <!-- Main Interactive HTML5 Canvas (Puppet Stage) -->
+        <canvas id="kelir-canvas" class="kelir-canvas-stage" width="1680" height="640" aria-label="Kanvas Pergerakan Wayang Kulit"></canvas>
+
+        <!-- Stage Bottom Banana Trunk (Debog / Gedebog with Authentic Javanese Motif) -->
+        <div class="stage-debog-base" aria-hidden="true">
+          <div class="debog-ornamental-border"></div>
+          <div class="debog-content-row">
+            <span class="debog-label" id="debog-label-left">Gedebog Kiwa (Sisi Kiri)</span>
+            <span class="debog-center-text">✦ Batas Panggung Pedalangan Tradisional Jawa ✦</span>
+            <span class="debog-label text-end" id="debog-label-right">Gedebog Tengen (Sisi Kanan)</span>
+          </div>
+        </div>
+
+        <!-- Puppet Name / Role Badges & Reel-Style Center Pill -->
+        <div class="stage-puppet-badges" aria-hidden="true" id="stage-puppet-badges">
+          <div class="puppet-badge" id="puppet-badge-left">
+            <span class="puppet-badge-role" id="badge-left-role">Wayang Kulit Tradisional</span>
+            <span class="puppet-badge-name" id="badge-left-name">Tokoh Utama (Kiri)</span>
+            <span class="puppet-badge-hand"><i class="bi bi-hand-index"></i> Dikendalikan Tangan Kiri</span>
+          </div>
+          <div class="puppet-badge-center" id="puppet-badge-center">
+            <span class="reel-style-pill">
+              <i class="bi bi-stars"></i> Dua Wayang · Satu Per Tangan
+            </span>
+          </div>
+          <div class="puppet-badge text-end" id="puppet-badge-right">
+            <span class="puppet-badge-role" id="badge-right-role">Wayang Kulit Tradisional</span>
+            <span class="puppet-badge-name" id="badge-right-name">Tokoh Utama (Kanan)</span>
+            <span class="puppet-badge-hand"><i class="bi bi-hand-index"></i> Dikendalikan Tangan Kanan</span>
+          </div>
+        </div>
+
+        <!-- Fullscreen HUD Helper Toast / Esc Notification -->
+        <div class="fullscreen-hud-helper hidden" id="fullscreen-hud-helper" aria-live="polite">
+          <i class="bi bi-info-circle me-1"></i>
+          <span>Mode Layar Penuh Aktif · Tekan <kbd>ESC</kbd> atau klik tombol Layar Penuh untuk keluar</span>
+        </div>
 
       <!-- Picture-In-Picture Webcam Live Preview Card -->
       <div class="webcam-pip-container" id="webcam-pip-card" aria-label="Pratinjau Kamera Dalang">
@@ -257,6 +338,8 @@
       </div>
 
     </div>
+    <!-- End of #wayang-experience-container -->
+    </div>
 
     <!-- ======================================================================
          CULTURAL CONTEXT & EDUCATIONAL CARDS
@@ -349,9 +432,9 @@
   <!-- ==========================================================================
        SHARED DESKTOP FOOTER
        ========================================================================== -->
-  <footer class="desktop-footer-motion" id="site-footer">
+  <footer class="desktop-footer-karsa desktop-footer-motion" id="site-footer">
     <div class="container-fluid">
-      <div class="footer-inner-content">
+      <div class="footer-top-grid">
         
         <!-- Brand & Vision Column -->
         <div class="footer-brand-col">
@@ -389,8 +472,9 @@
           <div>
             <div class="footer-nav-group-title">Fitur Interaktif</div>
             <ul class="footer-nav-links">
-              <li><a href="wayang-motion.html" class="footer-nav-link active text-warning">Wayang Motion (Baru)</a></li>
-              <li><a href="index.html#photobooth" class="footer-nav-link">Photobooth Budaya</a></li>
+              <li><a href="peta.html" class="footer-nav-link text-warning">Peta Interaktif Atlas</a></li>
+              <li><a href="wayang-motion.html" class="footer-nav-link active">Wayang Motion</a></li>
+              <li><a href="photobooth.html" class="footer-nav-link">Photobooth Budaya</a></li>
               <li><a href="timeline.html#arsip" class="footer-nav-link">Arsip Dokumen Cagar Budaya</a></li>
             </ul>
           </div>

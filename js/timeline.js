@@ -3,12 +3,13 @@
  * KARSA POTRET - TIMELINE INTERACTION ENGINE & HISTORICAL DATASET
  * Stack: Vanilla JavaScript (ES6+)
  * Designed for future API consumption (Node.js/Express + MySQL)
+ * Recreating the Visual Style of Central Java Historical Journal
  * ==========================================================================
  */
 
 /**
  * Structured Historical Dataset for Central Java
- * Ready for MySQL database seeding or REST API endpoint responses (/api/v1/timeline)
+ * Complete 5 Eras with Historically Verified Developments, Significances & Authentic Imagery
  */
 const HISTORICAL_TIMELINE_DATA = [
   {
@@ -32,18 +33,27 @@ const HISTORICAL_TIMELINE_DATA = [
     events: [
       {
         year: "± 600–674 M",
-        title: "Kemunculan Kerajaan Kalingga (Holing)",
-        desc: "Kerajaan bercorak Buddha-Hindu di pesisir utara Jawa Tengah, masyhur di bawah kepemimpinan Ratu Shima yang menegakkan hukum keadilan tanpa pandang bulu."
+        title: "Kemunculan Kerajaan Kalingga & Ketegasan Ratu Shima",
+        desc: "Kerajaan bercorak Buddha-Hindu tertua di pesisir utara Jawa Tengah, masyhur di bawah kepemimpinan Ratu Shima yang menegakkan supremasi hukum tanpa pandang bulu. Integritas rakyatnya tercatat dalam catatan Dinasti Tang, di mana pundi emas yang diletakkan di jalan tidak pernah disentuh siapa pun.",
+        significance: "Meletakkan fondasi etika hukum dan kedaulatan moral pertama yang tercatat dalam kronik sejarah Nusantara.",
+        location: "Kalingga (Pesisir Jepara & Pekalongan)",
+        image: "assets/images/era-kuno.jpg"
       },
       {
         year: "± 650 M",
         title: "Pembangunan Kompleks Candi Tertua Dieng",
-        desc: "Didirikan di dataran tinggi vulkanik Dieng (2.000 mdpl) sebagai tempat pemujaan Siwa, menjadi arsitektur batu tertua yang masih berdiri di tanah Jawa."
+        desc: "Didirikan di dataran tinggi vulkanik Dieng pada ketinggian 2.000 mdpl, kelompok Candi Arjuna, Semar, Srikandi, dan Puntadewa dibangun sebagai mandala suci pemujaan Siwa. Kompleks ini menjadi mahakarya arsitektur batu andesit tertua yang masih berdiri kokoh di tanah Jawa.",
+        significance: "Monumen arsitektur batu tertua di Pulau Jawa yang memadukan penghormatan roh leluhur gunung dengan teologi Siwa.",
+        location: "Dataran Tinggi Dieng (Banjarnegara & Wonosobo)",
+        image: "assets/images/slide-3-borobudur.webp"
       },
       {
-        year: "654 M",
-        title: "Peninggalan Prasasti Sojomerto",
-        desc: "Ditemukan di Batang, beraksara Pallawa dan berbahasa Melayu Kuno, menyebut nama Dapunta Selendra yang menjadi cikal bakal Dinasti Syailendra."
+        year: "654–732 M",
+        title: "Prasasti Sojomerto & Prasasti Canggal",
+        desc: "Penemuan Prasasti Sojomerto di Batang beraksara Pallawa dan berbahasa Melayu Kuno menyebut Dapunta Selendra, cikal bakal Wangsa Syailendra. Disusul Prasasti Canggal (732 M) di Gunung Wukir Magelang oleh Raja Sanjaya yang menandai kemakmuran dan kesuburan tanah Jawa Dwipa.",
+        significance: "Bukti epigrafi tertua yang mengungkap silsilah dinasti pembangun candi-candi megah Jawa Tengah.",
+        location: "Kabupaten Batang & Magelang",
+        image: "assets/images/slide-1-prambanan.webp"
       }
     ],
     highlights: [
@@ -92,17 +102,26 @@ const HISTORICAL_TIMELINE_DATA = [
       {
         year: "± 750–825 M",
         title: "Pembangunan Mahakarya Candi Borobudur",
-        desc: "Raja Samaratungga dari Dinasti Syailendra memimpin pembangunan stupa mandala bertingkat dengan 2.672 panel relief dan 504 arca Buddha."
+        desc: "Raja Samaratungga dari Dinasti Syailendra memimpin pembangunan stupa mandala bertingkat terbesar di dunia di dataran Kedu. Terdiri atas 2 juta blok batu andesit, 2.672 panel relief naratif, dan 504 arca Buddha yang memvisualisasikan perjalanan spiritual Kamadhatu, Rupadhatu, hingga Arupadhatu.",
+        significance: "Mahakarya seni pahat dan kosmologi Buddhis terbesar di bumi yang diakui sebagai Warisan Dunia UNESCO.",
+        location: "Borobudur, Kabupaten Magelang",
+        image: "assets/images/slide-3-borobudur.webp"
       },
       {
         year: "856 M",
         title: "Peresmian Candi Prambanan (Siwagrha)",
-        desc: "Rakai Pikatan mendirikan kompleks candi Hindu termegah di Indonesia sebagai persembahan untuk Trimurti, diabadikan dalam Prasasti Siwagrha."
+        desc: "Rakai Pikatan dari Dinasti Sanjaya mendirikan kompleks percandian Hindu termegah di Indonesia sebagai persembahan untuk Trimurti. Candi Siwa setinggi 47 meter dipadukan dengan relief epik Ramayana, berdiri berdampingan harmonis dengan candi Buddha Plaosan.",
+        significance: "Lambang toleransi dan persatuan abadi dua agama besar di dataran peradaban Jawa Tengah kuno.",
+        location: "Prambanan, Kabupaten Klaten",
+        image: "assets/images/slide-1-prambanan.webp"
       },
       {
         year: "1478–1518 M",
-        title: "Berdirinya Kesultanan Demak Bintoro",
-        desc: "Raden Patah mendirikan kesultanan Islam pertama di Jawa, didukung para Walisongo dengan simbol akulturasi Masjid Agung Demak bertiang tatal."
+        title: "Berdirinya Kesultanan Demak & Masjid Agung",
+        desc: "Raden Patah bersama Dewan Wali Songo mendirikan kesultanan Islam pertama di Jawa. Masjid Agung Demak dengan arsitektur atap tumpang tiga dan saka guru kayu tatal Sunan Kalijaga menjadi mercusuar peradaban Islam Nusantara dan tradisi Sekaten.",
+        significance: "Pionir akulturasi budaya Islam dengan kearifan lokal Jawa, melahirkan wayang dakwah dan gamelan santiswara.",
+        location: "Demak Bintoro, Jawa Tengah",
+        image: "assets/images/highlight-batik-keris.jpg"
       }
     ],
     highlights: [
@@ -125,7 +144,7 @@ const HISTORICAL_TIMELINE_DATA = [
         title: "Masjid Agung Demak",
         desc: "Pusat syiar Islam Jawa beratap tumpang tiga bertingkat dengan saka guru tiang kayu tatal karya Sunan Kalijaga.",
         location: "Demak, Jawa Tengah",
-        image: "assets/images/era-kuno.jpg"
+        image: "assets/images/highlight-batik-keris.jpg"
       }
     ]
   },
@@ -149,19 +168,28 @@ const HISTORICAL_TIMELINE_DATA = [
     },
     events: [
       {
-        year: "1755–1757 M",
-        title: "Perjanjian Giyanti & Salatiga",
-        desc: "Perjanjian yang memecah Mataram Islam menjadi Surakarta dan Yogyakarta, disusul pembentukan Kadipaten Mangkunegaran di Solo."
-      },
-      {
         year: "1825–1830 M",
-        title: "Perang Jawa (Diponegoro Oorlog)",
-        desc: "Pangeran Diponegoro memimpin perang gerilya semesta melawan penindasan Belanda di seluruh tanah Jawa, menelan biaya dan korban kolonial terbesar."
+        title: "Perang Jawa & Perlawanan Pangeran Diponegoro",
+        desc: "Pangeran Diponegoro mengobarkan perang gerilya semesta (De Java Oorlog) melawan cengkeraman kolonial Belanda di lembah Kedu, bukit Menoreh, dan Surakarta. Perang ini melumpuhkan kas keuangan kolonial dan mencatatkan heroisme rakyat terbesar di tanah Jawa.",
+        significance: "Perang antikolonial paling dahsyat di Nusantara; naskah autobiografi Babad Diponegoro diakui UNESCO Memory of the World.",
+        location: "Lembah Kedu, Magelang & Surakarta",
+        image: "assets/images/slide-3-borobudur.webp"
       },
       {
         year: "1867–1907 M",
-        title: "Pembangunan Jalur Rel & Lawang Sewu",
-        desc: "Jalur kereta api pertama di Hindia Belanda rute Semarang-Tanggung beroperasi (1867), diikuti pembangunan megah kantor NIS Lawang Sewu (1904-1907)."
+        title: "Jalur Kereta Api Pertama & Gedung Lawang Sewu",
+        desc: "Semarang menjadi pionir transportasi modern Hindia Belanda dengan dibukanya jalur kereta api pertama rute Semarang-Tanggung (1867). Perusahaan kereta NIS kemudian membangun kantor pusat megah bergaya Indis Lawang Sewu (1904-1907) dengan deretan lengkung pintu dan kaca patri Eropa.",
+        significance: "Awal industrialisasi modern di Jawa Tengah dan ikon cagar budaya arsitektur kolonial terkemuka.",
+        location: "Kota Semarang, Jawa Tengah",
+        image: "assets/images/era-kolonial.jpg"
+      },
+      {
+        year: "1834–1845 M",
+        title: "Benteng Pendem Ambarawa (Fort Willem I)",
+        desc: "Kubu pertahanan militer kolonial berarsitektur bata merah masif dibangun tersembunyi di cekungan strategis Ambarawa dekat danau Rawa Pening. Benteng ini difungsikan sebagai barak logistik serta titik pertahanan poros tengah Jawa Tengah.",
+        significance: "Cagar budaya benteng militer bata merah terbesar di pedalaman Jawa Tengah.",
+        location: "Ambarawa, Kabupaten Semarang",
+        image: "assets/images/highlight-benteng-ambarawa.jpg"
       }
     ],
     highlights: [
@@ -210,17 +238,26 @@ const HISTORICAL_TIMELINE_DATA = [
       {
         year: "14–19 Okt 1945",
         title: "Pertempuran Lima Hari di Semarang",
-        desc: "Perlawanan heroik pemuda Semarang melawan pasukan Batalyon Kido Butai Jepang untuk merebut kembali senjata dan mempertahankan kedaulatan."
+        desc: "Pemuda Semarang dan laskar rakyat melancarkan perlawanan gigih menghadapi tentara Batalyon Kido Butai Jepang untuk menguasai senjata dan menjaga kedaulatan kemerdekaan. Peristiwa heroik ini melahirkan Monumen Tugu Muda sebagai simbol api juang tak kunjung padam.",
+        significance: "Peristiwa revolusi fisik pertama di Jawa Tengah yang mengobarkan semangat heroisme pemuda di seluruh Indonesia.",
+        location: "Kawasan Tugu Muda, Semarang",
+        image: "assets/images/era-kemerdekaan.jpg"
       },
       {
         year: "20 Nov – 15 Des 1945",
-        title: "Kemenangan Palagan Ambarawa",
-        desc: "Kolonel Soedirman menggunakan taktik 'Supit Urang' mengepung dan memukul mundur pasukan Sekutu, kini diabadikan sebagai Hari Juang TNI AD."
+        title: "Kemenangan Palagan Ambarawa & Taktik Supit Urang",
+        desc: "Kolonel Soedirman memimpin pasukan TKR mengepung pasukan Sekutu bersenjata lengkap di cekungan Ambarawa. Melalui taktik pengepungan rangkap 'Supit Urang', pejuang Indonesia berhasil memukul mundur Sekutu ke Semarang pada 15 Desember 1945.",
+        significance: "Kemenangan militer gemilang tentara nasional yang diabadikan sebagai Hari Juang Infanteri TNI Angkatan Darat.",
+        location: "Palagan Ambarawa, Kabupaten Semarang",
+        image: "assets/images/highlight-benteng-ambarawa.jpg"
       },
       {
         year: "15 Agustus 1950",
         title: "Penetapan Resmi Provinsi Jawa Tengah",
-        desc: "Pemerintah Republik Indonesia mengesahkan UU No. 10 Tahun 1950 yang menetapkan Provinsi Jawa Tengah dengan ibukota di Semarang."
+        desc: "Pemerintah Republik Indonesia mengesahkan UU No. 10 Tahun 1950 yang secara yuridis menetapkan Jawa Tengah sebagai provinsi otonom dengan ibukota Semarang. R. Panji Soeroso bersama para tokoh daerah meletakkan fondasi pemerintahan 35 kabupaten dan kota.",
+        significance: "Kelahiran resmi tatanan administrasi pemerintahan otonom Jawa Tengah dalam bingkai NKRI.",
+        location: "Gedung Pemerintahan, Semarang",
+        image: "assets/images/era-kuno.jpg"
       }
     ],
     highlights: [
@@ -267,19 +304,28 @@ const HISTORICAL_TIMELINE_DATA = [
     },
     events: [
       {
-        year: "1973–1983 M",
-        title: "Restorasi Akbar Borobudur Bersama UNESCO",
-        desc: "Proyek restorasi teknologi mutakhir internasional membongkar dan menyusun ulang jutaan batu candi, menyelamatkan monumen dari kelapukan."
-      },
-      {
-        year: "1991 M",
-        title: "Penetapan Candi Warisan Dunia UNESCO",
-        desc: "Kompleks Candi Borobudur dan Prambanan secara resmi ditetapkan sebagai Situs Warisan Dunia UNESCO (World Cultural Heritage).",
+        year: "1991 & 1996 M",
+        title: "Penetapan Tiga Warisan Budaya Dunia UNESCO",
+        desc: "UNESCO secara resmi menetapkan Candi Borobudur dan Candi Prambanan (1991), disusul Situs Manusia Purba Sangiran di Sragen (1996) sebagai Situs Warisan Budaya Dunia. Pengakuan ini mengukuhkan Jawa Tengah sebagai salah satu pusat peradaban spiritual dan arkeologi tertua manusia.",
+        significance: "Pengakuan internasional tertinggi atas kekayaan peninggalan prasejarah dan monumen megalitikum Jawa Tengah.",
+        location: "Magelang, Klaten & Sragen",
+        image: "assets/images/slide-3-borobudur.webp"
       },
       {
         year: "2003–2009 M",
-        title: "Pengakuan UNESCO untuk Wayang, Keris & Batik",
-        desc: "UNESCO menetapkan Wayang Kulit (2003), Keris (2005), dan Batik Indonesia (2009) yang berakar kuat di Jawa Tengah sebagai Masterpiece of Humanity."
+        title: "Diplomasi Wayang Kulit, Keris & Batik ke Dunia",
+        desc: "UNESCO menetapkan Wayang Kulit Purwa (2003), Keris Jawa (2005), dan Batik Tradisional (2009) yang berakar kuat di Surakarta, Pekalongan, dan Banyumas sebagai Masterpieces of Oral and Intangible Heritage of Humanity.",
+        significance: "Pengakuan dunia terhadap filosofi adiluhung, seni tatah sungging, tempa pamor, dan seni canting malam Nusantara.",
+        location: "Surakarta, Pekalongan & Banyumas",
+        image: "assets/images/slide-2-wayang.webp"
+      },
+      {
+        year: "2015–Kini",
+        title: "Revitalisasi Pusaka & Budaya Masa Depan",
+        desc: "Revitalisasi Kota Lama Semarang sebagai ikon sejarah maritim 'Little Netherland', perlindungan keraton Surakarta dan Mangkunegaran, serta tumbuhnya ekosistem ekonomi kreatif berbasis tradisi menjadikan Jawa Tengah rujukan wisata pusaka dunia.",
+        significance: "Menjadikan kebudayaan sebagai nafas kemajuan zaman dan kebanggaan generasi masa depan.",
+        location: "Kota Lama Semarang & Surakarta",
+        image: "assets/images/highlight-batik-keris.jpg"
       }
     ],
     highlights: [
@@ -309,11 +355,274 @@ const HISTORICAL_TIMELINE_DATA = [
 ];
 
 /**
+ * Curated Dataset of Influential Central Javanese Historical Figures (Tokoh Sejarah)
+ */
+const HISTORICAL_FIGURES_DATA = [
+  {
+    id: "ratu-shima",
+    name: "Ratu Shima",
+    title: "Ratu Keadilan Kerajaan Kalingga",
+    era: "Masa Kuno (± Abad ke-7 M)",
+    category: "pemimpin",
+    region: "Kalingga (Jepara / Pekalongan)",
+    years: "Memerintah ± 674–695 M",
+    image: "assets/images/era-kuno.jpg",
+    quote: "Keadilan sejati tidak mengenal kerabat; barang siapa menyentuh hak orang lain, hukum harus ditegakkan dengan setimpal.",
+    achievements: [
+      "Menegakkan hukum keadilan tanpa pandang bulu di seluruh pesisir utara Jawa",
+      "Memimpin Kalingga hingga disegani pedagang Arab, Tiongkok, dan India",
+      "Menjadikan Jawa Tengah pusat perdagangan maritim dan kosmologi Buddha-Hindu awal"
+    ],
+    bio: "Ratu Shima adalah penguasa legendaris Kerajaan Kalingga (Holing) di pesisir utara Jawa Tengah. Kepemimpinannya masyhur hingga ke dinasti Tang di Tiongkok karena ketegasan dan kejujurannya. Legenda mencatat bahwa sebuah kantong emas diletakkan di jalanan Kalingga selama tiga tahun tanpa ada satu pun orang yang berani menyentuhnya, melambangkan integritas moral rakyat di bawah hukum sang Ratu."
+  },
+  {
+    id: "rakai-pikatan",
+    name: "Rakai Pikatan & Pramodhawardhani",
+    title: "Penguasa Mataram Kuno & Simbol Harmoni Religi",
+    era: "Masa Kerajaan (Abad ke-9 M)",
+    category: "pemimpin",
+    region: "Bumi Mataram (Klaten / Magelang)",
+    years: "Memerintah ± 838–856 M",
+    image: "assets/images/slide-1-prambanan.webp",
+    quote: "Dua wangsa besar bersatu dalam cinta dan kebijaksanaan, melahirkan candi-candi megah pengayom semesta.",
+    achievements: [
+      "Memprakarsai pembangunan Candi Prambanan (Siwagrha) termegah di Indonesia",
+      "Mempersatukan Wangsa Sanjaya (Hindu) dan Wangsa Syailendra (Buddha) melalui pernikahan suci",
+      "Mendirikan Candi Plaosan sebagai bukti keindahan toleransi antar peradaban"
+    ],
+    bio: "Rakai Pikatan dari Dinasti Sanjaya memperistri Putri Pramodhawardhani dari Dinasti Syailendra. Pernikahan ini bukan sekadar aliansi politik, melainkan landasan emas peradaban Jawa Tengah di mana candi bercorak Siwa (Prambanan) dan candi bercorak Buddha (Plaosan dan Borobudur) berdiri berdampingan secara harmonis di dataran Kedu dan Prambanan."
+  },
+  {
+    id: "raden-patah",
+    name: "Raden Patah",
+    title: "Sultan Pertama Kesultanan Demak Bintoro",
+    era: "Masa Kerajaan Islam (Abad ke-15 M)",
+    category: "pemimpin",
+    region: "Demak Bintoro",
+    years: "Memerintah 1478–1518 M",
+    image: "assets/images/highlight-batik-keris.jpg",
+    quote: "Menegakkan kedaulatan di atas tanah beriman, merawat tali persaudaraan dan kemakmuran pesisir Nusantara.",
+    achievements: [
+      "Mendirikan Kesultanan Islam pelopor pertama di tanah Jawa (Demak)",
+      "Membangun Masjid Agung Demak sebagai pusat permusyawaratan para Wali Songo",
+      "Mengembangkan kekuatan armada maritim militer nusantara di Laut Jawa"
+    ],
+    bio: "Raden Patah (Sultan Syah Alam Akbar Al-Fatah) merupakan putra Brawijaya V yang mendirikan Kesultanan Demak Bintoro dengan bimbingan Sunan Ampel dan Wali Songo. Di bawah kepemimpinannya, Demak bertransformasi menjadi kekuatan maritim dan pusat persebaran kebudayaan Islam di pesisir utara Jawa Tengah."
+  },
+  {
+    id: "sunan-kalijaga",
+    name: "Sunan Kalijaga",
+    title: "Wali Budayawan & Pendakwah Adiluhung",
+    era: "Masa Kerajaan Islam (Abad ke-15–16 M)",
+    category: "budaya",
+    region: "Kadilangu, Demak",
+    years: "± 1450–1592 M",
+    image: "assets/images/slide-2-wayang.webp",
+    quote: "Urip iku urup (Hidup itu menyala memberi terang bagi sesama tanpa mencabut akar budayanya).",
+    achievements: [
+      "Memadukan ajaran Islam dengan seni wayang kulit purwa, tembang macapat, dan gamelan",
+      "Menciptakan lakon wayang Jamus Kalimasada dan tembang filosofis Gundhul-gundhul Pacul & Lir-Ilir",
+      "Merancang tiang saka tatal Masjid Agung Demak dari serpihan kayu yang disatukan"
+    ],
+    bio: "Raden Mas Said (Sunan Kalijaga) dikenal sebagai salah satu tokoh Wali Songo paling berpengaruh yang mengedepankan pendekatan akulturasi budaya. Beliau memanfaatkan wayang kulit, baju takwa, dan tradisi Sekaten untuk menyampaikan ajaran moral dan spiritual sehingga diterima dengan penuh kehangatan oleh masyarakat Jawa."
+  },
+  {
+    id: "ratu-kalinyamat",
+    name: "Ratu Kalinyamat",
+    title: "Panglima Bahari Perkasa & Ratu Jepara",
+    era: "Masa Kerajaan (Abad ke-16 M)",
+    category: "pejuang",
+    region: "Jepara",
+    years: "Memerintah 1549–1579 M",
+    image: "assets/images/highlight-benteng-ambarawa.jpg",
+    quote: "Harta dan kedaulatan tanah air tidak akan pernah tunduk kepada bangsa penjajah samudra.",
+    achievements: [
+      "Mengirim ratusan armada kapal perang berkekuatan ribuan prajurit melawan Portugis di Malaka (1551 & 1574)",
+      "Memimpin bandar Jepara sebagai pusat perniagaan maritim internasional terbesar di Jawa",
+      "Dianugerahi gelar Pahlawan Nasional Republik Indonesia atas kepahlawanan baharinya"
+    ],
+    bio: "Retna Kencana, yang bergelar Ratu Kalinyamat, adalah putri Sultan Trenggono dari Demak yang memimpin Jepara dengan kecakapan diplomasi dan militer maritim luar biasa. Bangsa Portugis dalam catatan sejarahnya menjulukinya 'Rainha de Japara, Senhora Poderosa e Rica' (Ratu Jepara yang amat kuat dan kaya raya)."
+  },
+  {
+    id: "pangeran-diponegoro",
+    name: "Pangeran Diponegoro",
+    title: "Pemimpin Perang Jawa (De Java Oorlog)",
+    era: "Masa Kolonial (1785–1855 M)",
+    category: "pejuang",
+    region: "Kedu, Magelang & Surakarta",
+    years: "1785–1855 M",
+    image: "assets/images/slide-3-borobudur.webp",
+    quote: "Kebenaran dan keadilan tidak dapat ditawar; tanah leluhur adalah titipan suci yang harus dibela sampai akhir hayat.",
+    achievements: [
+      "Memimpin Perang Jawa (1825–1830) yang mengguncang kekuasaan kolonial Hindia Belanda hingga bangkrut",
+      "Menerapkan taktik perang gerilya di pegunungan Menoreh dan lembah Kedu",
+      "Menulis naskah autobiografi Babad Diponegoro yang diakui UNESCO Memory of the World"
+    ],
+    bio: "Bendara Pangeran Harya Dipanegara adalah ksatria pahlawan nasional yang mengobarkan perlawanan total terhadap penindasan kolonial di tanah Jawa. Perang Jawa menjadi pertempuran terbesar dan paling menguras kas militer kolonial Belanda dalam sejarah penjajahan Nusantara."
+  },
+  {
+    id: "ra-kartini",
+    name: "R.A. Kartini",
+    title: "Pelopor Emansipasi Wanita & Tokoh Literasi Modern",
+    era: "Masa Kolonial (1879–1904 M)",
+    category: "emansipasi",
+    region: "Jepara & Rembang",
+    years: "1879–1904 M",
+    image: "assets/images/highlight-batik-keris.jpg",
+    quote: "Habis gelap terbitlah terang — Tiada awan di langit yang tetap selamanya, tiada mungkin akan terus-menerus terang cuaca.",
+    achievements: [
+      "Memprakarsai sekolah pertama bagi perempuan pribumi di tanah Jawa",
+      "Menulis korespondensi pemikiran progresif kesetaraan gender dan hak asasi manusia",
+      "Mempromosikan kriya ukir kayu Jepara dan seni batik ke kancah peradaban internasional"
+    ],
+    bio: "Raden Adjeng Kartini adalah pahlawan nasional pelopor kebangkitan perempuan dan pendidikan modern di Nusantara. Melalui surat-suratnya yang terkumpul dalam 'Habis Gelap Terbitlah Terang' (Door Duisternis tot Licht), gagasan beliau menjadi obor penyulut kesadaran nasionalisme Indonesia."
+  },
+  {
+    id: "jenderal-soedirman",
+    name: "Jenderal Besar Soedirman",
+    title: "Panglima Besar TNI & Pahlawan Gerilya",
+    era: "Masa Kemerdekaan (1916–1950 M)",
+    category: "pejuang",
+    region: "Purbalingga, Ambarawa & Banyumas",
+    years: "1916–1950 M",
+    image: "assets/images/era-kemerdekaan.jpg",
+    quote: "Robek-robeklah badanku, potong-potonglah jasad ini, tetapi jiwaku yang dilindungi benteng kemerdekaan tidak akan dapat dibunuh.",
+    achievements: [
+      "Memimpin kemenangan gemilang Pertempuran Palagan Ambarawa (1945) mengusir Sekutu",
+      "Memimpin perang gerilya di atas tandu sejauh ribuan kilometer meski menderita sakit paru-paru parah",
+      "Menjadi Panglima Besar pertama Tentara Nasional Indonesia yang terpilih secara demokratis"
+    ],
+    bio: "Soedirman lahir di Bodas Karangjati, Purbalingga, Jawa Tengah. Dedikasi moral dan kepemimpinan militernya membakar semangat juang pemuda Indonesia. Kemenangannya di Ambarawa menggunakan siasat Supit Urang menjadi tonggak sejarah Hari Juang Infanteri TNI AD."
+  },
+  {
+    id: "ki-nartosabdo",
+    name: "Ki Nartosabdo",
+    title: "Maestro Karawitan & Dalang Pembaharu Wayang Kulit",
+    era: "Jawa Tengah Modern (1925–1985 M)",
+    category: "budaya",
+    region: "Semarang & Surakarta",
+    years: "1925–1985 M",
+    image: "assets/images/slide-2-wayang.webp",
+    quote: "Wayang iku wewayanganing ngaurip (Wayang adalah bayang-bayang kehidupan yang menuntun budi pekerti manusia).",
+    achievements: [
+      "Menciptakan ratusan gending Jawa legendaris (Ladrang Pangkur, Swara Suling, Gambang Suling)",
+      "Mendirikan grup wayang orang Ngesti Pandowo yang menjadi magnet seni panggung di Semarang",
+      "Mereformasi seni pedalangan wayang purwa menjadi lebih dinamis, komunikatif, dan dicintai generasi muda"
+    ],
+    bio: "Ki Nartosabdo (Soenarto) adalah seniman serba bisa legendaris kelahiran Klaten yang berkarya di Semarang dan Solo. Beliau dianugerahi berbagai penghargaan kebudayaan atas jasanya melestarikan dan memperkaya repertoar musik karawitan serta seni pedalangan wayang kulit Nusantara."
+  }
+];
+
+/**
+ * Curated Dataset of Central Javanese Cultural Heritage (Pusaka & Warisan Budaya)
+ */
+const CULTURAL_HERITAGE_DATA = [
+  {
+    id: "borobudur",
+    title: "Candi Borobudur",
+    category: "candi",
+    categoryLabel: "Candi & Arsitektur Megah",
+    unescoStatus: "Warisan Dunia UNESCO (1991)",
+    region: "Kabupaten Magelang",
+    period: "Wangsa Syailendra (Abad ke-8–9 M)",
+    image: "assets/images/slide-3-borobudur.webp",
+    desc: "Monumen candi Buddha terbesar di dunia yang tersusun atas 2 juta blok batu andesit, 504 arca Buddha, dan 2.672 panel relief naratif yang membentang sepanjang 3 kilometer.",
+    filosofi: "Tiga tingkatan kosmologis Buddhis: Kamadhatu (dunia nafsu), Rupadhatu (dunia berwujud), dan Arupadhatu (dunia tanpa wujud/kesempurnaan nirwana)."
+  },
+  {
+    id: "prambanan",
+    title: "Kompleks Candi Prambanan",
+    category: "candi",
+    categoryLabel: "Candi & Arsitektur Megah",
+    unescoStatus: "Warisan Dunia UNESCO (1991)",
+    region: "Kabupaten Klaten",
+    period: "Wangsa Sanjaya (Abad ke-9 M)",
+    image: "assets/images/slide-1-prambanan.webp",
+    desc: "Mahakarya arsitektur Hindu terindah di Asia Tenggara yang menjulang setinggi 47 meter, dipersembahkan untuk Trimurti: Dewa Siwa (Perusak), Brahma (Pencipta), dan Wisnu (Pemelihara).",
+    filosofi: "Prinsip Siwagrha melambangkan Gunung Meru sebagai poros semesta dan lambang harmoni kerukunan agama di Jawa Tengah kuno."
+  },
+  {
+    id: "keris-jawa",
+    title: "Pusaka Keris Surakarta",
+    category: "kriya",
+    categoryLabel: "Kriya & Busana Pusaka",
+    unescoStatus: "Warisan Budaya Takbenda UNESCO (2005)",
+    region: "Surakarta & Yogyakarta",
+    period: "Masa Kerajaan hingga Era Modern",
+    image: "assets/images/highlight-batik-keris.jpg",
+    desc: "Senjata tikam berbilah asimetris dengan pamor metalurgi multi-layer hasil tempaan pande besi empu Jawa, diakui dunia atas nilai spiritual dan estetika artistik tingginya.",
+    filosofi: "Bilah lurus melambangkan keteguhan batin menyembah Tuhan; bilah luk (berkelok) melambangkan keluwesan manusia meniti liku-liku gelombang kehidupan."
+  },
+  {
+    id: "batik-parang",
+    title: "Batik Tulis Parang & Kawung",
+    category: "kriya",
+    categoryLabel: "Kriya & Busana Pusaka",
+    unescoStatus: "Warisan Budaya Takbenda UNESCO (2009)",
+    region: "Surakarta & Pekalongan",
+    period: "Tradisi Keraton Mataram Islam",
+    image: "assets/images/highlight-batik-keris.jpg",
+    desc: "Seni lukis malam panas di atas kain mori halus menggunakan canting tembaga tradisional dengan ragam hias simbolik warisan keraton Jawa Tengah.",
+    filosofi: "Motif Parang melambangkan ombak karang laut yang tak pernah lelah berjuang; Motif Kawung melambangkan buah kolang-kaling empat penjuru sebagai simbol kesucian hati."
+  },
+  {
+    id: "wayang-kulit",
+    title: "Wayang Kulit Purwa",
+    category: "seni",
+    categoryLabel: "Seni Musik & Pertunjukan",
+    unescoStatus: "Masterpiece of Humanity UNESCO (2003)",
+    region: "Surakarta, Kedu & Banyumas",
+    period: "Abad ke-10 M hingga Sekarang",
+    image: "assets/images/slide-2-wayang.webp",
+    desc: "Teater bayangan kulit kerbau bertatah intrik beriringan orkestra gamelan Jawa, membawakan epos wiracarita Mahabarata dan Ramayana yang sarat ajaran filsafat budi pekerti luhur.",
+    filosofi: "Kelir (layar putih) adalah bentang dunia; Blencong (lampu minyak) adalah sang surya; Dalang adalah penguasa takdir; dan Wayang adalah cermin watak manusia."
+  },
+  {
+    id: "gamelan-jawa",
+    title: "Karawitan & Gamelan Ageng",
+    category: "seni",
+    categoryLabel: "Seni Musik & Pertunjukan",
+    unescoStatus: "Warisan Budaya Takbenda UNESCO (2021)",
+    region: "Keraton Kasunanan Surakarta & Mangkunegaran",
+    period: "Masa Mataram Kuno hingga Modern",
+    image: "assets/images/slide-2-wayang.webp",
+    desc: "Ansambel instrumen perunggu gong, kempul, kenong, bonang, kendang, dan rebab yang ditala dalam laras Slendro dan Pelog menghasilkan harmoni meditasi batin mendalam.",
+    filosofi: "Filosofi 'Rukun Agawe Santosa': tiap bilah instrumen saling menahan diri untuk tidak menonjol sendiri demi melahirkan keselarasan rasa yang agung."
+  },
+  {
+    id: "bedhaya-ketawang",
+    title: "Tari Bedhaya Ketawang",
+    category: "seni",
+    categoryLabel: "Seni Musik & Pertunjukan",
+    unescoStatus: "Pusaka Sakral Keraton Kasunanan",
+    region: "Kota Surakarta",
+    period: "Sultan Agung (Abad ke-17 M)",
+    image: "assets/images/highlight-batik-keris.jpg",
+    desc: "Tarian pusaka sakral yang ditarikan oleh sembilan putri berbusana dodot ageng dalam upacara Tingalan Dalem Jumenengan (peringatan naik takhta Sri Susuhunan Pakubuwono).",
+    filosofi: "Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa."
+  },
+  {
+    id: "candi-dieng",
+    title: "Kompleks Percandian Dieng",
+    category: "candi",
+    categoryLabel: "Candi & Arsitektur Megah",
+    unescoStatus: "Cagar Budaya Nasional Peringkat Satu",
+    region: "Dataran Tinggi Dieng, Banjarnegara",
+    period: "Abad ke-7–8 Masehi",
+    image: "assets/images/era-kuno.jpg",
+    desc: "Gugusan candi tertua di pulau Jawa yang berdiri di dataran tinggi vulkanik berkabut 2.000 meter di atas permukaan laut, dinamai berdasarkan ksatria Pandawa.",
+    filosofi: "'Di-Hyang' bermakna tempat bersemayamnya para dewata; tempat suci pembersihan jiwa para resi dan pertapa Jawa kuno."
+  }
+];
+
+/**
  * Controller Class for Karsa Potret Timeline Page
  */
 class KarsaTimelineController {
   constructor(data) {
     this.data = data;
+    this.figuresData = HISTORICAL_FIGURES_DATA;
+    this.heritageData = CULTURAL_HERITAGE_DATA;
     this.currentIndex = 0;
     this.isTransitioning = false;
 
@@ -335,15 +644,32 @@ class KarsaTimelineController {
       contextText: document.getElementById('context-box-text'),
       eventsList: document.getElementById('era-events-list'),
       
-      // Media Showcase DOM elements
+      // Media Showcase Fallback DOM elements
       showcaseImg: document.getElementById('era-showcase-img'),
       plaqueTag: document.getElementById('plaque-tag'),
       plaqueTitle: document.getElementById('plaque-title'),
       plaqueLocation: document.getElementById('plaque-location'),
       
+      // Dynamic Alternating Journey Developments Container
+      developmentsContainer: document.getElementById('era-developments-container'),
+      btnJourneyPrev: document.getElementById('btn-journey-prev'),
+      btnJourneyNext: document.getElementById('btn-journey-next'),
+      journeyNavCounter: document.getElementById('journey-nav-counter'),
+
       // Highlights section DOM elements
       highlightsEraLabel: document.getElementById('highlights-era-label'),
-      highlightsGrid: document.getElementById('highlights-grid')
+      highlightsGrid: document.getElementById('highlights-grid'),
+
+      // Tokoh Section DOM elements
+      tokohGrid: document.getElementById('tokoh-grid'),
+      tokohFilterBtns: document.querySelectorAll('[data-tokoh-filter]'),
+      tokohModal: document.getElementById('tokoh-modal'),
+      tokohModalContent: document.getElementById('tokoh-modal-content'),
+      btnCloseTokohModal: document.getElementById('btn-close-tokoh-modal'),
+
+      // Warisan Budaya Section DOM elements
+      warisanGrid: document.getElementById('warisan-grid'),
+      warisanFilterBtns: document.querySelectorAll('[data-warisan-filter]')
     };
 
     this.init();
@@ -352,6 +678,8 @@ class KarsaTimelineController {
   init() {
     this.checkUrlDeepLink();
     this.renderActiveEra(this.currentIndex, true);
+    this.renderTokoh('all');
+    this.renderWarisan('all');
     this.bindEvents();
   }
 
@@ -375,7 +703,7 @@ class KarsaTimelineController {
       });
     });
 
-    // Previous / Next Buttons
+    // Top Toolbar Previous / Next Buttons
     if (this.dom.btnPrevEra) {
       this.dom.btnPrevEra.addEventListener('click', () => {
         if (this.currentIndex > 0 && !this.isTransitioning) {
@@ -392,10 +720,81 @@ class KarsaTimelineController {
       });
     }
 
-    // Keyboard Arrow Navigation
+    // Journey Footer Previous / Next Buttons
+    if (this.dom.btnJourneyPrev) {
+      this.dom.btnJourneyPrev.addEventListener('click', () => {
+        if (this.currentIndex > 0 && !this.isTransitioning) {
+          this.goToEra(this.currentIndex - 1);
+          this.scrollToStage();
+        }
+      });
+    }
+
+    if (this.dom.btnJourneyNext) {
+      this.dom.btnJourneyNext.addEventListener('click', () => {
+        if (this.currentIndex < this.data.length - 1 && !this.isTransitioning) {
+          this.goToEra(this.currentIndex + 1);
+          this.scrollToStage();
+        }
+      });
+    }
+
+    // Tokoh Filter Tabs
+    this.dom.tokohFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.dom.tokohFilterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        this.renderTokoh(btn.dataset.tokohFilter);
+      });
+    });
+
+    // Warisan Filter Tabs
+    this.dom.warisanFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.dom.warisanFilterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        this.renderWarisan(btn.dataset.warisanFilter);
+      });
+    });
+
+    // Tokoh Grid Event Delegation for Modal
+    if (this.dom.tokohGrid) {
+      this.dom.tokohGrid.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-open-tokoh]');
+        const card = e.target.closest('[data-tokoh-id]');
+        const id = btn ? btn.dataset.openTokoh : (card ? card.dataset.tokohId : null);
+        if (id) {
+          this.openTokohModal(id);
+        }
+      });
+    }
+
+    // Tokoh Modal Close
+    if (this.dom.btnCloseTokohModal) {
+      this.dom.btnCloseTokohModal.addEventListener('click', () => this.closeTokohModal());
+    }
+    if (this.dom.tokohModal) {
+      this.dom.tokohModal.addEventListener('click', (e) => {
+        if (e.target === this.dom.tokohModal) this.closeTokohModal();
+      });
+    }
+
+    // Keyboard Navigation
     window.addEventListener('keydown', (e) => {
-      // Ignore if user is inside an input or textarea
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      if (e.key === 'Escape' && this.dom.tokohModal && this.dom.tokohModal.classList.contains('is-open')) {
+        this.closeTokohModal();
+        return;
+      }
 
       if (e.key === 'ArrowLeft') {
         if (this.currentIndex > 0 && !this.isTransitioning) {
@@ -411,6 +810,13 @@ class KarsaTimelineController {
     });
   }
 
+  scrollToStage() {
+    if (this.dom.stageCard) {
+      const topOffset = this.dom.stageCard.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+    }
+  }
+
   goToEra(targetIndex) {
     if (targetIndex < 0 || targetIndex >= this.data.length) return;
     this.isTransitioning = true;
@@ -421,7 +827,7 @@ class KarsaTimelineController {
       this.dom.stageCard.classList.add('transitioning');
     }
 
-    // Delay content swap slightly for cinema crossfade
+    // Delay content swap slightly for editorial crossfade
     setTimeout(() => {
       this.renderActiveEra(targetIndex, false);
       if (this.dom.stageCard) {
@@ -442,8 +848,9 @@ class KarsaTimelineController {
     const era = this.data[index];
     if (!era) return;
 
-    // 1. Update Timeline Track Progress & Milestones
     const total = this.data.length;
+
+    // 1. Update Timeline Track Progress & Milestones
     const progressPercent = total > 1 ? (index / (total - 1)) * 100 : 0;
     if (this.dom.trackProgress) {
       this.dom.trackProgress.style.width = `${progressPercent}%`;
@@ -471,7 +878,18 @@ class KarsaTimelineController {
       this.dom.btnNextEra.disabled = (index === total - 1);
     }
 
-    // 3. Update Stage Left Column (Narrative)
+    // 3. Update Journey Footer Controls
+    if (this.dom.btnJourneyPrev) {
+      this.dom.btnJourneyPrev.disabled = (index === 0);
+    }
+    if (this.dom.btnJourneyNext) {
+      this.dom.btnJourneyNext.disabled = (index === total - 1);
+    }
+    if (this.dom.journeyNavCounter) {
+      this.dom.journeyNavCounter.innerHTML = `<span>Era ${era.number} dari 0${total}</span> &bull; <strong>${era.shortTitle}</strong>`;
+    }
+
+    // 4. Update Stage Header (Narrative Context)
     if (this.dom.eraEyebrow) {
       this.dom.eraEyebrow.textContent = `${era.number} — ${era.badgeText}`;
     }
@@ -491,20 +909,7 @@ class KarsaTimelineController {
       this.dom.contextText.textContent = era.contextDesc;
     }
 
-    // Render Events List
-    if (this.dom.eventsList) {
-      this.dom.eventsList.innerHTML = era.events.map(ev => `
-        <article class="event-timeline-card">
-          <div class="event-card-header">
-            <span class="event-year-tag">${this.escapeHtml(ev.year)}</span>
-            <h4 class="event-title">${this.escapeHtml(ev.title)}</h4>
-          </div>
-          <p class="event-desc">${this.escapeHtml(ev.desc)}</p>
-        </article>
-      `).join('');
-    }
-
-    // 4. Update Stage Right Column (Media Showcase)
+    // 5. Update Backward Compatibility Anchors for Automated Tests
     if (this.dom.showcaseImg) {
       this.dom.showcaseImg.src = era.heroImage;
       this.dom.showcaseImg.alt = era.heroImageAlt;
@@ -518,8 +923,79 @@ class KarsaTimelineController {
     if (this.dom.plaqueLocation) {
       this.dom.plaqueLocation.innerHTML = `<i class="bi bi-geo-alt-fill" aria-hidden="true"></i> <span>${this.escapeHtml(era.heroPlaque.location)}</span>`;
     }
+    if (this.dom.eventsList) {
+      this.dom.eventsList.innerHTML = era.events.map(ev => `
+        <article class="event-timeline-card">
+          <div class="event-card-header">
+            <span class="event-year-tag">${this.escapeHtml(ev.year)}</span>
+            <h4 class="event-title">${this.escapeHtml(ev.title)}</h4>
+          </div>
+          <p class="event-desc">${this.escapeHtml(ev.desc)}</p>
+        </article>
+      `).join('');
+    }
 
-    // 5. Update Historical Highlights Section
+    // 6. RENDER THE ALTERNATING HISTORICAL DEVELOPMENTS (THE CORE EDITORIAL JOURNEY)
+    if (this.dom.developmentsContainer) {
+      this.dom.developmentsContainer.innerHTML = era.events.map((ev, i) => {
+        const isImageLeft = (i % 2 === 0); // Alternates: 0=Left, 1=Right, 2=Left
+        const numStr = String(i + 1).padStart(2, '0');
+
+        const imageBlock = `
+          <div class="col-lg-6 journey-col journey-media-col">
+            <div class="journey-photo-wrapper">
+              <div class="journey-photo-container">
+                <img src="${ev.image}" alt="${this.escapeHtml(ev.title)}" class="journey-photo-img" loading="lazy">
+                <div class="journey-photo-overlay-tag">
+                  <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+                  <span>${this.escapeHtml(ev.location)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const textBlock = `
+          <div class="col-lg-6 journey-col journey-text-col">
+            <div class="journey-narrative-card">
+              <span class="journey-watermark-num" aria-hidden="true">${numStr}.</span>
+              <div class="journey-meta-row">
+                <span class="journey-milestone-marker" aria-hidden="true"></span>
+                <span class="journey-date-pill">${this.escapeHtml(ev.year)}</span>
+                <span class="journey-order-tag">Tonggak Sejarah ${numStr}</span>
+              </div>
+              <h3 class="journey-event-title">${this.escapeHtml(ev.title)}</h3>
+              <p class="journey-event-desc">${this.escapeHtml(ev.desc)}</p>
+              
+              <div class="journey-significance-box">
+                <div class="significance-header">
+                  <i class="bi bi-shield-check" aria-hidden="true"></i>
+                  <span>Makna Historis &amp; Budaya</span>
+                </div>
+                <p class="significance-text">${this.escapeHtml(ev.significance)}</p>
+              </div>
+
+              <div class="journey-action-row">
+                <a href="#tokoh" class="journey-action-link">
+                  <span>Eksplorasi Tokoh &amp; Warisan Terkait</span>
+                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        return `
+          <article class="journey-development-row ${isImageLeft ? 'image-left' : 'image-right'}" data-step="${i + 1}">
+            <div class="row align-items-center g-4 g-xl-5">
+              ${isImageLeft ? imageBlock + textBlock : textBlock + imageBlock}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // 7. Update Historical Highlights Section
     if (this.dom.highlightsEraLabel) {
       this.dom.highlightsEraLabel.textContent = `Pusaka Pilihan: ${era.shortTitle} (${era.periodRange})`;
     }
@@ -543,6 +1019,115 @@ class KarsaTimelineController {
         </div>
       `).join('');
     }
+  }
+
+  renderTokoh(category = 'all') {
+    if (!this.dom.tokohGrid) return;
+    const filtered = this.figuresData.filter(fig => {
+      if (category === 'all') return true;
+      return fig.category === category;
+    });
+
+    this.dom.tokohGrid.innerHTML = filtered.map(fig => `
+      <article class="tokoh-profile-card" data-tokoh-id="${fig.id}">
+        <div class="tokoh-card-header">
+          <div class="tokoh-avatar-wrap">
+            <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="tokoh-avatar-img" loading="lazy">
+            <span class="tokoh-era-badge">${this.escapeHtml(fig.era)}</span>
+          </div>
+          <div class="tokoh-meta">
+            <h3 class="tokoh-name">${this.escapeHtml(fig.name)}</h3>
+            <span class="tokoh-role-tag">${this.escapeHtml(fig.title)}</span>
+            <div class="tokoh-origin">
+              <i class="bi bi-geo-alt" aria-hidden="true"></i> <span>${this.escapeHtml(fig.region)}</span>
+            </div>
+          </div>
+        </div>
+        <blockquote class="tokoh-quote">“${this.escapeHtml(fig.quote)}”</blockquote>
+        <ul class="tokoh-achievements-list">
+          ${fig.achievements.slice(0, 2).map(a => `<li><i class="bi bi-check2-circle" aria-hidden="true"></i> <span>${this.escapeHtml(a)}</span></li>`).join('')}
+        </ul>
+        <div class="tokoh-card-actions">
+          <button type="button" class="btn-read-tokoh" data-open-tokoh="${fig.id}">
+            <span>Telusuri Biografi</span> <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  openTokohModal(id) {
+    const fig = this.figuresData.find(f => f.id === id);
+    if (!fig || !this.dom.tokohModal || !this.dom.tokohModalContent) return;
+
+    this.dom.tokohModalContent.innerHTML = `
+      <div class="tokoh-modal-header">
+        <div class="tokoh-modal-avatar">
+          <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}">
+        </div>
+        <div class="tokoh-modal-meta">
+          <span class="modal-era-badge">${this.escapeHtml(fig.era)} &bull; ${this.escapeHtml(fig.years)}</span>
+          <h2 id="tokoh-modal-title" class="tokoh-modal-name">${this.escapeHtml(fig.name)}</h2>
+          <div class="tokoh-modal-title-tag">${this.escapeHtml(fig.title)}</div>
+          <div class="tokoh-modal-loc"><i class="bi bi-geo-alt-fill"></i> ${this.escapeHtml(fig.region)}</div>
+        </div>
+      </div>
+      <blockquote class="tokoh-modal-quote">“${this.escapeHtml(fig.quote)}”</blockquote>
+      <div class="tokoh-modal-section">
+        <h4 class="modal-section-title"><i class="bi bi-journal-text"></i> Kisah Perjalanan &amp; Kepeloporan</h4>
+        <p class="tokoh-modal-bio">${this.escapeHtml(fig.bio)}</p>
+      </div>
+      <div class="tokoh-modal-section">
+        <h4 class="modal-section-title"><i class="bi bi-trophy"></i> Sumbangsih &amp; Jasa Bersejarah</h4>
+        <ul class="tokoh-modal-achieve-list">
+          ${fig.achievements.map(a => `<li><i class="bi bi-shield-check"></i> <span>${this.escapeHtml(a)}</span></li>`).join('')}
+        </ul>
+      </div>
+    `;
+
+    this.dom.tokohModal.classList.add('is-open');
+    this.dom.tokohModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (this.dom.btnCloseTokohModal) this.dom.btnCloseTokohModal.focus();
+  }
+
+  closeTokohModal() {
+    if (!this.dom.tokohModal) return;
+    this.dom.tokohModal.classList.remove('is-open');
+    this.dom.tokohModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  renderWarisan(category = 'all') {
+    if (!this.dom.warisanGrid) return;
+    const filtered = this.heritageData.filter(item => {
+      if (category === 'all') return true;
+      if (category === 'unesco') return item.unescoStatus.includes('UNESCO');
+      return item.category === category;
+    });
+
+    this.dom.warisanGrid.innerHTML = filtered.map(item => `
+      <article class="warisan-item-card">
+        <div class="warisan-card-media">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="warisan-card-img" loading="lazy">
+          <div class="warisan-badges-row">
+            <span class="warisan-status-badge">${this.escapeHtml(item.unescoStatus)}</span>
+            <span class="warisan-category-badge">${this.escapeHtml(item.categoryLabel)}</span>
+          </div>
+        </div>
+        <div class="warisan-card-body">
+          <div class="warisan-region-tag">
+            <i class="bi bi-compass" aria-hidden="true"></i> <span>${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}</span>
+          </div>
+          <h3 class="warisan-item-title">${this.escapeHtml(item.title)}</h3>
+          <p class="warisan-item-desc">${this.escapeHtml(item.desc)}</p>
+          <div class="warisan-filosofi-box">
+            <strong class="filosofi-label"><i class="bi bi-lightbulb" aria-hidden="true"></i> Filosofi Adiluhung:</strong>
+            <p class="filosofi-text">${this.escapeHtml(item.filosofi)}</p>
+          </div>
+        </div>
+      </article>
+    `).join('');
   }
 
   escapeHtml(str) {

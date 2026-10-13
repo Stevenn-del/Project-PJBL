@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokoh Bersejarah Jawa Tengah — Galeri Editorial Karsa Potret</title>
+  <meta name="description" content="Menelusuri jejak integritas, kepahlawanan, pemikiran emansipasi, dan keteladanan para tokoh bersejarah adiluhung Jawa Tengah bersama Karsa Potret.">
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Base Project & Color Tokens Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/redesign-palette.css">
+  
+  <!-- Dedicated Tokoh Editorial Stylesheet -->
+  <link rel="stylesheet" href="css/tokoh.css">
+</head>
+<body class="tokoh-page-body">
+
+  <!-- ==========================================================================
+       1. STICKY EDITORIAL NAVBAR
+       ========================================================================== -->
+  <header class="desktop-header-tokoh" id="header-tokoh">
+    <div class="container-fluid">
+      <div class="navbar-inner-tokoh">
+        
+        <!-- Left: Brand Emblem -->
+        <div class="brand-wrapper">
+          <a href="index.html" class="brand-link" aria-label="Karsa Potret - Kembali ke Beranda">
+            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="brand-logo-img">
+          </a>
+        </div>
+
+        <!-- Center: Primary Navigation Links -->
+        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+          <ul class="nav-links-list">
+            <li><a href="index.html" class="nav-item-link">Beranda</a></li>
+            <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
+            <li><a href="tokoh.html" class="nav-item-link active" aria-current="page">Tokoh</a></li>
+            <li><a href="peta.html" class="nav-item-link">Peta</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+          </ul>
+        </nav>
+
+        <!-- Right: Wayang Motion Interactive Trigger -->
+        <div class="nav-right-wrapper">
+          <a href="wayang-motion.html" class="btn-wayang-action" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Wayang Motion</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. EDITORIAL HERO & CURATORIAL SIGNPOST
+       ========================================================================== -->
+  <section class="tokoh-hero-section" id="hero-tokoh" aria-labelledby="tokoh-main-heading">
+    <div class="tokoh-hero-container">
+      
+      <div class="editorial-signpost">
+        <span aria-hidden="true">✦</span>
+        <span>SATRIA, PUJANGGA &amp; PERINTIS PERADABAN</span>
+        <span aria-hidden="true">✦</span>
+      </div>
+
+      <h1 class="tokoh-main-title" id="tokoh-main-heading">
+        Tokoh Bersejarah <span class="gold-accent">Jawa Tengah</span>
+      </h1>
+
+      <p class="tokoh-main-lead">
+        Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan budayawan agung yang meletakkan dasar peradaban serta martabat bangsa melintas abad.
+      </p>
+
+      <!-- Category Filter Tabs -->
+      <div class="tokoh-filter-container" role="tablist" aria-label="Kategori Tokoh Sejarah">
+        <button type="button" class="tokoh-filter-pill active" data-tokoh-filter="all" role="tab" aria-selected="true">
+          <span>Semua Tokoh</span>
+        </button>
+        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pemimpin" role="tab" aria-selected="false">
+          <i class="bi bi-award" aria-hidden="true"></i>
+          <span>Pemimpin &amp; Kerajaan</span>
+        </button>
+        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pejuang" role="tab" aria-selected="false">
+          <i class="bi bi-shield-shaded" aria-hidden="true"></i>
+          <span>Pejuang Kemerdekaan</span>
+        </button>
+        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="emansipasi" role="tab" aria-selected="false">
+          <i class="bi bi-book" aria-hidden="true"></i>
+          <span>Emansipasi &amp; Literasi</span>
+        </button>
+        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="budaya" role="tab" aria-selected="false">
+          <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
+          <span>Seni &amp; Pedalangan</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. MAIN EDITORIAL CONTENT (SPOTLIGHT + 2-COLUMN PROFILE FLOW)
+       ========================================================================== -->
+  <main class="tokoh-content-wrapper" id="tokoh-content">
+    
+    <!-- Dynamic Spotlight Featured Figure Card -->
+    <div class="tokoh-spotlight-card" id="tokoh-spotlight" aria-live="polite">
+      <!-- Dynamically populated via js/tokoh.js -->
+    </div>
+
+    <!-- Editorial Section Heading & Counter -->
+    <div class="tokoh-editorial-heading-row">
+      <h2 class="editorial-section-title">Galeri Profil &amp; Kisah Perjuangan</h2>
+      <span class="editorial-count-badge" id="tokoh-count-badge">Memuat profil...</span>
+    </div>
+
+    <!-- Spacious 2-Column Curated Figure Sequence (NO Dense 3-Column Grid!) -->
+    <div class="tokoh-editorial-sequence" id="tokoh-grid" aria-live="polite">
+      <!-- Dynamically populated via js/tokoh.js -->
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       4. BIOGRAPHICAL DETAIL MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop-editorial" id="tokoh-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tokoh-modal-title">
+    <div class="tokoh-modal-card">
+      <button type="button" class="tokoh-modal-close" id="btn-close-tokoh-modal" aria-label="Tutup biografi">&times;</button>
+      <div id="tokoh-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       5. EDITORIAL FOOTER
+       ========================================================================== -->
+  <footer class="tokoh-footer-section">
+    <div class="container-fluid">
+      
+      <div class="tokoh-footer-grid">
+        <div class="tokoh-footer-brand">
+          <a href="index.html" aria-label="Karsa Potret">
+            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret">
+          </a>
+          <p class="tokoh-footer-desc">
+            Media interaktif dokumentasi dan apresiasi kekayaan sejarah, tokoh, serta warisan peradaban adiluhung Jawa Tengah dari masa ke masa.
+          </p>
+        </div>
+
+        <div class="tokoh-footer-nav-cols">
+          <div>
+            <div class="footer-nav-group-title">Eksplorasi</div>
+            <ul class="footer-nav-links">
+              <li><a href="index.html">Beranda</a></li>
+              <li><a href="timeline.html">Timeline Sejarah</a></li>
+              <li><a href="tokoh.html">Tokoh Bersejarah</a></li>
+              <li><a href="warisan-budaya.html">Warisan Budaya</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-nav-group-title">Interaktif</div>
+            <ul class="footer-nav-links">
+              <li><a href="peta.html">Peta Interaktif Atlas</a></li>
+              <li><a href="wayang-motion.html">Wayang Motion AI</a></li>
+              <li><a href="photobooth.html">Photobooth Budaya</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-nav-group-title">Tentang</div>
+            <ul class="footer-nav-links">
+              <li><a href="timeline.html">Arsip Kebudayaan</a></li>
+              <li><a href="#kebijakan">Kebijakan Privasi</a></li>
+              <li><a href="#kontak">Hubungi Tim</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tokoh-footer-bottom">
+        <div>&copy; 2026 Karsa Potret. Seluruh hak cipta dilindungi. Melestarikan Jejak Peradaban Nusantara.</div>
+        <div>Dokumentasi Kebudayaan Jawa Tengah</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Controller -->
+  <script src="js/tokoh.js"></script>
+</body>
+</html>

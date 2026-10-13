@@ -2,14 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jejak Sejarah Jawa Tengah — Timeline Kebudayaan Karsa Potret</title>
   <meta name="description" content="Menelusuri perjalanan Jawa Tengah dari masa ke masa, mengenal peristiwa, peninggalan, dan perubahan yang membentuk identitasnya bersama Karsa Potret.">
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -20,10 +20,13 @@
   <!-- Base Project Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   
-  <!-- Timeline Page Dedicated Stylesheet -->
+  <!-- Redesign 5-Color System Stylesheet -->
+  <link rel="stylesheet" href="css/redesign-palette.css">
+  
+  <!-- Timeline Page Dedicated Stylesheet (Reference-Inspired Redesign) -->
   <link rel="stylesheet" href="css/timeline.css">
 </head>
-<body>
+<body class="timeline-body">
 
   <!-- ==========================================================================
        STICKY DESKTOP HEADER NAVBAR
@@ -45,16 +48,16 @@
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link active" aria-current="page">Timeline</a></li>
             <li><a href="#tokoh" class="nav-item-link">Tokoh</a></li>
+            <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
-            <li><a href="wayang-motion.html" class="nav-item-link">Wayang Motion</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Photobooth Action Button -->
+        <!-- Right: Wayang Motion Action Button -->
         <div class="nav-right-wrapper">
-          <a href="#photobooth" class="btn-photobooth" id="btn-photobooth" aria-label="Buka Fitur Photobooth">
-            <i class="bi bi-camera-fill" aria-hidden="true"></i>
-            <span>Photobooth</span>
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Wayang Motion</span>
           </a>
         </div>
 
@@ -63,44 +66,59 @@
   </header>
 
   <!-- ==========================================================================
-       PAGE INTRODUCTION / HERO
+       1. LARGE PHOTOGRAPHIC HERO WITH TORN-PAPER TRANSITION
        ========================================================================== -->
-  <section class="timeline-hero text-center" id="intro-section" aria-labelledby="timeline-heading">
-    <div class="container">
+  <section class="timeline-hero" id="intro-section" aria-labelledby="timeline-heading">
+    <!-- Cinematic Full-Width Background Photo -->
+    <div class="hero-bg-media-container" aria-hidden="true">
+      <img src="assets/images/slide-3-borobudur.webp" alt="Panorama Candi Borobudur dan Dataran Kedu Jawa Tengah" class="hero-bg-img">
+      <div class="hero-tint-overlay"></div>
+    </div>
+
+    <!-- Editorial Hero Typography -->
+    <div class="container hero-content-relative">
       <div class="hero-meta-signpost">
-        <span>Arsip Kronologis Kebudayaan</span>
-        <span class="divider-dot" aria-hidden="true"></span>
-        <span>Jawa Dwipa Melintas Abad</span>
+        <span class="seal-glyph" aria-hidden="true">✦</span>
+        <span>Arsip Kronologis Kebudayaan &bull; Jawa Dwipa Melintas Abad</span>
+        <span class="seal-glyph" aria-hidden="true">✦</span>
       </div>
-      <h1 class="timeline-page-title" id="timeline-heading">Jejak Sejarah Jawa Tengah</h1>
-      <p class="timeline-page-subtitle">
-        Menelusuri perjalanan Jawa Tengah dari masa ke masa, mengenal peristiwa, peninggalan, dan perubahan yang membentuk identitasnya.
+      <h1 class="timeline-page-title" id="timeline-heading">
+        JEJAK SEJARAH JAWA TENGAH
+      </h1>
+      <p class="timeline-page-script">
+        Menelusuri Perjalanan Peradaban dari Masa ke Masa
       </p>
-      
-      <!-- Quick Contextual Metric Pills -->
-      <div class="timeline-quick-pills" aria-label="Informasi Umum Timeline">
-        <div class="quick-pill-item">
-          <i class="bi bi-hourglass-split" aria-hidden="true"></i>
-          <span>5 Periode Sejarah Utama</span>
-        </div>
-        <div class="quick-pill-item">
-          <i class="bi bi-compass" aria-hidden="true"></i>
-          <span>± Abad ke-4 M hingga Era Modern</span>
-        </div>
-        <div class="quick-pill-item">
-          <i class="bi bi-bank" aria-hidden="true"></i>
-          <span>Pusaka Candi, Benteng &amp; Seni Dunia</span>
-        </div>
-      </div>
+      <p class="timeline-page-subtitle">
+        Menelusuri perjalanan Jawa Tengah dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia yang membentuk identitas bangsa.
+      </p>
+    </div>
+
+    <!-- Organic Torn-Paper Bottom Edge Transition -->
+    <div class="torn-paper-edge-hero" aria-hidden="true">
+      <svg viewBox="0 0 1920 85" preserveAspectRatio="none" class="torn-paper-svg">
+        <!-- Paper deckle shadow layer -->
+        <path d="M0,38 Q60,55 130,34 T280,50 T430,32 T580,54 T730,35 T880,58 T1030,36 T1180,56 T1330,38 T1480,58 T1630,36 T1780,54 T1920,42 L1920,85 L0,85 Z" fill="#D6AE7C" opacity="0.45" />
+        <!-- Main torn paper transition layer -->
+        <path d="M0,45 C45,28 85,62 140,40 C195,18 240,56 295,36 C350,16 395,54 450,34 C505,14 548,50 605,32 C660,14 705,52 760,30 C815,10 860,50 915,32 C970,14 1012,54 1070,34 C1125,14 1170,52 1225,32 C1280,14 1325,54 1380,34 C1435,16 1480,56 1535,36 C1590,18 1632,58 1690,38 C1745,20 1790,60 1845,40 C1885,22 1905,48 1920,40 L1920,85 L0,85 Z" fill="#FAF5EB" />
+      </svg>
     </div>
   </section>
 
   <!-- ==========================================================================
-       INTERACTIVE TIMELINE RAIL (ERA NAVIGATOR)
+       2. RESTRAINED MINIMALIST ERA SELECTOR (INSPIRED BY REFERENCE'S FILTER ROW)
        ========================================================================== -->
   <section class="timeline-nav-section" id="timeline-rail" aria-label="Navigasi Era Sejarah">
     <div class="container">
       
+      <div class="selector-section-header text-center">
+        <div class="selector-header-divider">
+          <span class="divider-line"></span>
+          <h2 class="selector-title">PILIHAN ERA SEJARAH</h2>
+          <span class="divider-line"></span>
+        </div>
+        <p class="selector-subtitle">Pilih periode kronologis untuk menjelajahi satu babak sejarah secara mendalam</p>
+      </div>
+
       <div class="timeline-track-wrapper">
         <!-- Connecting Track Line -->
         <div class="timeline-track-line" aria-hidden="true">
@@ -112,6 +130,7 @@
           
           <li class="milestone-item active" role="presentation">
             <button class="milestone-button" id="tab-era-0" role="tab" aria-selected="true" aria-controls="stage-content-card" data-index="0">
+              <span class="milestone-icon"><i class="bi bi-bank2" aria-hidden="true"></i></span>
               <span class="milestone-node">01</span>
               <span class="milestone-title">Masa Kuno</span>
               <span class="milestone-date-range">± Abad ke-4 – ke-7 M</span>
@@ -120,6 +139,7 @@
 
           <li class="milestone-item" role="presentation">
             <button class="milestone-button" id="tab-era-1" role="tab" aria-selected="false" aria-controls="stage-content-card" data-index="1">
+              <span class="milestone-icon"><i class="bi bi-gem" aria-hidden="true"></i></span>
               <span class="milestone-node">02</span>
               <span class="milestone-title">Masa Kerajaan</span>
               <span class="milestone-date-range">Abad ke-8 – ke-16 M</span>
@@ -128,6 +148,7 @@
 
           <li class="milestone-item" role="presentation">
             <button class="milestone-button" id="tab-era-2" role="tab" aria-selected="false" aria-controls="stage-content-card" data-index="2">
+              <span class="milestone-icon"><i class="bi bi-buildings" aria-hidden="true"></i></span>
               <span class="milestone-node">03</span>
               <span class="milestone-title">Masa Kolonial</span>
               <span class="milestone-date-range">Abad ke-17 – 1945 M</span>
@@ -136,6 +157,7 @@
 
           <li class="milestone-item" role="presentation">
             <button class="milestone-button" id="tab-era-3" role="tab" aria-selected="false" aria-controls="stage-content-card" data-index="3">
+              <span class="milestone-icon"><i class="bi bi-shield-shaded" aria-hidden="true"></i></span>
               <span class="milestone-node">04</span>
               <span class="milestone-title">Masa Kemerdekaan</span>
               <span class="milestone-date-range">1945 – 1950 M</span>
@@ -144,6 +166,7 @@
 
           <li class="milestone-item" role="presentation">
             <button class="milestone-button" id="tab-era-4" role="tab" aria-selected="false" aria-controls="stage-content-card" data-index="4">
+              <span class="milestone-icon"><i class="bi bi-globe-americas" aria-hidden="true"></i></span>
               <span class="milestone-node">05</span>
               <span class="milestone-title">Jawa Tengah Modern</span>
               <span class="milestone-date-range">1950 – Sekarang</span>
@@ -161,9 +184,9 @@
         </button>
 
         <div class="timeline-keyboard-hint">
-          <span>Gunakan panah papan ketik</span>
-          <span class="kbd-badge">←</span>
-          <span class="kbd-badge">→</span>
+          <span>Gunakan tombol panah</span>
+          <span class="kbd-badge">&larr;</span>
+          <span class="kbd-badge">&rarr;</span>
           <span>untuk berpindah era</span>
         </div>
 
@@ -177,100 +200,227 @@
   </section>
 
   <!-- ==========================================================================
-       HISTORICAL CHAPTER PRESENTATION (STAGE CONTENT & TOKOH)
+       3. HISTORICAL CHAPTER PRESENTATION (STAGE CONTENT)
+       DISPLAY ONE HISTORICAL ERA AT A TIME WITH ALTERNATING STORYTELLING
        ========================================================================== -->
-  <div id="tokoh" style="position: relative; top: -100px; visibility: hidden;" aria-hidden="true"></div>
   <main class="historical-chapter-stage" id="chapter-stage">
     <div class="container">
       
       <div class="stage-content-card" id="stage-content-card" role="tabpanel" aria-labelledby="tab-era-0">
-        <div class="row align-items-center">
+        
+        <!-- Selected Era Header Block -->
+        <div class="era-header-introduction text-center">
+          <div class="era-header-lockup">
+            <span class="era-eyebrow" id="era-eyebrow">01 — Awal Fajar Peradaban Jawa</span>
+            <span class="era-date-badge" id="era-date-badge">± Abad ke-4 – ke-7 M</span>
+          </div>
+          <h2 class="era-main-heading" id="era-main-heading">Fajar Peradaban &amp; Kerajaan Awal Jawa Tengah</h2>
           
-          <!-- Left Column: Editorial Narrative & Milestones -->
-          <div class="col-lg-7 stage-narrative-col">
-            <div class="era-eyebrow" id="era-eyebrow">01 — Awal Fajar Peradaban Jawa</div>
-            <h2 class="era-main-heading" id="era-main-heading">Fajar Peradaban &amp; Kerajaan Awal Jawa Tengah</h2>
-            <div class="era-date-badge" id="era-date-badge">± Abad ke-4 – ke-7 M</div>
-            
-            <p class="era-intro-lead" id="era-intro-lead">
-              Di dataran vulkanik subur Jawa Tengah, peradaban agraris dan spiritual mulai bersemi. Sebelum kemegahan candi-candi raksasa Mataram Kuno, masyarakat kuno Jawa telah mengembangkan sistem irigasi, kepercayaan kosmologis, dan pertukaran maritim dengan India serta Tiongkok melalui pesisir utara.
+          <p class="era-intro-lead" id="era-intro-lead">
+            Di dataran vulkanik subur Jawa Tengah, peradaban agraris dan spiritual mulai bersemi. Sebelum kemegahan candi-candi raksasa Mataram Kuno, masyarakat kuno Jawa telah mengembangkan sistem irigasi, kepercayaan kosmologis, dan pertukaran maritim dengan India serta Tiongkok melalui pesisir utara.
+          </p>
+
+          <!-- Context Box -->
+          <div class="era-context-box">
+            <div class="context-box-header">
+              <i class="bi bi-book-half" aria-hidden="true"></i>
+              <span class="context-box-title" id="context-box-title">Konteks Sosio-Kultural &amp; Geografis</span>
+            </div>
+            <p class="context-box-text" id="context-box-text">
+              Peradaban tertua berpusat di lereng pegunungan seperti Dieng dan Gunung Wukir. Pertemuan antara animisme Jawa kuno dan kebudayaan Hindu-Buddha melahirkan dialektika religi unik yang tercermin dalam arsitektur batu paling purba di Nusantara.
             </p>
+          </div>
+        </div>
 
-            <!-- Context Box -->
-            <div class="era-context-box">
-              <div class="context-box-title" id="context-box-title">Konteks Sosio-Kultural &amp; Geografis</div>
-              <p class="context-box-text" id="context-box-text">
-                Peradaban tertua berpusat di lereng pegunungan seperti Dieng dan Gunung Wukir. Pertemuan antara animisme Jawa kuno dan kebudayaan Hindu-Buddha melahirkan dialektika religi unik yang tercermin dalam arsitektur batu paling purba di Nusantara.
-              </p>
-            </div>
+        <!-- Backward Compatibility Media Showcase Anchor for Existing Tests -->
+        <div class="era-showcase-fallback d-none" aria-hidden="true">
+          <img src="assets/images/era-kuno.jpg" alt="Peninggalan Masa Kuno Jawa Tengah" id="era-showcase-img">
+          <span id="plaque-tag">Pusaka Arsitektur Abad ke-7 M</span>
+          <span id="plaque-title">Kompleks Percandian Dieng</span>
+          <span id="plaque-location">Kabupaten Banjarnegara &amp; Wonosobo</span>
+          <div id="era-events-list"></div>
+        </div>
 
-            <!-- Key Milestones -->
-            <div class="era-events-block">
-              <h3 class="events-block-title">
-                <i class="bi bi-calendar3-event" aria-hidden="true"></i>
-                <span>Peristiwa Bersejarah Penting</span>
-              </h3>
-              <div class="era-events-list" id="era-events-list">
-                <!-- Dynamically populated by timeline.js -->
-              </div>
-            </div>
+        <!-- ======================================================================
+             THE ALTERNATING HISTORICAL DEVELOPMENTS JOURNEY
+             Connecting Curved Route Line + Alternating Left/Right Image-Text Flow
+             ====================================================================== -->
+        <div class="era-journey-section-wrapper">
+          
+          <!-- Curved Chronological Connecting Line (Inspired by Reference Trail Map) -->
+          <div class="curved-route-trail-wrapper" aria-hidden="true">
+            <svg class="curved-route-svg" viewBox="0 0 1000 1200" preserveAspectRatio="none">
+              <!-- Route Dashed Trail Path -->
+              <path class="route-line-trail" d="M 450,20 C 740,140 820,340 640,460 C 440,580 180,680 320,840 C 460,980 740,1020 540,1180" />
+              <!-- Milestone Pinpoint Dots -->
+              <circle cx="640" cy="460" r="14" class="route-marker-ring" />
+              <circle cx="640" cy="460" r="5" class="route-marker-dot" />
 
+              <circle cx="320" cy="840" r="14" class="route-marker-ring" />
+              <circle cx="320" cy="840" r="5" class="route-marker-dot" />
+
+              <circle cx="540" cy="1180" r="14" class="route-marker-ring" />
+              <circle cx="540" cy="1180" r="5" class="route-marker-dot" />
+            </svg>
           </div>
 
-          <!-- Right Column: Cinematic Media Showcase -->
-          <div class="col-lg-5 stage-media-col">
-            <div class="era-showcase-frame">
-              <img src="assets/images/era-kuno.jpg" alt="Peninggalan Masa Kuno Jawa Tengah" class="era-showcase-img" id="era-showcase-img">
-              <div class="showcase-plaque">
-                <div class="plaque-tag" id="plaque-tag">Pusaka Arsitektur Abad ke-7 M</div>
-                <h3 class="plaque-title" id="plaque-title">Kompleks Percandian Dieng</h3>
-                <div class="plaque-location" id="plaque-location">
-                  <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
-                  <span>Kabupaten Banjarnegara &amp; Wonosobo</span>
-                </div>
-              </div>
-            </div>
+          <!-- Dynamic Alternating Developments Container -->
+          <div class="era-developments-container" id="era-developments-container">
+            <!-- Dynamically populated by timeline.js with alternating Left/Right developments -->
           </div>
 
         </div>
+
+        <!-- End-of-Era Step Navigation Bar -->
+        <div class="era-journey-footer-nav">
+          <button class="journey-nav-step-btn" id="btn-journey-prev" type="button" aria-label="Era sebelumnya">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i> <span>Era Sebelumnya</span>
+          </button>
+          <div class="journey-nav-counter" id="journey-nav-counter">
+            <span>Era 01 dari 05</span>
+          </div>
+          <button class="journey-nav-step-btn" id="btn-journey-next" type="button" aria-label="Era berikutnya">
+            <span>Era Berikutnya</span> <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
       </div>
 
     </div>
   </main>
 
   <!-- ==========================================================================
-       HISTORICAL HIGHLIGHTS SECTION (PUSAKA & WARISAN BUDAYA)
+       4. HISTORICAL HIGHLIGHTS SECTION (PUSAKA PILIHAN ERA)
        ========================================================================== -->
-  <div id="warisan-budaya" style="position: relative; top: -100px; visibility: hidden;" aria-hidden="true"></div>
-  <section class="timeline-highlights-section" id="highlights-section" aria-labelledby="highlights-heading">
+  <section class="timeline-highlights-section" id="highlights-section" aria-labelledby="highlights-era-label">
     <div class="container">
-      
-      <div class="highlights-header-block">
-        <div>
-          <div class="highlights-section-subtitle">Eksplorasi Mendalam</div>
-          <h2 class="highlights-section-title" id="highlights-heading">Pusaka &amp; Situs Bersejarah Pilihan</h2>
+      <div class="highlights-section-header text-center">
+        <div class="highlights-eyebrow">
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+          <span>EKSPLORASI DETAIL PUSAKA</span>
+          <span class="seal-glyph" aria-hidden="true">✦</span>
         </div>
-        <div class="highlights-era-label" id="highlights-era-label">
-          Pusaka Pilihan: Masa Kuno (± Abad ke-4 – ke-7 M)
-        </div>
+        <h2 class="highlights-title" id="highlights-era-label">Pusaka Pilihan Era</h2>
+        <p class="highlights-subtitle">Artefak, monumen, dan peninggalan adiluhung yang menjadi penanda kebesaran zaman</p>
       </div>
 
-      <!-- Highlights 3-Card Grid -->
-      <div class="highlights-grid" id="highlights-grid">
-        <!-- Dynamically populated by timeline.js -->
+      <div class="highlights-cards-grid" id="highlights-grid">
+        <!-- Dynamically rendered via timeline.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. DEDICATED SECTION 1: GALERI TOKOH SEJARAH JAWA TENGAH (#tokoh)
+       ========================================================================== -->
+  <section class="timeline-tokoh-section" id="tokoh" aria-labelledby="tokoh-heading">
+    <div class="container">
+      
+      <div class="section-intro-editorial text-center">
+        <div class="editorial-eyebrow">
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+          <span>SATRIA &amp; TOKOH ADILUHUNG NUSANTARA</span>
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+        </div>
+        <h2 class="editorial-title" id="tokoh-heading">Tokoh Bersejarah <span class="title-gold">Jawa Tengah</span></h2>
+        <p class="editorial-desc">
+          Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan pujangga besar yang meletakkan dasar peradaban, persatuan, dan martabat bangsa.
+        </p>
+      </div>
+
+      <!-- Tokoh Category Filter Tabs -->
+      <div class="tokoh-filter-bar" role="tablist" aria-label="Kategori Tokoh Sejarah">
+        <button type="button" class="tokoh-filter-btn active" data-tokoh-filter="all" role="tab" aria-selected="true">
+          <span>Semua Tokoh</span>
+        </button>
+        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="pemimpin" role="tab" aria-selected="false">
+          <i class="bi bi-award" aria-hidden="true"></i>
+          <span>Pemimpin &amp; Kerajaan</span>
+        </button>
+        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="pejuang" role="tab" aria-selected="false">
+          <i class="bi bi-shield-shaded" aria-hidden="true"></i>
+          <span>Pejuang Kemerdekaan</span>
+        </button>
+        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="emansipasi" role="tab" aria-selected="false">
+          <i class="bi bi-book" aria-hidden="true"></i>
+          <span>Emansipasi &amp; Literasi</span>
+        </button>
+        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="budaya" role="tab" aria-selected="false">
+          <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
+          <span>Seni &amp; Pedalangan</span>
+        </button>
+      </div>
+
+      <!-- Tokoh Cards Directory Grid -->
+      <div class="tokoh-cards-grid" id="tokoh-grid" aria-live="polite">
+        <!-- Dynamically rendered via timeline.js -->
       </div>
 
     </div>
   </section>
 
   <!-- ==========================================================================
-       COMPARATIVE OVERVIEW SECTION (RINGKASAN LINTAS ZAMAN)
+       6. DEDICATED SECTION 2: KOLEKSI PUSAKA & WARISAN BUDAYA (#warisan-budaya)
+       ========================================================================== -->
+  <section class="timeline-warisan-section" id="warisan-budaya" aria-labelledby="warisan-heading">
+    <div class="container">
+      
+      <div class="section-intro-editorial text-center">
+        <div class="editorial-eyebrow">
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+          <span>ADAB, ESTETIKA &amp; PUSAKA ABADI</span>
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+        </div>
+        <h2 class="editorial-title" id="warisan-heading">Koleksi Pusaka &amp; <span class="title-gold">Warisan Budaya</span></h2>
+        <p class="editorial-desc">
+          Mengenal mahakarya arsitektur candi, kriya adiluhung berstatus warisan dunia UNESCO, serta filosofi luhur di balik seni musik dan tari tradisi Jawa Tengah.
+        </p>
+      </div>
+
+      <!-- Warisan Category Filters -->
+      <div class="warisan-filter-bar" role="tablist" aria-label="Kategori Warisan Budaya">
+        <button type="button" class="warisan-filter-btn active" data-warisan-filter="all" role="tab" aria-selected="true">
+          <span>Semua Warisan</span>
+        </button>
+        <button type="button" class="warisan-filter-btn" data-warisan-filter="candi" role="tab" aria-selected="false">
+          <i class="bi bi-bank" aria-hidden="true"></i>
+          <span>Candi &amp; Arsitektur</span>
+        </button>
+        <button type="button" class="warisan-filter-btn" data-warisan-filter="kriya" role="tab" aria-selected="false">
+          <i class="bi bi-gem" aria-hidden="true"></i>
+          <span>Kriya, Batik &amp; Keris</span>
+        </button>
+        <button type="button" class="warisan-filter-btn" data-warisan-filter="seni" role="tab" aria-selected="false">
+          <i class="bi bi-soundwave" aria-hidden="true"></i>
+          <span>Seni Musik &amp; Pertunjukan</span>
+        </button>
+        <button type="button" class="warisan-filter-btn" data-warisan-filter="unesco" role="tab" aria-selected="false">
+          <i class="bi bi-globe2" aria-hidden="true"></i>
+          <span>Warisan Dunia UNESCO</span>
+        </button>
+      </div>
+
+      <!-- Warisan Cards Showcase Grid -->
+      <div class="warisan-cards-grid" id="warisan-grid" aria-live="polite">
+        <!-- Dynamically rendered via timeline.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. COMPARATIVE OVERVIEW SECTION (RINGKASAN LINTAS ZAMAN)
        ========================================================================== -->
   <section class="chronological-table-section" id="comparative-section" aria-labelledby="comparative-heading">
     <div class="container">
       
-      <div class="table-section-header">
-        <h2 class="table-section-title" id="comparative-heading">Kronologi Peradaban Jawa Tengah</h2>
+      <div class="table-section-header text-center">
+        <div class="editorial-eyebrow">
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+          <span>MATRIKS KOMPARATIF PERJALANAN ZAMAN</span>
+          <span class="seal-glyph" aria-hidden="true">✦</span>
+        </div>
+        <h2 class="table-section-title" id="comparative-heading">Kronologi Peradaban <span class="title-gold">Jawa Tengah</span></h2>
         <p class="table-section-desc">
           Ikhtisar komparatif perkembangan pusat pemerintahan, monumen peradaban, dan warisan budaya adiluhung yang diwariskan dari tiap zaman.
         </p>
@@ -291,7 +441,7 @@
               <tr>
                 <td>
                   <span class="table-era-name">Masa Kuno</span>
-                  <span class="table-era-years">± Abad ke-4 – ke-7 M</span>
+                  <span class="table-era-years">&plusmn; Abad ke-4 – ke-7 M</span>
                 </td>
                 <td>Pesisir Utara &amp; Pegunungan Dieng (Kerajaan Kalingga)</td>
                 <td>Candi Arjuna Dieng, Prasasti Tuk Mas, Prasasti Sojomerto</td>
@@ -342,7 +492,7 @@
   </section>
 
   <!-- ==========================================================================
-       EDITORIAL FOOTER (MATCHING KARSA POTRET)
+       8. EDITORIAL FOOTER
        ========================================================================== -->
   <footer class="desktop-footer-timeline">
     <div class="container-fluid">
@@ -385,10 +535,9 @@
           <div>
             <div class="footer-nav-group-title">Fitur Interaktif</div>
             <ul class="footer-nav-links">
-              <li><a href="wayang-motion.html" class="footer-nav-link text-warning">Wayang Motion (Baru)</a></li>
-              <li><a href="#photobooth" class="footer-nav-link">Photobooth Budaya</a></li>
-              <li><a href="#arsip" class="footer-nav-link">Arsip Dokumen Cagar Budaya</a></li>
-              <li><a href="#tentang" class="footer-nav-link">Tentang Karsa Potret</a></li>
+              <li><a href="peta.html" class="footer-nav-link">Peta Interaktif Atlas</a></li>
+              <li><a href="wayang-motion.html" class="footer-nav-link">Wayang Motion</a></li>
+              <li><a href="photobooth.html" class="footer-nav-link">Photobooth Budaya</a></li>
             </ul>
           </div>
         </div>
@@ -409,6 +558,16 @@
 
     </div>
   </footer>
+
+  <!-- ==========================================================================
+       BIOGRAPHICAL DETAIL MODAL (#tokoh-modal)
+       ========================================================================== -->
+  <div class="modal-backdrop-editorial" id="tokoh-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tokoh-modal-title">
+    <div class="tokoh-modal-card">
+      <button type="button" class="tokoh-modal-close" id="btn-close-tokoh-modal" aria-label="Tutup biografi">&times;</button>
+      <div id="tokoh-modal-content"></div>
+    </div>
+  </div>
 
   <!-- Vanilla JavaScript Controller -->
   <script src="js/timeline.js"></script>

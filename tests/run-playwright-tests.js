@@ -79,25 +79,38 @@ async function runTests() {
     const indexActiveLink = await pageNav.$eval('.nav-links-list .nav-item-link.active', el => el.textContent.trim());
     record('Index page navbar highlights Beranda as active', indexActiveLink === 'Beranda');
 
-    // From index.html, click Timeline
+    // From index.html, click Peta
+    await pageNav.click('a[href="peta.html"]');
+    await pageNav.waitForURL(/peta\.html/);
+    record('Navigation from Index to Peta works', pageNav.url().includes('peta.html'));
+
+    // 2. Check peta.html
+    const petaTitle = await pageNav.title();
+    record('Peta page loads', petaTitle.includes('Peta Interaktif'), `Title: ${petaTitle}`);
+    const petaActiveLink = await pageNav.$eval('.nav-links-list .nav-item-link.active', el => el.textContent.trim());
+    record('Peta page navbar highlights Peta as active', petaActiveLink === 'Peta');
+
+    // From peta.html, click Timeline
     await pageNav.click('a[href="timeline.html"]');
     await pageNav.waitForURL(/timeline\.html/);
-    record('Navigation from Index to Timeline works', pageNav.url().includes('timeline.html'));
+    record('Navigation from Peta to Timeline works', pageNav.url().includes('timeline.html'));
 
-    // 2. Check timeline.html
+    // 3. Check timeline.html
     const timelineTitle = await pageNav.title();
     record('Timeline page loads', timelineTitle.includes('Timeline') || timelineTitle.includes('Jejak'), `Title: ${timelineTitle}`);
     const timelineActiveLink = await pageNav.$eval('.nav-links-list .nav-item-link.active', el => el.textContent.trim());
     record('Timeline page navbar highlights Timeline as active', timelineActiveLink === 'Timeline');
 
-    // From timeline.html, click Wayang Motion
-    await pageNav.click('a[href="wayang-motion.html"]');
+    // From timeline.html, click Wayang Motion button
+    await pageNav.click('#btn-wayang-motion');
     await pageNav.waitForURL(/wayang-motion\.html/);
     record('Navigation from Timeline to Wayang Motion works', pageNav.url().includes('wayang-motion.html'));
 
-    // 3. Check wayang-motion.html
-    const wayangActiveLink = await pageNav.$eval('.nav-links-list .nav-item-link.active', el => el.textContent.trim());
-    record('Wayang Motion navbar highlights Wayang Motion as active', wayangActiveLink === 'Wayang Motion');
+    // 4. Check wayang-motion.html
+    const wayangTitle = await pageNav.title();
+    record('Wayang Motion page loads', wayangTitle.includes('Wayang Motion'), `Title: ${wayangTitle}`);
+    const wayangBtnActive = await pageNav.$eval('#btn-wayang-motion', el => el.classList.contains('active'));
+    record('Wayang Motion navbar highlights Wayang Motion button as active', wayangBtnActive);
 
     // From wayang-motion.html, click Beranda
     await pageNav.click('a[href="index.html"]');
@@ -170,6 +183,7 @@ async function runTests() {
     const btnGuide = await pageMain.$('#btn-open-guide');
     await btnGuide.click();
     await pageMain.waitForSelector('#guide-modal.open');
+    await pageMain.waitForTimeout(350); // allow CSS transition to complete
     record('Panduan Gerakan modal opens correctly', await pageMain.isVisible('#guide-modal.open'));
 
     // Screenshot Guide Modal
@@ -179,15 +193,18 @@ async function runTests() {
     const btnUnderstood = await pageMain.$('#btn-understood-guide');
     await btnUnderstood.click();
     await pageMain.waitForFunction(() => !document.querySelector('#guide-modal').classList.contains('open'));
+    await pageMain.waitForTimeout(350); // allow backdrop fade-out
     record('Panduan Gerakan modal closes on confirmation', true);
 
     // Test Shadow Mode Toggle
     const btnShadow = await pageMain.$('#btn-toggle-shadow');
     await btnShadow.click();
+    await pageMain.waitForTimeout(200);
     const isShadow = await pageMain.$eval('#stage-viewport', el => el.classList.contains('shadow-mode'));
     record('Mode Bayangan toggle turns on shadow mode', isShadow);
     await pageMain.screenshot({ path: path.join(SCREENSHOT_DIR, 'wayang_motion_shadow_mode.png') });
     await btnShadow.click(); // Toggle back to color
+    await pageMain.waitForTimeout(200);
 
     // Test PiP Toggle
     const btnPipToggle = await pageMain.$('#btn-toggle-pip');
@@ -295,6 +312,172 @@ async function runTests() {
     await pageNoCam.close();
     await pageMain.close();
 
+    // -------------------------------------------------------------
+    // Test 6: Peta Interaktif Features & Interactions
+    // -------------------------------------------------------------
+    console.log('\n--- 6. Testing Peta Interaktif Features & Interactions ---');
+    const pagePeta = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await pagePeta.goto(`http://127.0.0.1:${PORT}/peta.html`);
+    await pagePeta.waitForSelector('#history-map');
+
+    record('Peta Interaktif map container initialized', await pagePeta.isVisible('#history-map'));
+
+    // Search functionality
+    await pagePeta.fill('#region-search', 'Semarang');
+    await pagePeta.waitForSelector('.search-result');
+    const searchResultCount = await pagePeta.$$eval('.search-result', els => els.length);
+    record('Region search produces autocomplete results', searchResultCount > 0, `Results: ${searchResultCount}`);
+
+    // Click first result
+    await pagePeta.click('.search-result');
+    await pagePeta.waitForTimeout(300);
+    const cardTitle = await pagePeta.$eval('#region-card-content', el => el.textContent);
+    record('Selecting region populates info card with history and figures', cardTitle.includes('Semarang'));
+
+    // Test Detail Modal
+    await pagePeta.click('[data-open-details]');
+    await pagePeta.waitForSelector('#history-modal.is-open');
+    await pagePeta.waitForTimeout(350);
+    record('Opening region details modal displays full history', await pagePeta.isVisible('#history-modal'));
+    await pagePeta.screenshot({ path: path.join(SCREENSHOT_DIR, 'peta_modal_1440.png') });
+
+    // Close Modal
+    await pagePeta.click('.modal-close');
+    await pagePeta.waitForSelector('#history-modal:not(.is-open)');
+    record('Modal closes cleanly', true);
+
+    // Test Heritage Explore Buttons
+    await pagePeta.click('[data-explore="candi"]');
+    await pagePeta.waitForTimeout(400);
+    const candiCardText = await pagePeta.$eval('#region-card-content', el => el.textContent);
+    record('Heritage exploration button zooms and selects Magelang candi region', candiCardText.includes('Magelang'));
+
+    await pagePeta.screenshot({ path: path.join(SCREENSHOT_DIR, 'peta_interaktif_1440.png') });
+    await pagePeta.close();
+
+    // -------------------------------------------------------------
+    // Test 7: Photobooth Features & Controls (if present)
+    // -------------------------------------------------------------
+    if (fs.existsSync(path.join(ROOT_DIR, 'photobooth.html'))) {
+      console.log('\n--- 7. Testing Photobooth Features & Controls ---');
+      const pagePhoto = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      await pagePhoto.goto(`http://127.0.0.1:${PORT}/photobooth.html`);
+      await pagePhoto.waitForSelector('#stage-viewport-box');
+
+      record('Photobooth studio viewport initialized', await pagePhoto.isVisible('#stage-viewport-box'));
+
+      // Test Tab Switching
+      await pagePhoto.click('[data-tab="tab-filters"]');
+      record('Switching to Filter tab displays historical filter choices', await pagePhoto.isVisible('#tab-filters'));
+
+      // Select Sepia filter
+      await pagePhoto.click('[data-filter="sepia"]');
+      const isSepiaSelected = await pagePhoto.$eval('[data-filter="sepia"]', el => el.classList.contains('selected'));
+      record('Selecting Sepia filter updates active selection', isSepiaSelected);
+
+      // Switch to Aksesoris tab
+      await pagePhoto.click('[data-tab="tab-stickers"]');
+      await pagePhoto.click('[data-sticker="blangkon"]');
+      const isBlangkonSelected = await pagePhoto.$eval('[data-sticker="blangkon"]', el => el.classList.contains('selected'));
+      record('Selecting Blangkon sticker updates active accessory', isBlangkonSelected);
+
+      // Use Sample Model button
+      await pagePhoto.click('#btn-use-sample');
+      await pagePhoto.waitForTimeout(350);
+      record('Sample portrait model loads successfully into studio', true);
+      await pagePhoto.screenshot({ path: path.join(SCREENSHOT_DIR, 'photobooth_studio_1440.png') });
+      await pagePhoto.close();
+    }
+
+    // -------------------------------------------------------------
+    // Test 8: Timeline Tokoh Sejarah & Warisan Budaya Features
+    // -------------------------------------------------------------
+    console.log('\n--- 8. Testing Timeline Tokoh & Warisan Budaya Features ---');
+    const pageTimeline = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await pageTimeline.goto(`http://127.0.0.1:${PORT}/timeline.html`);
+    await pageTimeline.waitForSelector('#stage-content-card');
+
+    // 1. Tokoh Grid & Filter Verification
+    const tokohCardsCount = await pageTimeline.$$eval('.tokoh-profile-card', els => els.length);
+    record('Tokoh Sejarah grid populated with figures', tokohCardsCount >= 6, `Total: ${tokohCardsCount}`);
+
+    // Scroll to #tokoh and capture
+    await pageTimeline.evaluate(() => document.querySelector('#tokoh').scrollIntoView());
+    await pageTimeline.waitForTimeout(300);
+    await pageTimeline.screenshot({ path: path.join(SCREENSHOT_DIR, 'timeline_tokoh_1440.png') });
+
+    // Click filter 'pemimpin'
+    await pageTimeline.click('[data-tokoh-filter="pemimpin"]');
+    await pageTimeline.waitForTimeout(200);
+    const filteredTokohCount = await pageTimeline.$$eval('.tokoh-profile-card', els => els.length);
+    record('Filtering Tokoh by "pemimpin" filters correctly', filteredTokohCount > 0 && filteredTokohCount < tokohCardsCount, `Filtered: ${filteredTokohCount}`);
+
+    // Click filter 'all' to restore
+    await pageTimeline.click('[data-tokoh-filter="all"]');
+
+    // Test Open Tokoh Biographical Modal
+    await pageTimeline.click('.btn-read-tokoh');
+    await pageTimeline.waitForSelector('#tokoh-modal.is-open');
+    await pageTimeline.waitForTimeout(350);
+    const modalName = await pageTimeline.$eval('#tokoh-modal-title', el => el.textContent);
+    record('Clicking "Telusuri Biografi" opens biographical modal', modalName.length > 0, `Figure: ${modalName}`);
+    await pageTimeline.screenshot({ path: path.join(SCREENSHOT_DIR, 'timeline_tokoh_modal_1440.png') });
+
+    // Close Modal via close button
+    await pageTimeline.click('#btn-close-tokoh-modal');
+    await pageTimeline.waitForSelector('#tokoh-modal:not(.is-open)');
+    await pageTimeline.waitForTimeout(300);
+    record('Closing biographical modal restores view cleanly', true);
+
+    // 2. Warisan Budaya Grid & Filter Verification
+    const warisanCardsCount = await pageTimeline.$$eval('.warisan-item-card', els => els.length);
+    record('Warisan Budaya grid populated with heritage cards', warisanCardsCount >= 6, `Total: ${warisanCardsCount}`);
+
+    // Scroll to #warisan-budaya and capture
+    await pageTimeline.evaluate(() => document.querySelector('#warisan-budaya').scrollIntoView());
+    await pageTimeline.waitForTimeout(300);
+    await pageTimeline.screenshot({ path: path.join(SCREENSHOT_DIR, 'timeline_warisan_1440.png') });
+
+    // Click filter 'unesco'
+    await pageTimeline.click('[data-warisan-filter="unesco"]');
+    await pageTimeline.waitForTimeout(200);
+    const unescoCount = await pageTimeline.$$eval('.warisan-item-card', els => els.length);
+    record('Filtering Warisan Budaya by "unesco" displays UNESCO world heritages', unescoCount > 0, `UNESCO: ${unescoCount}`);
+
+    await pageTimeline.close();
+
+    // -------------------------------------------------------------
+    // Test 9: Desktop Viewport Visual Screenshots Across All 4 Pages
+    // -------------------------------------------------------------
+    console.log('\n--- 9. Capturing Desktop Viewports (1366x768, 1440x900, 1920x1080) ---');
+    const viewports = [
+      { name: '1366x768', width: 1366, height: 768 },
+      { name: '1440x900', width: 1440, height: 900 },
+      { name: '1920x1080', width: 1920, height: 1080 }
+    ];
+
+    const pagesToCapture = [
+      { id: 'timeline', file: 'timeline.html', url: `http://127.0.0.1:${PORT}/timeline.html` },
+      { id: 'peta', file: 'peta.html', url: `http://127.0.0.1:${PORT}/peta.html` },
+      { id: 'wayang-motion', file: 'wayang-motion.html', url: `http://127.0.0.1:${PORT}/wayang-motion.html` },
+      { id: 'photobooth', file: 'photobooth.html', url: `http://127.0.0.1:${PORT}/photobooth.html` }
+    ].filter(p => fs.existsSync(path.join(ROOT_DIR, p.file)));
+
+    for (const targetPage of pagesToCapture) {
+      for (const vp of viewports) {
+        const vpPage = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
+        const errors = [];
+        vpPage.on('pageerror', err => errors.push(err.message));
+
+        await vpPage.goto(targetPage.url);
+        await vpPage.waitForTimeout(600);
+
+        const screenshotPath = path.join(SCREENSHOT_DIR, `${targetPage.id}_${vp.name}.png`);
+        await vpPage.screenshot({ path: screenshotPath });
+        record(`Page ${targetPage.id} at ${vp.name} renders error-free`, errors.length === 0, `Errors: ${errors.length}`);
+        await vpPage.close();
+      }
+    }
   } catch (err) {
     console.error('Fatal test error:', err);
     record('Playwright suite execution', false, err.message);
