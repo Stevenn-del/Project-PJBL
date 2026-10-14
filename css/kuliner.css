@@ -1,0 +1,511 @@
+/**
+ * ==============================================================================
+ * KARSA POTRET — KULINER TRADISIONAL JAWA TENGAH STYLESHEET
+ * ==============================================================================
+ * Central Javanese Royal Gastronomy & Traditional Culinary Showcase
+ * Design Tokens & Responsive Editorial Presentation
+ * ==============================================================================
+ */
+
+:root {
+  --kl-deep-brown: #611F0A;
+  --kl-warm-brown: #8D4B1F;
+  --kl-terracotta: #B46F39;
+  --kl-sand: #D6AE7C;
+  --kl-cream: #F0D9A7;
+
+  --kl-bg-canvas: #FBF7EE;
+  --kl-bg-surface: #FFFDF9;
+  --kl-bg-card: #FFFFFF;
+  --kl-bg-dark: #12151B;
+  --kl-gold-kencana: #D4AF37;
+
+  --kl-font-serif: 'Playfair Display', Georgia, serif;
+  --kl-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --kl-radius-sm: 6px;
+  --kl-radius-md: 14px;
+  --kl-radius-lg: 22px;
+  --kl-radius-pill: 9999px;
+
+  --kl-shadow-card: 0 10px 30px rgba(97, 31, 10, 0.08);
+  --kl-shadow-hover: 0 18px 45px rgba(97, 31, 10, 0.16);
+  --kl-transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.kuliner-page-body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #FAF6ED;
+  font-family: var(--kl-font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==============================================================================
+   1. EDITORIAL NAVBAR
+   ============================================================================== */
+.desktop-header-kuliner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 14px 0;
+}
+
+.desktop-header-kuliner .container-fluid {
+  max-width: 1440px;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.navbar-inner-kuliner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.desktop-header-kuliner .brand-logo-img {
+  height: 44px;
+  width: auto;
+}
+
+.desktop-header-kuliner .btn-wayang-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #F0D9A7 0%, #D6AE7C 100%);
+  color: #611F0A;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 9px 20px;
+  border-radius: var(--kl-radius-pill);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: transform var(--kl-transition), box-shadow var(--kl-transition);
+}
+
+.desktop-header-kuliner .btn-wayang-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  color: #4D1807;
+}
+
+/* ==============================================================================
+   2. HERO SECTION
+   ============================================================================== */
+.kuliner-hero-section {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  background: #12151B;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.kuliner-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.42;
+  filter: saturate(1.1) brightness(0.9);
+}
+
+.kuliner-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(18, 21, 27, 0.7) 0%, rgba(97, 31, 10, 0.85) 100%);
+}
+
+.kuliner-hero-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.kuliner-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #D4AF37;
+  background: rgba(45, 12, 3, 0.6);
+  padding: 6px 18px;
+  border-radius: var(--kl-radius-pill);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  margin-bottom: 20px;
+}
+
+.kuliner-main-heading {
+  font-family: var(--kl-font-serif);
+  font-size: 52px;
+  font-weight: 700;
+  color: #FAF6ED;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.kuliner-intro-lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #EAE2D2;
+  max-width: 760px;
+  margin: 0 auto 32px auto;
+}
+
+/* ==============================================================================
+   3. GASTRONOMIC STATS & PILLARS
+   ============================================================================== */
+.kuliner-stats-bar {
+  background: #FFF8EB;
+  border-bottom: 1px solid rgba(214, 174, 124, 0.3);
+  padding: 24px 0;
+}
+
+.stats-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-icon {
+  font-size: 28px;
+  color: var(--kl-terracotta);
+  line-height: 1;
+}
+
+.stat-num {
+  font-family: var(--kl-font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--kl-deep-brown);
+}
+
+.stat-label {
+  font-size: 12.5px;
+  color: var(--kl-warm-brown);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+/* ==============================================================================
+   4. FILTER TABS & SEARCH
+   ============================================================================== */
+.kuliner-showcase-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 32px 100px 32px;
+}
+
+.filter-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.kuliner-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-pill-btn {
+  background: #FFFFFF;
+  border: 1px solid rgba(214, 174, 124, 0.4);
+  color: var(--kl-warm-brown);
+  padding: 8px 20px;
+  border-radius: var(--kl-radius-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--kl-transition);
+}
+
+.filter-pill-btn:hover {
+  background: #FFF8EB;
+  border-color: var(--kl-terracotta);
+  color: var(--kl-deep-brown);
+}
+
+.filter-pill-btn.active {
+  background: var(--kl-deep-brown);
+  border-color: var(--kl-deep-brown);
+  color: #FAF6ED;
+  box-shadow: 0 4px 14px rgba(97, 31, 10, 0.2);
+}
+
+.filter-count-badge {
+  font-size: 13px;
+  color: var(--kl-warm-brown);
+  font-weight: 500;
+}
+
+/* ==============================================================================
+   5. CULINARY CARDS GRID (Spacious 2-column on desktop, responsive)
+   ============================================================================== */
+.kuliner-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+
+.kuliner-card {
+  background: var(--kl-bg-card);
+  border: 1px solid rgba(214, 174, 124, 0.35);
+  border-radius: var(--kl-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--kl-shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--kl-transition), box-shadow var(--kl-transition), border-color var(--kl-transition);
+}
+
+.kuliner-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--kl-shadow-hover);
+  border-color: var(--kl-terracotta);
+}
+
+.kuliner-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: #12151B;
+}
+
+.kuliner-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kuliner-card:hover .kuliner-card-img {
+  transform: scale(1.05);
+}
+
+.kuliner-card-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(97, 31, 10, 0.88);
+  backdrop-filter: blur(8px);
+  color: #FAF6ED;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: var(--kl-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.4);
+}
+
+.kuliner-region-tag {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: var(--kl-deep-brown);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--kl-radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.kuliner-card-body {
+  padding: 28px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.kuliner-card-title {
+  font-family: var(--kl-font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--kl-deep-brown);
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.kuliner-flavor-note {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kl-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kuliner-card-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #5A4335;
+  margin: 0 0 20px 0;
+  flex: 1 1 auto;
+}
+
+.kuliner-ingredients-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.ingredient-chip {
+  background: #F7EBD2;
+  color: var(--kl-warm-brown);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--kl-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.3);
+}
+
+.kuliner-card-footer {
+  border-top: 1px solid rgba(214, 174, 124, 0.25);
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-detail-kuliner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--kl-warm-brown);
+  color: #FAF6ED;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--kl-radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: all var(--kl-transition);
+}
+
+.btn-detail-kuliner:hover {
+  background: var(--kl-deep-brown);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(97, 31, 10, 0.25);
+}
+
+/* ==============================================================================
+   6. CULINARY MODAL
+   ============================================================================== */
+.kuliner-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 21, 27, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.kuliner-modal-backdrop.active {
+  display: flex;
+}
+
+.kuliner-modal-content {
+  background: #FFFDF9;
+  border: 1px solid rgba(214, 174, 124, 0.4);
+  border-radius: var(--kl-radius-lg);
+  max-width: 760px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  padding: 36px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #F7EBD2;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kl-deep-brown);
+  cursor: pointer;
+  font-size: 18px;
+  transition: all var(--kl-transition);
+}
+
+.modal-close-btn:hover {
+  background: var(--kl-deep-brown);
+  color: #FAF6ED;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .kuliner-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .desktop-header-kuliner .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .kuliner-main-heading {
+    font-size: 38px;
+  }
+}

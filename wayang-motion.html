@@ -2,14 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wayang Motion — Interaksi Wayang Kulit Digital Karsa Potret</title>
   <meta name="description" content="Kendalikan wayang kulit tradisional Jawa Tengah (Raden Gatotkaca & Raden Arjuna) secara interaktif dengan gestur tangan melalui webcam Anda bersama Karsa Potret.">
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -23,17 +23,26 @@
   <!-- Redesign 5-Color System Stylesheet -->
   <link rel="stylesheet" href="css/redesign-palette.css">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo-karsa-potret.png">
+  
   <!-- Wayang Motion Dedicated Stylesheet -->
   <link rel="stylesheet" href="css/wayang-motion.css">
 </head>
 <body class="wayang-motion-page">
 
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
   <!-- ==========================================================================
        STICKY DESKTOP HEADER NAVBAR
        ========================================================================== -->
-  <header class="desktop-header-karsa desktop-header-motion" id="header-navbar">
+  <header class="desktop-header-global" id="main-header">
     <div class="container-fluid">
-      <div class="navbar-inner">
+      <div class="navbar-inner-global">
         
         <!-- Left: Karsa Potret Logo -->
         <div class="brand-wrapper">
@@ -43,22 +52,27 @@
         </div>
 
         <!-- Center: Primary Navigation Links -->
-        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
           <ul class="nav-links-list">
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
-            <li><a href="timeline.html#tokoh" class="nav-item-link">Tokoh</a></li>
+            <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
-            <li><a href="timeline.html#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Wayang Motion Active Button -->
-        <div class="nav-right-wrapper">
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Active Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
           <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion active" id="btn-wayang-motion" aria-label="Fitur Wayang Motion Aktif" aria-current="page">
             <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
             <span>Wayang Motion</span>
           </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
 
       </div>
@@ -100,63 +114,108 @@
          ====================================================================== -->
     <div class="wayang-experience-container" id="wayang-experience-container" role="region" aria-label="Area Interaksi Wayang Motion">
 
-      <!-- Stage Control & Status Bar -->
-      <div class="stage-control-bar" id="stage-control-bar" role="toolbar" aria-label="Kontrol Interaksi Wayang Motion">
-        <div class="control-left-status">
-          <div class="tracking-status-indicator" id="tracking-status-box" aria-live="polite">
-            <span class="status-dot" id="status-dot"></span>
-            <span id="tracking-status-text">Kamera Belum Aktif</span>
-          </div>
-          <span class="badge bg-dark border border-secondary text-light px-2 py-1" id="hand-count-badge" style="font-size: 12px; display: none;">
-            0 Tangan
-          </span>
-        </div>
+      <!-- Top-Right Floating Controls (Matching Primary Reference) -->
+      <div class="stage-floating-actions" id="stage-floating-actions" role="toolbar" aria-label="Kontrol Utama Panggung">
+        <!-- Character Selector (Reference vs Classic) -->
+        <select id="select-puppet-mode" class="select-wm-control" aria-label="Pilih Karakter Wayang" title="Pilih Karakter Wayang">
+          <option value="reference" selected>Tokoh Referensi (Reel)</option>
+          <option value="gatotkaca-arjuna">Raden Gatotkaca &amp; Arjuna</option>
+        </select>
 
-        <div class="control-actions-group">
-          <!-- Character / Puppet Selector -->
-          <div class="puppet-select-wrapper" title="Pilih karakter wayang yang ingin dimainkan">
-            <label for="select-puppet-mode" class="visually-hidden">Pilihan Karakter Wayang</label>
-            <i class="bi bi-person-badge puppet-select-icon" aria-hidden="true"></i>
-            <select id="select-puppet-mode" class="select-wm-control" aria-label="Pilih Karakter Wayang">
-              <option value="reference" selected>Tokoh Referensi (Reel)</option>
-              <option value="gatotkaca-arjuna">Raden Gatotkaca &amp; Arjuna</option>
-            </select>
-          </div>
+        <!-- Shadow Mode Toggle Button -->
+        <button type="button" class="icon-btn" id="btn-toggle-shadow" title="Ubah mode tampilan antara warna asli atau siluet bayangan tradisi" aria-label="Mode Bayangan">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i>
+          <span class="visually-hidden">Mode Bayangan</span>
+        </button>
 
-          <button type="button" class="btn-wm-control" id="btn-toggle-shadow" title="Ubah tampilan layar antara warna asli atau siluet bayangan tradisi">
-            <i class="bi bi-moon-stars" aria-hidden="true"></i>
-            <span>Mode Bayangan</span>
-          </button>
+        <!-- Reset Puppets Position Button -->
+        <button type="button" class="icon-btn" id="btn-reset-puppets" title="Atur ulang posisi wayang ke default panggung" aria-label="Atur Ulang Posisi">
+          <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+          <span class="visually-hidden">Atur Ulang Posisi</span>
+        </button>
 
-          <button type="button" class="btn-wm-control" id="btn-reset-puppets" title="Kembalikan wayang ke posisi awal panggung">
-            <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
-            <span>Atur Ulang Posisi</span>
-          </button>
+        <!-- Audio / Gamelan Sound Toggle -->
+        <button type="button" id="sound-toggle" class="icon-btn sound-btn" aria-label="Putar musik gamelan" aria-pressed="false" title="Putar / Bisukan Musik Gamelan (M)">
+          <svg class="icon-sound-on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4Zm-2.5-8.8v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6Z"/></svg>
+          <svg class="icon-sound-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="display:none;"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7Z" transform="translate(2 0)"/></svg>
+        </button>
 
-          <button type="button" class="btn-wm-control" id="btn-toggle-pip" title="Tampilkan atau sembunyikan kotak kamera dalang">
-            <i class="bi bi-camera-video" aria-hidden="true"></i>
-            <span>Kamera Dalang</span>
-          </button>
+        <!-- Settings Drawer Toggle -->
+        <button type="button" id="settings-toggle" class="icon-btn" aria-label="Pengaturan Panggung" aria-expanded="false" title="Pengaturan Panggung">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.3 7.3 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.3 7.3 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.3 7.3 0 0 0 1.7 1L11 21h4l.4-2.7a7.3 7.3 0 0 0 1.7-1l2.5 1 2-3.5ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+        </button>
 
-          <!-- Dedicated Fullscreen Control -->
-          <button type="button" class="btn-wm-control btn-wm-fullscreen" id="btn-toggle-fullscreen" title="Tampilkan panggung kelir layar penuh (Fullscreen)" aria-label="Layar Penuh" aria-pressed="false">
-            <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
-            <span>Layar Penuh</span>
-          </button>
+        <!-- Dedicated Fullscreen Control -->
+        <button type="button" class="icon-btn btn-wm-fullscreen" id="btn-toggle-fullscreen" title="Tampilkan panggung kelir layar penuh (Fullscreen)" aria-label="Layar Penuh" aria-pressed="false">
+          <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+          <span class="visually-hidden">Layar Penuh</span>
+        </button>
 
-          <button type="button" class="btn-wm-control" id="btn-open-guide" title="Buka panduan gestur tangan">
-            <i class="bi bi-question-circle" aria-hidden="true"></i>
-            <span>Panduan Gerakan</span>
-          </button>
+        <!-- Guide Dialog Button -->
+        <button type="button" class="icon-btn" id="btn-open-guide" title="Buka panduan gestur tangan" aria-label="Panduan Gerakan">
+          <i class="bi bi-question-circle" aria-hidden="true"></i>
+        </button>
 
-          <button type="button" class="btn-wm-control danger" id="btn-stop-camera" style="display: none;" title="Hentikan pelacakan kamera">
-            <i class="bi bi-stop-circle" aria-hidden="true"></i>
-            <span>Hentikan Kamera</span>
-          </button>
-        </div>
+        <!-- Stop Session Button (Visible during active play) -->
+        <button type="button" class="icon-btn stop-btn danger-btn" id="btn-stop-camera" style="display: none;" title="Hentikan interaksi wayang" aria-label="Hentikan Kamera">
+          <i class="bi bi-stop-circle" aria-hidden="true"></i>
+          <span class="visually-hidden">Hentikan Kamera</span>
+        </button>
+
+        <!-- Toggle Camera Preview (PiP) Button -->
+        <button type="button" class="icon-btn" id="btn-toggle-pip" title="Tampilkan / Sembunyikan Kamera Dalang (V)" aria-label="Kamera Dalang">
+          <i class="bi bi-camera-video" aria-hidden="true"></i>
+          <span class="visually-hidden">Kamera Dalang</span>
+        </button>
       </div>
 
-      <!-- The Interactive Wayang Stage (Panggung Kelir) -->
+      <!-- Settings Panel Drawer (Matching Primary Reference) -->
+      <aside id="settings" class="panel settings" hidden aria-label="Pengaturan Panggung">
+        <div class="settings-header">
+          <h2>Pengaturan Panggung</h2>
+          <button type="button" class="btn-close-settings" id="btn-close-settings" aria-label="Tutup pengaturan">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+
+        <label>Jumlah Tokoh
+          <select id="opt-characters">
+            <option value="two" selected>Dua wayang, satu per tangan</option>
+            <option value="one">Satu wayang (dua tangan)</option>
+          </select>
+        </label>
+
+        <label>Jari Tuding Lengan
+          <select id="opt-fingers">
+            <option value="thumb-index" selected>Ibu jari + telunjuk</option>
+            <option value="thumb-pinky">Ibu jari + kelingking (lengan lebar)</option>
+            <option value="index-pinky">Telunjuk + kelingking</option>
+          </select>
+        </label>
+
+        <label>Arah Hadap
+          <select id="opt-facing">
+            <option value="target" selected>Saling berhadapan</option>
+            <option value="walk">Menghadap arah berjalan</option>
+            <option value="manual">Manual (Tombol F / G)</option>
+          </select>
+        </label>
+
+        <label class="row">
+          <input type="checkbox" id="opt-camera" checked />
+          <span>Tampilkan pratinjau kamera</span>
+        </label>
+
+        <label>Ukuran Wayang
+          <input type="range" id="opt-size" min="0.36" max="0.85" step="0.01" value="0.55" />
+        </label>
+
+        <label>Volume Musik Gamelan
+          <input type="range" id="opt-volume" min="0" max="1" step="0.05" value="0.6" />
+        </label>
+      </aside>
+
+      <!-- The Interactive Wayang Stage (Panggung Kelir Adiluhung) -->
       <div class="stage-viewport-wrapper" id="stage-viewport" role="region" aria-label="Panggung Kelir Wayang Kulit">
         
         <!-- Authentic Scalloped Langse / Pelmet Valance Curtain with Tassel Motif -->
@@ -232,11 +291,88 @@
           <span>Mode Layar Penuh Aktif · Tekan <kbd>ESC</kbd> atau klik tombol Layar Penuh untuk keluar</span>
         </div>
 
-      <!-- Picture-In-Picture Webcam Live Preview Card -->
-      <div class="webcam-pip-container" id="webcam-pip-card" aria-label="Pratinjau Kamera Dalang">
+      </div>
+      <!-- End of #stage-viewport -->
+
+      <!-- ======================================================================
+           LEFT-FLOATING INTRO PANEL (Matching Primary Reference Website)
+           ====================================================================== -->
+      <section id="overlay-intro" class="panel intro stage-overlay-intro" role="dialog" aria-labelledby="intro-title" aria-modal="true">
+        <p class="eyebrow">Wayang Kulit · Karsa Potret</p>
+        <h1 class="intro-title" id="intro-title">Dua wayang,<br />satu di setiap tangan</h1>
+        <p class="lede intro-desc">
+          Mainkan sepasang wayang kulit tradisional Jawa Tengah di atas panggung kelir bercahaya lampu blencong. Kamera Anda melacak kedua tangan secara langsung, layaknya dalang memegang cempurit.
+        </p>
+
+        <ul class="howto">
+          <li>
+            <span class="k">Tangan kiri &amp; kanan</span>
+            <span>Setiap tangan memainkan satu tokoh: tangan kiri memainkan tokoh kiri, tangan kanan memainkan tokoh kanan.</span>
+          </li>
+          <li>
+            <span class="k">Telapak tangan</span>
+            <span>Gagang utama tubuh (gapit). Wayang bergerak dinamis mengikuti posisi dan ayunan telapak tangan Anda.</span>
+          </li>
+          <li>
+            <span class="k">Ibu jari &amp; telunjuk</span>
+            <span>Tangkai lengan wayang (tuding). Renggangkan, angkat, atau satukan untuk menggerakkan lengan wayang.</span>
+          </li>
+          <li>
+            <span class="k">Kemiringan tangan</span>
+            <span>Wayang condong dan membungkuk seirama sudut rotasi pergelangan tangan Anda saat berdialog.</span>
+          </li>
+          <li>
+            <span class="k">Maju ke kamera</span>
+            <span>Mengangkat wayang dari layar kelir, sehingga siluet bayangannya membesar dan melembut secara dramatis.</span>
+          </li>
+          <li>
+            <span class="k">Jari kelingking</span>
+            <span>Tunjukkan hanya jari kelingking: wayang melakukan tarian <em>kiprahan</em> khas dalang mengikuti irama gamelan.</span>
+          </li>
+        </ul>
+
+        <div class="actions">
+          <button type="button" id="btn-start-motion" class="btn primary btn-start-motion" aria-label="Mulai Pengalaman Kamera">
+            <i class="bi bi-camera-video-fill me-1" aria-hidden="true"></i>
+            <span>Mulai Kamera</span>
+          </button>
+          <button type="button" id="btn-start-interactive-intro" class="btn" aria-label="Mainkan Menggunakan Mouse">
+            <i class="bi bi-cursor-fill me-1" aria-hidden="true"></i>
+            <span>Gunakan Mouse</span>
+          </button>
+        </div>
+
+        <p id="intro-status" class="status-line" role="status"></p>
+        <div class="intro-privacy-note">
+          <i class="bi bi-shield-check me-1" aria-hidden="true"></i>
+          <span>100% Privat: Video webcam diproses secara lokal di peramban tanpa pernah direkam ke server.</span>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           BOTTOM-LEFT HUD & STATUS PILL (Matching Primary Reference Website)
+           ====================================================================== -->
+      <div id="hud" class="hud" role="toolbar" aria-label="Status & Pintasan Interaksi">
+        <div class="pill" id="status">
+          <span class="dot" id="status-dot"></span>
+          <span id="status-text">Siap Dimainkan</span>
+          <span id="tracking-status-text" class="visually-hidden">Kamera Belum Aktif</span>
+          <span class="badge bg-dark border border-secondary text-light px-2 py-0 ms-1" id="hand-count-badge" style="font-size: 11px; display: none;">
+            0 Tangan
+          </span>
+        </div>
+        <p class="keys">
+          <kbd>D</kbd> kiprahan <kbd>F</kbd><kbd>G</kbd> balik hadap <kbd>H</kbd> sembunyikan UI <kbd>C</kbd> kalibrasi <kbd>V</kbd> kamera <kbd>P</kbd> jendela pop-out <kbd>M</kbd> musik <kbd>Esc</kbd> layar penuh
+        </p>
+      </div>
+
+      <!-- ======================================================================
+           BOTTOM-RIGHT CAMERA PREVIEW BOX (Matching Primary Reference Website)
+           ====================================================================== -->
+      <div id="webcam-pip-card" class="webcam-pip-container" aria-label="Pratinjau Kamera Dalang">
         <div class="webcam-pip-header">
           <div class="pip-header-title">
-            <i class="bi bi-webcam" aria-hidden="true"></i>
+            <i class="bi bi-camera-video" aria-hidden="true"></i>
             <span>Kamera Dalang</span>
           </div>
           <div class="pip-header-actions">
@@ -253,57 +389,20 @@
           <!-- Hidden video feed element for MediaPipe input -->
           <video id="webcam-video" class="webcam-hidden-video" playsinline autoplay muted></video>
           <!-- Landmark Skeleton Canvas -->
-          <canvas id="webcam-canvas" class="webcam-landmark-canvas" width="250" height="152"></canvas>
+          <canvas id="webcam-canvas" class="webcam-landmark-canvas" width="280" height="158"></canvas>
           <div class="pip-guide-overlay" id="pip-guide-text">
             Arahkan 1 atau 2 tangan ke kamera
           </div>
+          <button id="preview-popout" class="popout-btn" type="button" aria-label="Buka kamera di jendela baru" title="Buka jendela pop-out (P)">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3ZM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg>
+          </button>
         </div>
       </div>
 
       <!-- ======================================================================
-           OVERLAY 1: INTRODUCTION MODAL CARD
+           TOP-CENTER FLOATING TOAST NOTIFICATION (Matching Primary Reference)
            ====================================================================== -->
-      <div class="stage-overlay-intro" id="overlay-intro" role="dialog" aria-labelledby="intro-title" aria-modal="true">
-        <div class="intro-modal-card">
-          <span class="intro-badge">
-            <i class="bi bi-stars" aria-hidden="true"></i>
-            Eksplorasi Interaktif Warisan Budaya
-          </span>
-          <h2 class="intro-title" id="intro-title">Selamat Datang di Wayang Motion</h2>
-          <p class="intro-desc">
-            Nyalakan webcam dan gunakan tangan Anda untuk menggerakkan dua tokoh wayang legendaris Jawa Tengah di atas panggung kelir: <strong>Raden Gatotkaca</strong> (Ksatria Otot Kawat Tulang Besi) dan <strong>Raden Arjuna</strong> (Ksatria Panah Pasopati).
-          </p>
-
-          <div class="intro-features-grid">
-            <div class="intro-feature-item">
-              <div class="feature-item-icon"><i class="bi bi-hand-index-thumb"></i></div>
-              <div class="feature-item-title">Deteksi 2 Tangan</div>
-              <div class="feature-item-desc">Gerakkan kedua wayang secara mandiri dengan kedua tangan Anda.</div>
-            </div>
-            <div class="intro-feature-item">
-              <div class="feature-item-icon"><i class="bi bi-shield-check"></i></div>
-              <div class="feature-item-title">100% Privat &amp; Aman</div>
-              <div class="feature-item-desc">Video diproses lokal di peramban Anda tanpa pernah dikirim ke server.</div>
-            </div>
-            <div class="intro-feature-item">
-              <div class="feature-item-icon"><i class="bi bi-lightning-charge"></i></div>
-              <div class="feature-item-title">Responsif &amp; Halus</div>
-              <div class="feature-item-desc">Didukung algoritma interpolasi gerak alami tanpa jeda kaku.</div>
-            </div>
-          </div>
-
-          <div class="d-flex flex-column align-items-center">
-            <button type="button" class="btn-start-motion" id="btn-start-motion" aria-label="Mulai Pengalaman Wayang Motion">
-              <i class="bi bi-camera-video-fill" aria-hidden="true"></i>
-              <span>Mulai Bermain</span>
-            </button>
-            <div class="intro-privacy-note">
-              <i class="bi bi-lock-fill" aria-hidden="true"></i>
-              <span>Akses kamera memerlukan izin peramban Anda. Tidak ada data rekaman yang disimpan.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
       <!-- ======================================================================
            OVERLAY 2: LOADING INITIALIZATION
@@ -325,13 +424,13 @@
             Peramban tidak dapat terhubung ke kamera Anda. Pastikan Anda telah memberikan izin akses kamera atau periksa apakah kamera sedang digunakan oleh aplikasi lain.
           </p>
           <div class="error-actions-group">
-            <button type="button" class="btn-retry-camera" id="btn-retry-camera">
+            <button type="button" class="btn-retry-camera btn primary" id="btn-retry-camera">
               <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
               <span>Coba Hubungkan Lagi</span>
             </button>
-            <button type="button" class="btn-interactive-mode" id="btn-start-interactive">
+            <button type="button" class="btn-interactive-mode btn" id="btn-start-interactive">
               <i class="bi bi-mouse" aria-hidden="true"></i>
-              <span>Mainkan Mode Kursor / Sentuh</span>
+              <span>Mainkan Mode Mouse</span>
             </button>
           </div>
         </div>
@@ -339,7 +438,6 @@
 
     </div>
     <!-- End of #wayang-experience-container -->
-    </div>
 
     <!-- ======================================================================
          CULTURAL CONTEXT & EDUCATIONAL CARDS
@@ -506,5 +604,6 @@
 
   <!-- WAYANG MOTION JAVASCRIPT CONTROLLER -->
   <script src="js/wayang-motion.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

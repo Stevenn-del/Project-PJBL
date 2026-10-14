@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0E1116">
   <title>Peta Interaktif Jawa Tengah — Karsa Potret</title>
   <meta name="description" content="Jelajahi jejak sejarah, tokoh, dan peninggalan bersejarah di setiap 35 kabupaten dan kota di Jawa Tengah melalui atlas interaktif Karsa Potret.">
@@ -29,12 +29,18 @@
 </head>
 <body class="peta-page">
 
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
   <!-- ==========================================================================
        DESKTOP HEADER NAVBAR (Unified Karsa Potret)
        ========================================================================== -->
-  <header class="desktop-header-karsa" id="header-navbar">
+  <header class="desktop-header-global" id="main-header">
     <div class="container-fluid">
-      <div class="navbar-inner">
+      <div class="navbar-inner-global">
 
         <!-- Left: Brand Logo -->
         <div class="brand-wrapper">
@@ -44,22 +50,27 @@
         </div>
 
         <!-- Center: Primary Navigation Links -->
-        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
           <ul class="nav-links-list">
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
-            <li><a href="timeline.html#tokoh" class="nav-item-link">Tokoh</a></li>
+            <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link active" aria-current="page">Peta</a></li>
-            <li><a href="timeline.html#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Wayang Motion Action Button -->
-        <div class="nav-right-wrapper">
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
           <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
             <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
             <span>Wayang Motion</span>
           </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
 
       </div>
@@ -255,9 +266,9 @@
           <span>&copy; 2026 Karsa Potret. Seluruh hak cipta dilindungi. Melestarikan Jejak Peradaban Nusantara.</span>
         </div>
         <div class="footer-bottom-links">
-          <a href="#kebijakan" class="footer-bottom-link">Kebijakan Privasi</a>
-          <a href="#ketentuan" class="footer-bottom-link">Ketentuan Penggunaan</a>
-          <a href="#kontak" class="footer-bottom-link">Hubungi Kami</a>
+          <a href="index.html" class="footer-bottom-link">Beranda</a>
+          <a href="index.html#about" class="footer-bottom-link">Tentang</a>
+          <a href="index.html#contact" class="footer-bottom-link">Hubungi Kami</a>
         </div>
       </div>
 
@@ -277,5 +288,6 @@
   <!-- Leaflet Library & Page Logic -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="js/peta.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

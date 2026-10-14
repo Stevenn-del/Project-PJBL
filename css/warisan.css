@@ -2,70 +2,80 @@
  * ==============================================================================
  * KARSA POTRET — WARISAN BUDAYA DEDICATED CULTURAL EXHIBITION STYLESHEET
  * ==============================================================================
- * Layout: Spacious Cultural Exhibition / Digital Museum Pavilion
- * (Distinct from Tokoh: Focuses on artifacts, architecture, crafts, performing arts)
+ * Primary Reference: Pinterest "Voyage — Destinations" Architecture & Aesthetics
+ * Layout: Full-Bleed 3D Layered Perspective Carousel + Bold Integrated Typography
  * 
- * Strict 5-Color Palette:
- * - Deep brown  : #611F0A (Monumental headers, deep exhibition surfaces, typography)
- * - Warm brown  : #8D4B1F (Curatorial metadata, museum frames, secondary notes)
- * - Terracotta  : #B46F39 (Selective exhibition accents, interactive buttons, highlight seals)
- * - Sand        : #D6AE7C (Placard borders, pedestal accents, dividers)
- * - Cream       : #F0D9A7 (Museum labels, exhibition surfaces, warm lighting accents)
+ * Mandatory 5-Color Karsa Potret Palette:
+ * - Deep brown  : #611F0A (Monumental typography, dark exhibition canvas, stage anchors)
+ * - Warm brown  : #8D4B1F (Curatorial metadata, museum frames, secondary accents)
+ * - Terracotta  : #B46F39 (Active item highlights, CTA buttons, seal borders)
+ * - Sand        : #D6AE7C (Placard rims, 3D card borders, dividers, subtle accents)
+ * - Cream       : #F0D9A7 (Museum labels, badges, illuminated typography, highlights)
  * ==============================================================================
  */
 
 /* ------------------------------------------------------------------------------
-   1. ROOT VARIABLES FOR WARISAN BUDAYA
+   1. ROOT VARIABLES & PALETTE TOKENS
    ------------------------------------------------------------------------------ */
 :root {
-  --wb-deep-brown: #611F0A;
-  --wb-warm-brown: #8D4B1F;
-  --wb-terracotta: #B46F39;
-  --wb-sand: #D6AE7C;
-  --wb-cream: #F0D9A7;
+  --color-deep-brown: #611F0A;
+  --color-warm-brown: #8D4B1F;
+  --color-terracotta: #B46F39;
+  --color-sand: #D6AE7C;
+  --color-cream: #F0D9A7;
+
+  /* Reusable Semantic Tokens */
+  --wb-deep-brown: var(--color-deep-brown);
+  --wb-warm-brown: var(--color-warm-brown);
+  --wb-terracotta: var(--color-terracotta);
+  --wb-sand: var(--color-sand);
+  --wb-cream: var(--color-cream);
 
   --wb-bg-canvas: #F8F1E3;
   --wb-bg-placard: #FFFDF9;
-  --wb-bg-pavilion: #F2E4CB;
-  --wb-bg-dark: #2B0D05;
+  --wb-bg-dark: #0E0301;
+  --wb-bg-card-stage: #140502;
   
   --wb-font-serif: 'Playfair Display', Georgia, serif;
   --wb-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   
   --wb-radius-sm: 6px;
-  --wb-radius-md: 14px;
-  --wb-radius-lg: 22px;
+  --wb-radius-md: 12px;
+  --wb-radius-lg: 16px;
   --wb-radius-pill: 9999px;
   
-  --wb-shadow-subtle: 0 6px 20px rgba(97, 31, 10, 0.07);
-  --wb-shadow-placard: 0 12px 32px rgba(97, 31, 10, 0.1);
-  --wb-shadow-hover: 0 20px 48px rgba(97, 31, 10, 0.16);
+  --wb-shadow-subtle: 0 6px 20px rgba(97, 31, 10, 0.08);
+  --wb-shadow-placard: 0 16px 44px rgba(97, 31, 10, 0.12);
+  --wb-shadow-3d-active: 0 32px 80px rgba(0, 0, 0, 0.85);
+  --wb-shadow-3d-prev: 0 18px 50px rgba(0, 0, 0, 0.65);
 }
 
 body.warisan-page-body {
   margin: 0;
   padding: 0;
-  background-color: var(--wb-bg-canvas);
+  background-color: transparent;
   color: var(--wb-deep-brown);
   font-family: var(--wb-font-sans);
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ------------------------------------------------------------------------------
-   2. EXHIBITION NAVBAR
+   2. STICKY EXHIBITION NAVBAR (Voyage Reference Architecture)
    ------------------------------------------------------------------------------ */
 .desktop-header-warisan {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(97, 31, 10, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(214, 174, 124, 0.35);
-  padding: 12px 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 14px 0;
   transition: all 0.25s ease;
 }
 
@@ -79,196 +89,499 @@ body.warisan-page-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
 }
 
 .brand-wrapper .brand-logo-img {
-  height: 40px;
+  height: 44px;
   width: auto;
   display: block;
-}
-
-.nav-links-list {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 32px;
-}
-
-.nav-links-list li a.nav-item-link {
-  color: var(--wb-cream);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 6px 0;
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.nav-links-list li a.nav-item-link:hover,
-.nav-links-list li a.nav-item-link.active {
-  color: #FFFFFF;
-}
-
-.nav-links-list li a.nav-item-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--wb-terracotta);
-  border-radius: 2px;
 }
 
 .btn-wayang-action {
   background: var(--wb-terracotta);
   color: #FFFFFF;
   text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 22px;
   border-radius: var(--wb-radius-pill);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
-  border: 1px solid rgba(240, 217, 167, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
 }
 
 .btn-wayang-action:hover {
   background: #A05E2A;
   color: #FFFFFF;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
+  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.5);
 }
 
 /* ------------------------------------------------------------------------------
-   3. EXHIBITION HERO & INTRODUCING BANNER
+   3. EXHIBITION HERO & CINEMATIC IMMERSION
+   (Pinterest Reference: Full-Bleed Blurred Ambient Backdrop with Dark Vignette)
    ------------------------------------------------------------------------------ */
 .warisan-hero-section {
   position: relative;
-  background: var(--wb-bg-dark);
+  background: transparent;
   color: #FFFFFF;
   overflow: hidden;
-  border-bottom: 1px solid rgba(214, 174, 124, 0.4);
+  border-bottom: 1px solid rgba(214, 174, 124, 0.28);
+  min-height: calc(100vh - 66px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0 20px;
+  box-sizing: border-box;
 }
 
 .warisan-hero-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.warisan-hero-backdrop img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.38;
-  filter: saturate(0.9) contrast(1.1);
-}
-
-.warisan-hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(43, 13, 5, 0.82) 0%, rgba(97, 31, 10, 0.94) 100%);
-}
-
-.warisan-hero-container {
-  position: relative;
-  z-index: 2;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 68px 24px 60px;
-  text-align: center;
-}
-
-.exhibition-hall-seal {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--wb-cream);
-  background: rgba(240, 217, 167, 0.12);
-  padding: 6px 20px;
-  border-radius: var(--wb-radius-pill);
-  border: 1px solid rgba(214, 174, 124, 0.35);
-  margin-bottom: 20px;
-}
-
-.warisan-main-title {
-  font-family: var(--wb-font-serif);
-  font-size: clamp(34px, 4.4vw, 54px);
-  font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1.15;
-  margin: 0 0 16px;
-  letter-spacing: -0.01em;
-}
-
-.warisan-main-title .gold-highlight {
-  color: var(--wb-cream);
-  font-style: italic;
-}
-
-.warisan-main-lead {
-  font-size: clamp(15px, 1.3vw, 17px);
-  line-height: 1.65;
-  color: var(--wb-sand);
-  max-width: 760px;
-  margin: 0 auto 32px;
+  display: none !important;
 }
 
 /* ------------------------------------------------------------------------------
-   4. WARISAN FILTER TABS (EXHIBITION PAVILION SELECTORS)
+   4. PRIMARY VISUAL CONCEPT — LAYERED CULTURAL IMAGE GALLERY (3D PERSPECTIVE)
+   (Pinterest Reference: Portrait Vertical Overlapping Panels & Integrated Typography)
    ------------------------------------------------------------------------------ */
-.warisan-filter-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+.warisan-masterpiece-showcase.layered-gallery-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.warisan-filter-pill {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(214, 174, 124, 0.45);
-  color: var(--wb-cream);
+.layered-gallery-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 3D Perspective Carousel Stage */
+.layered-gallery-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 560px;
+  margin: 0 auto;
+  perspective: 1300px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* Minimalist Navigation Chevrons (< and >) Framing the Stage */
+.gallery-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  background: rgba(14, 3, 1, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-nav-prev {
+  left: max(20px, calc(50% - 590px));
+}
+
+.gallery-nav-next {
+  right: max(20px, calc(50% - 590px));
+}
+
+.gallery-nav-arrow:hover {
+  background: var(--wb-terracotta);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.14);
+  box-shadow: 0 10px 28px rgba(180, 111, 57, 0.55);
+}
+
+.gallery-nav-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+/* 3D Cards Track */
+.layered-cards-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* Individual Layered Card (Portrait Vertical Aspect Ratio) */
+.layered-card {
+  position: absolute;
+  width: 360px;
+  height: 530px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: var(--wb-bg-card-stage);
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.65s ease,
+              filter 0.65s ease,
+              box-shadow 0.65s ease;
+  will-change: transform, opacity;
+  box-shadow: var(--wb-shadow-3d-prev);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* 3D Depth Stepped Arrangement */
+.layered-card.is-active {
+  z-index: 10;
+  transform: translate3d(0, 0, 75px) rotateY(0deg) scale(1.02);
+  opacity: 1;
+  filter: brightness(1) saturate(1.08) contrast(1.02);
+  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.92),
+              0 0 0 1px rgba(255, 255, 255, 0.25);
+  cursor: default;
+}
+
+.layered-card.is-prev {
+  z-index: 6;
+  transform: translate3d(-76%, 0, -30px) rotateY(14deg) scale(0.88);
+  opacity: 0.92;
+  filter: brightness(0.82) contrast(1.03);
+}
+
+.layered-card.is-next {
+  z-index: 6;
+  transform: translate3d(76%, 0, -30px) rotateY(-14deg) scale(0.88);
+  opacity: 0.92;
+  filter: brightness(0.82) contrast(1.03);
+}
+
+.layered-card.is-prev-2 {
+  z-index: 3;
+  transform: translate3d(-142%, 0, -95px) rotateY(22deg) scale(0.74);
+  opacity: 0.72;
+  filter: brightness(0.60) contrast(1.03);
+}
+
+.layered-card.is-next-2 {
+  z-index: 3;
+  transform: translate3d(142%, 0, -95px) rotateY(-22deg) scale(0.74);
+  opacity: 0.72;
+  filter: brightness(0.60) contrast(1.03);
+}
+
+.layered-card.is-hidden {
+  z-index: 1;
+  transform: translate3d(0, 0, -350px) scale(0.4);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hover Interaction on Preview Cards */
+.layered-card.is-prev:hover {
+  filter: brightness(0.92) contrast(1.04);
+  opacity: 0.98;
+  transform: translate3d(-72%, -4px, -20px) rotateY(14deg) scale(0.89);
+}
+
+.layered-card.is-next:hover {
+  filter: brightness(0.92) contrast(1.04);
+  opacity: 0.98;
+  transform: translate3d(72%, -4px, -20px) rotateY(-14deg) scale(0.89);
+}
+
+.layered-card.is-prev-2:hover {
+  filter: brightness(0.75) contrast(1.04);
+  opacity: 0.82;
+  transform: translate3d(-136%, -3px, -80px) rotateY(22deg) scale(0.75);
+}
+
+.layered-card.is-next-2:hover {
+  filter: brightness(0.75) contrast(1.04);
+  opacity: 0.82;
+  transform: translate3d(136%, -3px, -80px) rotateY(-22deg) scale(0.75);
+}
+
+/* Card Internal Media & Scrim */
+.card-inner-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.card-media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.layered-card.is-active:hover .card-media-img {
+  transform: scale(1.03);
+}
+
+.card-gradient-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14, 3, 1, 0.05) 0%, rgba(14, 3, 1, 0.2) 35%, rgba(14, 3, 1, 0.72) 70%, rgba(10, 2, 0, 0.96) 100%);
+  pointer-events: none;
+}
+
+/* Top-Right Hashtag (#Magelang • Candi, like #Central America) */
+.card-top-tag {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-family: var(--wb-font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.layered-card:not(.is-active) .card-top-tag {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.layered-card.is-active .card-top-tag {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------------------
+   INTEGRATED FOCAL TYPOGRAPHY (Pinterest "MACHU PICCHU - PERU" Style)
+   Active Center Card displays prominent uppercase typography across the focal composition
+   ------------------------------------------------------------------------------ */
+.card-voyage-focal {
+  position: absolute;
+  bottom: 28px;
+  left: 26px;
+  right: 26px;
+  text-align: left;
+  z-index: 5;
+  transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+}
+
+.layered-card.is-active .card-voyage-focal {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.layered-card:not(.is-active) .card-voyage-focal {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+}
+
+.card-voyage-title {
+  font-family: var(--wb-font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  line-height: 1.12;
+  margin: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95);
+  display: block;
+}
+
+.card-voyage-title .title-primary {
+  font-size: clamp(23px, 2.1vw, 28px);
+  font-weight: 800;
+  color: #FFFFFF;
+  display: block;
+  letter-spacing: 0.02em;
+}
+
+.card-voyage-title .title-sub {
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  display: block;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+.card-voyage-divider {
+  width: 44px;
+  height: 2px;
+  background: #FFFFFF;
+  margin: 12px 0 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.card-voyage-tagline {
   font-family: var(--wb-font-sans);
   font-size: 13.5px;
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: var(--wb-radius-pill);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.45;
+  margin: 0 0 14px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.card-voyage-focal .btn-voyage-cta {
+  background: rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  color: #FFFFFF !important;
+  font-family: var(--wb-font-sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  padding: 8px 18px !important;
+  border-radius: var(--wb-radius-pill) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.22s ease;
-  backdrop-filter: blur(6px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.warisan-filter-pill:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--wb-cream);
-  color: #FFFFFF;
-  transform: translateY(-1px);
+.card-voyage-focal .btn-voyage-cta:hover {
+  background: var(--wb-terracotta) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(180, 111, 57, 0.6) !important;
 }
 
-.warisan-filter-pill.active {
-  background: var(--wb-terracotta);
-  border-color: var(--wb-terracotta);
+/* Secondary Preview Captions for Flanking Cards: Hidden to ensure pure photographic panels */
+.card-preview-caption {
+  display: none !important;
+}
+
+.card-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-sand);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.card-name {
+  font-family: var(--wb-font-sans);
+  font-size: 17px;
+  font-weight: 700;
   color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(180, 111, 57, 0.45);
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 /* ------------------------------------------------------------------------------
-   5. FEATURED MASTERPIECE SHOWCASE (EXPANSIVE CULTURAL EXHIBITION)
+   5. MINIMALIST STEPPER & DOTS INDICATOR
+   ------------------------------------------------------------------------------ */
+.gallery-stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 22px auto 0;
+  flex-wrap: wrap;
+}
+
+.gallery-counter-box {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  background: rgba(240, 217, 167, 0.1);
+  border: 1px solid rgba(214, 174, 124, 0.35);
+  padding: 4px 14px;
+  border-radius: var(--wb-radius-pill);
+}
+
+.current-index-num {
+  font-family: var(--wb-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--wb-cream);
+}
+
+.counter-slash {
+  font-size: 13px;
+  color: var(--wb-sand);
+  opacity: 0.7;
+}
+
+.total-index-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wb-sand);
+}
+
+.gallery-dots-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gallery-dot-btn {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--wb-radius-pill);
+  background: rgba(214, 174, 124, 0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.gallery-dot-btn:hover {
+  background: var(--wb-sand);
+}
+
+.gallery-dot-btn.active {
+  width: 26px;
+  background: var(--wb-terracotta);
+  box-shadow: 0 0 10px rgba(180, 111, 57, 0.5);
+}
+
+.gallery-keyboard-hint {
+  font-size: 12px;
+  color: var(--wb-sand);
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ------------------------------------------------------------------------------
+   6. RESTRAINED SUPPORTING EXHIBITION PAVILION (SPACIOUS 2-COLUMN PLACARDS)
    ------------------------------------------------------------------------------ */
 .warisan-content-wrapper {
   max-width: 1340px;
@@ -276,187 +589,100 @@ body.warisan-page-body {
   padding: 56px 28px 80px;
 }
 
-.warisan-masterpiece-showcase {
+/* Category Filter Tabs */
+.warisan-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.warisan-filter-pill {
   background: #FFFFFF;
-  border: 1px solid rgba(214, 174, 124, 0.55);
-  border-radius: var(--wb-radius-lg);
-  box-shadow: var(--wb-shadow-placard);
-  overflow: hidden;
-  margin-bottom: 64px;
-}
-
-.masterpiece-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  align-items: stretch;
-}
-
-.masterpiece-visual-frame {
-  position: relative;
-  min-height: 440px;
-  background-color: var(--wb-bg-dark);
-  overflow: hidden;
-}
-
-.masterpiece-visual-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.warisan-masterpiece-showcase:hover .masterpiece-visual-img {
-  transform: scale(1.04);
-}
-
-.masterpiece-unesco-seal {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(97, 31, 10, 0.9);
-  backdrop-filter: blur(8px);
-  color: var(--wb-cream);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 6px 16px;
-  border-radius: var(--wb-radius-pill);
   border: 1px solid rgba(214, 174, 124, 0.45);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.masterpiece-placard-body {
-  padding: 44px 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #FFFDF9;
-  border-left: 1px solid rgba(214, 174, 124, 0.3);
-}
-
-.masterpiece-origin-tag {
-  color: var(--wb-warm-brown);
-  font-size: 12.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.masterpiece-title {
-  font-family: var(--wb-font-serif);
-  font-size: clamp(28px, 3.2vw, 38px);
-  font-weight: 700;
   color: var(--wb-deep-brown);
-  line-height: 1.2;
-  margin: 0 0 16px;
-}
-
-.masterpiece-concise-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #4A1A0C;
-  margin: 0 0 22px;
-}
-
-.masterpiece-filosofi-plaque {
-  background: #FFF8EA;
-  border: 1px solid rgba(214, 174, 124, 0.5);
-  border-left: 4px solid var(--wb-terracotta);
-  border-radius: 0 var(--wb-radius-sm) var(--wb-radius-sm) 0;
-  padding: 16px 20px;
-  margin-bottom: 26px;
-}
-
-.filosofi-plaque-heading {
-  font-size: 12.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--wb-terracotta);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.filosofi-plaque-text {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--wb-deep-brown);
-  margin: 0;
-  font-style: italic;
-}
-
-.masterpiece-cta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(214, 174, 124, 0.3);
-  padding-top: 20px;
-}
-
-.btn-explore-warisan-primary {
-  background: var(--wb-deep-brown);
-  color: #FFFFFF;
-  border: none;
   font-family: var(--wb-font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
   border-radius: var(--wb-radius-pill);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 14px rgba(97, 31, 10, 0.2);
+  box-shadow: var(--wb-shadow-subtle);
 }
 
-.btn-explore-warisan-primary:hover {
+.warisan-filter-pill:hover {
+  background: var(--wb-cream);
+  border-color: var(--wb-terracotta);
+  color: var(--wb-deep-brown);
+  transform: translateY(-1px);
+}
+
+.warisan-filter-pill.active {
   background: var(--wb-terracotta);
+  border-color: var(--wb-terracotta);
   color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.35);
+  box-shadow: 0 4px 16px rgba(180, 111, 57, 0.4);
 }
 
-.masterpiece-period-note {
-  font-size: 13px;
-  color: var(--wb-warm-brown);
-  font-weight: 600;
-}
-
-/* ------------------------------------------------------------------------------
-   6. CURATED EXHIBITION PAVILION GALLERY (SPACIOUS 2-COLUMN PLACARDS)
-   ------------------------------------------------------------------------------ */
 .warisan-gallery-heading-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   border-bottom: 1px solid rgba(214, 174, 124, 0.45);
-  padding-bottom: 14px;
+  padding-bottom: 16px;
   margin-bottom: 36px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.gallery-heading-text {
+  max-width: 700px;
+}
+
+.gallery-sub-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--wb-terracotta);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
 .gallery-section-title {
   font-family: var(--wb-font-serif);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
-  color: var(--wb-deep-brown);
+  color: #FAF6ED;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.gallery-section-desc {
+  font-size: 14px;
+  color: #E0D8CB;
   margin: 0;
 }
 
 .gallery-count-badge {
   font-size: 13px;
-  color: var(--wb-warm-brown);
-  font-weight: 600;
+  color: #F0D9A7;
+  font-weight: 700;
+  background: rgba(45, 10, 14, 0.75);
+  padding: 6px 16px;
+  border-radius: var(--wb-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.4);
 }
 
-/* Spacious 2-Column Grid (NO Dense 3-Column Grids!) */
+/* Spacious 2-Column Grid (Preserves Clean Editorial Rhythm) */
 .warisan-pavilion-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -477,7 +703,7 @@ body.warisan-page-body {
 
 .warisan-item-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--wb-shadow-hover);
+  box-shadow: 0 18px 44px rgba(97, 31, 10, 0.15);
   border-color: var(--wb-terracotta);
 }
 
@@ -485,7 +711,7 @@ body.warisan-page-body {
   position: relative;
   width: 100%;
   height: 260px;
-  background-color: var(--wb-bg-dark);
+  background-color: var(--wb-bg-card-stage);
   overflow: hidden;
 }
 
@@ -607,6 +833,7 @@ body.warisan-page-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
 .btn-explore-warisan {
@@ -625,7 +852,28 @@ body.warisan-page-body {
 
 .btn-explore-warisan:hover {
   color: var(--wb-deep-brown);
-  transform: translateX(4px);
+  transform: translateX(3px);
+}
+
+.btn-select-gallery {
+  background: rgba(180, 111, 57, 0.1);
+  border: 1px solid rgba(180, 111, 57, 0.3);
+  color: var(--wb-warm-brown);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--wb-radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-select-gallery:hover {
+  background: var(--wb-warm-brown);
+  color: #FFFFFF;
+  border-color: var(--wb-warm-brown);
 }
 
 /* ------------------------------------------------------------------------------
@@ -635,7 +883,7 @@ body.warisan-page-body {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(43, 13, 5, 0.8);
+  background: rgba(10, 2, 0, 0.88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -660,7 +908,7 @@ body.warisan-page-body {
   width: 100%;
   max-height: 88vh;
   overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(45, 12, 3, 0.45);
+  box-shadow: 0 24px 60px rgba(10, 2, 0, 0.55);
   position: relative;
   transform: scale(0.96) translateY(12px);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -703,7 +951,7 @@ body.warisan-page-body {
   border-radius: var(--wb-radius-md);
   overflow: hidden;
   margin-bottom: 24px;
-  background-color: var(--wb-bg-dark);
+  background-color: var(--wb-bg-card-stage);
   border: 1px solid rgba(214, 174, 124, 0.4);
 }
 
@@ -723,6 +971,15 @@ body.warisan-page-body {
 .modal-unesco-pill {
   background: rgba(97, 31, 10, 0.1);
   color: var(--wb-deep-brown);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--wb-radius-pill);
+}
+
+.modal-category-pill {
+  background: rgba(180, 111, 57, 0.15);
+  color: var(--wb-terracotta);
   font-size: 12px;
   font-weight: 700;
   padding: 4px 12px;
@@ -862,23 +1119,113 @@ body.warisan-page-body {
 }
 
 /* ------------------------------------------------------------------------------
-   9. RESPONSIVE REFLOW (1366, 1440, 1920 & MOBILE)
+   9. RESPONSIVE REFLOW (1920x1080, 1440x900, 1366x768 & MOBILE)
    ------------------------------------------------------------------------------ */
+@media (min-width: 1920px) {
+  .layered-gallery-stage {
+    height: 620px;
+    max-width: 1560px;
+  }
+
+  .layered-card {
+    width: 400px;
+    height: 580px;
+  }
+
+  .gallery-nav-prev {
+    left: max(24px, calc(50% - 660px));
+  }
+
+  .gallery-nav-next {
+    right: max(24px, calc(50% - 660px));
+  }
+
+  .card-voyage-title .title-primary {
+    font-size: 32px;
+  }
+
+  .card-voyage-title .title-sub {
+    font-size: 24px;
+  }
+
+  .card-voyage-tagline {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .layered-gallery-stage {
+    height: 550px;
+    max-width: 1360px;
+  }
+  
+  .layered-card {
+    width: 350px;
+    height: 515px;
+  }
+
+  .gallery-nav-prev {
+    left: max(18px, calc(50% - 570px));
+  }
+
+  .gallery-nav-next {
+    right: max(18px, calc(50% - 570px));
+  }
+}
+
+@media (max-width: 1366px) {
+  .desktop-header-warisan {
+    padding: 10px 0;
+  }
+
+  .warisan-hero-section {
+    min-height: calc(100vh - 58px);
+    padding: 24px 0 20px;
+  }
+
+  .layered-gallery-stage {
+    height: 490px;
+    max-width: 1200px;
+  }
+
+  .layered-card {
+    width: 315px;
+    height: 465px;
+  }
+
+  .card-voyage-title .title-primary {
+    font-size: 25px;
+  }
+
+  .card-voyage-title .title-sub {
+    font-size: 19px;
+  }
+
+  .card-voyage-tagline {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .btn-voyage-cta {
+    font-size: 11px;
+    padding: 7px 16px;
+  }
+
+  .gallery-stepper-row {
+    margin-top: 18px;
+    gap: 20px;
+  }
+
+  .gallery-nav-prev {
+    left: max(14px, calc(50% - 510px));
+  }
+
+  .gallery-nav-next {
+    right: max(14px, calc(50% - 510px));
+  }
+}
+
 @media (max-width: 1024px) {
-  .masterpiece-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .masterpiece-visual-frame {
-    min-height: 320px;
-  }
-  
-  .masterpiece-placard-body {
-    padding: 32px 28px;
-    border-left: none;
-    border-top: 1px solid rgba(214, 174, 124, 0.3);
-  }
-  
   .warisan-pavilion-grid {
     grid-template-columns: 1fr;
   }
@@ -886,21 +1233,70 @@ body.warisan-page-body {
   .warisan-footer-grid {
     grid-template-columns: 1fr;
   }
+
+  .layered-gallery-stage {
+    height: 420px;
+  }
+
+  .layered-card {
+    width: 270px;
+    height: 400px;
+  }
 }
 
 @media (max-width: 768px) {
   .nav-links-list {
     display: none;
   }
-  
+
+  .warisan-hero-section {
+    min-height: 520px;
+    padding: 24px 0;
+  }
+
+  .layered-gallery-stage {
+    height: 400px;
+  }
+
+  .layered-card {
+    width: 82vw;
+    max-width: 310px;
+    height: 390px;
+  }
+
+  .layered-card.is-prev {
+    transform: translate3d(-78%, 0, -40px) scale(0.85);
+  }
+
+  .layered-card.is-next {
+    transform: translate3d(78%, 0, -40px) scale(0.85);
+  }
+
+  .layered-card.is-prev-2,
+  .layered-card.is-next-2 {
+    display: none;
+  }
+
+  .gallery-nav-arrow {
+    font-size: 24px;
+  }
+
+  .gallery-nav-prev {
+    left: 8px;
+  }
+
+  .gallery-nav-next {
+    right: 8px;
+  }
+
   .warisan-card-media-stage {
     height: 200px;
   }
-  
+
   .warisan-modal-card {
     padding: 24px;
   }
-  
+
   .warisan-modal-media {
     height: 200px;
   }

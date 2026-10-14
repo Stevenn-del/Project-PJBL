@@ -1,10 +1,15 @@
 /**
  * ==============================================================================
- * KARSA POTRET — TOKOH BERSEJARAH EDITORIAL CONTROLLER
+ * KARSA POTRET — TOKOH BERSEJARAH CINEMATIC CHARACTER SHOWCASE CONTROLLER
  * ==============================================================================
  * Stack: Vanilla JavaScript (ES6+)
- * Provides: Dynamic Category Filtering, Spotlight Feature Sync,
- * Modal Biographical Detail Interaction, Keyboard Accessibility.
+ * Architecture:
+ * - Split Horizontal Composition: Left Information Panel & Right Layered Deck
+ * - Dynamic Category Filtering (Semua, Pemimpin, Pejuang, Emansipasi, Budaya)
+ * - Layered Stacking & Perspective Slot Transforms
+ * - Synchronized Real-time Narrative Crossfade
+ * - Comprehensive Biographical Detail Modal (#tokoh-modal)
+ * - Keyboard Accessibility (ArrowLeft / ArrowRight / Escape)
  * ==============================================================================
  */
 
@@ -168,13 +173,12 @@ class TokohEditorialController {
   constructor() {
     this.dataset = TOKOH_DATASET;
     this.activeFilter = 'all';
-    this.spotlightFigureId = 'ratu-shima';
+    this.activeIndex = 0;
 
     this.dom = {
       filterBtns: document.querySelectorAll('[data-tokoh-filter]'),
-      spotlightCard: document.getElementById('tokoh-spotlight'),
-      editorialGrid: document.getElementById('tokoh-grid'),
-      editorialCount: document.getElementById('tokoh-count-badge'),
+      infoPanel: document.getElementById('tokoh-spotlight'),
+      galleryDeck: document.getElementById('tokoh-grid'),
       modal: document.getElementById('tokoh-modal'),
       modalContent: document.getElementById('tokoh-modal-content'),
       modalCloseBtn: document.getElementById('btn-close-tokoh-modal')
@@ -184,7 +188,7 @@ class TokohEditorialController {
   }
 
   init() {
-    this.renderTokoh();
+    this.renderShowcase();
     this.bindEvents();
   }
 
@@ -193,88 +197,142 @@ class TokohEditorialController {
     return this.dataset.filter(fig => fig.category === this.activeFilter);
   }
 
-  renderTokoh() {
-    const filtered = this.getFilteredFigures();
-    if (filtered.length === 0) return;
-
-    // Pick spotlight: either current spotlightFigureId if present in filtered, else first filtered item
-    let spotlightFig = filtered.find(f => f.id === this.spotlightFigureId);
-    if (!spotlightFig) {
-      spotlightFig = filtered[0];
-      this.spotlightFigureId = spotlightFig.id;
+  getActiveFigure() {
+    const list = this.getFilteredFigures();
+    if (list.length === 0) return null;
+    if (this.activeIndex >= list.length) {
+      this.activeIndex = 0;
     }
+    return list[this.activeIndex];
+  }
 
-    // 1. Render Spotlight Showcase Card
-    if (this.dom.spotlightCard) {
-      this.dom.spotlightCard.innerHTML = `
-        <div class="tokoh-spotlight-inner">
-          <div class="spotlight-portrait-frame">
-            <img src="${spotlightFig.image}" alt="${this.escapeHtml(spotlightFig.name)}" class="spotlight-portrait-img">
-            <span class="spotlight-era-plaque">${this.escapeHtml(spotlightFig.era)}</span>
+  setActiveIndex(newIndex) {
+    const list = this.getFilteredFigures();
+    if (list.length === 0) return;
+    this.activeIndex = (newIndex + list.length) % list.length;
+    this.renderShowcase();
+  }
+
+  prevFigure() {
+    this.setActiveIndex(this.activeIndex - 1);
+  }
+
+  nextFigure() {
+    this.setActiveIndex(this.activeIndex + 1);
+  }
+
+  renderShowcase() {
+    const list = this.getFilteredFigures();
+    if (list.length === 0) return;
+
+    const activeFig = this.getActiveFigure();
+    if (!activeFig) return;
+
+    // 1. Render Left Side Information & Introduction Panel (#tokoh-spotlight)
+    if (this.dom.infoPanel) {
+      const sentences = activeFig.bio.split('. ');
+      const conciseDesc = sentences.slice(0, 2).join('. ') + (sentences.slice(0, 2).join('. ').endsWith('.') ? '' : '.');
+
+      const currentIndexFormatted = (this.activeIndex + 1).toString().padStart(2, '0');
+      const totalCountFormatted = list.length.toString().padStart(2, '0');
+
+      this.dom.infoPanel.innerHTML = `
+        <div class="tokoh-info-inner">
+          
+          <!-- Editorial Signpost Eyebrow -->
+          <div class="showcase-eyebrow">
+            <span class="seal-glyph" aria-hidden="true">✦</span>
+            <span>TOKOH &amp; INSPIRASI</span>
+            <span class="seal-glyph" aria-hidden="true">✦</span>
           </div>
-          <div class="spotlight-narrative-box">
-            <div class="spotlight-kicker-row">
-              <span class="spotlight-role-tag">${this.escapeHtml(spotlightFig.title)}</span>
+
+          <!-- Section Heading -->
+          <h1 class="tokoh-showcase-title" id="tokoh-main-heading">
+            Tokoh Berpengaruh <span class="gold-accent">Jawa Tengah</span>
+          </h1>
+
+          <!-- Section Introduction -->
+          <p class="tokoh-showcase-intro">
+            Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan budayawan adiluhung yang meletakkan dasar peradaban serta martabat Jawa Tengah melintas abad.
+          </p>
+
+          <!-- Dynamic Active Figure Card Block -->
+          <div class="spotlight-active-narrative">
+            <div class="spotlight-provenance-row">
+              <span class="spotlight-role-tag">${this.escapeHtml(activeFig.title)}</span>
               <span class="spotlight-region-pill">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(spotlightFig.region)}
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(activeFig.region)}
               </span>
-            </div>
-            <h2 class="spotlight-figure-name">${this.escapeHtml(spotlightFig.name)}</h2>
-            <p class="spotlight-concise-desc">${this.escapeHtml(spotlightFig.bio.split('.')[0] + '.' + spotlightFig.bio.split('.')[1] + '.')}</p>
-            
-            <div class="spotlight-quote-box">
-              <blockquote class="spotlight-quote-text">“${this.escapeHtml(spotlightFig.quote)}”</blockquote>
+              <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
             </div>
 
-            <div class="spotlight-actions-row">
-              <button type="button" class="btn-read-tokoh-primary btn-read-tokoh" data-open-tokoh="${spotlightFig.id}">
+            <h2 class="spotlight-figure-name">${this.escapeHtml(activeFig.name)}</h2>
+            
+            <p class="spotlight-concise-desc">${this.escapeHtml(conciseDesc)}</p>
+
+            <div class="spotlight-quote-box">
+              <blockquote class="spotlight-quote-text">“${this.escapeHtml(activeFig.quote)}”</blockquote>
+            </div>
+
+            <!-- Action & Navigation Controls Bar -->
+            <div class="spotlight-controls-row">
+              <button type="button" class="btn-read-tokoh-primary btn-read-tokoh" data-open-tokoh="${activeFig.id}">
                 <span>Pelajari Kisah Lengkap</span>
                 <i class="bi bi-arrow-right" aria-hidden="true"></i>
               </button>
-              <span class="spotlight-years-meta">${this.escapeHtml(spotlightFig.years)}</span>
+
+              <div class="deck-nav-cluster" aria-label="Navigasi Galeri Tokoh">
+                <button type="button" class="btn-deck-nav btn-deck-prev" id="btn-tokoh-prev" aria-label="Tokoh sebelumnya">
+                  <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                </button>
+                <span class="deck-counter-badge" id="tokoh-counter">${currentIndexFormatted} / ${totalCountFormatted}</span>
+                <button type="button" class="btn-deck-nav btn-deck-next" id="btn-tokoh-next" aria-label="Tokoh selanjutnya">
+                  <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <span class="spotlight-years-meta">${this.escapeHtml(activeFig.years)}</span>
             </div>
           </div>
+
         </div>
       `;
+
+      // Re-bind controls on the left panel
+      const btnPrev = document.getElementById('btn-tokoh-prev');
+      const btnNext = document.getElementById('btn-tokoh-next');
+      if (btnPrev) btnPrev.addEventListener('click', () => this.prevFigure());
+      if (btnNext) btnNext.addEventListener('click', () => this.nextFigure());
     }
 
-    // 2. Render Curated Editorial Sequence (Remaining figures in this category)
-    if (this.dom.editorialGrid) {
-      // Show other figures; if only 1, show it in the sequence too for consistency
-      const otherFigures = filtered.filter(f => f.id !== spotlightFig.id);
-      const figuresToRender = otherFigures.length > 0 ? otherFigures : [spotlightFig];
-
-      if (this.dom.editorialCount) {
-        this.dom.editorialCount.textContent = `Menampilkan ${figuresToRender.length} dari ${filtered.length} Tokoh Terkurasi`;
-      }
-
-      this.dom.editorialGrid.innerHTML = figuresToRender.map(fig => {
-        // Concise 2-sentence description
-        const sentences = fig.bio.split('.');
-        const shortDesc = (sentences[0] + '.' + (sentences[1] ? sentences[1] + '.' : ''));
+    // 2. Render Right Side Layered Portrait Gallery Deck (#tokoh-grid)
+    if (this.dom.galleryDeck) {
+      this.dom.galleryDeck.innerHTML = list.map((fig, idx) => {
+        const slot = (idx - this.activeIndex + list.length) % list.length;
+        const isFeatured = (slot === 0);
 
         return `
-          <article class="tokoh-profile-card" data-tokoh-id="${fig.id}">
-            <div class="tokoh-card-portrait-wrap">
-              <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="tokoh-card-portrait-img" loading="lazy">
-              <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
-            </div>
-            <div class="tokoh-card-content">
-              <div class="tokoh-card-header-meta">
-                <span class="tokoh-card-role">${this.escapeHtml(fig.title)}</span>
-                <h3 class="tokoh-card-name">${this.escapeHtml(fig.name)}</h3>
-                <div class="tokoh-card-origin">
-                  <i class="bi bi-geo-alt" aria-hidden="true"></i>
-                  <span>${this.escapeHtml(fig.region)}</span>
+          <article class="tokoh-profile-card deck-card ${isFeatured ? 'is-featured' : ''}"
+                   data-tokoh-id="${fig.id}"
+                   data-figure-index="${idx}"
+                   data-slot="${slot}"
+                   style="--slot-index: ${slot};">
+            <div class="deck-card-frame">
+              <div class="deck-card-inner">
+                <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" loading="lazy">
+                <div class="deck-card-vignette" aria-hidden="true"></div>
+                <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
+                
+                <!-- Bottom Frosted Scrim Bar Inspired by Reference Image -->
+                <div class="deck-card-footer">
+                  <div class="deck-card-footer-info">
+                    <span class="deck-card-title">${this.escapeHtml(fig.title)}</span>
+                    <h3 class="deck-card-name">${this.escapeHtml(fig.name)}</h3>
+                  </div>
+                  <button type="button" class="deck-card-action-btn btn-read-tokoh" data-open-tokoh="${fig.id}" aria-label="Pelajari kisah ${this.escapeHtml(fig.name)}">
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                  </button>
                 </div>
-              </div>
-              <p class="tokoh-card-concise-desc">${this.escapeHtml(shortDesc)}</p>
-              <div class="tokoh-card-action-bar">
-                <button type="button" class="btn-read-tokoh" data-open-tokoh="${fig.id}">
-                  <span>Pelajari Kisah</span>
-                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                </button>
-                <span class="tokoh-card-period-year">${this.escapeHtml(fig.years)}</span>
               </div>
             </div>
           </article>
@@ -333,7 +391,7 @@ class TokohEditorialController {
   }
 
   bindEvents() {
-    // Filter pill tabs
+    // 1. Category Filter Pill Tabs
     this.dom.filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         this.dom.filterBtns.forEach(b => {
@@ -343,20 +401,42 @@ class TokohEditorialController {
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
         this.activeFilter = btn.dataset.tokohFilter;
-        this.renderTokoh();
+        this.activeIndex = 0;
+        this.renderShowcase();
       });
     });
 
-    // Delegation for modal trigger
+    // 2. Click Delegation on Deck Cards
+    if (this.dom.galleryDeck) {
+      this.dom.galleryDeck.addEventListener('click', (e) => {
+        const card = e.target.closest('.deck-card');
+        if (!card) return;
+
+        const slot = parseInt(card.dataset.slot, 10);
+        const figIndex = parseInt(card.dataset.figureIndex, 10);
+        const openBtn = e.target.closest('[data-open-tokoh]');
+
+        // If user explicitly clicked the arrow button or if card is already featured
+        if (openBtn || slot === 0) {
+          const id = card.dataset.tokohId;
+          if (id) this.openModal(id);
+        } else {
+          // Neighboring card clicked: smoothly rotate deck to make it featured
+          this.setActiveIndex(figIndex);
+        }
+      });
+    }
+
+    // 3. Delegation for Modal Trigger in Left Info Panel
     document.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-open-tokoh]');
+      const btn = e.target.closest('.btn-read-tokoh-primary[data-open-tokoh]');
       if (btn) {
         const id = btn.dataset.openTokoh;
         if (id) this.openModal(id);
       }
     });
 
-    // Modal Close buttons
+    // 4. Modal Close Handlers
     if (this.dom.modalCloseBtn) {
       this.dom.modalCloseBtn.addEventListener('click', () => this.closeModal());
     }
@@ -367,10 +447,17 @@ class TokohEditorialController {
       });
     }
 
-    // Keyboard support (Escape key)
+    // 5. Keyboard Navigation (Arrows & Escape)
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.dom.modal && this.dom.modal.classList.contains('is-open')) {
-        this.closeModal();
+      if (this.dom.modal && this.dom.modal.classList.contains('is-open')) {
+        if (e.key === 'Escape') this.closeModal();
+        return;
+      }
+
+      if (e.key === 'ArrowLeft') {
+        this.prevFigure();
+      } else if (e.key === 'ArrowRight') {
+        this.nextFigure();
       }
     });
   }

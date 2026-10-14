@@ -429,20 +429,20 @@ async function runTests() {
     await pageTimeline.waitForTimeout(300);
     record('Closing biographical modal restores view cleanly', true);
 
-    // 2. Warisan Budaya Grid & Filter Verification
-    const warisanCardsCount = await pageTimeline.$$eval('.warisan-item-card', els => els.length);
-    record('Warisan Budaya grid populated with heritage cards', warisanCardsCount >= 6, `Total: ${warisanCardsCount}`);
+    // 2. Warisan Budaya 3D Gallery Verification
+    const warisanCardsCount = await pageTimeline.$$eval('.layered-card', els => els.length);
+    record('Warisan Budaya 3D gallery populated with heritage cards', warisanCardsCount >= 6, `Total: ${warisanCardsCount}`);
 
     // Scroll to #warisan-budaya and capture
     await pageTimeline.evaluate(() => document.querySelector('#warisan-budaya').scrollIntoView());
     await pageTimeline.waitForTimeout(300);
     await pageTimeline.screenshot({ path: path.join(SCREENSHOT_DIR, 'timeline_warisan_1440.png') });
 
-    // Click filter 'unesco'
-    await pageTimeline.click('[data-warisan-filter="unesco"]');
+    // Test 3D gallery next navigation
+    await pageTimeline.click('#btn-gallery-next');
     await pageTimeline.waitForTimeout(200);
-    const unescoCount = await pageTimeline.$$eval('.warisan-item-card', els => els.length);
-    record('Filtering Warisan Budaya by "unesco" displays UNESCO world heritages', unescoCount > 0, `UNESCO: ${unescoCount}`);
+    const activeItemTitle = await pageTimeline.$eval('.layered-card.is-active .card-voyage-title', el => el.textContent.trim());
+    record('Navigating 3D gallery advances active heritage item', activeItemTitle.length > 0, `Active: ${activeItemTitle}`);
 
     await pageTimeline.close();
 

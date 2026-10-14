@@ -26,12 +26,18 @@
 </head>
 <body class="warisan-page-body">
 
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
   <!-- ==========================================================================
        1. STICKY EXHIBITION NAVBAR
        ========================================================================== -->
-  <header class="desktop-header-warisan" id="header-warisan">
+  <header class="desktop-header-global" id="main-header">
     <div class="container-fluid">
-      <div class="navbar-inner-warisan">
+      <div class="navbar-inner-global">
         
         <!-- Left: Brand Emblem -->
         <div class="brand-wrapper">
@@ -41,22 +47,27 @@
         </div>
 
         <!-- Center: Primary Navigation Links -->
-        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
           <ul class="nav-links-list">
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
             <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="warisan-budaya.html" class="nav-item-link active" aria-current="page">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Wayang Motion Trigger -->
-        <div class="nav-right-wrapper">
-          <a href="wayang-motion.html" class="btn-wayang-action" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
             <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
             <span>Wayang Motion</span>
           </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
 
       </div>
@@ -64,70 +75,71 @@
   </header>
 
   <!-- ==========================================================================
-       2. CINEMATIC EXHIBITION HERO & ATMOSPHERE BANNER
+       FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
+       ========================================================================== -->
+  <section class="page-intro container">
+    <div class="provenance-badge">
+      <span class="badge-dot"></span>
+      <span>Adab, Estetika &amp; Pusaka Abadi</span>
+    </div>
+    <h1 class="page-hero-title" id="warisan-main-heading">Warisan Budaya <span>Jawa Tengah</span></h1>
+    <p class="page-hero-lead">Jelajahi mahakarya arsitektur candi dunia, kriya adiluhung berstatus warisan UNESCO, serta filosofi luhur seni tradisi yang abadi.</p>
+    <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
+  </section>
+
+  <!-- ==========================================================================
+       2. CINEMATIC EXHIBITION HERO & LAYERED CULTURAL IMAGE GALLERY
+       (Pinterest "Voyage" Reference Composition: Pure Immersion)
        ========================================================================== -->
   <section class="warisan-hero-section" id="hero-warisan" aria-labelledby="warisan-main-heading">
+
     <!-- Archival Background with Atmosphere Scrim -->
-    <div class="warisan-hero-backdrop" aria-hidden="true">
-      <img src="assets/images/warisan-exhibition-hero.jpg" alt="Pameran Kurasi Warisan Budaya Jawa Tengah">
+    <div class="warisan-hero-backdrop" id="warisan-hero-backdrop" aria-hidden="true">
+      <img src="assets/images/slide-3-borobudur.webp" id="hero-dynamic-backdrop-img" alt="Pameran Kurasi Warisan Budaya Jawa Tengah">
       <div class="warisan-hero-gradient"></div>
     </div>
 
-    <div class="warisan-hero-container">
-      
-      <div class="exhibition-hall-seal">
-        <span aria-hidden="true">✦</span>
-        <span>MAHAKARYA PERADABAN &amp; PUSAKA ADILUHUNG</span>
-        <span aria-hidden="true">✦</span>
-      </div>
-
-      <h1 class="warisan-main-title" id="warisan-main-heading">
-        Koleksi Pusaka &amp; <span class="gold-highlight">Warisan Budaya</span>
-      </h1>
-
-      <p class="warisan-main-lead">
-        Menyelami keagungan monumen candi mandala dunia, kehalusan seni kriya keraton bertaraf internasional, serta kedalaman filosofi seni pertunjukan tradisi Jawa Tengah.
-      </p>
-
-      <!-- Category Filter Tabs -->
-      <div class="warisan-filter-container" role="tablist" aria-label="Kategori Warisan Budaya">
-        <button type="button" class="warisan-filter-pill active" data-warisan-filter="all" role="tab" aria-selected="true">
-          <span>Semua Warisan</span>
-        </button>
-        <button type="button" class="warisan-filter-pill" data-warisan-filter="candi" role="tab" aria-selected="false">
-          <i class="bi bi-bank" aria-hidden="true"></i>
-          <span>Candi &amp; Arsitektur</span>
-        </button>
-        <button type="button" class="warisan-filter-pill" data-warisan-filter="kriya" role="tab" aria-selected="false">
-          <i class="bi bi-gem" aria-hidden="true"></i>
-          <span>Kriya &amp; Busana Pusaka</span>
-        </button>
-        <button type="button" class="warisan-filter-pill" data-warisan-filter="seni" role="tab" aria-selected="false">
-          <i class="bi bi-soundwave" aria-hidden="true"></i>
-          <span>Seni &amp; Pertunjukan</span>
-        </button>
-        <button type="button" class="warisan-filter-pill" data-warisan-filter="unesco" role="tab" aria-selected="false">
-          <i class="bi bi-award" aria-hidden="true"></i>
-          <span>Warisan Dunia UNESCO</span>
-        </button>
-      </div>
-
+    <!-- PRIMARY VISUAL CONCEPT: LAYERED CULTURAL IMAGE GALLERY -->
+    <div class="warisan-masterpiece-showcase layered-gallery-container" id="warisan-masterpiece" aria-live="polite">
+      <!-- Dynamically rendered via js/warisan.js -->
     </div>
   </section>
 
   <!-- ==========================================================================
-       3. MAIN EXHIBITION CONTENT (MASTERPIECE + 2-COLUMN PLACARDS)
+       3. RESTRAINED SUPPORTING EXHIBITION SECTION (MUSEUM INDEX)
        ========================================================================== -->
   <main class="warisan-content-wrapper" id="warisan-content">
     
-    <!-- Dynamic Featured Masterpiece Showcase -->
-    <div class="warisan-masterpiece-showcase" id="warisan-masterpiece" aria-live="polite">
-      <!-- Dynamically populated via js/warisan.js -->
+    <!-- Category Filter Tabs -->
+    <div class="warisan-filter-container" role="tablist" aria-label="Kategori Warisan Budaya">
+      <button type="button" class="warisan-filter-pill active" data-warisan-filter="all" role="tab" aria-selected="true">
+        <span>Semua Warisan</span>
+      </button>
+      <button type="button" class="warisan-filter-pill" data-warisan-filter="candi" role="tab" aria-selected="false">
+        <i class="bi bi-bank" aria-hidden="true"></i>
+        <span>Candi &amp; Arsitektur</span>
+      </button>
+      <button type="button" class="warisan-filter-pill" data-warisan-filter="kriya" role="tab" aria-selected="false">
+        <i class="bi bi-gem" aria-hidden="true"></i>
+        <span>Kriya &amp; Busana Pusaka</span>
+      </button>
+      <button type="button" class="warisan-filter-pill" data-warisan-filter="seni" role="tab" aria-selected="false">
+        <i class="bi bi-soundwave" aria-hidden="true"></i>
+        <span>Seni &amp; Pertunjukan</span>
+      </button>
+      <button type="button" class="warisan-filter-pill" data-warisan-filter="unesco" role="tab" aria-selected="false">
+        <i class="bi bi-award" aria-hidden="true"></i>
+        <span>Warisan Dunia UNESCO</span>
+      </button>
     </div>
-
+    
     <!-- Gallery Section Title & Counter -->
     <div class="warisan-gallery-heading-row">
-      <h2 class="gallery-section-title">Paviliun Koleksi Pusaka Adiluhung</h2>
+      <div class="gallery-heading-text">
+        <span class="gallery-sub-badge"><i class="bi bi-collection-play" aria-hidden="true"></i> INDEKS PUSAKA ADILUHUNG</span>
+        <h2 class="gallery-section-title">Paviliun Koleksi Warisan Budaya</h2>
+        <p class="gallery-section-desc">Telusuri katalog lengkap dokumentasi sejarah peradaban dan pusaka Jawa Tengah.</p>
+      </div>
       <span class="gallery-count-badge" id="warisan-count-badge">Memuat kurasi...</span>
     </div>
 
@@ -172,6 +184,7 @@
               <li><a href="timeline.html">Timeline Sejarah</a></li>
               <li><a href="tokoh.html">Tokoh Bersejarah</a></li>
               <li><a href="warisan-budaya.html">Warisan Budaya</a></li>
+              <li><a href="kuliner.html">Kuliner Tradisional</a></li>
             </ul>
           </div>
           <div>
@@ -179,15 +192,15 @@
             <ul class="footer-nav-links">
               <li><a href="peta.html">Peta Interaktif Atlas</a></li>
               <li><a href="wayang-motion.html">Wayang Motion AI</a></li>
-              <li><a href="photobooth.html">Photobooth Budaya</a></li>
+              <li><a href="index.html#pengalaman-preview">Pengalaman Budaya</a></li>
             </ul>
           </div>
           <div>
             <div class="footer-nav-group-title">Tentang</div>
             <ul class="footer-nav-links">
-              <li><a href="timeline.html">Arsip Kebudayaan</a></li>
-              <li><a href="#kebijakan">Kebijakan Privasi</a></li>
-              <li><a href="#kontak">Hubungi Tim</a></li>
+              <li><a href="index.html#about">Visi & Misi</a></li>
+              <li><a href="index.html#contact">Hubungi Tim</a></li>
+              <li><a href="peta.html">35 Kabupaten & Kota</a></li>
             </ul>
           </div>
         </div>
@@ -203,5 +216,6 @@
 
   <!-- Vanilla JavaScript Controller -->
   <script src="js/warisan.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

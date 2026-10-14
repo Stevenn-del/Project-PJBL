@@ -520,6 +520,10 @@ const CULTURAL_HERITAGE_DATA = [
   {
     id: "borobudur",
     title: "Candi Borobudur",
+    titleMain: "CANDI BOROBUDUR",
+    titleRegion: "MAGELANG",
+    tagline: "Mahakarya arsitektur Buddha terbesar di dunia",
+    hashtag: "#Magelang • Candi",
     category: "candi",
     categoryLabel: "Candi & Arsitektur Megah",
     unescoStatus: "Warisan Dunia UNESCO (1991)",
@@ -532,6 +536,10 @@ const CULTURAL_HERITAGE_DATA = [
   {
     id: "prambanan",
     title: "Kompleks Candi Prambanan",
+    titleMain: "CANDI PRAMBANAN",
+    titleRegion: "KLATEN",
+    tagline: "Kemegahan candi Hindu tertinggi di Nusantara",
+    hashtag: "#Klaten • Candi",
     category: "candi",
     categoryLabel: "Candi & Arsitektur Megah",
     unescoStatus: "Warisan Dunia UNESCO (1991)",
@@ -544,30 +552,42 @@ const CULTURAL_HERITAGE_DATA = [
   {
     id: "keris-jawa",
     title: "Pusaka Keris Surakarta",
+    titleMain: "PUSAKA KERIS",
+    titleRegion: "SURAKARTA",
+    tagline: "Mahakarya metalurgi & filosofi jiwa Jawa",
+    hashtag: "#Surakarta • Kriya",
     category: "kriya",
     categoryLabel: "Kriya & Busana Pusaka",
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2005)",
     region: "Surakarta & Yogyakarta",
     period: "Masa Kerajaan hingga Era Modern",
-    image: "assets/images/highlight-batik-keris.jpg",
+    image: "assets/images/warisan-pusaka-keris.jpg",
     desc: "Senjata tikam berbilah asimetris dengan pamor metalurgi multi-layer hasil tempaan pande besi empu Jawa, diakui dunia atas nilai spiritual dan estetika artistik tingginya.",
     filosofi: "Bilah lurus melambangkan keteguhan batin menyembah Tuhan; bilah luk (berkelok) melambangkan keluwesan manusia meniti liku-liku gelombang kehidupan."
   },
   {
     id: "batik-parang",
     title: "Batik Tulis Parang & Kawung",
+    titleMain: "BATIK TULIS",
+    titleRegion: "SURAKARTA",
+    tagline: "Keanggunan busana pusaka adiluhung keraton",
+    hashtag: "#Surakarta • Kriya",
     category: "kriya",
     categoryLabel: "Kriya & Busana Pusaka",
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2009)",
     region: "Surakarta & Pekalongan",
     period: "Tradisi Keraton Mataram Islam",
-    image: "assets/images/highlight-batik-keris.jpg",
+    image: "assets/images/warisan-batik-tulis.jpg",
     desc: "Seni lukis malam panas di atas kain mori halus menggunakan canting tembaga tradisional dengan ragam hias simbolik warisan keraton Jawa Tengah.",
     filosofi: "Motif Parang melambangkan ombak karang laut yang tak pernah lelah berjuang; Motif Kawung melambangkan buah kolang-kaling empat penjuru sebagai simbol kesucian hati."
   },
   {
     id: "wayang-kulit",
     title: "Wayang Kulit Purwa",
+    titleMain: "WAYANG KULIT",
+    titleRegion: "SURAKARTA",
+    tagline: "Epos wiracarita luhur bayang-bayang kehidupan",
+    hashtag: "#Banyumas • Seni",
     category: "seni",
     categoryLabel: "Seni Musik & Pertunjukan",
     unescoStatus: "Masterpiece of Humanity UNESCO (2003)",
@@ -580,30 +600,42 @@ const CULTURAL_HERITAGE_DATA = [
   {
     id: "gamelan-jawa",
     title: "Karawitan & Gamelan Ageng",
+    titleMain: "GAMELAN AGENG",
+    titleRegion: "SURAKARTA",
+    tagline: "Harmoni meditasi batin ansambel perunggu Jawa",
+    hashtag: "#Surakarta • Seni",
     category: "seni",
     categoryLabel: "Seni Musik & Pertunjukan",
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2021)",
     region: "Keraton Kasunanan Surakarta & Mangkunegaran",
     period: "Masa Mataram Kuno hingga Modern",
-    image: "assets/images/slide-2-wayang.webp",
+    image: "assets/images/warisan-gamelan-ageng.jpg",
     desc: "Ansambel instrumen perunggu gong, kempul, kenong, bonang, kendang, dan rebab yang ditala dalam laras Slendro dan Pelog menghasilkan harmoni meditasi batin mendalam.",
     filosofi: "Filosofi 'Rukun Agawe Santosa': tiap bilah instrumen saling menahan diri untuk tidak menonjol sendiri demi melahirkan keselarasan rasa yang agung."
   },
   {
     id: "bedhaya-ketawang",
     title: "Tari Bedhaya Ketawang",
+    titleMain: "BEDHAYA KETAWANG",
+    titleRegion: "SURAKARTA",
+    tagline: "Tarian pusaka sembilan putri penjaga kosmos Jawa",
+    hashtag: "#Surakarta • Seni",
     category: "seni",
     categoryLabel: "Seni Musik & Pertunjukan",
     unescoStatus: "Pusaka Sakral Keraton Kasunanan",
     region: "Kota Surakarta",
     period: "Sultan Agung (Abad ke-17 M)",
-    image: "assets/images/highlight-batik-keris.jpg",
+    image: "assets/images/warisan-bedhaya-ketawang.jpg",
     desc: "Tarian pusaka sakral yang ditarikan oleh sembilan putri berbusana dodot ageng dalam upacara Tingalan Dalem Jumenengan (peringatan naik takhta Sri Susuhunan Pakubuwono).",
     filosofi: "Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa."
   },
   {
     id: "candi-dieng",
     title: "Kompleks Percandian Dieng",
+    titleMain: "PERCANDIAN DIENG",
+    titleRegion: "BANJARNEGARA",
+    tagline: "Tempat suci para dewata di dataran tinggi berkabut",
+    hashtag: "#Dieng • Candi",
     category: "candi",
     categoryLabel: "Candi & Arsitektur Megah",
     unescoStatus: "Cagar Budaya Nasional Peringkat Satu",
@@ -625,6 +657,9 @@ class KarsaTimelineController {
     this.heritageData = CULTURAL_HERITAGE_DATA;
     this.currentIndex = 0;
     this.isTransitioning = false;
+    this.warisanCurrentIndex = 0;
+    this.warisanTouchStartX = 0;
+    this.warisanTouchEndX = 0;
 
     // Cache DOM Elements
     this.dom = {
@@ -667,9 +702,12 @@ class KarsaTimelineController {
       tokohModalContent: document.getElementById('tokoh-modal-content'),
       btnCloseTokohModal: document.getElementById('btn-close-tokoh-modal'),
 
-      // Warisan Budaya Section DOM elements
-      warisanGrid: document.getElementById('warisan-grid'),
-      warisanFilterBtns: document.querySelectorAll('[data-warisan-filter]')
+      // Warisan Budaya 3D Gallery DOM elements
+      warisanMasterpiece: document.getElementById('warisan-masterpiece-timeline'),
+      warisanBackdropImg: document.getElementById('warisan-dynamic-backdrop-img'),
+      warisanModal: document.getElementById('warisan-modal'),
+      warisanModalContent: document.getElementById('warisan-modal-content'),
+      btnCloseWarisanModal: document.getElementById('btn-close-warisan-modal')
     };
 
     this.init();
@@ -679,7 +717,7 @@ class KarsaTimelineController {
     this.checkUrlDeepLink();
     this.renderActiveEra(this.currentIndex, true);
     this.renderTokoh('all');
-    this.renderWarisan('all');
+    this.renderWarisanGallery();
     this.bindEvents();
   }
 
@@ -752,19 +790,6 @@ class KarsaTimelineController {
       });
     });
 
-    // Warisan Filter Tabs
-    this.dom.warisanFilterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.dom.warisanFilterBtns.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        this.renderWarisan(btn.dataset.warisanFilter);
-      });
-    });
-
     // Tokoh Grid Event Delegation for Modal
     if (this.dom.tokohGrid) {
       this.dom.tokohGrid.addEventListener('click', (e) => {
@@ -787,21 +812,49 @@ class KarsaTimelineController {
       });
     }
 
+    // Warisan Modal Close
+    if (this.dom.btnCloseWarisanModal) {
+      this.dom.btnCloseWarisanModal.addEventListener('click', () => this.closeWarisanModal());
+    }
+    if (this.dom.warisanModal) {
+      this.dom.warisanModal.addEventListener('click', (e) => {
+        if (e.target === this.dom.warisanModal) this.closeWarisanModal();
+      });
+    }
+
     // Keyboard Navigation
     window.addEventListener('keydown', (e) => {
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
-      if (e.key === 'Escape' && this.dom.tokohModal && this.dom.tokohModal.classList.contains('is-open')) {
-        this.closeTokohModal();
-        return;
+      if (e.key === 'Escape') {
+        if (this.dom.tokohModal && this.dom.tokohModal.classList.contains('is-open')) {
+          this.closeTokohModal();
+          return;
+        }
+        if (this.dom.warisanModal && this.dom.warisanModal.classList.contains('is-open')) {
+          this.closeWarisanModal();
+          return;
+        }
       }
 
       if (e.key === 'ArrowLeft') {
+        const stage = document.getElementById('gallery-stage-timeline');
+        if (stage && stage.getAttribute('data-focused') === 'true') {
+          e.preventDefault();
+          this.goToWarisan(this.warisanCurrentIndex - 1);
+          return;
+        }
         if (this.currentIndex > 0 && !this.isTransitioning) {
           e.preventDefault();
           this.goToEra(this.currentIndex - 1);
         }
       } else if (e.key === 'ArrowRight') {
+        const stage = document.getElementById('gallery-stage-timeline');
+        if (stage && stage.getAttribute('data-focused') === 'true') {
+          e.preventDefault();
+          this.goToWarisan(this.warisanCurrentIndex + 1);
+          return;
+        }
         if (this.currentIndex < this.data.length - 1 && !this.isTransitioning) {
           e.preventDefault();
           this.goToEra(this.currentIndex + 1);
@@ -976,7 +1029,7 @@ class KarsaTimelineController {
               </div>
 
               <div class="journey-action-row">
-                <a href="#tokoh" class="journey-action-link">
+                <a href="tokoh.html" class="journey-action-link">
                   <span>Eksplorasi Tokoh &amp; Warisan Terkait</span>
                   <i class="bi bi-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -1098,36 +1151,350 @@ class KarsaTimelineController {
     document.body.style.overflow = '';
   }
 
-  renderWarisan(category = 'all') {
-    if (!this.dom.warisanGrid) return;
-    const filtered = this.heritageData.filter(item => {
-      if (category === 'all') return true;
-      if (category === 'unesco') return item.unescoStatus.includes('UNESCO');
-      return item.category === category;
+  /**
+   * ==============================================================================
+   * SEMANTIC 3D HERITAGE GALLERY METHODS
+   * ==============================================================================
+   */
+  getWarisanActiveItem() {
+    if (!this.heritageData || this.heritageData.length === 0) return null;
+    if (this.warisanCurrentIndex >= this.heritageData.length) this.warisanCurrentIndex = 0;
+    if (this.warisanCurrentIndex < 0) this.warisanCurrentIndex = this.heritageData.length - 1;
+    return this.heritageData[this.warisanCurrentIndex];
+  }
+
+  updateWarisanBackdropImage() {
+    const activeItem = this.getWarisanActiveItem();
+    if (!activeItem || !this.dom.warisanBackdropImg) return;
+
+    if (this.dom.warisanBackdropImg.src.includes(activeItem.image)) {
+      this.dom.warisanBackdropImg.style.opacity = '0.6';
+      return;
+    }
+
+    this.dom.warisanBackdropImg.style.opacity = '0.15';
+    setTimeout(() => {
+      this.dom.warisanBackdropImg.src = activeItem.image;
+      this.dom.warisanBackdropImg.style.opacity = '0.6';
+    }, 180);
+  }
+
+  renderWarisanGallery() {
+    const container = this.dom.warisanMasterpiece;
+    if (!container) return;
+
+    const items = this.heritageData;
+    if (items.length === 0) {
+      container.innerHTML = `<div class="empty-gallery-state">Tidak ada koleksi pusaka.</div>`;
+      return;
+    }
+
+    if (this.warisanCurrentIndex >= items.length) this.warisanCurrentIndex = 0;
+
+    container.innerHTML = `
+      <div class="layered-gallery-wrapper">
+        
+        <!-- 1. Interactive 3D Perspective Stage -->
+        <div class="layered-gallery-stage" id="gallery-stage-timeline" role="region" aria-label="Galeri Gambar Berlapis Warisan Budaya">
+          
+          <!-- Prev Button (<) -->
+          <button type="button" class="gallery-nav-arrow gallery-nav-prev" id="btn-gallery-prev" aria-label="Pusaka Sebelumnya">
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          </button>
+
+          <!-- Cards 3D Track -->
+          <div class="layered-cards-track" id="gallery-cards-track">
+            ${items.map((item, index) => this.generateWarisanCardMarkup(item, index, items.length)).join('')}
+          </div>
+
+          <!-- Next Button (>) -->
+          <button type="button" class="gallery-nav-arrow gallery-nav-next" id="btn-gallery-next" aria-label="Pusaka Selanjutnya">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- 2. Minimalist Stepper & Dots Indicator Row -->
+        <div class="gallery-stepper-row">
+          <div class="gallery-counter-box" aria-live="polite">
+            <span class="current-index-num" id="gallery-current-num">${String(this.warisanCurrentIndex + 1).padStart(2, '0')}</span>
+            <span class="counter-slash">/</span>
+            <span class="total-index-num" id="gallery-total-num">${String(items.length).padStart(2, '0')}</span>
+          </div>
+
+          <div class="gallery-dots-indicator" id="gallery-dots-indicator" role="tablist" aria-label="Indikator Pilihan Warisan">
+            ${items.map((item, i) => `
+              <button type="button" 
+                      class="gallery-dot-btn ${i === this.warisanCurrentIndex ? 'active' : ''}" 
+                      data-goto-index="${i}" 
+                      aria-label="Pilih ${this.escapeHtml(item.title)}" 
+                      role="tab" 
+                      aria-selected="${i === this.warisanCurrentIndex}">
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="gallery-keyboard-hint">
+            <i class="bi bi-arrow-left-right" aria-hidden="true"></i> Navigasi Panah &larr; &rarr;
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    this.attachWarisanGalleryListeners();
+    this.updateWarisanBackdropImage();
+  }
+
+  generateWarisanCardMarkup(item, index, total) {
+    let diff = index - this.warisanCurrentIndex;
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+
+    let stateClass = 'is-hidden';
+    if (diff === 0) stateClass = 'is-active';
+    else if (diff === 1) stateClass = 'is-next';
+    else if (diff === -1) stateClass = 'is-prev';
+    else if (diff === 2) stateClass = 'is-next-2';
+    else if (diff === -2) stateClass = 'is-prev-2';
+
+    const isActive = diff === 0;
+
+    return `
+      <div class="layered-card warisan-item-card ${stateClass}" 
+           data-card-id="${item.id}" 
+           data-card-index="${index}" 
+           role="button" 
+           tabindex="0" 
+           aria-label="${this.escapeHtml(item.title)} - ${isActive ? 'Sedang Ditampilkan' : 'Klik untuk menampilkan'}">
+        <div class="card-inner-stage">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="card-media-img" loading="${Math.abs(diff) <= 2 ? 'eager' : 'lazy'}">
+          
+          <!-- Dark Vignette Scrim for text legibility -->
+          <div class="card-gradient-scrim"></div>
+
+          <!-- Top-Right Hashtag (#Magelang • Candi) -->
+          <div class="card-top-tag">${this.escapeHtml(item.hashtag)}</div>
+
+          <!-- Integrated Focal Typography (Center Active Item - Pinterest Reference) -->
+          <div class="card-voyage-focal">
+            <h2 class="${isActive ? 'masterpiece-title ' : ''}card-voyage-title">
+              <span class="title-primary">${this.escapeHtml(item.titleMain)}</span>
+              <span class="title-sub">— ${this.escapeHtml(item.titleRegion)}</span>
+            </h2>
+
+            <div class="card-voyage-divider"></div>
+
+            <p class="card-voyage-tagline">${this.escapeHtml(item.tagline)}</p>
+
+            <button type="button" class="btn-explore-warisan btn-voyage-cta" data-open-warisan="${item.id}" aria-label="Eksplorasi kurasi ${this.escapeHtml(item.title)}">
+              <span>Eksplorasi Kurasi Detail</span>
+              <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- Preview Flanking Caption (Displayed on secondary preview cards) -->
+          <div class="card-preview-caption">
+            <span class="card-tag">${this.escapeHtml(item.categoryLabel)}</span>
+            <h3 class="card-name">${this.escapeHtml(item.title)}</h3>
+          </div>
+
+        </div>
+      </div>
+    `;
+  }
+
+  updateWarisanCardsPosition() {
+    const items = this.heritageData;
+    const total = items.length;
+    const cards = document.querySelectorAll('.layered-card');
+
+    cards.forEach(card => {
+      const index = parseInt(card.dataset.cardIndex, 10);
+      let diff = index - this.warisanCurrentIndex;
+      if (diff > total / 2) diff -= total;
+      if (diff < -total / 2) diff += total;
+
+      card.classList.remove('is-active', 'is-prev', 'is-next', 'is-prev-2', 'is-next-2', 'is-hidden');
+
+      if (diff === 0) {
+        card.classList.add('is-active');
+        card.setAttribute('aria-label', `${card.querySelector('.card-name')?.textContent || 'Warisan'} - Sedang Ditampilkan`);
+        const titleEl = card.querySelector('.card-voyage-title');
+        if (titleEl) titleEl.classList.add('masterpiece-title');
+      } else {
+        const titleEl = card.querySelector('.card-voyage-title');
+        if (titleEl) titleEl.classList.remove('masterpiece-title');
+
+        if (diff === 1) card.classList.add('is-next');
+        else if (diff === -1) card.classList.add('is-prev');
+        else if (diff === 2) card.classList.add('is-next-2');
+        else if (diff === -2) card.classList.add('is-prev-2');
+        else card.classList.add('is-hidden');
+
+        card.setAttribute('aria-label', `Pilih ${card.querySelector('.card-name')?.textContent || 'Warisan'}`);
+      }
     });
 
-    this.dom.warisanGrid.innerHTML = filtered.map(item => `
-      <article class="warisan-item-card">
-        <div class="warisan-card-media">
-          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="warisan-card-img" loading="lazy">
-          <div class="warisan-badges-row">
-            <span class="warisan-status-badge">${this.escapeHtml(item.unescoStatus)}</span>
-            <span class="warisan-category-badge">${this.escapeHtml(item.categoryLabel)}</span>
+    // Update Counter
+    const curNum = document.getElementById('gallery-current-num');
+    if (curNum) curNum.textContent = String(this.warisanCurrentIndex + 1).padStart(2, '0');
+
+    // Update Dots
+    const dots = document.querySelectorAll('.gallery-dot-btn');
+    dots.forEach((dot, idx) => {
+      if (idx === this.warisanCurrentIndex) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.classList.remove('active');
+        dot.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    this.updateWarisanBackdropImage();
+  }
+
+  goToWarisan(index) {
+    const total = this.heritageData.length;
+    if (total === 0) return;
+    this.warisanCurrentIndex = (index % total + total) % total;
+    this.updateWarisanCardsPosition();
+  }
+
+  attachWarisanGalleryListeners() {
+    const btnPrev = document.getElementById('btn-gallery-prev');
+    const btnNext = document.getElementById('btn-gallery-next');
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.goToWarisan(this.warisanCurrentIndex - 1);
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.goToWarisan(this.warisanCurrentIndex + 1);
+      });
+    }
+
+    // Dot indicators
+    const dots = document.querySelectorAll('.gallery-dot-btn');
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const target = parseInt(dot.dataset.gotoIndex, 10);
+        this.goToWarisan(target);
+      });
+    });
+
+    // Card click selection or explore modal
+    const track = document.getElementById('gallery-cards-track');
+    if (track) {
+      track.addEventListener('click', (e) => {
+        const ctaBtn = e.target.closest('[data-open-warisan]');
+        if (ctaBtn) {
+          e.stopPropagation();
+          this.openWarisanModal(ctaBtn.dataset.openWarisan);
+          return;
+        }
+
+        const card = e.target.closest('.layered-card');
+        if (card) {
+          const cardIdx = parseInt(card.dataset.cardIndex, 10);
+          if (cardIdx !== this.warisanCurrentIndex) {
+            this.goToWarisan(cardIdx);
+          }
+        }
+      });
+    }
+
+    // Stage swipe / touch support
+    const stage = document.getElementById('gallery-stage-timeline');
+    if (stage) {
+      stage.addEventListener('touchstart', (e) => {
+        this.warisanTouchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        this.warisanTouchEndX = e.changedTouches[0].screenX;
+        const diff = this.warisanTouchStartX - this.warisanTouchEndX;
+        if (Math.abs(diff) > 45) {
+          if (diff > 0) this.goToWarisan(this.warisanCurrentIndex + 1);
+          else this.goToWarisan(this.warisanCurrentIndex - 1);
+        }
+      }, { passive: true });
+
+      // Stage hover keyboard arrow support
+      stage.addEventListener('mouseenter', () => {
+        stage.setAttribute('data-focused', 'true');
+      });
+      stage.addEventListener('mouseleave', () => {
+        stage.removeAttribute('data-focused');
+      });
+    }
+  }
+
+  openWarisanModal(id) {
+    const item = this.heritageData.find(h => h.id === id);
+    if (!item || !this.dom.warisanModal || !this.dom.warisanModalContent) return;
+
+    this.dom.warisanModalContent.innerHTML = `
+      <div class="warisan-modal-header">
+        <div class="warisan-modal-hero-img">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}">
+          <div class="warisan-modal-scrim"></div>
+          <span class="modal-badge-unesco">${this.escapeHtml(item.unescoStatus)}</span>
+        </div>
+        <div class="warisan-modal-meta">
+          <span class="modal-cat-tag">${this.escapeHtml(item.categoryLabel)}</span>
+          <h2 id="warisan-modal-title" class="warisan-modal-title">${this.escapeHtml(item.title)}</h2>
+          <div class="warisan-modal-loc">
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}
           </div>
         </div>
-        <div class="warisan-card-body">
-          <div class="warisan-region-tag">
-            <i class="bi bi-compass" aria-hidden="true"></i> <span>${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}</span>
-          </div>
-          <h3 class="warisan-item-title">${this.escapeHtml(item.title)}</h3>
-          <p class="warisan-item-desc">${this.escapeHtml(item.desc)}</p>
-          <div class="warisan-filosofi-box">
-            <strong class="filosofi-label"><i class="bi bi-lightbulb" aria-hidden="true"></i> Filosofi Adiluhung:</strong>
-            <p class="filosofi-text">${this.escapeHtml(item.filosofi)}</p>
+      </div>
+      <div class="warisan-modal-body">
+        <div class="warisan-modal-section">
+          <h4 class="modal-section-title"><i class="bi bi-journal-richtext" aria-hidden="true"></i> Deskripsi &amp; Sejarah</h4>
+          <p class="warisan-modal-desc">${this.escapeHtml(item.desc)}</p>
+        </div>
+        <div class="warisan-modal-section">
+          <h4 class="modal-section-title"><i class="bi bi-lightbulb-fill" aria-hidden="true"></i> Filosofi Adiluhung</h4>
+          <div class="warisan-modal-filosofi">
+            <p>${this.escapeHtml(item.filosofi)}</p>
           </div>
         </div>
-      </article>
-    `).join('');
+      </div>
+    `;
+
+    this.dom.warisanModal.classList.add('is-open');
+    this.dom.warisanModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (this.dom.btnCloseWarisanModal) this.dom.btnCloseWarisanModal.focus();
+  }
+
+  closeWarisanModal() {
+    if (!this.dom.warisanModal) return;
+    this.dom.warisanModal.classList.remove('is-open');
+    this.dom.warisanModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Backward-compatibility wrapper for any external caller
+  renderWarisan(category = 'all') {
+    if (category && category !== 'all') {
+      const idx = this.heritageData.findIndex(item => {
+        if (category === 'unesco') return item.unescoStatus.includes('UNESCO');
+        return item.category === category;
+      });
+      if (idx !== -1) {
+        this.goToWarisan(idx);
+        return;
+      }
+    }
+    this.renderWarisanGallery();
   }
 
   escapeHtml(str) {

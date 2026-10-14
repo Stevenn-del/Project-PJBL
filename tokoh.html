@@ -26,12 +26,18 @@
 </head>
 <body class="tokoh-page-body">
 
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
   <!-- ==========================================================================
        1. STICKY EDITORIAL NAVBAR
        ========================================================================== -->
-  <header class="desktop-header-tokoh" id="header-tokoh">
+  <header class="desktop-header-global" id="main-header">
     <div class="container-fluid">
-      <div class="navbar-inner-tokoh">
+      <div class="navbar-inner-global">
         
         <!-- Left: Brand Emblem -->
         <div class="brand-wrapper">
@@ -41,22 +47,27 @@
         </div>
 
         <!-- Center: Primary Navigation Links -->
-        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
           <ul class="nav-links-list">
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
             <li><a href="tokoh.html" class="nav-item-link active" aria-current="page">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Wayang Motion Interactive Trigger -->
-        <div class="nav-right-wrapper">
-          <a href="wayang-motion.html" class="btn-wayang-action" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
             <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
             <span>Wayang Motion</span>
           </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
 
       </div>
@@ -64,72 +75,67 @@
   </header>
 
   <!-- ==========================================================================
-       2. EDITORIAL HERO & CURATORIAL SIGNPOST
+       FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
        ========================================================================== -->
-  <section class="tokoh-hero-section" id="hero-tokoh" aria-labelledby="tokoh-main-heading">
-    <div class="tokoh-hero-container">
-      
-      <div class="editorial-signpost">
-        <span aria-hidden="true">✦</span>
-        <span>SATRIA, PUJANGGA &amp; PERINTIS PERADABAN</span>
-        <span aria-hidden="true">✦</span>
-      </div>
-
-      <h1 class="tokoh-main-title" id="tokoh-main-heading">
-        Tokoh Bersejarah <span class="gold-accent">Jawa Tengah</span>
-      </h1>
-
-      <p class="tokoh-main-lead">
-        Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan budayawan agung yang meletakkan dasar peradaban serta martabat bangsa melintas abad.
-      </p>
-
-      <!-- Category Filter Tabs -->
-      <div class="tokoh-filter-container" role="tablist" aria-label="Kategori Tokoh Sejarah">
-        <button type="button" class="tokoh-filter-pill active" data-tokoh-filter="all" role="tab" aria-selected="true">
-          <span>Semua Tokoh</span>
-        </button>
-        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pemimpin" role="tab" aria-selected="false">
-          <i class="bi bi-award" aria-hidden="true"></i>
-          <span>Pemimpin &amp; Kerajaan</span>
-        </button>
-        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pejuang" role="tab" aria-selected="false">
-          <i class="bi bi-shield-shaded" aria-hidden="true"></i>
-          <span>Pejuang Kemerdekaan</span>
-        </button>
-        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="emansipasi" role="tab" aria-selected="false">
-          <i class="bi bi-book" aria-hidden="true"></i>
-          <span>Emansipasi &amp; Literasi</span>
-        </button>
-        <button type="button" class="tokoh-filter-pill" data-tokoh-filter="budaya" role="tab" aria-selected="false">
-          <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
-          <span>Seni &amp; Pedalangan</span>
-        </button>
-      </div>
-
+  <section class="page-intro container">
+    <div class="provenance-badge">
+      <span class="badge-dot"></span>
+      <span>Satria &amp; Tokoh Adiluhung Nusantara</span>
     </div>
+    <h1 class="page-hero-title">Tokoh Bersejarah <span>Jawa Tengah</span></h1>
+    <p class="page-hero-lead">Menyimak keteladanan para pemimpin bijak, pejuang kemerdekaan, pemikir emansipasi, dan pujangga besar yang meletakkan pilar martabat bangsa.</p>
+    <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
   </section>
 
   <!-- ==========================================================================
-       3. MAIN EDITORIAL CONTENT (SPOTLIGHT + 2-COLUMN PROFILE FLOW)
+       2. CINEMATIC CHARACTER SHOWCASE SECTION (SPLIT TWO-PART COMPOSITION)
        ========================================================================== -->
-  <main class="tokoh-content-wrapper" id="tokoh-content">
-    
-    <!-- Dynamic Spotlight Featured Figure Card -->
-    <div class="tokoh-spotlight-card" id="tokoh-spotlight" aria-live="polite">
-      <!-- Dynamically populated via js/tokoh.js -->
-    </div>
+  <main class="tokoh-showcase-section" id="tokoh-showcase" aria-labelledby="tokoh-main-heading">
+    <div class="tokoh-showcase-container">
+      
+      <!-- Top Cultural Category Filter Pills Bar -->
+      <div class="tokoh-filter-wrapper text-center">
+        <div class="tokoh-filter-container" role="tablist" aria-label="Kategori Tokoh Sejarah">
+          <button type="button" class="tokoh-filter-pill active" data-tokoh-filter="all" role="tab" aria-selected="true">
+            <span>Semua Tokoh</span>
+          </button>
+          <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pemimpin" role="tab" aria-selected="false">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span>Pemimpin &amp; Kerajaan</span>
+          </button>
+          <button type="button" class="tokoh-filter-pill" data-tokoh-filter="pejuang" role="tab" aria-selected="false">
+            <i class="bi bi-shield-shaded" aria-hidden="true"></i>
+            <span>Pejuang Kemerdekaan</span>
+          </button>
+          <button type="button" class="tokoh-filter-pill" data-tokoh-filter="emansipasi" role="tab" aria-selected="false">
+            <i class="bi bi-book" aria-hidden="true"></i>
+            <span>Emansipasi &amp; Literasi</span>
+          </button>
+          <button type="button" class="tokoh-filter-pill" data-tokoh-filter="budaya" role="tab" aria-selected="false">
+            <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
+            <span>Seni &amp; Pedalangan</span>
+          </button>
+        </div>
+      </div>
 
-    <!-- Editorial Section Heading & Counter -->
-    <div class="tokoh-editorial-heading-row">
-      <h2 class="editorial-section-title">Galeri Profil &amp; Kisah Perjuangan</h2>
-      <span class="editorial-count-badge" id="tokoh-count-badge">Memuat profil...</span>
-    </div>
+      <!-- Split Horizontal Two-Part Layout Stage -->
+      <div class="tokoh-split-stage">
+        
+        <!-- Left Side — Introduction, Prominent Heading & Dynamic Description Panel (#tokoh-spotlight) -->
+        <div class="tokoh-info-panel" id="tokoh-spotlight" aria-live="polite">
+          <!-- Dynamically rendered and synchronized via js/tokoh.js -->
+        </div>
 
-    <!-- Spacious 2-Column Curated Figure Sequence (NO Dense 3-Column Grid!) -->
-    <div class="tokoh-editorial-sequence" id="tokoh-grid" aria-live="polite">
-      <!-- Dynamically populated via js/tokoh.js -->
-    </div>
+        <!-- Right Side — Layered Portrait Gallery (#tokoh-grid) -->
+        <div class="tokoh-gallery-panel">
+          <div class="tokoh-layered-deck" id="tokoh-grid" aria-live="polite" aria-label="Galeri Kartu Tokoh Berlapis">
+            <!-- Dynamically populated via js/tokoh.js with .tokoh-profile-card -->
+          </div>
+        </div>
 
+      </div>
+
+    </div>
   </main>
 
   <!-- ==========================================================================
@@ -166,6 +172,7 @@
               <li><a href="timeline.html">Timeline Sejarah</a></li>
               <li><a href="tokoh.html">Tokoh Bersejarah</a></li>
               <li><a href="warisan-budaya.html">Warisan Budaya</a></li>
+              <li><a href="kuliner.html">Kuliner Tradisional</a></li>
             </ul>
           </div>
           <div>
@@ -173,15 +180,15 @@
             <ul class="footer-nav-links">
               <li><a href="peta.html">Peta Interaktif Atlas</a></li>
               <li><a href="wayang-motion.html">Wayang Motion AI</a></li>
-              <li><a href="photobooth.html">Photobooth Budaya</a></li>
+              <li><a href="index.html#pengalaman-preview">Pengalaman Budaya</a></li>
             </ul>
           </div>
           <div>
             <div class="footer-nav-group-title">Tentang</div>
             <ul class="footer-nav-links">
-              <li><a href="timeline.html">Arsip Kebudayaan</a></li>
-              <li><a href="#kebijakan">Kebijakan Privasi</a></li>
-              <li><a href="#kontak">Hubungi Tim</a></li>
+              <li><a href="index.html#about">Visi & Misi</a></li>
+              <li><a href="index.html#contact">Hubungi Tim</a></li>
+              <li><a href="peta.html">35 Kabupaten & Kota</a></li>
             </ul>
           </div>
         </div>
@@ -197,5 +204,6 @@
 
   <!-- Vanilla JavaScript Controller -->
   <script src="js/tokoh.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Karsa Potret — Jejak Sejarah Jawa Tengah</title>
   <meta name="description" content="Menelusuri perjalanan Jawa Tengah dari kerajaan hingga masa kini. Eksplorasi keindahan dan warisan budaya Jawa Tengah bersama Karsa Potret.">
   
@@ -17,17 +17,17 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   
-  <!-- Custom Desktop Stylesheet -->
+  <!-- Core Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-home-viewport">
 
-  <!-- Main Hero Viewport -->
+  <!-- Main Hero Viewport (Simplified Viewport-Focused Experience) -->
   <div class="hero-section" id="hero-section">
 
     <!-- Automatic 3-Image Hero Background Slideshow -->
     <div class="slideshow-container" aria-hidden="true">
-      <div class="hero-slide" id="slide-1" style="background-image: url('assets/images/slide-1-prambanan.webp');"></div>
+      <div class="hero-slide active" id="slide-1" style="background-image: url('assets/images/slide-1-prambanan.webp');"></div>
       <div class="hero-slide" id="slide-2" style="background-image: url('assets/images/slide-2-wayang.webp');"></div>
       <div class="hero-slide" id="slide-3" style="background-image: url('assets/images/slide-3-borobudur.webp');"></div>
     </div>
@@ -36,11 +36,11 @@
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <!-- Desktop Overlay Navbar -->
-    <header class="desktop-header">
+    <header class="desktop-header desktop-header-global" id="main-header">
       <div class="container-fluid">
-        <div class="navbar-inner">
+        <div class="navbar-inner navbar-inner-global">
           
-          <!-- Left: Karsa Potret Logo -->
+          <!-- Left: Brand Logo -->
           <div class="brand-wrapper">
             <a href="index.html" class="brand-link" aria-label="Karsa Potret - Beranda">
               <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="brand-logo-img">
@@ -48,32 +48,42 @@
           </div>
 
           <!-- Center: Primary Navigation Links -->
-          <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+          <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
             <ul class="nav-links-list">
               <li><a href="index.html" class="nav-item-link active" aria-current="page">Beranda</a></li>
               <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
-              <li><a href="timeline.html#tokoh" class="nav-item-link">Tokoh</a></li>
+              <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
               <li><a href="peta.html" class="nav-item-link">Peta</a></li>
-              <li><a href="timeline.html#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
+              <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+              <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
             </ul>
           </nav>
 
-          <!-- Right: Wayang Motion Action Button -->
-          <div class="nav-right-wrapper">
-            <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Wayang Motion">
+          <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+          <div class="nav-right-wrapper d-flex align-items-center gap-2">
+            <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
               <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
               <span>Wayang Motion</span>
             </a>
+
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+              <i class="bi bi-list"></i>
+            </button>
           </div>
 
         </div>
       </div>
     </header>
 
-    <!-- Anchored Hero Typography & CTA -->
+    <!-- Anchored Hero Typography & Primary CTA -->
     <main class="hero-main">
       <div class="container-fluid">
         <div class="hero-content-box">
+          <div class="hero-provenance-tag">
+            <span class="seal-glyph" aria-hidden="true">✦</span>
+            <span>Jejak Peradaban Jawa Dwipa</span>
+            <span class="seal-glyph" aria-hidden="true">✦</span>
+          </div>
           <h1 class="hero-heading">JEJAK SEJARAH<br>JAWA TENGAH</h1>
           <p class="hero-description">Menelusuri perjalanan Jawa Tengah dari kerajaan hingga masa kini bersama Karsa Potret.</p>
           <a href="timeline.html" class="btn-explore" id="btn-explore" aria-label="Mulai menjelajah jejak sejarah Jawa Tengah">
@@ -86,7 +96,7 @@
 
   </div>
 
-  <!-- Vanilla JavaScript Slideshow Controller -->
+  <!-- Vanilla JavaScript Slideshow & Navigation Controller -->
   <script src="js/slideshow.js"></script>
 </body>
 </html>

@@ -1,25 +1,29 @@
 /**
  * ==============================================================================
- * KARSA POTRET — TOKOH BERSEJARAH DEDICATED EDITORIAL STYLESHEET
+ * KARSA POTRET — TOKOH BERSEJARAH CINEMATIC CHARACTER SHOWCASE STYLESHEET
  * ==============================================================================
- * Layout: Portrait-Led Editorial Presentation (Museum Monograph & Archival Profile)
- * Strict 5-Color Palette:
- * - Deep brown  : #611F0A (Headings, primary text, dark backgrounds)
- * - Warm brown  : #8D4B1F (Secondary titles, metadata, subtle borders)
- * - Terracotta  : #B46F39 (Accents, active pills, action buttons)
- * - Sand        : #D6AE7C (Frames, borders, dividers, secondary tags)
- * - Cream       : #F0D9A7 (Light surfaces, placards, soft highlights)
+ * Primary Layout: Split Composition (Left Information Panel, Right Layered Deck)
+ * Visual Direction: Warm Heritage Luxury & Authentic Cultural Aesthetics
+ * Color Palette:
+ * - Canvas Background  : Warm Ivory / Soft Cream (#FBF7EE & #FAF5EB)
+ * - Headings & Body    : Deep Espresso Brown (#231C18 & #611F0A)
+ * - Secondary & Meta   : Warm Rich Brown (#8D4B1F)
+ * - Interactive Accent : Terracotta / Burnt Sienna (#B46F39 & #C05634)
+ * - Borders & Seals    : Antique Gold & Sand (#D4AF37 & #D6AE7C)
  * ==============================================================================
  */
 
 /* ------------------------------------------------------------------------------
-   1. RESET & BASE VARIABLES FOR TOKOH
+   1. DESIGN TOKENS & SYSTEM VARIABLES
    ------------------------------------------------------------------------------ */
 :root {
   --tk-deep-brown: #611F0A;
+  --tk-espresso: #231C18;
   --tk-warm-brown: #8D4B1F;
   --tk-terracotta: #B46F39;
+  --tk-terracotta-hover: #9E5B28;
   --tk-sand: #D6AE7C;
+  --tk-gold: #D4AF37;
   --tk-cream: #F0D9A7;
 
   --tk-bg-canvas: #FBF7EE;
@@ -36,34 +40,40 @@
   --tk-radius-pill: 9999px;
   
   --tk-shadow-subtle: 0 4px 16px rgba(97, 31, 10, 0.06);
-  --tk-shadow-editorial: 0 10px 30px rgba(97, 31, 10, 0.09);
-  --tk-shadow-hover: 0 16px 40px rgba(97, 31, 10, 0.14);
+  --tk-shadow-editorial: 0 12px 36px rgba(97, 31, 10, 0.12);
+  --tk-shadow-deck-front: 0 24px 54px rgba(35, 28, 24, 0.38), 0 0 20px rgba(212, 175, 55, 0.22);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body.tokoh-page-body {
   margin: 0;
   padding: 0;
-  background-color: var(--tk-bg-canvas);
-  color: var(--tk-deep-brown);
+  background-color: transparent;
+  color: #FAF6ED;
   font-family: var(--tk-font-sans);
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ------------------------------------------------------------------------------
-   2. EDITORIAL NAVBAR
+   2. STICKY EDITORIAL NAVBAR
    ------------------------------------------------------------------------------ */
 .desktop-header-tokoh {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(97, 31, 10, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(214, 174, 124, 0.35);
-  padding: 12px 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 14px 0;
   transition: all 0.25s ease;
 }
 
@@ -77,170 +87,83 @@ body.tokoh-page-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
 }
 
 .brand-wrapper .brand-logo-img {
-  height: 40px;
+  height: 44px;
   width: auto;
   display: block;
 }
 
-.nav-links-list {
+/* ------------------------------------------------------------------------------
+   3. CINEMATIC SHOWCASE SECTION CONTAINER
+   ------------------------------------------------------------------------------ */
+.tokoh-showcase-section {
+  padding: 24px 0 44px;
+  background: transparent;
+  position: relative;
+  min-height: calc(100vh - 65px);
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 32px;
 }
 
-.nav-links-list li a.nav-item-link {
-  color: var(--tk-cream);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 6px 0;
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.nav-links-list li a.nav-item-link:hover,
-.nav-links-list li a.nav-item-link.active {
-  color: #FFFFFF;
-}
-
-.nav-links-list li a.nav-item-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--tk-terracotta);
-  border-radius: 2px;
-}
-
-.btn-wayang-action {
-  background: var(--tk-terracotta);
-  color: #FFFFFF;
-  text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: var(--tk-radius-pill);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(240, 217, 167, 0.3);
-}
-
-.btn-wayang-action:hover {
-  background: #A05E2A;
-  color: #FFFFFF;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
-}
-
-/* ------------------------------------------------------------------------------
-   3. EDITORIAL HERO & SIGNPOST
-   ------------------------------------------------------------------------------ */
-.tokoh-hero-section {
-  padding: 64px 0 48px;
-  background: linear-gradient(180deg, #F5EBD7 0%, var(--tk-bg-canvas) 100%);
-  border-bottom: 1px solid rgba(214, 174, 124, 0.4);
-  text-align: center;
-  position: relative;
-}
-
-.tokoh-hero-container {
-  max-width: 980px;
+.tokoh-showcase-container {
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 36px;
+  width: 100%;
 }
 
-.editorial-signpost {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--tk-terracotta);
-  background: rgba(180, 111, 57, 0.09);
-  padding: 6px 18px;
-  border-radius: var(--tk-radius-pill);
-  border: 1px solid rgba(180, 111, 57, 0.22);
+/* Category Filter Tabs Bar */
+.tokoh-filter-wrapper {
   margin-bottom: 20px;
 }
 
-.tokoh-main-title {
-  font-family: var(--tk-font-serif);
-  font-size: clamp(34px, 4.2vw, 52px);
-  font-weight: 700;
-  color: var(--tk-deep-brown);
-  line-height: 1.15;
-  margin: 0 0 16px;
-  letter-spacing: -0.01em;
-}
-
-.tokoh-main-title .gold-accent {
-  color: var(--tk-terracotta);
-  font-style: italic;
-}
-
-.tokoh-main-lead {
-  font-size: clamp(15px, 1.3vw, 17px);
-  line-height: 1.65;
-  color: var(--tk-warm-brown);
-  max-width: 760px;
-  margin: 0 auto 32px;
-}
-
-/* ------------------------------------------------------------------------------
-   4. TOKOH FILTER BAR (SPACIOUS PILLS)
-   ------------------------------------------------------------------------------ */
 .tokoh-filter-container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  background: rgba(255, 253, 249, 0.7);
+  padding: 5px 10px;
+  background: rgba(26, 6, 9, 0.65);
+  padding: 5px 10px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.28);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .tokoh-filter-pill {
-  background: #FFFFFF;
-  border: 1px solid var(--tk-sand);
-  color: var(--tk-deep-brown);
+  background: rgba(45, 10, 14, 0.6);
+  border: 1px solid rgba(214, 174, 124, 0.3);
+  color: #FAF6ED;
   font-family: var(--tk-font-sans);
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 8px 20px;
+  padding: 6px 16px;
   border-radius: var(--tk-radius-pill);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   transition: all 0.22s ease;
-  box-shadow: 0 2px 6px rgba(97, 31, 10, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .tokoh-filter-pill:hover {
-  background: #FFF8EB;
-  border-color: var(--tk-terracotta);
-  color: var(--tk-terracotta);
+  background: rgba(180, 111, 57, 0.35);
+  border-color: var(--tk-sand);
+  color: #FFFFFF;
   transform: translateY(-1px);
 }
 
 .tokoh-filter-pill.active {
   background: var(--tk-terracotta);
-  border-color: var(--tk-terracotta);
+  border-color: rgba(240, 217, 167, 0.6);
   color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.3);
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.4);
 }
 
 .tokoh-filter-pill.active i {
@@ -248,40 +171,324 @@ body.tokoh-page-body {
 }
 
 /* ------------------------------------------------------------------------------
-   5. FEATURED SPOTLIGHT SHOWCASE (LARGE PORTRAIT + DESCRIPTIVE TEXT)
+   4. SPLIT TWO-PART STAGE (LEFT INFO PANEL + RIGHT LAYERED DECK)
    ------------------------------------------------------------------------------ */
-.tokoh-content-wrapper {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 56px 28px 80px;
+.tokoh-split-stage {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.05fr) minmax(520px, 1.25fr);
+  gap: 48px;
+  align-items: center;
+  min-height: 520px;
 }
 
-.tokoh-spotlight-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(214, 174, 124, 0.55);
-  border-radius: var(--tk-radius-lg);
-  box-shadow: var(--tk-shadow-editorial);
-  overflow: hidden;
-  margin-bottom: 60px;
+/* ------------------------------------------------------------------------------
+   5. LEFT SIDE — INTRODUCTION & DYNAMIC NARRATIVE PANEL (#tokoh-spotlight)
+   Clean, spacious editorial layout without placing every element inside a separate box.
+   ------------------------------------------------------------------------------ */
+.tokoh-info-panel {
+  position: relative;
+  z-index: 5;
+}
+
+.tokoh-info-inner {
+  animation: fadeInNarrative 0.32s ease-out;
+}
+
+@keyframes fadeInNarrative {
+  from {
+    opacity: 0.65;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.showcase-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #E5C378;
+  background: rgba(45, 10, 14, 0.7);
+  padding: 4px 14px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.35);
+  margin-bottom: 12px;
+}
+
+.showcase-eyebrow .seal-glyph {
+  font-size: 9px;
+  color: var(--tk-sand);
+}
+
+.tokoh-showcase-title {
+  font-family: var(--tk-font-serif);
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  color: #FAF6ED;
+  line-height: 1.15;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.tokoh-showcase-title .gold-accent {
+  color: #E5C378;
+  font-style: italic;
+}
+
+.tokoh-showcase-intro {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #E0D8CB;
+  margin: 0 0 20px;
+  max-width: 560px;
+}
+
+/* Open, Spacious Editorial Narrative (NO box-in-box wrapping!) */
+.spotlight-active-narrative {
+  background: transparent;
+  border: none;
+  padding: 0;
   position: relative;
 }
 
-.tokoh-spotlight-inner {
-  display: grid;
-  grid-template-columns: 460px 1fr;
+.spotlight-provenance-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.spotlight-role-tag {
+  color: #E5C378;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.spotlight-region-pill {
+  font-size: 11.5px;
+  color: #FAF6ED;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(180, 111, 57, 0.25);
+  padding: 2px 9px;
+  border-radius: var(--tk-radius-pill);
+}
+
+.spotlight-era-plaque {
+  font-size: 11px;
+  font-weight: 600;
+  color: #F0D9A7;
+  background: rgba(45, 10, 14, 0.7);
+  padding: 2px 8px;
+  border-radius: var(--tk-radius-pill);
+  border: 1px solid rgba(214, 174, 124, 0.4);
+}
+
+.spotlight-figure-name {
+  font-family: var(--tk-font-serif);
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 700;
+  color: #FAF6ED;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.spotlight-concise-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #E0D8CB;
+  margin: 0 0 16px;
+  max-width: 580px;
+}
+
+.spotlight-quote-box {
+  background: rgba(255, 249, 237, 0.85);
+  border-left: 3px solid var(--tk-terracotta);
+  padding: 12px 18px;
+  border-radius: 0 var(--tk-radius-sm) var(--tk-radius-sm) 0;
+  margin-bottom: 22px;
+  max-width: 580px;
+}
+
+.spotlight-quote-text {
+  font-family: var(--tk-font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--tk-espresso);
+  margin: 0;
+}
+
+.spotlight-controls-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.btn-read-tokoh-primary {
+  background: var(--tk-terracotta);
+  color: #FFFFFF;
+  border: 1px solid rgba(240, 217, 167, 0.35);
+  font-family: var(--tk-font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--tk-radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
+}
+
+.btn-read-tokoh-primary:hover {
+  background: #9E5B28;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.5);
+}
+
+/* Deck Navigation Control Cluster */
+.deck-nav-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid var(--tk-sand);
+  padding: 3px 6px;
+  border-radius: var(--tk-radius-pill);
+  box-shadow: 0 2px 8px rgba(97, 31, 10, 0.05);
+}
+
+.btn-deck-nav {
+  background: transparent;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--tk-espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn-deck-nav:hover {
+  background: var(--tk-terracotta);
+  color: #FFFFFF;
+}
+
+.deck-counter-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tk-warm-brown);
+  padding: 0 8px;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.spotlight-years-meta {
+  font-size: 12.5px;
+  color: var(--tk-warm-brown);
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* ------------------------------------------------------------------------------
+   6. RIGHT SIDE — LAYERED PORTRAIT GALLERY DECK (#tokoh-grid)
+   ------------------------------------------------------------------------------ */
+.tokoh-gallery-panel {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
   align-items: center;
 }
 
-.spotlight-portrait-frame {
-  position: relative;
-  height: 100%;
-  min-height: 480px;
-  background-color: #2D0F05;
-  overflow: hidden;
-  border-right: 1px solid rgba(214, 174, 124, 0.35);
+/* Background Cultural Ambient Glow */
+.tokoh-gallery-panel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 111, 57, 0.16) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.spotlight-portrait-img {
+/* The Layered Deck Container (Strictly 1 Grid Column to satisfy tests & stacking) */
+.tokoh-layered-deck {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  perspective: 1400px;
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  align-items: center;
+  justify-items: start;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------------------------
+   7. PORTRAIT CARDS GEOMETRY & CHAMFERED CUT
+   Inspired by Reference Image ("foto" character card with angled top-right corner)
+   ------------------------------------------------------------------------------ */
+.tokoh-profile-card.deck-card {
+  grid-area: 1 / 1;
+  width: 310px;
+  height: 465px;
+  position: relative;
+  transition: transform 0.52s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.45s ease,
+              filter 0.45s ease,
+              box-shadow 0.45s ease;
+  will-change: transform, opacity, filter;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Chamfered Top-Right Cut on Frame */
+.deck-card-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+  background: #231C18;
+  overflow: hidden;
+}
+
+.deck-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid rgba(214, 174, 124, 0.45);
+  clip-path: polygon(0 0, calc(100% - 27px) 0, 100% 27px, 100% 100%, 0 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.deck-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -289,301 +496,176 @@ body.tokoh-page-body {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tokoh-spotlight-card:hover .spotlight-portrait-img {
-  transform: scale(1.03);
+.deck-card-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(35, 28, 24, 0.08) 0%, rgba(35, 28, 24, 0.25) 45%, rgba(20, 10, 6, 0.94) 100%);
+  pointer-events: none;
 }
 
-.spotlight-era-plaque {
+/* Card Top-Left Era Tag */
+.tokoh-card-era-tag {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(97, 31, 10, 0.88);
+  top: 14px;
+  left: 14px;
+  background: rgba(35, 28, 24, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--tk-cream);
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 6px 14px;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
   border-radius: var(--tk-radius-pill);
   border: 1px solid rgba(214, 174, 124, 0.4);
+  z-index: 2;
 }
 
-.spotlight-narrative-box {
-  padding: 44px 48px;
-}
-
-.spotlight-kicker-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.spotlight-role-tag {
-  color: var(--tk-terracotta);
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.spotlight-region-pill {
-  font-size: 12px;
-  color: var(--tk-warm-brown);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.spotlight-figure-name {
-  font-family: var(--tk-font-serif);
-  font-size: clamp(28px, 3vw, 40px);
-  font-weight: 700;
-  color: var(--tk-deep-brown);
-  line-height: 1.2;
-  margin: 0 0 16px;
-}
-
-.spotlight-concise-desc {
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: #4A1A0C;
-  margin: 0 0 24px;
-  max-width: 680px;
-}
-
-.spotlight-quote-box {
-  background: #FFF9ED;
-  border-left: 3px solid var(--tk-terracotta);
-  padding: 16px 20px;
-  border-radius: 0 var(--tk-radius-sm) var(--tk-radius-sm) 0;
-  margin-bottom: 28px;
-}
-
-.spotlight-quote-text {
-  font-family: var(--tk-font-serif);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--tk-deep-brown);
-  margin: 0;
-}
-
-.spotlight-actions-row {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.btn-read-tokoh-primary {
-  background: var(--tk-deep-brown);
-  color: #FFFFFF;
-  border: none;
-  font-family: var(--tk-font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 28px;
-  border-radius: var(--tk-radius-pill);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.22s ease;
-  box-shadow: 0 4px 14px rgba(97, 31, 10, 0.2);
-}
-
-.btn-read-tokoh-primary:hover {
-  background: var(--tk-terracotta);
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.35);
-}
-
-.spotlight-years-meta {
-  font-size: 13px;
-  color: var(--tk-warm-brown);
-  font-weight: 600;
-}
-
-/* ------------------------------------------------------------------------------
-   6. CURATED EDITORIAL SEQUENCE (SPACIOUS 2-COLUMN PRESENTATION)
-   ------------------------------------------------------------------------------ */
-.tokoh-editorial-heading-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(214, 174, 124, 0.45);
-  padding-bottom: 14px;
-  margin-bottom: 36px;
-}
-
-.editorial-section-title {
-  font-family: var(--tk-font-serif);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--tk-deep-brown);
-  margin: 0;
-}
-
-.editorial-count-badge {
-  font-size: 13px;
-  color: var(--tk-warm-brown);
-  font-weight: 600;
-}
-
-/* Spacious 2-Column Grid for Editorial Profiles */
-.tokoh-editorial-sequence {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-}
-
-.tokoh-profile-card {
-  background: var(--tk-bg-card);
-  border: 1px solid rgba(214, 174, 124, 0.45);
-  border-radius: var(--tk-radius-md);
-  box-shadow: var(--tk-shadow-subtle);
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-}
-
-.tokoh-profile-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--tk-shadow-hover);
-  border-color: var(--tk-terracotta);
-}
-
-.tokoh-card-portrait-wrap {
-  position: relative;
-  background-color: #2D0F05;
-  height: 100%;
-  min-height: 250px;
-  overflow: hidden;
-}
-
-.tokoh-card-portrait-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.tokoh-profile-card:hover .tokoh-card-portrait-img {
-  transform: scale(1.05);
-}
-
-.tokoh-card-era-tag {
+/* Bottom Frosted Scrim Bar (Inspired by "MINT NFT ->" / "MCRT STAKING ->" in Reference) */
+.deck-card-footer {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(97, 31, 10, 0.88);
-  backdrop-filter: blur(6px);
-  color: var(--tk-cream);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(35, 24, 18, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(214, 174, 124, 0.35);
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 3;
+}
+
+.deck-card-footer-info {
+  overflow: hidden;
+}
+
+.deck-card-title {
+  display: block;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  border-radius: var(--tk-radius-pill);
-  border: 1px solid rgba(214, 174, 124, 0.3);
-}
-
-.tokoh-card-content {
-  padding: 24px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.tokoh-card-header-meta {
-  margin-bottom: 8px;
-}
-
-.tokoh-card-role {
-  color: var(--tk-terracotta);
-  font-size: 12px;
-  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.tokoh-card-name {
-  font-family: var(--tk-font-serif);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--tk-deep-brown);
-  line-height: 1.25;
-  margin: 0 0 6px;
-}
-
-.tokoh-card-origin {
-  font-size: 12px;
-  color: var(--tk-warm-brown);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.tokoh-card-concise-desc {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: #4A1A0C;
-  margin: 10px 0 16px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  letter-spacing: 0.06em;
+  color: var(--tk-sand);
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 
-.tokoh-card-action-bar {
-  border-top: 1px solid rgba(214, 174, 124, 0.3);
-  padding-top: 12px;
+.deck-card-name {
+  font-family: var(--tk-font-serif);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deck-card-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--tk-terracotta);
+  border: 1px solid rgba(240, 217, 167, 0.3);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.btn-read-tokoh {
-  background: transparent;
-  border: none;
-  color: var(--tk-terracotta);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 0;
+  justify-content: center;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-size: 14px;
+  transition: all 0.22s ease;
 }
 
-.btn-read-tokoh:hover {
-  color: var(--tk-deep-brown);
-  transform: translateX(4px);
-}
-
-.tokoh-card-period-year {
-  font-size: 11.5px;
-  color: #8D4B1F;
-  font-weight: 600;
+.deck-card-action-btn:hover {
+  background: #A05E2A;
+  transform: scale(1.08);
 }
 
 /* ------------------------------------------------------------------------------
-   7. EDITORIAL BIOGRAPHICAL DETAIL MODAL
+   8. LAYERED STACKING & DEPTH SLOT TRANSFORMS
+   ------------------------------------------------------------------------------ */
+/* Slot 0: Primary Featured Focal Point */
+.deck-card[data-slot="0"],
+.deck-card.is-featured {
+  transform: translateX(0) translateZ(40px) scale(1.02);
+  z-index: 20;
+  opacity: 1;
+  pointer-events: auto;
+  filter: drop-shadow(0 20px 48px rgba(35, 28, 24, 0.42)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.28));
+}
+
+.deck-card[data-slot="0"] .deck-card-inner,
+.deck-card.is-featured .deck-card-inner {
+  border-color: #D6AE7C;
+  border-width: 2px;
+}
+
+/* Slot 1: First Overlapping Receding Card Beside Featured Card */
+.deck-card[data-slot="1"] {
+  transform: translateX(190px) translateZ(0) scale(0.92);
+  z-index: 15;
+  opacity: 0.88;
+  filter: drop-shadow(0 14px 28px rgba(35, 28, 24, 0.28));
+}
+
+.deck-card[data-slot="1"]:hover {
+  transform: translateX(175px) translateY(-10px) translateZ(10px) scale(0.94);
+  opacity: 0.96;
+  filter: drop-shadow(0 20px 36px rgba(35, 28, 24, 0.36));
+}
+
+/* Slot 2: Second Overlapping Receding Card */
+.deck-card[data-slot="2"] {
+  transform: translateX(345px) translateZ(-40px) scale(0.82);
+  z-index: 10;
+  opacity: 0.65;
+  filter: drop-shadow(0 10px 20px rgba(35, 28, 24, 0.2));
+}
+
+.deck-card[data-slot="2"]:hover {
+  transform: translateX(330px) translateY(-10px) translateZ(-30px) scale(0.84);
+  opacity: 0.8;
+}
+
+/* Slot 3: Third Receding Card in Background */
+.deck-card[data-slot="3"] {
+  transform: translateX(475px) translateZ(-80px) scale(0.73);
+  z-index: 5;
+  opacity: 0.42;
+  filter: drop-shadow(0 6px 14px rgba(35, 28, 24, 0.15));
+}
+
+.deck-card[data-slot="3"]:hover {
+  transform: translateX(460px) translateY(-10px) translateZ(-70px) scale(0.75);
+  opacity: 0.6;
+}
+
+/* Hidden Background Overflow Slots */
+.deck-card:not([data-slot="0"]):not([data-slot="1"]):not([data-slot="2"]):not([data-slot="3"]) {
+  transform: translateX(540px) translateZ(-120px) scale(0.66);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------------------
+   9. EDITORIAL BIOGRAPHICAL DETAIL MODAL (#tokoh-modal)
    ------------------------------------------------------------------------------ */
 .modal-backdrop-editorial {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(45, 12, 3, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(45, 12, 3, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -762,7 +844,7 @@ body.tokoh-page-body {
 }
 
 /* ------------------------------------------------------------------------------
-   8. EDITORIAL FOOTER
+   10. EDITORIAL FOOTER
    ------------------------------------------------------------------------------ */
 .tokoh-footer-section {
   background-color: var(--tk-deep-brown);
@@ -842,25 +924,59 @@ body.tokoh-page-body {
 }
 
 /* ------------------------------------------------------------------------------
-   9. RESPONSIVE BREAKPOINTS (1366, 1440, 1920 & MOBILE REFLOW)
+   11. RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
    ------------------------------------------------------------------------------ */
+@media (max-width: 1280px) {
+  .tokoh-split-stage {
+    gap: 32px;
+  }
+  
+  .deck-card[data-slot="1"] {
+    transform: translateX(160px) translateZ(0) scale(0.92);
+  }
+  
+  .deck-card[data-slot="2"] {
+    transform: translateX(290px) translateZ(-40px) scale(0.82);
+  }
+  
+  .deck-card[data-slot="3"] {
+    transform: translateX(400px) translateZ(-80px) scale(0.74);
+  }
+}
+
 @media (max-width: 1024px) {
-  .tokoh-spotlight-inner {
+  .tokoh-split-stage {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
   
-  .spotlight-portrait-frame {
-    min-height: 360px;
-    border-right: none;
-    border-bottom: 1px solid rgba(214, 174, 124, 0.35);
+  .tokoh-info-panel {
+    max-width: 680px;
+    margin: 0 auto;
   }
   
-  .spotlight-narrative-box {
-    padding: 32px 28px;
+  .tokoh-gallery-panel {
+    justify-content: center;
+    min-height: 480px;
   }
   
-  .tokoh-editorial-sequence {
-    grid-template-columns: 1fr;
+  .tokoh-layered-deck {
+    justify-items: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  
+  .deck-card[data-slot="1"] {
+    transform: translateX(120px) translateZ(0) scale(0.92);
+  }
+  
+  .deck-card[data-slot="2"] {
+    transform: translateX(230px) translateZ(-40px) scale(0.82);
+  }
+  
+  .deck-card[data-slot="3"] {
+    opacity: 0;
+    pointer-events: none;
   }
   
   .tokoh-footer-grid {
@@ -869,24 +985,95 @@ body.tokoh-page-body {
 }
 
 @media (max-width: 768px) {
-  .tokoh-profile-card {
-    grid-template-columns: 1fr;
+  .tokoh-showcase-section {
+    padding: 24px 0 48px;
+    align-items: flex-start;
   }
-  
-  .tokoh-card-portrait-wrap {
-    min-height: 220px;
+
+  .tokoh-showcase-container {
+    padding: 0 16px;
   }
-  
+
+  .tokoh-filter-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 8px;
+    margin: 8px 0 20px;
+    scrollbar-width: none;
+  }
+
+  .tokoh-filter-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tokoh-filter-container {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: max-content;
+  }
+
   .nav-links-list {
     display: none;
   }
+
+  .tokoh-showcase-title {
+    font-size: 26px;
+  }
+
+  .tokoh-split-stage {
+    gap: 36px;
+  }
+
+  .tokoh-gallery-panel {
+    min-height: 450px;
+    margin-top: 10px;
+  }
+
+  .tokoh-layered-deck {
+    min-height: 450px;
+    max-width: 100%;
+  }
+
+  .tokoh-profile-card.deck-card {
+    width: min(290px, 82vw);
+    height: 430px;
+  }
+
+  .deck-card[data-slot="1"] {
+    transform: translateX(45px) translateZ(0) scale(0.92);
+  }
   
+  .deck-card[data-slot="2"] {
+    transform: translateX(85px) translateZ(-40px) scale(0.84);
+  }
+
+  .deck-card[data-slot="3"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .tokoh-modal-card {
     padding: 24px;
   }
-  
+
   .tokoh-modal-header {
     flex-direction: column;
+    text-align: center;
+  }
+
+  .spotlight-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .deck-nav-cluster {
+    justify-content: center;
+  }
+
+  .spotlight-years-meta {
+    margin-left: 0;
     text-align: center;
   }
 }

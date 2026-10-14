@@ -28,12 +28,18 @@
 </head>
 <body class="timeline-body">
 
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
   <!-- ==========================================================================
        STICKY DESKTOP HEADER NAVBAR
        ========================================================================== -->
-  <header class="desktop-header-timeline" id="header-timeline">
+  <header class="desktop-header-global" id="main-header">
     <div class="container-fluid">
-      <div class="navbar-inner-timeline">
+      <div class="navbar-inner-global">
         
         <!-- Left: Karsa Potret Logo -->
         <div class="brand-wrapper">
@@ -43,22 +49,27 @@
         </div>
 
         <!-- Center: Primary Navigation Links -->
-        <nav class="nav-center-wrapper" aria-label="Navigasi Utama">
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
           <ul class="nav-links-list">
             <li><a href="index.html" class="nav-item-link">Beranda</a></li>
             <li><a href="timeline.html" class="nav-item-link active" aria-current="page">Timeline</a></li>
-            <li><a href="#tokoh" class="nav-item-link">Tokoh</a></li>
+            <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
-            <li><a href="#warisan-budaya" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
-        <!-- Right: Wayang Motion Action Button -->
-        <div class="nav-right-wrapper">
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
           <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
             <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
             <span>Wayang Motion</span>
           </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
 
       </div>
@@ -66,42 +77,16 @@
   </header>
 
   <!-- ==========================================================================
-       1. LARGE PHOTOGRAPHIC HERO WITH TORN-PAPER TRANSITION
+       FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
        ========================================================================== -->
-  <section class="timeline-hero" id="intro-section" aria-labelledby="timeline-heading">
-    <!-- Cinematic Full-Width Background Photo -->
-    <div class="hero-bg-media-container" aria-hidden="true">
-      <img src="assets/images/slide-3-borobudur.webp" alt="Panorama Candi Borobudur dan Dataran Kedu Jawa Tengah" class="hero-bg-img">
-      <div class="hero-tint-overlay"></div>
+  <section class="page-intro container">
+    <div class="provenance-badge">
+      <span class="badge-dot"></span>
+      <span>Arsip Kronologis Kebudayaan · Jawa Dwipa Melintas Abad</span>
     </div>
-
-    <!-- Editorial Hero Typography -->
-    <div class="container hero-content-relative">
-      <div class="hero-meta-signpost">
-        <span class="seal-glyph" aria-hidden="true">✦</span>
-        <span>Arsip Kronologis Kebudayaan &bull; Jawa Dwipa Melintas Abad</span>
-        <span class="seal-glyph" aria-hidden="true">✦</span>
-      </div>
-      <h1 class="timeline-page-title" id="timeline-heading">
-        JEJAK SEJARAH JAWA TENGAH
-      </h1>
-      <p class="timeline-page-script">
-        Menelusuri Perjalanan Peradaban dari Masa ke Masa
-      </p>
-      <p class="timeline-page-subtitle">
-        Menelusuri perjalanan Jawa Tengah dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia yang membentuk identitas bangsa.
-      </p>
-    </div>
-
-    <!-- Organic Torn-Paper Bottom Edge Transition -->
-    <div class="torn-paper-edge-hero" aria-hidden="true">
-      <svg viewBox="0 0 1920 85" preserveAspectRatio="none" class="torn-paper-svg">
-        <!-- Paper deckle shadow layer -->
-        <path d="M0,38 Q60,55 130,34 T280,50 T430,32 T580,54 T730,35 T880,58 T1030,36 T1180,56 T1330,38 T1480,58 T1630,36 T1780,54 T1920,42 L1920,85 L0,85 Z" fill="#D6AE7C" opacity="0.45" />
-        <!-- Main torn paper transition layer -->
-        <path d="M0,45 C45,28 85,62 140,40 C195,18 240,56 295,36 C350,16 395,54 450,34 C505,14 548,50 605,32 C660,14 705,52 760,30 C815,10 860,50 915,32 C970,14 1012,54 1070,34 C1125,14 1170,52 1225,32 C1280,14 1325,54 1380,34 C1435,16 1480,56 1535,36 C1590,18 1632,58 1690,38 C1745,20 1790,60 1845,40 C1885,22 1905,48 1920,40 L1920,85 L0,85 Z" fill="#FAF5EB" />
-      </svg>
-    </div>
+    <h1 class="page-hero-title">Jejak Sejarah <span>Jawa Tengah</span></h1>
+    <p class="page-hero-lead">Telusuri lintasan peradaban dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia.</p>
+    <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
   </section>
 
   <!-- ==========================================================================
@@ -289,81 +274,18 @@
     </div>
   </main>
 
-  <!-- ==========================================================================
-       4. HISTORICAL HIGHLIGHTS SECTION (PUSAKA PILIHAN ERA)
-       ========================================================================== -->
-  <section class="timeline-highlights-section" id="highlights-section" aria-labelledby="highlights-era-label">
-    <div class="container">
-      <div class="highlights-section-header text-center">
-        <div class="highlights-eyebrow">
-          <span class="seal-glyph" aria-hidden="true">✦</span>
-          <span>EKSPLORASI DETAIL PUSAKA</span>
-          <span class="seal-glyph" aria-hidden="true">✦</span>
-        </div>
-        <h2 class="highlights-title" id="highlights-era-label">Pusaka Pilihan Era</h2>
-        <p class="highlights-subtitle">Artefak, monumen, dan peninggalan adiluhung yang menjadi penanda kebesaran zaman</p>
-      </div>
-
-      <div class="highlights-cards-grid" id="highlights-grid">
-        <!-- Dynamically rendered via timeline.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       5. DEDICATED SECTION 1: GALERI TOKOH SEJARAH JAWA TENGAH (#tokoh)
-       ========================================================================== -->
-  <section class="timeline-tokoh-section" id="tokoh" aria-labelledby="tokoh-heading">
-    <div class="container">
-      
-      <div class="section-intro-editorial text-center">
-        <div class="editorial-eyebrow">
-          <span class="seal-glyph" aria-hidden="true">✦</span>
-          <span>SATRIA &amp; TOKOH ADILUHUNG NUSANTARA</span>
-          <span class="seal-glyph" aria-hidden="true">✦</span>
-        </div>
-        <h2 class="editorial-title" id="tokoh-heading">Tokoh Bersejarah <span class="title-gold">Jawa Tengah</span></h2>
-        <p class="editorial-desc">
-          Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan pujangga besar yang meletakkan dasar peradaban, persatuan, dan martabat bangsa.
-        </p>
-      </div>
-
-      <!-- Tokoh Category Filter Tabs -->
-      <div class="tokoh-filter-bar" role="tablist" aria-label="Kategori Tokoh Sejarah">
-        <button type="button" class="tokoh-filter-btn active" data-tokoh-filter="all" role="tab" aria-selected="true">
-          <span>Semua Tokoh</span>
-        </button>
-        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="pemimpin" role="tab" aria-selected="false">
-          <i class="bi bi-award" aria-hidden="true"></i>
-          <span>Pemimpin &amp; Kerajaan</span>
-        </button>
-        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="pejuang" role="tab" aria-selected="false">
-          <i class="bi bi-shield-shaded" aria-hidden="true"></i>
-          <span>Pejuang Kemerdekaan</span>
-        </button>
-        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="emansipasi" role="tab" aria-selected="false">
-          <i class="bi bi-book" aria-hidden="true"></i>
-          <span>Emansipasi &amp; Literasi</span>
-        </button>
-        <button type="button" class="tokoh-filter-btn" data-tokoh-filter="budaya" role="tab" aria-selected="false">
-          <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
-          <span>Seni &amp; Pedalangan</span>
-        </button>
-      </div>
-
-      <!-- Tokoh Cards Directory Grid -->
-      <div class="tokoh-cards-grid" id="tokoh-grid" aria-live="polite">
-        <!-- Dynamically rendered via timeline.js -->
-      </div>
-
-    </div>
-  </section>
 
   <!-- ==========================================================================
        6. DEDICATED SECTION 2: KOLEKSI PUSAKA & WARISAN BUDAYA (#warisan-budaya)
        ========================================================================== -->
   <section class="timeline-warisan-section" id="warisan-budaya" aria-labelledby="warisan-heading">
-    <div class="container">
+    <!-- Atmospheric Ambient Cultural Backdrop for 3D Gallery -->
+    <div class="warisan-ambient-backdrop" id="warisan-ambient-backdrop" aria-hidden="true">
+      <img src="assets/images/slide-3-borobudur.webp" id="warisan-dynamic-backdrop-img" alt="">
+      <div class="warisan-ambient-gradient"></div>
+    </div>
+
+    <div class="container warisan-container-relative">
       
       <div class="section-intro-editorial text-center">
         <div class="editorial-eyebrow">
@@ -377,31 +299,8 @@
         </p>
       </div>
 
-      <!-- Warisan Category Filters -->
-      <div class="warisan-filter-bar" role="tablist" aria-label="Kategori Warisan Budaya">
-        <button type="button" class="warisan-filter-btn active" data-warisan-filter="all" role="tab" aria-selected="true">
-          <span>Semua Warisan</span>
-        </button>
-        <button type="button" class="warisan-filter-btn" data-warisan-filter="candi" role="tab" aria-selected="false">
-          <i class="bi bi-bank" aria-hidden="true"></i>
-          <span>Candi &amp; Arsitektur</span>
-        </button>
-        <button type="button" class="warisan-filter-btn" data-warisan-filter="kriya" role="tab" aria-selected="false">
-          <i class="bi bi-gem" aria-hidden="true"></i>
-          <span>Kriya, Batik &amp; Keris</span>
-        </button>
-        <button type="button" class="warisan-filter-btn" data-warisan-filter="seni" role="tab" aria-selected="false">
-          <i class="bi bi-soundwave" aria-hidden="true"></i>
-          <span>Seni Musik &amp; Pertunjukan</span>
-        </button>
-        <button type="button" class="warisan-filter-btn" data-warisan-filter="unesco" role="tab" aria-selected="false">
-          <i class="bi bi-globe2" aria-hidden="true"></i>
-          <span>Warisan Dunia UNESCO</span>
-        </button>
-      </div>
-
-      <!-- Warisan Cards Showcase Grid -->
-      <div class="warisan-cards-grid" id="warisan-grid" aria-live="polite">
+      <!-- SEMANTIC 3D HERITAGE GALLERY (Immediate & Fully Visible Showcase) -->
+      <div class="warisan-masterpiece-showcase layered-gallery-container" id="warisan-masterpiece-timeline" aria-live="polite">
         <!-- Dynamically rendered via timeline.js -->
       </div>
 
@@ -569,7 +468,18 @@
     </div>
   </div>
 
+  <!-- ==========================================================================
+       INTERACTIVE WARISAN EXHIBITION MODAL (#warisan-modal)
+       ========================================================================== -->
+  <div class="modal-backdrop-warisan" id="warisan-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="warisan-modal-title">
+    <div class="warisan-modal-card">
+      <button type="button" class="warisan-modal-close" id="btn-close-warisan-modal" aria-label="Tutup kurasi pusaka">&times;</button>
+      <div id="warisan-modal-content"></div>
+    </div>
+  </div>
+
   <!-- Vanilla JavaScript Controller -->
   <script src="js/timeline.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

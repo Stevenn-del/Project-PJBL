@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuliner Tradisional Jawa Tengah — Cita Rasa Pusaka Karsa Potret</title>
+  <meta name="description" content="Menjelajahi kelezatan gastronomi dan warisan kuliner tradisional Jawa Tengah bersama Karsa Potret. Dari Lumpia Semarang, Gudeg Solo, hingga Dawet Ayu Banjarnegara.">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Global Shared & Culinary Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/kuliner.css">
+</head>
+<body class="kuliner-page-body">
+
+  <!-- Shared Cinematic Background Treatment (All Non-Home Pages) -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
+  <!-- ==========================================================================
+       1. STICKY EDITORIAL NAVBAR
+       ========================================================================== -->
+  <header class="desktop-header-global" id="main-header">
+    <div class="container-fluid">
+      <div class="navbar-inner-global">
+
+        <!-- Left: Brand Logo -->
+        <div class="brand-wrapper">
+          <a href="index.html" class="brand-link" aria-label="Karsa Potret - Kembali ke Beranda">
+            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="brand-logo-img">
+          </a>
+        </div>
+
+        <!-- Center: Primary Navigation Links -->
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
+          <ul class="nav-links-list">
+            <li><a href="index.html" class="nav-item-link">Beranda</a></li>
+            <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
+            <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
+            <li><a href="peta.html" class="nav-item-link">Peta</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+            <li><a href="kuliner.html" class="nav-item-link active" aria-current="page">Kuliner</a></li>
+          </ul>
+        </nav>
+
+        <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Wayang Motion</span>
+          </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
+       ========================================================================== -->
+  <section class="page-intro container" id="hero-kuliner">
+    <div class="provenance-badge">
+      <span class="badge-dot"></span>
+      <span>Gastronomi Adiluhung · Cita Rasa Jawa Dwipa</span>
+    </div>
+    <h1 class="page-hero-title" id="kuliner-heading">Kuliner Tradisional <span>Jawa Tengah</span></h1>
+    <p class="page-hero-lead">Menyelami filosofi rasa, warisan rempah bumi pertiwi, dan kelezatan hidangan legendaris yang mengakar dalam tata krama serta denyut sejarah peradaban Jawa.</p>
+    <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
+  </section>
+
+  <!-- ==========================================================================
+       3. GASTRONOMIC STATS & PILLARS
+       ========================================================================== -->
+  <section class="kuliner-stats-bar" aria-label="Statistik Kuliner Tradisional">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <i class="bi bi-egg-fried stat-icon" aria-hidden="true"></i>
+        <div>
+          <span class="stat-num">35+ Ragam</span>
+          <span class="stat-label">Ikon Kuliner Daerah</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="bi bi-clock-history stat-icon" aria-hidden="true"></i>
+        <div>
+          <span class="stat-num">Abad ke-8 M</span>
+          <span class="stat-label">Akar Resep Relief Borobudur</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="bi bi-flower1 stat-icon" aria-hidden="true"></i>
+        <div>
+          <span class="stat-num">Rempah Murni</span>
+          <span class="stat-label">Bumbu Warisan Keraton</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. CULINARY SHOWCASE & INTERACTIVE FILTER
+       ========================================================================== -->
+  <main class="kuliner-showcase-section" id="koleksi-kuliner">
+    <div class="filter-controls-row">
+      <div class="kuliner-filter-pills" role="tablist" aria-label="Filter Kategori Hidangan">
+        <button class="filter-pill-btn active" data-kuliner-filter="all" role="tab" aria-selected="true">Semua Hidangan</button>
+        <button class="filter-pill-btn" data-kuliner-filter="utama" role="tab" aria-selected="false">Makanan Utama</button>
+        <button class="filter-pill-btn" data-kuliner-filter="kudapan" role="tab" aria-selected="false">Kudapan & Camilan</button>
+        <button class="filter-pill-btn" data-kuliner-filter="minuman" role="tab" aria-selected="false">Minuman Tradisional</button>
+      </div>
+      <div class="filter-count-badge" id="kuliner-count">
+        Menampilkan 5 Hidangan Pusaka
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="kuliner-cards-grid" id="kuliner-cards-container">
+
+      <!-- 1. Lumpia Semarang -->
+      <article class="kuliner-card" data-category="kudapan" data-dish-key="lumpia-semarang">
+        <div class="kuliner-card-img-wrapper">
+          <img src="assets/images/kuliner-lumpia-semarang.jpg" alt="Lumpia Semarang renyah dengan saus cokelat kental dan lokio" class="kuliner-card-img" loading="lazy">
+          <span class="kuliner-card-badge">Warisan Pesisir</span>
+          <span class="kuliner-region-tag"><i class="bi bi-geo-alt-fill text-danger"></i> Kota Semarang</span>
+        </div>
+        <div class="kuliner-card-body">
+          <h2 class="kuliner-card-title">Lumpia Semarang</h2>
+          <div class="kuliner-flavor-note">
+            <i class="bi bi-stars"></i> Gurih Renyah, Manis Rebung & Aroma Udang
+          </div>
+          <p class="kuliner-card-desc">
+            Mahakarya akulturasi kuliner Tionghoa dan Jawa abad ke-19. Gulungan kulit tipis berisi rebung bambu betung manis gurih, daging ayam, dan udang cincang yang disajikan basah atau digoreng renyah keemasan.
+          </p>
+          <div class="kuliner-ingredients-preview">
+            <span class="ingredient-chip">Rebung Bambu</span>
+            <span class="ingredient-chip">Udang Segar</span>
+            <span class="ingredient-chip">Saus Gula Bawang</span>
+            <span class="ingredient-chip">Daun Lokio</span>
+          </div>
+          <div class="kuliner-card-footer">
+            <span class="text-muted small">Camilan Legendaris</span>
+            <button type="button" class="btn-detail-kuliner" aria-label="Lihat filosofi dan detail Lumpia Semarang">
+              <span>Telusuri Kisah</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Gudeg Solo -->
+      <article class="kuliner-card" data-category="utama" data-dish-key="gudeg-solo">
+        <div class="kuliner-card-img-wrapper">
+          <img src="assets/images/kuliner-gudeg-solo.jpg" alt="Gudeg Solo dengan kuah areh putih gurih, krecek pedas, dan telur pindang dalam kendil tanah liat" class="kuliner-card-img" loading="lazy">
+          <span class="kuliner-card-badge">Pusaka Keraton</span>
+          <span class="kuliner-region-tag"><i class="bi bi-geo-alt-fill text-danger"></i> Kota Surakarta</span>
+        </div>
+        <div class="kuliner-card-body">
+          <h2 class="kuliner-card-title">Gudeg Solo</h2>
+          <div class="kuliner-flavor-note">
+            <i class="bi bi-stars"></i> Gurih Lembut, Areh Kental & Pedas Krecek
+          </div>
+          <p class="kuliner-card-desc">
+            Dimasak perlahan dalam kuali tanah liat (kendil) dengan santan kelapa tua murni dan daun jati. Menghadirkan rasa manis yang anggun berpadu sambal goreng krecek gurih pedas dan opor ayam kampung.
+          </p>
+          <div class="kuliner-ingredients-preview">
+            <span class="ingredient-chip">Nangka Muda (Gori)</span>
+            <span class="ingredient-chip">Areh Santan Kental</span>
+            <span class="ingredient-chip">Sambal Krecek</span>
+            <span class="ingredient-chip">Telur Pindang</span>
+          </div>
+          <div class="kuliner-card-footer">
+            <span class="text-muted small">Santapan Adat</span>
+            <button type="button" class="btn-detail-kuliner" aria-label="Lihat filosofi dan detail Gudeg Solo">
+              <span>Telusuri Kisah</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Soto Kudus -->
+      <article class="kuliner-card" data-category="utama" data-dish-key="soto-kudus">
+        <div class="kuliner-card-img-wrapper">
+          <img src="assets/images/kuliner-soto-kudus.jpg" alt="Soto Kudus disajikan dalam mangkuk porselen kecil dengan kuah rempah bening harum dan taburan bawang putih goreng" class="kuliner-card-img" loading="lazy">
+          <span class="kuliner-card-badge">Filosofi Toleransi</span>
+          <span class="kuliner-region-tag"><i class="bi bi-geo-alt-fill text-danger"></i> Kabupaten Kudus</span>
+        </div>
+        <div class="kuliner-card-body">
+          <h2 class="kuliner-card-title">Soto Kudus</h2>
+          <div class="kuliner-flavor-note">
+            <i class="bi bi-stars"></i> Kaldu Rempah Gurih Segar & Bawang Goreng
+          </div>
+          <p class="kuliner-card-desc">
+            Warisan kearifan Sunan Kudus yang mengganti daging sapi dengan kerbau sebagai wujud penghormatan lintas agama. Disajikan dalam mangkuk porselen kecil khas perniagaan Jalur Sutra pesisir utara.
+          </p>
+          <div class="kuliner-ingredients-preview">
+            <span class="ingredient-chip">Daging Kerbau / Ayam</span>
+            <span class="ingredient-chip">Kaldu Bumbu Kuning</span>
+            <span class="ingredient-chip">Tauge Renyah</span>
+            <span class="ingredient-chip">Sate Kerang</span>
+          </div>
+          <div class="kuliner-card-footer">
+            <span class="text-muted small">Hidangan Kuah</span>
+            <button type="button" class="btn-detail-kuliner" aria-label="Lihat filosofi dan detail Soto Kudus">
+              <span>Telusuri Kisah</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Dawet Ayu Banjarnegara -->
+      <article class="kuliner-card" data-category="minuman" data-dish-key="dawet-ayu">
+        <div class="kuliner-card-img-wrapper">
+          <img src="assets/images/kuliner-dawet-ayu.jpg" alt="Segelas Dawet Ayu Banjarnegara dengan lapisan juruh gula merah kelapa, santan gurih, dan bulir pandan hijau segar" class="kuliner-card-img" loading="lazy">
+          <span class="kuliner-card-badge">Penyegar Alami</span>
+          <span class="kuliner-region-tag"><i class="bi bi-geo-alt-fill text-danger"></i> Banjarnegara</span>
+        </div>
+        <div class="kuliner-card-body">
+          <h2 class="kuliner-card-title">Dawet Ayu Banjarnegara</h2>
+          <div class="kuliner-flavor-note">
+            <i class="bi bi-stars"></i> Manis Nira Kelapa Asli, Santan & Harum Pandan
+          </div>
+          <p class="kuliner-card-desc">
+            Minuman ikonik bernuansa punakawan Semar dan Gareng. Bulir dawet dari tepung beras dan air daun suji pandan berpadu juruh gula kelapa nira pohon kelapa lereng Serayu yang wangi dan lembut di tenggorokan.
+          </p>
+          <div class="kuliner-ingredients-preview">
+            <span class="ingredient-chip">Tepung Beras Suji</span>
+            <span class="ingredient-chip">Gula Kelapa Nira</span>
+            <span class="ingredient-chip">Santan Kelapa Asli</span>
+            <span class="ingredient-chip">Nangka Matang</span>
+          </div>
+          <div class="kuliner-card-footer">
+            <span class="text-muted small">Minuman Warisan</span>
+            <button type="button" class="btn-detail-kuliner" aria-label="Lihat filosofi dan detail Dawet Ayu">
+              <span>Telusuri Kisah</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Nasi Liwet Solo -->
+      <article class="kuliner-card" data-category="utama" data-dish-key="nasi-liwet">
+        <div class="kuliner-card-img-wrapper">
+          <img src="assets/images/kuliner-nasi-liwet.jpg" alt="Seporsi Nasi Liwet Solo dalam pincuk daun pisang dengan suwiran ayam kampung, labu siam pedas, dan areh kumut" class="kuliner-card-img" loading="lazy">
+          <span class="kuliner-card-badge">Sajian Kerakyatan</span>
+          <span class="kuliner-region-tag"><i class="bi bi-geo-alt-fill text-danger"></i> Kota Surakarta</span>
+        </div>
+        <div class="kuliner-card-body">
+          <h2 class="kuliner-card-title">Nasi Liwet Solo</h2>
+          <div class="kuliner-flavor-note">
+            <i class="bi bi-stars"></i> Gurih Santan Beras Wangi & Suwiran Ayam
+          </div>
+          <p class="kuliner-card-desc">
+            Sajian hangat beras wangi yang dimasak bersama santan, serai, dan daun salam. Dilengkapi suwiran ayam kampung, sayur labu siam berkuah santan gurih pedas, serta areh kumut gurih beralaskan daun pisang.
+          </p>
+          <div class="kuliner-ingredients-preview">
+            <span class="ingredient-chip">Beras Wangi Pulen</span>
+            <span class="ingredient-chip">Ayam Kampung Suwir</span>
+            <span class="ingredient-chip">Sayur Labu Siam</span>
+            <span class="ingredient-chip">Areh Kumut</span>
+          </div>
+          <div class="kuliner-card-footer">
+            <span class="text-muted small">Makanan Utama Tradisional</span>
+            <button type="button" class="btn-detail-kuliner" aria-label="Lihat filosofi dan detail Nasi Liwet Solo">
+              <span>Telusuri Kisah</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       5. GASTRONOMY MODAL
+       ========================================================================== -->
+  <div class="kuliner-modal-backdrop" id="kuliner-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-kuliner-title">
+    <div class="kuliner-modal-content">
+      <button type="button" class="modal-close-btn" id="kuliner-modal-close" aria-label="Tutup jendela informasi kuliner">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="row g-4">
+        <div class="col-md-5">
+          <img id="modal-kuliner-img" src="assets/images/kuliner-lumpia-semarang.jpg" alt="Foto Makanan" class="img-fluid rounded-3 mb-3 w-100" style="max-height: 260px; object-fit: cover;">
+          <div class="p-3 bg-light rounded-3">
+            <small class="text-uppercase fw-bold text-muted d-block mb-1">Asal Daerah</small>
+            <h5 id="modal-kuliner-region" class="fw-bold mb-0 text-dark">Kota Semarang</h5>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <h2 id="modal-kuliner-title" class="fw-bold mb-2 text-dark" style="font-family: var(--kl-font-serif);">Nama Hidangan</h2>
+          <hr class="my-3">
+          
+          <h6 class="text-uppercase fw-bold text-primary small">Filosofi & Kisah Sejarah</h6>
+          <p id="modal-kuliner-philosophy" class="small text-muted mb-3 leading-relaxed">Penjelasan filosofi hidangan...</p>
+
+          <h6 class="text-uppercase fw-bold text-primary small">Komposisi & Bumbu Utama</h6>
+          <ul id="modal-kuliner-ingredients" class="small text-muted mb-3 ps-3">
+            <li>Bahan utama</li>
+          </ul>
+
+          <h6 class="text-uppercase fw-bold text-primary small">Tata Cara Menikmati</h6>
+          <p id="modal-kuliner-tips" class="small text-muted mb-0">Petunjuk menikmati sajian...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       6. GLOBAL FOOTER (.desktop-footer-karsa)
+       ========================================================================== -->
+  <footer class="desktop-footer-karsa" id="site-footer">
+    <div class="container-fluid">
+      <div class="footer-top-grid">
+
+        <!-- Brand Info -->
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret Logo" class="footer-logo-img">
+          <p class="footer-tagline">
+            Karsa Potret adalah inisiatif digital pelestarian warisan budaya, sejarah peradaban, dan gastronomi luhur Jawa Tengah. Menyajikan dokumentasi interaktif melintas abad bagi generasi penerus bangsa.
+          </p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-nav-col">
+          <div>
+            <h4 class="footer-nav-group-title">Eksplorasi</h4>
+            <ul class="footer-nav-links">
+              <li><a href="index.html" class="footer-nav-link">Beranda</a></li>
+              <li><a href="timeline.html" class="footer-nav-link">Timeline Kronologis</a></li>
+              <li><a href="tokoh.html" class="footer-nav-link">Tokoh Bersejarah</a></li>
+              <li><a href="peta.html" class="footer-nav-link">Peta Atlas Interaktif</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-nav-group-title">Budaya & Rasa</h4>
+            <ul class="footer-nav-links">
+              <li><a href="warisan-budaya.html" class="footer-nav-link">Warisan Budaya 3D</a></li>
+              <li><a href="kuliner.html" class="footer-nav-link">Kuliner Tradisional</a></li>
+              <li><a href="wayang-motion.html" class="footer-nav-link">Wayang Motion AI</a></li>
+              <li><a href="index.html#pengalaman-preview" class="footer-nav-link">Pengalaman Budaya</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-nav-group-title">Tentang</h4>
+            <ul class="footer-nav-links">
+              <li><a href="index.html#about" class="footer-nav-link">Visi & Misi</a></li>
+              <li><a href="index.html#contact" class="footer-nav-link">Hubungi Kami</a></li>
+              <li><a href="peta.html" class="footer-nav-link">35 Kabupaten & Kota</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 Karsa Potret — Jejak Peradaban Jawa Tengah. Hak Cipta Dilindungi.</span>
+        <div class="footer-bottom-links">
+          <a href="index.html" class="footer-bottom-link">Beranda</a>
+          <a href="index.html#about" class="footer-bottom-link">Tentang</a>
+          <a href="index.html#contact" class="footer-bottom-link">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Controller -->
+  <script src="js/kuliner.js"></script>
+  <script src="js/nav.js"></script>
+</body>
+</html>

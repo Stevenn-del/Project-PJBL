@@ -89,7 +89,20 @@ html, body {
 }
 
 body {
-  min-width: 1200px; /* Desktop only as required by specifications */
+  min-width: 320px;
+}
+
+/* Single-Screen Viewport-Focused Experience */
+body.page-home-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: hidden;
+}
+
+@media (max-height: 580px) {
+  body.page-home-viewport {
+    overflow-y: auto;
+  }
 }
 
 /* Focus outline accessibility */
@@ -107,7 +120,11 @@ button:focus-visible {
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 740px;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -179,29 +196,108 @@ button:focus-visible {
       rgba(11, 13, 16, 0.20) 100%);
 }
 
-/* ==========================================================================
-   DESKTOP NAVBAR
-   ========================================================================== */
+/* ==============================================================================
+   SHARED CINEMATIC BACKDROP (ALL NON-HOME FEATURE PAGES)
+   Layer 1: Shared Home Background Image (slide-1-prambanan.webp)
+   Layer 2: Blur (10-12px) & Darkening
+   Layer 3: Translucent Burgundy / Red Overlay (60-75% opacity)
+   ============================================================================== */
+.cinematic-backdrop-fixed {
+  position: fixed;
+  inset: -24px;
+  width: calc(100% + 48px);
+  height: calc(100% + 48px);
+  z-index: -999;
+  pointer-events: none;
+  overflow: hidden;
+}
 
-.desktop-header {
-  position: relative;
-  z-index: 10;
+.cinematic-backdrop-img {
+  position: absolute;
+  inset: -20px;
+  background-image: url('../assets/images/slide-1-prambanan.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: blur(12px) brightness(0.5);
+  transform: scale(1.06);
+  will-change: transform, filter;
+}
+
+.cinematic-backdrop-scrim {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 50% 35%, rgba(77, 18, 25, 0.70) 0%, rgba(35, 8, 12, 0.86) 100%),
+    linear-gradient(180deg, rgba(52, 12, 16, 0.65) 0%, rgba(20, 5, 8, 0.90) 100%);
+}
+
+/* ==============================================================================
+   UNIFIED GLOBAL NAVBAR (REFERENCE 1 SPECIFICATION)
+   - Deep burgundy / dark maroon background (#2D0B0E / #340C10)
+   - Left: Karsakala brand logo
+   - Center: Rounded pill container with navigation links
+   - Active: Antique gold highlight with golden bottom glow
+   - Right: Rounded pill Wayang Motion button
+   ============================================================================== */
+.desktop-header-global,
+.desktop-header,
+.desktop-header-timeline,
+.desktop-header-tokoh,
+.desktop-header-karsa,
+.desktop-header-warisan,
+.desktop-header-kuliner,
+.desktop-header-motion {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   width: 100%;
-  padding-top: 26px;
-  padding-bottom: 20px;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 14px 0;
+  transition: all var(--kp-transition-fast);
 }
 
-.desktop-header .container-fluid {
-  max-width: 1820px;
-  padding-left: 64px;
-  padding-right: 64px;
+.page-home-viewport .desktop-header-global,
+.page-home-viewport .desktop-header {
+  position: relative;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
-.navbar-inner {
+.desktop-header-global .container-fluid,
+.desktop-header .container-fluid,
+.desktop-header-timeline .container-fluid,
+.desktop-header-tokoh .container-fluid,
+.desktop-header-karsa .container-fluid,
+.desktop-header-warisan .container-fluid,
+.desktop-header-kuliner .container-fluid,
+.desktop-header-motion .container-fluid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.navbar-inner-global,
+.navbar-inner,
+.navbar-inner-timeline,
+.navbar-inner-tokoh,
+.navbar-inner-warisan,
+.navbar-inner-kuliner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 20px;
 }
 
 /* Left: Logo */
@@ -218,19 +314,16 @@ button:focus-visible {
 
 .brand-link:hover {
   transform: scale(1.03);
-  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.35));
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
 .brand-logo-img {
-  height: 62px;
+  height: 44px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.6));
-  border-radius: 9999px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
-/* Center: Navigation Links */
+/* Center: Rounded Capsule Navigation Container (Ref 1) */
 .nav-center-wrapper {
   flex: 1 1 auto;
   display: flex;
@@ -238,101 +331,131 @@ button:focus-visible {
 }
 
 .nav-links-list {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 36px;
+  gap: 4px;
   list-style: none;
   margin: 0;
-  padding: 8px 24px;
-  background: rgba(18, 21, 27, 0.65);
-  border: 1px solid rgba(212, 175, 55, 0.18);
+  padding: 4px 8px;
+  background: rgba(26, 6, 9, 0.65);
+  border: 1px solid rgba(214, 174, 124, 0.28);
   border-radius: var(--kp-radius-pill);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav-links-list li {
+  margin: 0;
 }
 
 .nav-item-link {
-  color: #D9D2C5;
+  display: inline-block;
+  padding: 7px 18px;
   font-family: var(--kp-font-sans);
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  color: #FAF6ED;
   text-decoration: none;
-  padding: 6px 4px;
+  border-radius: var(--kp-radius-pill);
+  transition: all var(--kp-transition-fast);
+  white-space: nowrap;
   position: relative;
-  transition: color var(--kp-transition-fast);
 }
 
 .nav-item-link:hover {
-  color: var(--kp-cream-selo);
+  color: #FFFFFF;
+  background: rgba(180, 111, 57, 0.25);
 }
 
+/* Active Highlight with Antique Gold & Bottom Glow (Ref 1) */
+.nav-links-list .nav-item-link.active,
 .nav-item-link.active {
-  color: var(--kp-gold-kencana);
-  font-weight: 600;
+  color: #E5C378;
+  font-weight: 700;
+  background: rgba(212, 175, 55, 0.12);
+  text-shadow: 0 0 12px rgba(229, 195, 120, 0.6);
 }
 
+.nav-links-list .nav-item-link.active::after,
 .nav-item-link.active::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
+  bottom: 2px;
+  left: 16px;
+  right: 16px;
   height: 2px;
-  background: linear-gradient(90deg, #C5A059 0%, #D4AF37 50%, #C5A059 100%);
+  background: linear-gradient(90deg, transparent, #E5C378, transparent);
+  box-shadow: 0 0 8px rgba(229, 195, 120, 0.85);
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
 }
 
-/* Right: Photobooth Button */
+/* Right: Wayang Motion Button */
 .nav-right-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex: 0 0 auto;
 }
 
+.btn-wayang-pill,
 .btn-photobooth,
-.btn-wayang-motion {
+.btn-wayang-motion,
+.btn-wayang-action {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  background: linear-gradient(135deg, #FAF6ED 0%, #EDE4D3 100%);
-  color: #161311;
+  gap: 8px;
+  padding: 8px 20px;
+  background: #B46F39;
+  color: #FFFFFF !important;
   font-family: var(--kp-font-sans);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  padding: 10px 24px;
-  border-radius: var(--kp-radius-pill);
   text-decoration: none;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  box-shadow: var(--kp-shadow-button);
-  transition: transform var(--kp-transition-fast), 
-              box-shadow var(--kp-transition-fast), 
-              background var(--kp-transition-fast);
+  border-radius: var(--kp-radius-pill);
+  border: 1px solid rgba(240, 217, 167, 0.35);
+  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
+  transition: all var(--kp-transition-fast);
+  white-space: nowrap;
 }
 
-.btn-photobooth i,
-.btn-wayang-motion i {
-  font-size: 16px;
-  line-height: 1;
-  color: #8F702E;
-}
-
+.btn-wayang-pill:hover,
 .btn-photobooth:hover,
-.btn-wayang-motion:hover {
-  background: #FFFFFF;
-  color: #161311;
-  transform: translateY(-2px);
-  box-shadow: var(--kp-shadow-button-hover);
+.btn-wayang-motion:hover,
+.btn-wayang-action:hover {
+  background: #9E5B28;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.5);
 }
 
-.btn-photobooth:active,
-.btn-photobooth.active,
-.btn-wayang-motion:active,
-.btn-wayang-motion.active {
-  transform: translateY(0);
-  background: #EAE2D2;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+.btn-wayang-pill i,
+.btn-photobooth i,
+.btn-wayang-motion i,
+.btn-wayang-action i {
+  color: #F0D9A7;
+  font-size: 15px;
 }
+
+/* Mobile Toggle */
+.mobile-nav-toggle {
+  display: none;
+  background: rgba(35, 8, 12, 0.8);
+  border: 1px solid rgba(214, 174, 124, 0.35);
+  color: #FAF6ED;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-toggle:hover {
+  background: rgba(180, 111, 57, 0.35);
+  color: #FFFFFF;
+}
+
 
 /* ==========================================================================
    HERO MAIN CONTENT
@@ -745,5 +868,204 @@ button:focus-visible {
 
 .footer-bottom-link:hover {
   color: var(--kp-gold-imperial, #D4AF37);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .desktop-header-global .container-fluid,
+  .desktop-header .container-fluid,
+  .desktop-header-timeline .container-fluid,
+  .desktop-header-tokoh .container-fluid,
+  .desktop-header-karsa .container-fluid,
+  .desktop-header-warisan .container-fluid,
+  .desktop-header-kuliner .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 10, 14, 0.85);
+    border: 1px solid rgba(214, 174, 124, 0.4);
+    color: #FAF6ED;
+    font-size: 22px;
+    padding: 6px 12px;
+    border-radius: var(--kp-radius-sm);
+    cursor: pointer;
+  }
+
+  .nav-center-wrapper {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    background: rgba(35, 8, 12, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(214, 174, 124, 0.3);
+    padding: 24px;
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+  }
+
+  .nav-center-wrapper.show {
+    display: flex;
+  }
+
+  .nav-links-list {
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(20, 5, 8, 0.7);
+    border: 1px solid rgba(214, 174, 124, 0.2);
+    box-shadow: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .nav-item-link {
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    padding: 10px 14px;
+    width: 100%;
+  }
+
+  .hero-main .container-fluid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero-heading {
+    font-size: 46px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-heading {
+    font-size: 34px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .btn-explore {
+    padding: 11px 26px;
+    font-size: 15px;
+  }
+
+  .btn-wayang-motion span {
+    display: none;
+  }
+
+  .btn-wayang-motion {
+    padding: 8px 14px;
+  }
+}
+
+/* ==============================================================================
+   SHARED FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
+   Architecture: Eyebrow Badge -> Clear Title -> Descriptive Lead -> Subtle Rule
+   Warm Cream, Terracotta, Brown, and Antique-Gold Palette
+   ============================================================================== */
+:root {
+  --color-deep-brown: #611F0A;
+  --color-warm-brown: #8D4B1F;
+  --color-terracotta: #B46F39;
+  --color-sand: #D6AE7C;
+  --color-cream: #F0D9A7;
+}
+
+.page-intro {
+  text-align: center;
+  padding: 32px 20px 22px;
+  max-width: 920px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.page-intro .provenance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px;
+  border-radius: var(--kp-radius-pill, 9999px);
+  background: rgba(141, 75, 31, 0.45);
+  border: 1px solid var(--color-sand, #D6AE7C);
+  color: var(--color-cream, #F0D9A7);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.page-intro .provenance-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-sand, #D6AE7C);
+  box-shadow: 0 0 8px rgba(214, 174, 124, 0.8);
+}
+
+.page-intro .page-hero-title,
+.page-intro h1 {
+  font-family: var(--kp-font-serif, 'Playfair Display', serif);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--color-cream, #F0D9A7);
+  margin: 0 0 12px;
+}
+
+.page-intro .page-hero-title span,
+.page-intro h1 span {
+  color: var(--color-sand, #D6AE7C);
+  font-style: italic;
+}
+
+.page-intro .page-hero-lead,
+.page-intro p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: rgba(240, 217, 167, 0.88);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page-intro .intro-rule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.page-intro .intro-rule span:nth-child(1),
+.page-intro .intro-rule span:nth-child(3) {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-sand, #D6AE7C);
+}
+
+.page-intro .intro-rule span:nth-child(2) {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-sand, #D6AE7C), transparent);
 }
 

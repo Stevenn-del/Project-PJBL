@@ -11,11 +11,8 @@
    PAGE WRAPPER & INTRO HERO
    ========================================================================== */
 body.peta-page {
-  background-color: var(--color-deep-brown);
-  background-image: 
-    radial-gradient(circle at 10% 15%, rgba(214, 174, 124, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 90% 85%, rgba(180, 111, 57, 0.1) 0%, transparent 45%),
-    linear-gradient(180deg, #611F0A 0%, #4D1807 50%, #611F0A 100%);
+  background-color: transparent;
+  background-image: none;
   color: var(--color-cream);
   min-height: 100vh;
   display: flex;

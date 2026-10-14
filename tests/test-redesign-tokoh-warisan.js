@@ -229,7 +229,7 @@ async function runTestSuite() {
     for (const pageName of ['tokoh', 'warisan-budaya']) {
       for (const vp of viewports) {
         const vpPage = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
-        await vpPage.goto(`http://127.0.0.1:${PORT}/${pageName}.html`);
+        await vpPage.goto(`http://127.0.0.1:${PORT}/${pageName}.html`, { waitUntil: 'domcontentloaded' });
         await vpPage.waitForTimeout(400);
 
         const outPath = path.join(SCREENSHOT_DIR, `${pageName}_${vp.name}.png`);
