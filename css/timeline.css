@@ -1,19 +1,20 @@
 /* ==========================================================================
-   KARSA POTRET — REFERENCE-INSPIRED 3D TIMELINE STAGE
-   Visual Style faithfully recreated from the supplied 3D Cover Flow reference
-   while adhering strictly to Karsakala's cultural design identity:
-     - Warm ivory/cream, deep brown, terracotta, sand, antique gold
-     - Playfair Display historical titles, Plus Jakarta Sans UI
-     - 3D perspective slab rack with realistic book/vinyl spines
-     - Mirrored floor reflection and studio ambient lighting
-     - Segmented pill mode switcher, quick search, floating action button,
-       and floating bottom controller dock
+   KARSA POTRET — 3D HISTORICAL GALLERY EXHIBITION (TIMELINE PAGE)
+   Directly adapted from the 3D vertical panel perspective reference:
+     - Symmetrical 3D perspective gallery with tall vertical panels
+     - Left panels face rightward exposing left spines and artwork
+     - Right panels face leftward exposing right spines and artwork
+     - Prominent active center panel with rich depth, focus, and lighting
+     - Mirror floor reflection and studio ambient spotlight
+     - Chronological milestone stepper rail, curatorial dock & chronicle modal
+     - Colors: Warm ivory/cream, deep mahogany, terracotta, antique gold
+     - Typography: Playfair Display titles & Plus Jakarta Sans UI
    ========================================================================== */
 
 @import url('./redesign-palette.css');
 
 /* ==========================================================================
-   1. PAGE BASE & BODY (TRANSPARENT FOR CINEMATIC BACKDROP)
+   1. PAGE BASE & BODY (TRANSPARENT FOR SHARED CINEMATIC BACKDROP)
    ========================================================================== */
 html:has(body.timeline-body) {
   height: auto !important;
@@ -162,7 +163,7 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   3. SHORT INTRODUCTION HEADER (MATCHING PETA PAGE STYLE)
+   3. SHORT FEATURE INTRODUCTION (MATCHING PETA PAGE STYLE)
    ========================================================================== */
 .page-intro {
   text-align: center;
@@ -248,7 +249,7 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   4. REFERENCE-INSPIRED 3D TIMELINE STAGE CONTAINER
+   4. 3D HISTORICAL GALLERY STAGE CONTAINER
    ========================================================================== */
 .timeline-reference-stage {
   position: relative;
@@ -265,11 +266,11 @@ body.timeline-body {
 
 .stage-content-card {
   position: relative;
-  background: radial-gradient(ellipse at 50% 30%, rgba(46, 26, 16, 0.75) 0%, rgba(16, 10, 7, 0.96) 80%);
+  background: radial-gradient(ellipse at 50% 30%, rgba(46, 26, 16, 0.78) 0%, rgba(16, 10, 7, 0.96) 80%);
   border: 1px solid rgba(214, 174, 124, 0.28);
   border-radius: 24px;
   box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.7),
+    0 24px 60px rgba(0, 0, 0, 0.72),
     inset 0 1px 0 rgba(240, 217, 167, 0.2);
   overflow: hidden;
   backdrop-filter: blur(18px);
@@ -278,7 +279,7 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   5. STAGE TOP BAR (SEGMENTED SWITCH, STATUS & SEARCH)
+   5. STAGE TOP BAR (CHRONOLOGICAL MILESTONE RAIL & SEARCH)
    ========================================================================== */
 .stage-top-bar {
   position: relative;
@@ -288,7 +289,7 @@ body.timeline-body {
   gap: 16px;
   padding-bottom: 14px;
   border-bottom: 1px solid rgba(214, 174, 124, 0.15);
-  z-index: 20;
+  z-index: 25;
 }
 
 .stage-status-meta {
@@ -298,7 +299,8 @@ body.timeline-body {
   font-size: 13px;
   font-weight: 600;
   color: var(--color-cream);
-  min-width: 180px;
+  min-width: 190px;
+  flex-shrink: 0;
 }
 
 .status-period-tag {
@@ -309,48 +311,78 @@ body.timeline-body {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: #FFFFFF;
 }
 
 .status-period-label {
   color: rgba(250, 246, 237, 0.75);
   font-weight: 500;
   font-size: 12.5px;
+  white-space: nowrap;
 }
 
-/* Segmented Pill Switcher (Matches [Albums | Playlists] in Reference) */
-.stage-segmented-switch {
+/* Chronological Milestone Stepper */
+.stage-milestone-stepper {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   background: rgba(14, 9, 6, 0.88);
-  border: 1px solid rgba(214, 174, 124, 0.32);
+  border: 1px solid rgba(214, 174, 124, 0.3);
   border-radius: var(--kp-radius-pill);
-  padding: 3px;
+  padding: 3px 6px;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  overflow-x: auto;
+  max-width: 820px;
+  scrollbar-width: none;
 }
 
-.segment-btn {
+.stage-milestone-stepper::-webkit-scrollbar {
+  display: none;
+}
+
+.milestone-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
   border: none;
-  color: rgba(250, 246, 237, 0.72);
-  font-size: 13px;
+  color: rgba(250, 246, 237, 0.68);
+  font-size: 12px;
   font-weight: 600;
   font-family: var(--kp-font-sans);
-  padding: 6px 20px;
+  padding: 5px 12px;
   border-radius: var(--kp-radius-pill);
   cursor: pointer;
   transition: all var(--kp-transition-fast);
+  white-space: nowrap;
   outline: none;
 }
 
-.segment-btn:hover {
+.milestone-pill-btn:hover {
   color: #FFFFFF;
+  background: rgba(240, 217, 167, 0.1);
 }
 
-.segment-btn.active {
+.milestone-pill-btn.active {
   background: #0E0A08;
   color: #FFFFFF;
-  border: 1px solid rgba(240, 217, 167, 0.45);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(240, 217, 167, 0.5);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.pill-number {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-sand);
+  background: rgba(180, 111, 57, 0.25);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.milestone-pill-btn.active .pill-number {
+  background: var(--color-terracotta);
+  color: #FFFFFF;
 }
 
 /* Stage Search & Quick Jump */
@@ -361,6 +393,7 @@ body.timeline-body {
   position: relative;
   min-width: 180px;
   justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 .stage-search-toggle {
@@ -438,14 +471,14 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   6. 3D COVER FLOW STAGE VIEWPORT
+   6. 3D PERSPECTIVE GALLERY VIEWPORT & STAGE LIGHTING
    ========================================================================== */
 .coverflow-stage-viewport {
   position: relative;
   width: 100%;
-  height: 440px;
-  perspective: 1200px;
-  perspective-origin: 50% 48%;
+  height: 480px;
+  perspective: 1300px;
+  perspective-origin: 50% 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -454,7 +487,7 @@ body.timeline-body {
   user-select: none;
   -webkit-user-select: none;
   touch-action: pan-y;
-  margin: 6px 0 16px;
+  margin: 4px 0 16px;
 }
 
 .coverflow-stage-viewport:active {
@@ -466,20 +499,59 @@ body.timeline-body {
   outline-offset: -2px;
 }
 
-/* Ambient Studio Lighting (Reference Atmosphere) */
+/* Ambient Exhibition Spotlight Glow */
 .stage-ambient-glow {
   position: absolute;
-  top: 20%;
+  top: 25%;
   left: 50%;
-  transform: translate(-50%, -20%);
-  width: 800px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(180, 111, 57, 0.16) 0%, rgba(97, 31, 10, 0.06) 50%, transparent 75%);
+  transform: translate(-50%, -25%);
+  width: 860px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(180, 111, 57, 0.18) 0%, rgba(97, 31, 10, 0.08) 50%, transparent 75%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* 3D Track */
+/* Floating Lateral Stage Navigation Arrows */
+.gallery-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(28, 18, 12, 0.85);
+  border: 1px solid rgba(214, 174, 124, 0.4);
+  color: #FAF6ED;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all var(--kp-transition-fast);
+  z-index: 110;
+}
+
+.gallery-nav-arrow.arrow-prev {
+  left: 18px;
+}
+
+.gallery-nav-arrow.arrow-next {
+  right: 18px;
+}
+
+.gallery-nav-arrow:hover {
+  background: var(--color-terracotta);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 28px rgba(180, 111, 57, 0.55);
+}
+
+/* 3D Perspective Track */
 .coverflow-track {
   position: relative;
   width: 100%;
@@ -489,17 +561,16 @@ body.timeline-body {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: transform 0.55s cubic-bezier(0.18, 0.9, 0.28, 1);
 }
 
 /* ==========================================================================
-   7. 3D SLABS (VINYL / ART BOOK RACK — FAITHFUL TO REFERENCE)
-   Every slab features a prominent left spine with vertical text & front cover
+   7. 3D VERTICAL PANELS (FAITHFUL TO REFERENCE WITH LEFT/RIGHT SPINES)
    ========================================================================== */
 .timeline-slab {
   position: absolute;
   width: 250px;
-  height: 340px;
+  height: 380px;
   transform-style: preserve-3d;
   cursor: pointer;
   transition: 
@@ -507,8 +578,8 @@ body.timeline-body {
     filter 0.4s ease,
     opacity 0.4s ease;
   will-change: transform, filter, opacity;
-  /* Hardware Accelerated Floor Reflection */
-  -webkit-box-reflect: below 2px linear-gradient(to bottom, transparent 62%, rgba(0, 0, 0, 0.32) 100%);
+  /* Dark Showroom Floor Reflection (hardware-accelerated) */
+  -webkit-box-reflect: below 2px linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
 }
 
 .slab-3d-box {
@@ -520,31 +591,59 @@ body.timeline-body {
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 
-    0 16px 36px rgba(0, 0, 0, 0.75),
+    0 18px 40px rgba(0, 0, 0, 0.75),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(240, 217, 167, 0.35);
+  border: 1px solid rgba(214, 174, 124, 0.35);
   background: #180F0A;
 }
 
-/* --- Left Spine Strip (Matches Reference Album Spines!) --- */
+/* --- Left & Right Spine Strips (Vertical Title Strips) --- */
 .slab-spine {
   width: 26px;
   height: 100%;
   flex-shrink: 0;
   background: var(--spine-bg, linear-gradient(to bottom, #30170B 0%, #1A0D07 50%, #2A140A 100%));
-  border-right: 1px solid rgba(214, 174, 124, 0.45);
   box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.7);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   z-index: 5;
 }
 
+.slab-spine.spine-left {
+  border-right: 1px solid rgba(214, 174, 124, 0.45);
+}
+
+.slab-spine.spine-right {
+  border-left: 1px solid rgba(214, 174, 124, 0.45);
+}
+
+/* Visibility Rules:
+   - On left cards (.is-left): show left spine, hide right spine
+   - On right cards (.is-right): show right spine, hide left spine
+   - On active center card (.is-active): hide spines to show full cover face */
+.timeline-slab.is-left .slab-spine.spine-left {
+  display: flex;
+}
+.timeline-slab.is-left .slab-spine.spine-right {
+  display: none;
+}
+
+.timeline-slab.is-right .slab-spine.spine-right {
+  display: flex;
+}
+.timeline-slab.is-right .slab-spine.spine-left {
+  display: none;
+}
+
+.timeline-slab.is-active .slab-spine {
+  display: none;
+}
+
 .spine-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  transform: rotate(180deg);
   white-space: nowrap;
   font-family: var(--kp-font-sans);
   font-size: 10.5px;
@@ -552,8 +651,12 @@ body.timeline-body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--spine-color, #F0D9A7);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
   padding: 10px 0;
+}
+
+.timeline-slab.is-left .spine-text {
+  transform: rotate(180deg);
 }
 
 /* --- Front Cover Face --- */
@@ -579,50 +682,76 @@ body.timeline-body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px 14px 12px;
-  background: linear-gradient(to top, rgba(14, 9, 6, 0.96) 0%, rgba(14, 9, 6, 0.7) 60%, transparent 100%);
+  padding: 24px 14px 14px;
+  background: linear-gradient(to top, rgba(14, 9, 6, 0.98) 0%, rgba(14, 9, 6, 0.72) 65%, transparent 100%);
   color: #FAF6ED;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  transition: padding var(--kp-transition-smooth);
+}
+
+/* Active card has extra bottom reserve padding for floating action button */
+.timeline-slab.is-active .slab-cover-overlay {
+  padding: 30px 18px 58px;
 }
 
 .slab-tag {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-sand);
 }
 
 .slab-title {
   font-family: var(--kp-font-serif);
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.22;
   color: #FFFFFF;
   margin: 0;
 }
 
+.timeline-slab.is-active .slab-title {
+  font-size: 17.5px;
+}
+
 .slab-subtitle {
   font-size: 11px;
-  color: rgba(240, 217, 167, 0.85);
+  color: rgba(240, 217, 167, 0.88);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Glare & Edge Highlights */
+/* Brief description only on active card for clean editorial breathing room */
+.slab-desc-brief {
+  font-size: 11.5px;
+  line-height: 1.42;
+  color: rgba(250, 246, 237, 0.85);
+  margin: 4px 0 0;
+  display: none;
+}
+
+.timeline-slab.is-active .slab-desc-brief {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Glare & Bevel Highlights */
 .slab-bevel-glare {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, transparent 40%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 45%);
   pointer-events: none;
   border-radius: 5px;
 }
 
-/* 3D Top and Right Realism Edges */
+/* 3D Top Depth Edge */
 .slab-top-edge {
   position: absolute;
   top: 0;
@@ -635,33 +764,21 @@ body.timeline-body {
   border: 1px solid rgba(214, 174, 124, 0.3);
 }
 
-.slab-right-edge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 22px;
-  height: 100%;
-  transform-origin: 100% 0;
-  transform: translateZ(11px) rotateY(90deg);
-  background: #200E06;
-  border: 1px solid rgba(214, 174, 124, 0.25);
-}
-
 /* Active & Hover States */
 .timeline-slab.is-active {
-  filter: brightness(1.08) drop-shadow(0 20px 40px rgba(180, 111, 57, 0.5));
+  filter: brightness(1.08) drop-shadow(0 22px 48px rgba(180, 111, 57, 0.55));
 }
 
-.timeline-slab.is-active .slab-front {
-  border-color: var(--color-cream);
+.timeline-slab.is-active .slab-3d-box {
+  border-color: rgba(240, 217, 167, 0.75);
   box-shadow: 
-    0 24px 50px rgba(0, 0, 0, 0.78),
-    0 0 28px rgba(180, 111, 57, 0.4),
+    0 26px 60px rgba(0, 0, 0, 0.82),
+    0 0 32px rgba(180, 111, 57, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .timeline-slab:hover:not(.is-active) {
-  filter: brightness(1.12);
+  filter: brightness(1.14);
 }
 
 /* Ground Floor Reflection Gradient Overlay */
@@ -670,18 +787,18 @@ body.timeline-body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(to bottom, rgba(16, 10, 7, 0) 0%, rgba(16, 10, 7, 0.65) 60%, rgba(16, 10, 7, 0.98) 100%);
+  height: 95px;
+  background: linear-gradient(to bottom, rgba(16, 10, 7, 0) 0%, rgba(16, 10, 7, 0.7) 60%, rgba(16, 10, 7, 0.98) 100%);
   pointer-events: none;
   z-index: 10;
 }
 
 /* ==========================================================================
-   8. FLOATING CENTER ACTION PILL (MATCHES "✨ Get Full Access" IN REFERENCE)
+   8. FLOATING CENTER ACTION PILL BUTTON
    ========================================================================== */
 .stage-center-action-wrapper {
   position: absolute;
-  bottom: 16px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 18;
@@ -691,18 +808,18 @@ body.timeline-body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(28, 17, 11, 0.9);
-  border: 1px solid rgba(240, 217, 167, 0.5);
+  background: rgba(28, 17, 11, 0.92);
+  border: 1px solid rgba(240, 217, 167, 0.55);
   border-radius: var(--kp-radius-pill);
   color: #FFFFFF;
   font-family: var(--kp-font-sans);
   font-size: 13px;
   font-weight: 600;
-  padding: 7px 20px;
+  padding: 8px 22px;
   cursor: pointer;
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.5),
-    0 0 16px rgba(180, 111, 57, 0.35);
+    0 8px 20px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(180, 111, 57, 0.38);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: all var(--kp-transition-fast);
@@ -715,7 +832,7 @@ body.timeline-body {
   transform: scale(1.05);
   box-shadow: 
     0 10px 24px rgba(0, 0, 0, 0.6),
-    0 0 22px rgba(180, 111, 57, 0.6);
+    0 0 24px rgba(180, 111, 57, 0.6);
 }
 
 .sparkle-glyph {
@@ -724,7 +841,7 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   9. FLOATING BOTTOM CONTROLLER DOCK (MATCHES PLAYER DOCK IN REFERENCE)
+   9. MUSEUM CURATORIAL CONTROLLER DOCK
    ========================================================================== */
 .stage-bottom-dock {
   position: relative;
@@ -732,16 +849,16 @@ body.timeline-body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: rgba(22, 14, 9, 0.92);
+  background: rgba(22, 14, 9, 0.94);
   border: 1px solid rgba(214, 174, 124, 0.35);
   border-radius: var(--kp-radius-pill);
   padding: 8px 18px 8px 12px;
   box-shadow: 
-    0 14px 34px rgba(0, 0, 0, 0.65),
+    0 14px 34px rgba(0, 0, 0, 0.68),
     inset 0 1px 0 rgba(240, 217, 167, 0.22);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  z-index: 20;
+  z-index: 25;
 }
 
 /* Left Metadata Lockup */
@@ -798,7 +915,7 @@ body.timeline-body {
 .dock-controls-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .dock-btn {
@@ -822,29 +939,59 @@ body.timeline-body {
   color: #FFFFFF;
 }
 
-.dock-btn-play {
+/* Progress Dot Matrix */
+.dock-progress-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+}
+
+.dock-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(240, 217, 167, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--kp-transition-fast);
+}
+
+.dock-dot:hover {
+  background: rgba(240, 217, 167, 0.7);
+  transform: scale(1.2);
+}
+
+.dock-dot.active {
+  width: 18px;
+  border-radius: var(--kp-radius-pill);
+  background: var(--color-terracotta);
+  box-shadow: 0 0 10px rgba(180, 111, 57, 0.6);
+}
+
+.dock-btn-tour {
+  background: rgba(48, 28, 18, 0.85);
+  border: 1px solid rgba(214, 174, 124, 0.4);
+  color: var(--color-cream);
+  font-size: 16px;
+}
+
+.dock-btn-tour:hover {
   background: var(--color-terracotta);
   color: #FFFFFF;
-  width: 40px;
-  height: 40px;
-  font-size: 19px;
-  border: 1px solid rgba(240, 217, 167, 0.4);
-  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.45);
-}
-
-.dock-btn-play:hover {
-  background: #C57E45;
+  border-color: #FFFFFF;
   transform: scale(1.06);
-  box-shadow: 0 6px 18px rgba(180, 111, 57, 0.6);
 }
 
-.dock-btn-play.is-playing {
+.dock-btn-tour.is-playing {
   background: #611F0A;
   border-color: var(--color-sand);
-  animation: pulsePlayGlow 2s infinite ease-in-out;
+  color: #FFFFFF;
+  animation: pulseTourGlow 2s infinite ease-in-out;
 }
 
-@keyframes pulsePlayGlow {
+@keyframes pulseTourGlow {
   0%, 100% { box-shadow: 0 0 12px rgba(180, 111, 57, 0.4); }
   50% { box-shadow: 0 0 24px rgba(240, 217, 167, 0.8); }
 }
@@ -863,7 +1010,7 @@ body.timeline-body {
   align-items: center;
   gap: 5px;
   font-size: 11.5px;
-  color: rgba(240, 217, 167, 0.6);
+  color: rgba(240, 217, 167, 0.65);
 }
 
 .kbd-key {
@@ -879,7 +1026,12 @@ body.timeline-body {
 .dock-btn-overview {
   background: rgba(36, 22, 14, 0.7);
   border: 1px solid rgba(214, 174, 124, 0.3);
-  font-size: 15px;
+  border-radius: var(--kp-radius-pill);
+  width: auto;
+  height: 34px;
+  padding: 0 12px;
+  display: inline-flex;
+  font-size: 14px;
 }
 
 .dock-btn-overview:hover {
@@ -1329,15 +1481,21 @@ body.timeline-body {
 }
 
 /* ==========================================================================
-   13. RESPONSIVE OPTIMIZATIONS
+   13. RESPONSIVE DESIGN & MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 1199px) {
   .coverflow-stage-viewport {
-    height: 410px;
+    height: 430px;
   }
   .timeline-slab {
     width: 220px;
-    height: 300px;
+    height: 340px;
+  }
+  .slab-title {
+    font-size: 15px;
+  }
+  .stage-milestone-stepper {
+    max-width: 480px;
   }
 }
 
@@ -1356,21 +1514,27 @@ body.timeline-body {
     min-width: auto;
     font-size: 11.5px;
   }
-  .stage-segmented-switch {
+  .stage-milestone-stepper {
     order: 1;
     width: 100%;
-    justify-content: center;
+    max-width: 100%;
+    justify-content: flex-start;
   }
   .stage-top-actions {
     order: 3;
     min-width: auto;
   }
   .coverflow-stage-viewport {
-    height: 380px;
+    height: 390px;
   }
   .timeline-slab {
     width: 200px;
-    height: 275px;
+    height: 310px;
+  }
+  .gallery-nav-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
   }
   .stage-bottom-dock {
     flex-direction: column;
@@ -1397,25 +1561,34 @@ body.timeline-body {
 
 @media (max-width: 576px) {
   .coverflow-stage-viewport {
-    height: 350px;
+    height: 360px;
   }
   .timeline-slab {
     width: 175px;
-    height: 240px;
+    height: 275px;
   }
   .slab-spine {
-    width: 18px;
+    width: 20px;
   }
   .spine-text {
     font-size: 9px;
     letter-spacing: 0.1em;
   }
   .slab-title {
-    font-size: 14.5px;
+    font-size: 14px;
+  }
+  .slab-desc-brief {
+    display: none;
   }
   .btn-stage-access {
     font-size: 11.5px;
     padding: 6px 14px;
+  }
+  .gallery-nav-arrow.arrow-prev {
+    left: 8px;
+  }
+  .gallery-nav-arrow.arrow-next {
+    right: 8px;
   }
   .stage-bottom-dock {
     padding: 8px 10px;
@@ -1438,5 +1611,22 @@ body.timeline-body {
     flex-direction: column;
     gap: 10px;
     text-align: center;
+  }
+}
+
+/* ==========================================================================
+   14. REDUCED MOTION PREFERENCES
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-slab,
+  .coverflow-track,
+  .stage-content-card,
+  .modal-backdrop-editorial,
+  .timeline-overview-drawer {
+    transition: none !important;
+    animation: none !important;
+  }
+  .dock-btn-tour.is-playing {
+    animation: none !important;
   }
 }

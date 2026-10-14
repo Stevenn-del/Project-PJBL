@@ -23,7 +23,7 @@
   <!-- Redesign 5-Color System Stylesheet -->
   <link rel="stylesheet" href="css/redesign-palette.css">
   
-  <!-- Timeline Page Dedicated Stylesheet (Reference-Inspired Redesign) -->
+  <!-- Timeline Page Dedicated Stylesheet (3D Historical Gallery Exhibition) -->
   <link rel="stylesheet" href="css/timeline.css">
 </head>
 <body class="timeline-body">
@@ -85,17 +85,18 @@
       <span>Kronik Sejarah Kebudayaan · Jawa Dwipa Melintas Abad</span>
     </div>
     <h1 class="page-hero-title">Jejak Sejarah <span>Jawa Tengah</span></h1>
-    <p class="page-hero-lead">Telusuri lintasan peradaban tanah Jawa dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia dalam galeri kronologis interaktif.</p>
+    <p class="page-hero-lead">Telusuri lintasan peradaban tanah Jawa dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia dalam galeri 3D interaktif.</p>
     <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
   </section>
 
   <!-- ==========================================================================
-       MAIN FEATURE: REFERENCE-INSPIRED 3D TIMELINE STAGE
-       Faithful to the supplied reference image composition:
-         - Top Segmented Switcher & Search
-         - 3D Cover Flow with authentic book/vinyl spines and reflections
-         - Floating center action pill button ("✦ Telusuri Jejak Sejarah")
-         - Floating bottom controller dock (thumbnail, title, controls, overview)
+       MAIN FEATURE: CINEMATIC 3D HISTORICAL GALLERY EXHIBITION
+       Faithful to the supplied 3D vertical panel perspective reference:
+         - Tall vertical panels arranged in perspective depth across the stage
+         - Symmetric inward angles exposing side spines and artwork faces
+         - Stepped forward active panel as the primary visual focus
+         - Polished dark showroom floor reflection
+         - Refined cultural timeline rail & museum curatorial controller
        ========================================================================== -->
   <main class="timeline-reference-stage" id="chapter-stage" aria-label="Galeri 3D Garis Waktu Sejarah Jawa Tengah">
     <div class="container-fluid stage-outer-container">
@@ -103,27 +104,22 @@
       <!-- Stage Inner Box / Card (Preserving #stage-content-card for tests) -->
       <div class="stage-content-card" id="stage-content-card">
 
-        <!-- 1. Top Bar: Status Meta, Segmented Switch & Search Tool (Preserving #timeline-rail) -->
+        <!-- 1. Top Bar: Chronological Milestone Rail & Curatorial Navigation (Preserving #timeline-rail) -->
         <div class="stage-top-bar" id="timeline-rail">
           <!-- Left: Period Status Indicator -->
           <div class="stage-status-meta">
-            <span class="status-period-tag" id="status-period-tag">Babak 01 / 05</span>
+            <span class="status-period-tag" id="status-period-tag">Babak 01 / 08</span>
             <span class="status-period-label d-none d-md-inline" id="status-period-label">· ± Abad ke-4 – ke-7 M</span>
           </div>
 
-          <!-- Center: Segmented Pill Switcher (Matches [Albums | Playlists] in Reference) -->
-          <div class="stage-segmented-switch" role="tablist" aria-label="Mode Tampilan Garis Waktu">
-            <button type="button" class="segment-btn active milestone-button" id="tab-mode-eras" role="tab" aria-selected="true" data-mode="eras" data-index="0">
-              <span>Babak Era</span>
-            </button>
-            <button type="button" class="segment-btn milestone-button" id="tab-mode-events" role="tab" aria-selected="false" data-mode="events" data-index="1">
-              <span>Jejak Peristiwa</span>
-            </button>
+          <!-- Center: Interactive Chronological Era Stepper Rail -->
+          <div class="stage-milestone-stepper" id="milestone-stepper" role="tablist" aria-label="Pilih Babak Sejarah">
+            <!-- Dynamically populated era pills via timeline.js -->
           </div>
 
-          <!-- Right: Search Button & Quick Jump -->
+          <!-- Right: Search Tool & Overview Shortcut -->
           <div class="stage-top-actions">
-            <button type="button" class="stage-search-toggle" id="btn-toggle-search" aria-label="Cari peristiwa atau tahun sejarah">
+            <button type="button" class="stage-search-toggle" id="btn-toggle-search" aria-label="Cari peristiwa, tokoh, atau tahun sejarah">
               <i class="bi bi-search" aria-hidden="true"></i>
             </button>
             <div class="stage-quick-search-box" id="stage-search-box" aria-hidden="true">
@@ -133,21 +129,29 @@
           </div>
         </div>
 
-        <!-- 2. Main 3D Cover Flow Viewport -->
-        <div class="coverflow-stage-viewport" id="coverflow-viewport" tabindex="0" role="region" aria-label="Rak 3D Garis Waktu Sejarah (Gunakan tombol panah kiri dan kanan untuk bernavigasi)">
+        <!-- 2. Main 3D Perspective Gallery Viewport -->
+        <div class="coverflow-stage-viewport" id="coverflow-viewport" tabindex="0" role="region" aria-label="Panggung Galeri 3D Sejarah Jawa Tengah (Gunakan tombol panah kiri dan kanan untuk bernavigasi)">
           
-          <!-- Ambient Lighting Glow -->
+          <!-- Ambient Gallery Spotlight Glow -->
           <div class="stage-ambient-glow" aria-hidden="true"></div>
+
+          <!-- Floating Stage Lateral Navigation Arrows -->
+          <button type="button" class="gallery-nav-arrow arrow-prev" id="btn-stage-prev" aria-label="Lihat era sebelumnya">
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="gallery-nav-arrow arrow-next" id="btn-stage-next" aria-label="Lihat era berikutnya">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
 
           <!-- 3D Perspective Track Container -->
           <div class="coverflow-track" id="coverflow-track">
-            <!-- Dynamically populated 3D slabs with thick spine and front cover via timeline.js -->
+            <!-- Dynamically populated 3D vertical panels with spines and cover faces via timeline.js -->
           </div>
 
           <!-- Ground Floor Reflection Gradient Overlay -->
           <div class="stage-floor-reflection" aria-hidden="true"></div>
 
-          <!-- Floating Center Action Pill (Matches "✨ Get Full Access" in Reference) -->
+          <!-- Floating Center Action Pill Button -->
           <div class="stage-center-action-wrapper">
             <button type="button" class="btn-stage-access" id="btn-open-era-detail" aria-label="Buka riwayat lengkap era ini">
               <span class="sparkle-glyph" aria-hidden="true">✦</span>
@@ -157,10 +161,10 @@
 
         </div>
 
-        <!-- 3. Floating Bottom Controller Dock (Matches Player Bar in Reference) -->
+        <!-- 3. Museum Curatorial Controller Bar (Curatorial Controls) -->
         <div class="stage-bottom-dock" id="stage-bottom-dock">
           
-          <!-- Left: Thumbnail & Title Lockup -->
+          <!-- Left: Active Era Curatorial Snapshot -->
           <div class="dock-meta-group">
             <div class="dock-thumb-wrapper">
               <img src="assets/images/era-kuno.jpg" alt="" class="dock-thumbnail" id="dock-thumbnail">
@@ -171,30 +175,36 @@
             </div>
           </div>
 
-          <!-- Center: Step & Play/Tour Controls -->
+          <!-- Center: Step Controls & Chronological Dots -->
           <div class="dock-controls-group">
-            <button type="button" class="dock-btn dock-btn-step" id="btn-dock-prev" aria-label="Masa atau peristiwa sebelumnya">
+            <button type="button" class="dock-btn dock-btn-step" id="btn-dock-prev" aria-label="Era sejarah sebelumnya">
               <i class="bi bi-chevron-left" aria-hidden="true"></i>
             </button>
 
-            <button type="button" class="dock-btn dock-btn-play" id="btn-dock-play" aria-label="Mulai tur otomatis linimasa">
-              <i class="bi bi-play-fill" id="dock-play-icon" aria-hidden="true"></i>
+            <!-- Interactive Chronological Dot Matrix -->
+            <div class="dock-progress-dots" id="dock-progress-dots" aria-hidden="true">
+              <!-- Populated via timeline.js -->
+            </div>
+
+            <button type="button" class="dock-btn dock-btn-tour" id="btn-dock-play" aria-label="Mulai tur otomatis linimasa" title="Tur Otomatis">
+              <i class="bi bi-compass" id="dock-play-icon" aria-hidden="true"></i>
             </button>
 
-            <button type="button" class="dock-btn dock-btn-step" id="btn-dock-next" aria-label="Masa atau peristiwa berikutnya">
+            <button type="button" class="dock-btn dock-btn-step" id="btn-dock-next" aria-label="Era sejarah berikutnya">
               <i class="bi bi-chevron-right" aria-hidden="true"></i>
             </button>
           </div>
 
-          <!-- Right: Keyboard Hint & Overview List Toggle -->
+          <!-- Right: Keyboard Hint & Overview Chronicle Toggle -->
           <div class="dock-extra-group">
             <div class="dock-keyboard-hint d-none d-lg-flex" aria-hidden="true">
               <span class="kbd-key">&larr;</span>
               <span class="kbd-key">&rarr;</span>
               <span>Navigasi</span>
             </div>
-            <button type="button" class="dock-btn dock-btn-overview" id="btn-dock-overview" aria-label="Buka daftar ringkasan kronologis">
-              <i class="bi bi-card-list" aria-hidden="true"></i>
+            <button type="button" class="dock-btn dock-btn-overview" id="btn-dock-overview" aria-label="Buka ikhtisar kronologis lengkap" title="Ikhtisar Sejarah">
+              <i class="bi bi-journal-text" aria-hidden="true"></i>
+              <span class="d-none d-xl-inline ms-1" style="font-size: 12px; font-weight: 600;">Ikhtisar</span>
             </button>
           </div>
 
@@ -232,7 +242,7 @@
     <div class="timeline-detail-card">
       <button type="button" class="timeline-modal-close" id="btn-close-timeline-modal" aria-label="Tutup rincian sejarah">&times;</button>
       <div class="timeline-modal-body" id="timeline-modal-body">
-        <!-- Injected via JavaScript -->
+        <!-- Injected dynamically via JavaScript -->
       </div>
     </div>
   </div>
@@ -249,7 +259,7 @@
       <button type="button" class="drawer-close" id="btn-close-drawer" aria-label="Tutup ikhtisar">&times;</button>
     </div>
     <div class="drawer-body" id="drawer-milestones-list">
-      <!-- Populated via JavaScript -->
+      <!-- Populated dynamically via JavaScript -->
     </div>
   </div>
   <div class="drawer-scrim" id="drawer-scrim" aria-hidden="true"></div>
@@ -280,9 +290,9 @@
             <div class="footer-nav-group-title">Babak Sejarah</div>
             <ul class="footer-nav-links">
               <li><a href="timeline.html?era=kuno" class="footer-nav-link">Masa Kuno</a></li>
-              <li><a href="timeline.html?era=kerajaan" class="footer-nav-link">Masa Kerajaan</a></li>
-              <li><a href="timeline.html?era=kolonial" class="footer-nav-link">Masa Kolonial</a></li>
-              <li><a href="timeline.html?era=kemerdekaan" class="footer-nav-link">Masa Kemerdekaan</a></li>
+              <li><a href="timeline.html?era=mataram-borobudur" class="footer-nav-link">Masa Borobudur</a></li>
+              <li><a href="timeline.html?era=mataram-prambanan" class="footer-nav-link">Masa Prambanan</a></li>
+              <li><a href="timeline.html?era=demak" class="footer-nav-link">Kesultanan Demak</a></li>
               <li><a href="timeline.html?era=modern" class="footer-nav-link">Jawa Tengah Modern</a></li>
             </ul>
           </div>
@@ -309,7 +319,7 @@
     </div>
   </footer>
 
-  <!-- Vanilla JavaScript Controller -->
+  <!-- Vanilla JavaScript Controllers -->
   <script src="js/timeline.js"></script>
   <script src="js/nav.js"></script>
 </body>
