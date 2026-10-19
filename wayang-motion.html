@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wayang Motion — Interaksi Wayang Kulit Digital Karsa Potret</title>
-  <meta name="description" content="Kendalikan wayang kulit tradisional Jawa Tengah (Raden Gatotkaca & Raden Arjuna) secara interaktif dengan gestur tangan melalui webcam Anda bersama Karsa Potret.">
+  <title>Wayang Motion — Interaksi Wayang Kulit Digital Karsakala (Karsa Potret)</title>
+  <meta name="description" content="Kendalikan wayang kulit tradisional Jawa Tengah (Raden Gatotkaca & Raden Arjuna) secara interaktif dengan gestur tangan melalui webcam Anda bersama Karsakala.">
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/redesign-palette.css">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/logo-karsa-potret.png">
+  <link rel="icon" type="image/svg+xml" href="assets/images/karsakala-logo.svg">
   
   <!-- Wayang Motion Dedicated Stylesheet -->
   <link rel="stylesheet" href="css/wayang-motion.css">
@@ -44,10 +44,11 @@
     <div class="container-fluid">
       <div class="navbar-inner-global">
         
-        <!-- Left: Karsa Potret Logo -->
+        <!-- Left: Brand Logo & Wordmark -->
         <div class="brand-wrapper">
-          <a href="index.html" class="brand-link" aria-label="Karsa Potret - Kembali ke Beranda">
-            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="brand-logo-img">
+          <a href="index.html" class="brand-link" aria-label="Karsakala - Kembali ke Beranda">
+            <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+            <span class="brand-wordmark visually-hidden">Karsakala</span>
           </a>
         </div>
 
@@ -59,7 +60,6 @@
             <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
-            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
@@ -86,15 +86,10 @@
     
     <!-- Meta Header -->
     <div class="motion-header-meta">
-      <div class="provenance-badge">
-        <span class="badge-dot"></span>
-        <span>Seni Pedalangan Digital · Panggung Kelir Interaktif</span>
-      </div>
       <h1 class="motion-title">Wayang Motion <span>Digital Kelir</span></h1>
       <p class="motion-subtitle">
         Rasakan pengalaman menjadi dalang kontemporer. Gerakkan tokoh wayang legendaris Jawa Tengah secara langsung melalui deteksi gestur tangan webcam Anda di panggung kelir digital.
       </p>
-      <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
 
     <!-- Cultural Ambient Corner Clouds (Traditional Mega Mendung SVG Motifs) -->
@@ -247,7 +242,7 @@
             <div class="tassel-body"></div>
             <div class="tassel-threads"></div>
           </div>
-          <span class="stage-pelmet-ornament">✦ PANGGUNG KELIR DIGITAL ADILUHUNG ✦</span>
+          <span class="stage-pelmet-ornament">Kelir Digital Wayang Kulit</span>
         </div>
 
         <!-- Background Blencong Light Glow -->
@@ -260,9 +255,9 @@
         <div class="stage-debog-base" aria-hidden="true">
           <div class="debog-ornamental-border"></div>
           <div class="debog-content-row">
-            <span class="debog-label" id="debog-label-left">Gedebog Kiwa (Sisi Kiri)</span>
-            <span class="debog-center-text">✦ Batas Panggung Pedalangan Tradisional Jawa ✦</span>
-            <span class="debog-label text-end" id="debog-label-right">Gedebog Tengen (Sisi Kanan)</span>
+            <span class="debog-label" id="debog-label-left">Gedebog Kiwa</span>
+            <span class="debog-center-text">Batas Panggung Pedalangan Jawa</span>
+            <span class="debog-label text-end" id="debog-label-right">Gedebog Tengen</span>
           </div>
         </div>
 
@@ -440,40 +435,95 @@
     <!-- End of #wayang-experience-container -->
 
     <!-- ======================================================================
-         CULTURAL CONTEXT & EDUCATIONAL CARDS
+         CULTURAL CONTEXT & EDUCATIONAL SECTION (EDITORIAL REDESIGN)
          ====================================================================== -->
-    <section class="motion-context-section" aria-label="Konteks Filosofis & Budaya Wayang">
-      
-      <div class="cultural-card">
-        <h3 class="cultural-card-title">
-          <i class="bi bi-sun"></i>
-          <span>Kelir &amp; Blencong</span>
-        </h3>
-        <p class="cultural-card-text">
-          Dalam seni wayang kulit purwa Jawa Tengah, <em>Kelir</em> (layar putih) melambangkan jagat raya dan alam semesta, sedangkan <em>Blencong</em> (lampu minyak perunggu) melambangkan surya dan sang pencerah kehidupan. Bayangan yang tercipta mengingatkan manusia akan hakikat kehidupan fana.
-        </p>
-      </div>
+    <section class="motion-context-section" aria-label="Konteks Filosofis &amp; Budaya Wayang">
+      <div class="motion-context-container">
 
-      <div class="cultural-card">
-        <h3 class="cultural-card-title">
-          <i class="bi bi-shield-shaded"></i>
-          <span>Dua Karakter Utama</span>
-        </h3>
-        <p class="cultural-card-text">
-          <strong>Raden Gatotkaca</strong> bertengger di sisi kiwa (kiri), melambangkan ketangguhan ksatria berjiwa patriotik pelindung negara. <strong>Raden Arjuna</strong> di sisi tengen (kanan), mencerminkan kehalusan budi pekerti, ketenangan batin, serta ketepatan cipta busur panah Pasopati.
-        </p>
-      </div>
+        <!-- 1. Intro Section: Kelir & Blencong (Philosophical Foundation) -->
+        <article class="context-block context-block-intro cultural-card">
+          <div class="context-intro-grid">
+            <div class="context-intro-heading-col">
+              <span class="context-eyebrow">Kosmologi Pertunjukan</span>
+              <h2 class="context-title cultural-card-title">
+                <i class="bi bi-brightness-high" aria-hidden="true"></i>
+                <span>Kelir &amp; Blencong</span>
+              </h2>
+              <div class="context-accent-line" aria-hidden="true"></div>
+            </div>
+            <div class="context-intro-content-col">
+              <p class="context-lead-text cultural-card-text">
+                Dalam seni wayang kulit purwa Jawa Tengah, <em>Kelir</em> (layar putih) melambangkan jagat raya dan alam semesta, sedangkan <em>Blencong</em> (lampu minyak perunggu) melambangkan surya dan sang pencerah kehidupan. Bayangan yang tercipta mengingatkan manusia akan hakikat kehidupan fana.
+              </p>
+            </div>
+          </div>
+        </article>
 
-      <div class="cultural-card">
-        <h3 class="cultural-card-title">
-          <i class="bi bi-cpu"></i>
-          <span>Interaksi Vision Berbasis Web</span>
-        </h3>
-        <p class="cultural-card-text">
-          Fitur ini memanfaatkan teknologi MediaPipe Vision untuk memetakan 21 titik koordinat anatomis telapak tangan secara real-time. Koordinat diterjemahkan menjadi vektor posisi dan rotasi tuding wayang kulit tanpa membutuhkan instalasi aplikasi eksternal apa pun.
-        </p>
-      </div>
+        <!-- Subtle Section Divider -->
+        <div class="context-section-divider" aria-hidden="true"></div>
 
+        <!-- 2. Dual Character Section: Dua Karakter Utama (Kiwa & Tengen) -->
+        <article class="context-block context-block-characters cultural-card">
+          <div class="context-char-header">
+            <span class="context-eyebrow">Pilar Lakon Wayang</span>
+            <h2 class="context-title cultural-card-title">
+              <i class="bi bi-shield-shaded" aria-hidden="true"></i>
+              <span>Dua Karakter Utama</span>
+            </h2>
+          </div>
+          
+          <div class="context-char-grid">
+            <!-- Kiwa: Raden Gatotkaca -->
+            <div class="char-editorial-col char-kiwa">
+              <div class="char-header-row">
+                <span class="char-position-tag">Sisi Kiwa (Kiri)</span>
+                <h3 class="char-name">Raden Gatotkaca</h3>
+              </div>
+              <p class="char-desc cultural-card-text">
+                <strong>Raden Gatotkaca</strong> bertengger di sisi kiwa (kiri), melambangkan ketangguhan ksatria berjiwa patriotik pelindung negara.
+              </p>
+            </div>
+
+            <!-- Tengen: Raden Arjuna -->
+            <div class="char-editorial-col char-tengen">
+              <div class="char-header-row">
+                <span class="char-position-tag">Sisi Tengen (Kanan)</span>
+                <h3 class="char-name">Raden Arjuna</h3>
+              </div>
+              <p class="char-desc cultural-card-text">
+                <strong>Raden Arjuna</strong> di sisi tengen (kanan), mencerminkan kehalusan budi pekerti, ketenangan batin, serta ketepatan cipta busur panah Pasopati.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Subtle Section Divider -->
+        <div class="context-section-divider" aria-hidden="true"></div>
+
+        <!-- 3. Technical Vision Section: Interaksi Vision Berbasis Web -->
+        <article class="context-block context-block-vision cultural-card">
+          <div class="context-vision-grid">
+            <div class="context-vision-meta-col">
+              <span class="context-eyebrow">Teknologi &amp; Sensorik</span>
+              <h2 class="context-title cultural-card-title">
+                <i class="bi bi-cpu" aria-hidden="true"></i>
+                <span>Interaksi Vision Berbasis Web</span>
+              </h2>
+              <div class="vision-tech-pills">
+                <span class="vision-pill">MediaPipe Vision</span>
+                <span class="vision-pill">21 Titik Koordinat</span>
+                <span class="vision-pill">Pelacakan Real-Time</span>
+              </div>
+            </div>
+            <div class="context-vision-content-col">
+              <p class="context-body-text cultural-card-text">
+                Fitur ini memanfaatkan teknologi MediaPipe Vision untuk memetakan 21 titik koordinat anatomis telapak tangan secara real-time. Koordinat diterjemahkan menjadi vektor posisi dan rotasi tuding wayang kulit tanpa membutuhkan instalasi aplikasi eksternal apa pun.
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </section>
 
   </main>
@@ -536,8 +586,8 @@
         
         <!-- Brand & Vision Column -->
         <div class="footer-brand-col">
-          <a href="index.html" class="brand-link" aria-label="Karsa Potret - Beranda">
-            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="footer-logo-img">
+          <a href="index.html" class="brand-link" aria-label="Karsakala - Beranda">
+            <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="footer-logo-img" width="94" height="48" loading="lazy" decoding="async">
           </a>
           <p class="footer-tagline">
             Media interaktif dokumentasi dan apresiasi kekayaan sejarah, tokoh, serta warisan peradaban adiluhung Jawa Tengah dari masa ke masa.
@@ -551,8 +601,8 @@
             <ul class="footer-nav-links">
               <li><a href="index.html" class="footer-nav-link">Beranda</a></li>
               <li><a href="timeline.html" class="footer-nav-link">Timeline Sejarah</a></li>
-              <li><a href="timeline.html#tokoh" class="footer-nav-link">Tokoh Bersejarah</a></li>
-              <li><a href="timeline.html#warisan-budaya" class="footer-nav-link">Warisan Budaya</a></li>
+              <li><a href="tokoh.html" class="footer-nav-link">Tokoh Bersejarah</a></li>
+              <li><a href="warisan-budaya.html" class="footer-nav-link">Warisan Budaya</a></li>
             </ul>
           </div>
 
@@ -572,7 +622,7 @@
             <ul class="footer-nav-links">
               <li><a href="peta.html" class="footer-nav-link text-warning">Peta Interaktif Atlas</a></li>
               <li><a href="wayang-motion.html" class="footer-nav-link active">Wayang Motion</a></li>
-              <li><a href="photobooth.html" class="footer-nav-link">Photobooth Budaya</a></li>
+              <li><a href="warisan-budaya.html" class="footer-nav-link">Warisan Budaya UNESCO</a></li>
               <li><a href="timeline.html#arsip" class="footer-nav-link">Arsip Dokumen Cagar Budaya</a></li>
             </ul>
           </div>
@@ -598,12 +648,12 @@
   <!-- ==========================================================================
        DEPENDENCY SCRIPTS: MEDIAPIPE HANDS
        ========================================================================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous" defer></script>
 
   <!-- WAYANG MOTION JAVASCRIPT CONTROLLER -->
-  <script src="js/wayang-motion.js"></script>
-  <script src="js/nav.js"></script>
+  <script src="js/wayang-motion.js" defer></script>
+  <script src="js/nav.js" defer></script>
 </body>
 </html>

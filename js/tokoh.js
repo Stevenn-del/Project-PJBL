@@ -22,7 +22,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Kalingga (Jepara / Pekalongan)",
     years: "Memerintah ± 674–695 M",
-    image: "assets/images/tokoh-ratushima.jpg",
+    image: "assets/images/tokoh-ratushima.webp",
     quote: "Keadilan sejati tidak mengenal kerabat; barang siapa menyentuh hak orang lain, hukum harus ditegakkan dengan setimpal.",
     achievements: [
       "Menegakkan hukum keadilan tanpa pandang bulu di seluruh pesisir utara Jawa",
@@ -39,7 +39,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Bumi Mataram (Klaten / Magelang)",
     years: "Memerintah ± 838–856 M",
-    image: "assets/images/slide-1-prambanan.webp",
+    image: "assets/images/tokoh-3.webp",
     quote: "Dua wangsa besar bersatu dalam cinta dan kebijaksanaan, melahirkan candi-candi megah pengayom semesta.",
     achievements: [
       "Memprakarsai pembangunan Candi Prambanan (Siwagrha) termegah di Indonesia",
@@ -56,7 +56,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Demak Bintoro",
     years: "Memerintah 1478–1518 M",
-    image: "assets/images/highlight-batik-keris.jpg",
+    image: "assets/images/tokoh-4.webp",
     quote: "Menegakkan kedaulatan di atas tanah beriman, merawat tali persaudaraan dan kemakmuran pesisir Nusantara.",
     achievements: [
       "Mendirikan Kesultanan Islam pelopor pertama di tanah Jawa (Demak)",
@@ -73,7 +73,7 @@ const TOKOH_DATASET = [
     category: "budaya",
     region: "Kadilangu, Demak",
     years: "± 1450–1592 M",
-    image: "assets/images/tokoh-kalijaga.jpg",
+    image: "assets/images/tokoh-kalijaga.webp",
     quote: "Urip iku urup (Hidup itu menyala memberi terang bagi sesama tanpa mencabut akar budayanya).",
     achievements: [
       "Memadukan ajaran Islam dengan seni wayang kulit purwa, tembang macapat, dan gamelan",
@@ -90,7 +90,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Jepara",
     years: "Memerintah 1549–1579 M",
-    image: "assets/images/highlight-benteng-ambarawa.jpg",
+    image: "assets/images/highlight-benteng-ambarawa.webp",
     quote: "Harta dan kedaulatan tanah air tidak akan pernah tunduk kepada bangsa penjajah samudra.",
     achievements: [
       "Mengirim ratusan armada kapal perang berkekuatan ribuan prajurit melawan Portugis di Malaka (1551 & 1574)",
@@ -107,7 +107,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Kedu, Magelang & Surakarta",
     years: "1785–1855 M",
-    image: "assets/images/tokoh-diponegoro.jpg",
+    image: "assets/images/tokoh-diponegoro.webp",
     quote: "Kebenaran dan keadilan tidak dapat ditawar; tanah leluhur adalah titipan suci yang harus dibela sampai akhir hayat.",
     achievements: [
       "Memimpin Perang Jawa (1825–1830) yang mengguncang kekuasaan kolonial Hindia Belanda hingga bangkrut",
@@ -124,7 +124,7 @@ const TOKOH_DATASET = [
     category: "emansipasi",
     region: "Jepara & Rembang",
     years: "1879–1904 M",
-    image: "assets/images/tokoh-kartini.jpg",
+    image: "assets/images/tokoh-kartini.webp",
     quote: "Habis gelap terbitlah terang — Tiada awan di langit yang tetap selamanya, tiada mungkin akan terus-menerus terang cuaca.",
     achievements: [
       "Memprakarsai sekolah pertama bagi perempuan pribumi di tanah Jawa",
@@ -179,6 +179,7 @@ class TokohEditorialController {
       filterBtns: document.querySelectorAll('[data-tokoh-filter]'),
       infoPanel: document.getElementById('tokoh-spotlight'),
       galleryDeck: document.getElementById('tokoh-grid'),
+      rosterTrack: document.getElementById('tokoh-roster-track'),
       modal: document.getElementById('tokoh-modal'),
       modalContent: document.getElementById('tokoh-modal-content'),
       modalCloseBtn: document.getElementById('btn-close-tokoh-modal')
@@ -238,24 +239,6 @@ class TokohEditorialController {
 
       this.dom.infoPanel.innerHTML = `
         <div class="tokoh-info-inner">
-          
-          <!-- Editorial Signpost Eyebrow -->
-          <div class="showcase-eyebrow">
-            <span class="seal-glyph" aria-hidden="true">✦</span>
-            <span>TOKOH &amp; INSPIRASI</span>
-            <span class="seal-glyph" aria-hidden="true">✦</span>
-          </div>
-
-          <!-- Section Heading -->
-          <h1 class="tokoh-showcase-title" id="tokoh-main-heading">
-            Tokoh Berpengaruh <span class="gold-accent">Jawa Tengah</span>
-          </h1>
-
-          <!-- Section Introduction -->
-          <p class="tokoh-showcase-intro">
-            Menyimak keteladanan para pemimpin bijak, pahlawan kemerdekaan, pemikir emansipasi, dan budayawan adiluhung yang meletakkan dasar peradaban serta martabat Jawa Tengah melintas abad.
-          </p>
-
           <!-- Dynamic Active Figure Card Block -->
           <div class="spotlight-active-narrative">
             <div class="spotlight-provenance-row">
@@ -266,7 +249,7 @@ class TokohEditorialController {
               <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
             </div>
 
-            <h2 class="spotlight-figure-name">${this.escapeHtml(activeFig.name)}</h2>
+            <h2 class="spotlight-figure-name" id="tokoh-main-heading">${this.escapeHtml(activeFig.name)}</h2>
             
             <p class="spotlight-concise-desc">${this.escapeHtml(conciseDesc)}</p>
 
@@ -319,7 +302,7 @@ class TokohEditorialController {
                    style="--slot-index: ${slot};">
             <div class="deck-card-frame">
               <div class="deck-card-inner">
-                <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" loading="lazy">
+                <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" width="320" height="460" loading="${isFeatured ? 'eager' : 'lazy'}" decoding="async">
                 <div class="deck-card-vignette" aria-hidden="true"></div>
                 <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
                 
@@ -331,11 +314,34 @@ class TokohEditorialController {
                   </div>
                   <button type="button" class="deck-card-action-btn btn-read-tokoh" data-open-tokoh="${fig.id}" aria-label="Pelajari kisah ${this.escapeHtml(fig.name)}">
                     <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                  </button>
                 </div>
               </div>
             </div>
           </article>
+        `;
+      }).join('');
+    }
+
+    // 3. Render Bottom Curatorial Archival Roster Track (#tokoh-roster-track)
+    if (this.dom.rosterTrack) {
+      this.dom.rosterTrack.innerHTML = list.map((fig, idx) => {
+        const isActive = (idx === this.activeIndex);
+        return `
+          <button type="button" 
+                  class="tokoh-roster-card ${isActive ? 'is-active' : ''}" 
+                  data-roster-index="${idx}"
+                  role="tab"
+                  aria-selected="${isActive ? 'true' : 'false'}"
+                  aria-label="Tampilkan ${this.escapeHtml(fig.name)}">
+            <div class="roster-card-avatar">
+              <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" width="48" height="48" loading="lazy" decoding="async">
+            </div>
+            <div class="roster-card-info">
+              <span class="roster-card-role">${this.escapeHtml(fig.title)}</span>
+              <h3 class="roster-card-name">${this.escapeHtml(fig.name)}</h3>
+              <span class="roster-card-years">${this.escapeHtml(fig.years.split('(')[0].trim())}</span>
+            </div>
+          </button>
         `;
       }).join('');
     }
@@ -348,7 +354,7 @@ class TokohEditorialController {
     this.dom.modalContent.innerHTML = `
       <div class="tokoh-modal-header">
         <div class="tokoh-modal-avatar">
-          <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}">
+          <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" width="110" height="110" loading="lazy" decoding="async">
         </div>
         <div class="tokoh-modal-meta">
           <span class="modal-era-badge">${this.escapeHtml(fig.era)} &bull; ${this.escapeHtml(fig.years)}</span>
@@ -460,6 +466,18 @@ class TokohEditorialController {
         this.nextFigure();
       }
     });
+
+    // 6. Click Delegation on Curatorial Archival Roster Track
+    if (this.dom.rosterTrack) {
+      this.dom.rosterTrack.addEventListener('click', (e) => {
+        const card = e.target.closest('.tokoh-roster-card');
+        if (!card) return;
+        const idx = parseInt(card.dataset.rosterIndex, 10);
+        if (!isNaN(idx)) {
+          this.setActiveIndex(idx);
+        }
+      });
+    }
   }
 
   escapeHtml(str) {

@@ -48,7 +48,7 @@ const regionStories = {
     heritage: ["Kota Lama Semarang", "Lawang Sewu", "Masjid Agung Semarang", "Klenteng Sam Poo Kong"],
     period: "Tumbuh sebagai bandar penting di pesisir utara Jawa sejak abad ke-15 dan berkembang pesat sebagai simpul perniagaan Hindia Belanda.",
     fact: "Di Kota Lama, jejak arsitektur bernuansa Eropa berpadu dengan denyut pelabuhan yang menghubungkan Jawa dengan peradaban dunia.",
-    image: "assets/images/highlight-benteng-ambarawa.jpg"
+    image: "assets/images/highlight-benteng-ambarawa.webp"
   },
   "Kabupaten Semarang": {
     summary: "Kabupaten Semarang menyimpan kisah panjang dari pusat permukiman kuno lereng Ungaran hingga jalur logistik perkeretaapian Hindia Belanda.",
@@ -88,7 +88,7 @@ const regionStories = {
     heritage: ["Masjid Agung Demak", "Makam Sunan Kalijaga Kadilangu", "Pintu Bledeg"],
     period: "Masa keemasan kesultanan maritim Islam nusantara pada abad ke-15 hingga ke-16.",
     fact: "Masjid Agung Demak ditopang oleh empat saka guru kayu jati raksasa, salah satunya 'Saka Tatal' buatan Sunan Kalijaga.",
-    image: "assets/images/highlight-batik-keris.jpg"
+    image: "assets/images/highlight-batik-keris.webp"
   },
   "Kabupaten Jepara": {
     summary: "Jepara adalah bandar bahari perkasa yang dipimpin figur wanita tangguh Ratu Kalinyamat dan tempat lahir pahlawan emansipasi R.A. Kartini.",
@@ -104,7 +104,7 @@ const regionStories = {
     heritage: ["Keraton Kasunanan Surakarta", "Pura Mangkunegaran", "Pasar Gede Harjonagoro", "Kampung Batik Laweyan"],
     period: "Pusat monarki, kesusastraan Jawa, seni tari bedhaya, dan tradisi batik sejak perpindahan Kartasura ke Sala tahun 1745.",
     fact: "Tradisi karawitan, tarian sakral bedhaya ketawang, dan falsafah batik adiluhung tetap lestari hidup di tengah masyarakat Solo masa kini.",
-    image: "assets/images/highlight-batik-keris.jpg"
+    image: "assets/images/highlight-batik-keris.webp"
   }
 };
 
@@ -199,7 +199,7 @@ function getStory(name) {
     heritage: ["Situs Pusaka Daerah", "Tradisi Adat & Batik Khas", "Cagar Budaya Setempat"],
     period: "Pusat perjumpaan tradisi Jawa klasik, denyut perdagangan pedalaman, dan semangat perjuangan kemerdekaan.",
     fact: `Setiap jengkal tanah di ${name} menyimpan mutiara cerita yang diwariskan dari para leluhur turun-temurun.`,
-    image: "assets/images/highlight-batik-keris.jpg"
+    image: "assets/images/highlight-batik-keris.webp"
   };
 }
 
@@ -217,7 +217,7 @@ function renderRegionCard(name) {
   
   cardContent.innerHTML = `
     <div class="region-image">
-      <img src="${imageUrl(story)}" alt="Ilustrasi sejarah ${escapeHtml(name)}" loading="lazy">
+      <img src="${imageUrl(story)}" alt="Ilustrasi sejarah ${escapeHtml(name)}" width="360" height="220" loading="lazy" decoding="async">
       <div class="region-image-label">
         <span>MENYUSURI JEJAK SEJARAH</span>
         <strong>${escapeHtml(name)}</strong>
@@ -248,7 +248,7 @@ function renderRegionCard(name) {
   const imgEl = cardContent.querySelector("img");
   if (imgEl) {
     imgEl.addEventListener("error", () => {
-      imgEl.src = "assets/images/highlight-batik-keris.jpg";
+      imgEl.src = "assets/images/highlight-batik-keris.webp";
     }, { once: true });
   }
 }
@@ -463,7 +463,7 @@ function openDetails(name) {
   const story = getStory(name);
   previousFocus = document.activeElement;
   modalContent.innerHTML = `
-    <div class="modal-image"><img src="${imageUrl(story)}" alt="Ilustrasi sejarah ${escapeHtml(name)}"></div>
+    <div class="modal-image"><img src="${imageUrl(story)}" alt="Ilustrasi sejarah ${escapeHtml(name)}" width="560" height="320" loading="lazy" decoding="async"></div>
     <div class="modal-body">
       <div class="eyebrow"><span></span> CATATAN SEJARAH JAWA TENGAH</div>
       <h2 id="modal-title">${escapeHtml(name)}</h2>
@@ -489,7 +489,7 @@ function openDetails(name) {
   const imgEl = modalContent.querySelector("img");
   if (imgEl) {
     imgEl.addEventListener("error", () => {
-      imgEl.src = "assets/images/highlight-batik-keris.jpg";
+      imgEl.src = "assets/images/highlight-batik-keris.webp";
     }, { once: true });
   }
 }

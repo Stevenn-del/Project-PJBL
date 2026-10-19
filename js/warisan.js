@@ -62,7 +62,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2005)",
     region: "Surakarta & Yogyakarta",
     period: "Masa Kerajaan hingga Era Modern",
-    image: "assets/images/warisan-pusaka-keris.jpg",
+    image: "assets/images/warisan-pusaka-keris.webp",
     desc: "Senjata tikam berbilah asimetris dengan pamor metalurgi multi-layer hasil tempaan pande besi empu Jawa, diakui dunia atas nilai spiritual dan estetika artistik tingginya.",
     filosofi: "Bilah lurus melambangkan keteguhan batin menyembah Tuhan; bilah luk (berkelok) melambangkan keluwesan manusia meniti liku-liku gelombang kehidupan."
   },
@@ -78,7 +78,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2009)",
     region: "Surakarta & Pekalongan",
     period: "Tradisi Keraton Mataram Islam",
-    image: "assets/images/warisan-batik-tulis.jpg",
+    image: "assets/images/warisan-batik-tulis.webp",
     desc: "Seni lukis malam panas di atas kain mori halus menggunakan canting tembaga tradisional dengan ragam hias simbolik warisan keraton Jawa Tengah.",
     filosofi: "Motif Parang melambangkan ombak karang laut yang tak pernah lelah berjuang; Motif Kawung melambangkan buah kolang-kaling empat penjuru sebagai simbol kesucian hati."
   },
@@ -110,7 +110,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2021)",
     region: "Keraton Kasunanan Surakarta & Mangkunegaran",
     period: "Masa Mataram Kuno hingga Modern",
-    image: "assets/images/warisan-gamelan-ageng.jpg",
+    image: "assets/images/warisan-gamelan-ageng.webp",
     desc: "Ansambel instrumen perunggu gong, kempul, kenong, bonang, kendang, dan rebab yang ditala dalam laras Slendro dan Pelog menghasilkan harmoni meditasi batin mendalam.",
     filosofi: "Filosofi 'Rukun Agawe Santosa': tiap bilah instrumen saling menahan diri untuk tidak menonjol sendiri demi melahirkan keselarasan rasa yang agung."
   },
@@ -126,7 +126,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Pusaka Sakral Keraton Kasunanan",
     region: "Kota Surakarta",
     period: "Sultan Agung (Abad ke-17 M)",
-    image: "assets/images/warisan-bedhaya-ketawang.jpg",
+    image: "assets/images/warisan-bedhaya-ketawang.webp",
     desc: "Tarian pusaka sakral yang ditarikan oleh sembilan putri berbusana dodot ageng dalam upacara Tingalan Dalem Jumenengan (peringatan naik takhta Sri Susuhunan Pakubuwono).",
     filosofi: "Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa."
   },
@@ -142,7 +142,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Cagar Budaya Nasional Peringkat Satu",
     region: "Dataran Tinggi Dieng, Banjarnegara",
     period: "Abad ke-7–8 Masehi",
-    image: "assets/images/era-kuno.jpg",
+    image: "assets/images/era-kuno.webp",
     desc: "Gugusan candi tertua di pulau Jawa yang berdiri di dataran tinggi vulkanik berkabut 2.000 meter di atas permukaan laut, dinamai berdasarkan ksatria Pandawa.",
     filosofi: "'Di-Hyang' bermakna tempat bersemayamnya para dewata; tempat suci pembersihan jiwa para resi dan pertapa Jawa kuno."
   }
@@ -311,7 +311,7 @@ class WarisanExhibitionController {
            tabindex="0" 
            aria-label="${this.escapeHtml(item.title)} - ${isActive ? 'Sedang Ditampilkan' : 'Klik untuk menampilkan'}">
         <div class="card-inner-stage">
-          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="card-media-img" loading="${Math.abs(diff) <= 2 ? 'eager' : 'lazy'}">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="card-media-img" width="420" height="520" loading="${Math.abs(diff) <= 2 ? 'eager' : 'lazy'}" decoding="async">
           
           <!-- Dark Vignette Scrim for text legibility -->
           <div class="card-gradient-scrim"></div>
@@ -523,7 +523,7 @@ class WarisanExhibitionController {
     grid.innerHTML = filtered.map(item => `
       <article class="warisan-item-card" data-warisan-id="${item.id}">
         <div class="warisan-card-media-stage">
-          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="warisan-card-media-img" loading="lazy">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="warisan-card-media-img" width="380" height="240" loading="lazy" decoding="async">
           <div class="warisan-badges-overlay">
             <span class="badge-unesco-pill">${this.escapeHtml(item.unescoStatus)}</span>
             <span class="badge-category-pill">${this.escapeHtml(item.categoryLabel)}</span>
@@ -565,7 +565,7 @@ class WarisanExhibitionController {
 
     this.dom.modalContent.innerHTML = `
       <div class="warisan-modal-media">
-        <img src="${item.image}" alt="${this.escapeHtml(item.title)}">
+        <img src="${item.image}" alt="${this.escapeHtml(item.title)}" width="600" height="380" loading="lazy" decoding="async">
       </div>
       <div class="warisan-modal-meta-row">
         <span class="modal-unesco-pill">${this.escapeHtml(item.unescoStatus)}</span>

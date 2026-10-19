@@ -1,9 +1,13 @@
 /**
  * ==============================================================================
- * KARSA POTRET — 3D HISTORICAL GALLERY INTERACTION ENGINE
+ * KARSAKALA — 3D HISTORICAL GALLERY INTERACTION ENGINE
  * Faithful 3D perspective vertical panel exhibition of Central Java's history.
- * Symmetrical perspective rack, realistic spines, floor reflection,
- * chronological milestone stepper, search, and curatorial detail view.
+ * Structured into five canonical historical periods:
+ *   01. Masa Kuno & Kerajaan Kalingga (± Abad ke-4 – ke-7 M)
+ *   02. Era Candi Klasik: Borobudur & Prambanan (± 780 – 900 M)
+ *   03. Kesultanan Demak & Fajar Islam Jawa (1478 – 1546 M)
+ *   04. Kasunanan Surakarta & Perang Diponegoro (1755 – 1830 M)
+ *   05. Palagan Kemerdekaan & Pusaka UNESCO (1945 – Sekarang)
  * Pure Vanilla JavaScript (ES6+), zero external runtime dependencies.
  * ==============================================================================
  */
@@ -12,8 +16,8 @@
   'use strict';
 
   /**
-   * 1. COMPLETE HISTORICAL DATASET (CENTRAL JAVA / JAWA TENGAH)
-   * 8 Authentically curated historical eras spanning ancient kingdoms to modern UNESCO heritage.
+   * 1. COMPLETE AUTHENTIC HISTORICAL DATASET (CENTRAL JAVA / JAWA TENGAH)
+   * Five representative historical epochs preserving all authentic milestones and cultural citations.
    */
   const HISTORICAL_ERAS_DATA = [
     {
@@ -29,10 +33,10 @@
       briefDesc: "Awal peradaban agraris dan spiritual Jawa, kedaulatan hukum Ratu Shima di Kerajaan Kalingga serta candi andesit tertua di Dataran Tinggi Dieng.",
       contextTitle: "Konteks Sosio-Kultural & Geografis",
       contextDesc: "Peradaban tertua berpusat di lereng pegunungan Dieng dan Gunung Wukir. Pertemuan antara animisme Jawa kuno dan spiritualitas Hindu-Buddha melahirkan dialektika religi unik yang tercermin dalam arsitektur batu paling purba di Nusantara.",
-      heroImage: "assets/images/era-kuno.jpg",
+      heroImage: "assets/images/era-kuno.webp",
       heroImageAlt: "Candi Arjuna di Dataran Tinggi Dieng, peninggalan peradaban kuno Jawa Tengah",
-      spineBg: "linear-gradient(to bottom, #301E13 0%, #4D3424 50%, #2A170C 100%)",
-      spineColor: "#F0D9A7",
+      spineBg: "linear-gradient(to bottom, #11100e 0%, #1e1b15 50%, #080808 100%)",
+      spineColor: "#e1ca7a",
       spineTitle: "± Abad 4–7 M · Kalingga & Percandian Dieng",
       location: "Dataran Tinggi Dieng & Pesisir Jepara",
       heroPlaque: {
@@ -47,7 +51,7 @@
           desc: "Kerajaan bercorak Buddha-Hindu tertua di pesisir utara Jawa Tengah, masyhur di bawah kepemimpinan Ratu Shima yang menegakkan supremasi hukum tanpa pandang bulu. Integritas rakyatnya tercatat dalam catatan Dinasti Tang.",
           significance: "Meletakkan fondasi etika hukum dan kedaulatan moral pertama dalam kronik sejarah Nusantara.",
           location: "Pesisir Jepara & Pekalongan",
-          image: "assets/images/tokoh-ratushima.jpg"
+          image: "assets/images/tokoh-ratushima.webp"
         },
         {
           year: "± 650 M",
@@ -55,7 +59,7 @@
           desc: "Didirikan di dataran tinggi vulkanik Dieng pada ketinggian 2.000 mdpl, kelompok Candi Arjuna dibangun sebagai mandala suci pemujaan Siwa. Kompleks ini menjadi mahakarya arsitektur batu andesit tertua di Pulau Jawa.",
           significance: "Monumen arsitektur batu andesit tertua di Jawa yang memadukan kosmologi gunung dengan teologi Siwa.",
           location: "Dataran Tinggi Dieng",
-          image: "assets/images/era-kuno.jpg"
+          image: "assets/images/era-kuno.webp"
         },
         {
           year: "654–732 M",
@@ -68,28 +72,28 @@
       ]
     },
     {
-      id: "mataram-borobudur",
+      id: "era-candi",
       index: 1,
       number: "02",
-      shortTitle: "Mataram: Borobudur",
-      stepperLabel: "Borobudur",
-      periodRange: "± 780 – 825 M",
-      badgeText: "Puncak Peradaban Candi Buddha",
-      mainHeading: "Era Mataram Kuno: Mahakarya Borobudur",
-      introLead: "Abad ke-8 menandai fajar keemasan dinasti Syailendra di lembah subur Kedu. Dengan kejeniusan arsitek Gunadharma, jutaan balok batu andesit ditata menjadi mandala kosmis berundak sepuluh tingkat yang memvisualisasikan perjalanan batin manusia menuju pencerahan sejati.",
-      briefDesc: "Monumen mandala Buddha Mahayana terbesar di dunia karya Dinasti Syailendra dengan 2.672 panel relief adiluhung.",
-      contextTitle: "Konteks Kosmologi Kamadhatu hingga Arupadhatu",
-      contextDesc: "Borobudur membagi tingkatan alam semesta menjadi tiga ranah spiritual: Kamadhatu (dunia nafsu), Rupadhatu (dunia bentuk tanpa nafsu), dan Arupadhatu (dunia tanpa bentuk). Setiap relief menceritakan wiracarita Lalitavistara, Jataka, dan Gandavyuha.",
+      shortTitle: "Era Candi Klasik",
+      stepperLabel: "Era Candi",
+      periodRange: "± 780 – 900 M",
+      badgeText: "Puncak Peradaban Borobudur & Prambanan",
+      mainHeading: "Mahakarya Borobudur & Prambanan",
+      introLead: "Abad ke-8 hingga ke-10 menandai puncak keemasan dinasti Syailendra dan Sanjaya di lembah subur Kedu dan Prambanan. Jutaan balok batu andesit ditata menjadi stupa mandala agung Borobudur dan mahakarya candi Hindu Siwagrha Prambanan yang menjulang anggun.",
+      briefDesc: "Puncak keemasan arsitektur batu andesit dunia karya Dinasti Syailendra dan Sanjaya, memadukan kosmologi mandala Borobudur dan keagungan Trimurti Prambanan.",
+      contextTitle: "Konteks Kosmologi Mandala & Harmoni Lintas Keyakinan",
+      contextDesc: "Borobudur membagi tingkatan alam semesta menjadi Kamadhatu, Rupadhatu, dan Arupadhatu. Sementara Prambanan menjulang 47 meter memuliakan Trimurti. Pernikahan politis Rakai Pikatan dan Pramodhawardhani menjadi teladan agung toleransi peradaban kuno Nusantara.",
       heroImage: "assets/images/slide-3-borobudur.webp",
       heroImageAlt: "Candi Borobudur mahakarya Dinasti Syailendra di Magelang Jawa Tengah",
-      spineBg: "linear-gradient(to bottom, #3C2216 0%, #611F0A 50%, #30170D 100%)",
-      spineColor: "#FFE6BA",
-      spineTitle: "± 780–825 M · Mahakarya Borobudur",
-      location: "Lembah Progo, Kabupaten Magelang",
+      spineBg: "linear-gradient(to bottom, #161513 0%, #2a2418 50%, #0d0c0a 100%)",
+      spineColor: "#f4efe4",
+      spineTitle: "± 780–900 M · Mahakarya Borobudur & Prambanan",
+      location: "Lembah Kedu & Dataran Prambanan",
       heroPlaque: {
         tag: "Warisan Budaya Dunia UNESCO",
-        title: "Candi Borobudur & Wangsa Syailendra",
-        location: "Kabupaten Magelang"
+        title: "Candi Borobudur & Prambanan",
+        location: "Magelang & Klaten"
       },
       events: [
         {
@@ -102,58 +106,31 @@
         },
         {
           year: "± 824 M",
-          title: "Pahatan 2.672 Panel Relief Naratif",
-          desc: "Para seniman pahat Jawa kuno mengukir kisah kehidupan Sang Buddha, kehidupan maritim, kapal bercadik Jawa kuno, dan flora fauna lokal dengan ketelitian mikroskopis.",
+          title: "Pahatan 2.672 Panel Relief Naratif Borobudur",
+          desc: "Para seniman pahat Jawa kuno mengukir kisah Lalitavistara, Jataka, dan Gandavyuha serta perahu bercadik Jawa kuno dengan ketelitian mikroskopis.",
           significance: "Dokumentasi visual terlengkap mengenai sosio-kultural dan maritim Nusantara abad ke-8.",
           location: "Candi Borobudur",
           image: "assets/images/slide-3-borobudur.webp"
         },
         {
           year: "± 825 M",
-          title: "Penyelesaian Stupa Induk & Peresmian Mandala",
+          title: "Penyelesaian Stupa Induk & Peresmian Mandala Borobudur",
           desc: "Puncak stupa tunggal raksasa diselesaikan sebagai simbol kemanunggalan alam semesta dan pencapaian Nirwana tertinggi.",
           significance: "Karya puncak peradaban Buddha dunia yang diakui sebagai Warisan Dunia UNESCO nomor 592.",
           location: "Magelang",
           image: "assets/images/slide-3-borobudur.webp"
-        }
-      ]
-    },
-    {
-      id: "mataram-prambanan",
-      index: 2,
-      number: "03",
-      shortTitle: "Mataram: Prambanan",
-      stepperLabel: "Prambanan",
-      periodRange: "± 850 – 856 M",
-      badgeText: "Era Keagungan Trimurti Hindu",
-      mainHeading: "Kejayaan Prambanan & Wangsa Sanjaya",
-      introLead: "Sebagai perlambang kebangkitan Wangsa Sanjaya dan penghormatan kepada Trimurti Hindu, Candi Prambanan (Siwagrha) dibangun menjulang setinggi 47 meter. Candi ini mencerminkan perpaduan harmoni toleransi dan arsitektur vertikal ramping khas Jawa Tengah.",
-      briefDesc: "Kompleks candi Hindu terindah dan tertinggi di Nusantara dengan Candi Siwa setinggi 47 meter dan relief Ramayana.",
-      contextTitle: "Konteks Harmoni Siwagrha & Toleransi Dinasti",
-      contextDesc: "Pernikahan politis antara Rakai Pikatan (Sanjaya/Hindu) dan Pramodhawardhani (Syailendra/Buddha) membuktikan bahwa Jawa Tengah kuno adalah teladan toleransi lintas keyakinan tertua di Asia Tenggara.",
-      heroImage: "assets/images/slide-1-prambanan.webp",
-      heroImageAlt: "Candi Prambanan Siwagrha mahakarya Dinasti Sanjaya",
-      spineBg: "linear-gradient(to bottom, #541B0A 0%, #7A2F16 50%, #421308 100%)",
-      spineColor: "#FCE4BC",
-      spineTitle: "± 850–856 M · Candi Prambanan Siwagrha",
-      location: "Perbatasan Klaten & Sleman",
-      heroPlaque: {
-        tag: "Warisan Budaya Dunia UNESCO",
-        title: "Candi Prambanan (Siwagrha)",
-        location: "Klaten & Sleman"
-      },
-      events: [
+        },
         {
           year: "± 850 M",
-          title: "Pembangunan Candi Siwa, Brahma, dan Wisnu",
-          desc: "Pembangunan gugusan candi Trimurti dengan Candi Siwa sebagai poros utama diiringi candi wahana Garuda, Nandi, dan Angsa.",
-          significance: "Mahakarya arsitektur batu ramping menjulang tertinggi di kawasan Asia Tenggara.",
-          location: "Klaten",
+          title: "Pembangunan Kompleks Percandian Prambanan (Siwagrha)",
+          desc: "Rakai Pikatan menginisiasi gugusan candi Trimurti dengan Candi Siwa setinggi 47 meter sebagai poros utama diiringi candi Brahma, Wisnu, dan wahana.",
+          significance: "Kompleks candi Hindu terindah dan tertinggi di Indonesia.",
+          location: "Klaten & Sleman",
           image: "assets/images/slide-1-prambanan.webp"
         },
         {
           year: "856 M",
-          title: "Prasasti Siwagrha & Peresmian Bendungan Opak",
+          title: "Prasasti Siwagrha & Tata Rekayasa Aliran Sungai Opak",
           desc: "Prasasti Siwagrha mencatat peresmian candi serta pengalihan aliran Sungai Opak untuk melindungi mandala suci dari banjir lahar Merapi.",
           significance: "Bukti kecakapan rekayasa hidrologi dan tata ruang terpadu peradaban Jawa kuno.",
           location: "Prambanan",
@@ -161,8 +138,8 @@
         },
         {
           year: "Abad ke-9 M",
-          title: "Pengukiran Wiracarita Epik Ramayana",
-          desc: "Dinding pagar langkan Candi Siwa dan Candi Brahma dipahat dengan kisah Ramayana yang hingga kini lestari dalam Sendratari Prambanan.",
+          title: "Pengukiran Wiracarita Epik Ramayana di Prambanan",
+          desc: "Dinding pagar langkan Candi Siwa dan Brahma dipahat dengan relief Ramayana yang hingga kini lestari dalam Sendratari Prambanan.",
           significance: "Karya sastra relief tertua yang menginspirasi seni tari Jawa lintas generasi.",
           location: "Prambanan",
           image: "assets/images/slide-1-prambanan.webp"
@@ -171,21 +148,21 @@
     },
     {
       id: "demak",
-      index: 3,
-      number: "04",
+      index: 2,
+      number: "03",
       shortTitle: "Kesultanan Demak",
       stepperLabel: "Demak Islam",
       periodRange: "1478 – 1546 M",
       badgeText: "Fajar Islam & Akulturasi Budaya",
       mainHeading: "Kesultanan Demak & Fajar Islam Jawa",
-      introLead: "Runtuhnya hegemoni Majapahit memberi ruang bagi bangkitnya Kesultanan Demak Bintoro sebagai imperium Islam pertama di tanah Jawa. Dipimpin Raden Patah dan dibimbing majelis Walisongo, Islam berkembang melalui pendekatan kultural yang memeluk tradisi lokal.",
-      briefDesc: "Imperium Islam pesisir pertama pelopor dakwah kultural damai Walisongo dan arsitektur Masjid Agung Demak.",
+      introLead: "Runtuhnya hegemoni Majapahit memberi ruang bagi bangkitnya Kesultanan Demak Bintoro sebagai imperium Islam pertama di tanah Jawa. Dipimpin Raden Patah dan dibimbing majelis Walisongo, Islam berkembang melalui pendekatan kultural damai yang memeluk tradisi lokal.",
+      briefDesc: "Imperium Islam pesisir pertama pelopor dakwah kultural damai Walisongo, Sunan Kalijaga, dan arsitektur Masjid Agung Demak.",
       contextTitle: "Konteks Dakwah Damai Walisongo & Akulturasi",
       contextDesc: "Sunan Kalijaga dan para wali menggunakan wayang kulit, gamelan Sekaten, dan tembang mocopat sebagai media syiar. Masjid Agung Demak dengan atap tajug tumpang tiga dan saka tatal menjadi simbol agung akulturasi Islam Nusantara.",
-      heroImage: "assets/images/tokoh-kalijaga.jpg",
+      heroImage: "assets/images/tokoh-kalijaga.webp",
       heroImageAlt: "Sunan Kalijaga tokoh pelopor dakwah kultural Kesultanan Demak",
-      spineBg: "linear-gradient(to bottom, #26160F 0%, #4A2B1D 50%, #1C0F0A 100%)",
-      spineColor: "#FAF6ED",
+      spineBg: "linear-gradient(to bottom, #11100e 0%, #1f1b14 50%, #080808 100%)",
+      spineColor: "#c5a44d",
       spineTitle: "1478–1546 M · Kesultanan Demak & Walisongo",
       location: "Demak Bintoro, Jawa Tengah",
       heroPlaque: {
@@ -200,7 +177,7 @@
           desc: "Raden Patah dinobatkan sebagai Sultan Demak pertama dengan gelar Senapati Jimbun Ngabdurrahman Panembahan Sayidin Panatagama.",
           significance: "Berdirinya imperium maritim Islam berdaulat pertama di Pulau Jawa.",
           location: "Demak Bintoro",
-          image: "assets/images/tokoh-kalijaga.jpg"
+          image: "assets/images/tokoh-kalijaga.webp"
         },
         {
           year: "1479 M",
@@ -208,7 +185,7 @@
           desc: "Walisongo bersama-sama mendirikan Masjid Agung Demak. Sunan Kalijaga menciptakan tiang tatal dari kepingan kayu sisa yang dipadatkan.",
           significance: "Karya puncak arsitektur vernakular atap tumpang tiga yang mendefinisikan masjid Nusantara.",
           location: "Demak",
-          image: "assets/images/tokoh-kalijaga.jpg"
+          image: "assets/images/tokoh-kalijaga.webp"
         },
         {
           year: "1513 M",
@@ -216,50 +193,50 @@
           desc: "Adipati Yunus (Pangeran Sabrang Lor) memimpin armada laut gabungan Jawa menyeberangi Selat Malaka untuk mengusir kolonial Portugis.",
           significance: "Bukti kekuatan armada maritim militer terkuat Jawa Tengah di kancah Nusantara.",
           location: "Pesisir Jepara & Malaka",
-          image: "assets/images/tokoh-kalijaga.jpg"
+          image: "assets/images/tokoh-kalijaga.webp"
         }
       ]
     },
     {
-      id: "surakarta",
-      index: 4,
-      number: "05",
-      shortTitle: "Kasunanan Surakarta",
-      stepperLabel: "Surakarta",
-      periodRange: "1755 – Abad ke-19 M",
-      badgeText: "Pusat Sastra & Adiluhung Kraton",
-      mainHeading: "Kasunanan Surakarta & Adiluhung Kraton",
-      introLead: "Perjanjian Giyanti 1755 membagi bumi Mataram Islam menjadi dua wilayah kekuasaan. Di bumi Solo, Kasunanan Surakarta Hadiningrat di bawah Pakubuwono III dan para pujangga besar memelopori era renaisans kebudayaan Jawa klasik.",
-      briefDesc: "Pusat kristalisasi sastra adiluhung pujangga Ronggowarsito, seni tari sakral Bedhaya Ketawang, dan karawitan klasik.",
-      contextTitle: "Konteks Renaisans Sastra & Seni Adiluhung",
-      contextDesc: "Kraton Surakarta bertransformasi menjadi laboratorium kebudayaan. Pujangga keraton seperti Yasadipura dan Ronggowarsito menyadur naskah-naskah kuno ke dalam Bahasa Jawa Baru, sementara seni tari Bedhaya Ketawang ditetapkan sebagai pusaka sakral.",
-      heroImage: "assets/images/warisan-bedhaya-ketawang.jpg",
-      heroImageAlt: "Tari Bedhaya Ketawang pusaka adiluhung Kraton Kasunanan Surakarta",
-      spineBg: "linear-gradient(to bottom, #4D1208 0%, #6B1C0E 50%, #380C05 100%)",
-      spineColor: "#D6AE7C",
-      spineTitle: "1755–Abad 19 M · Surakarta & Tari Bedhaya",
-      location: "Surakarta Hadiningrat",
+      id: "kraton-diponegoro",
+      index: 3,
+      number: "04",
+      shortTitle: "Kraton & Diponegoro",
+      stepperLabel: "Perang Jawa",
+      periodRange: "1755 – 1830 M",
+      badgeText: "Adiluhung Kraton & Perang Semesta",
+      mainHeading: "Kasunanan Surakarta & Perang Diponegoro",
+      introLead: "Perjanjian Giyanti 1755 membagi Mataram menjadi Kasunanan Surakarta dan Kasultanan Yogyakarta, memicu renaisans sastra dan seni adiluhung keraton. Namun tirani kolonial Belanda memicu perlawanan semesta Pangeran Diponegoro dalam Perang Jawa lima tahun yang dahsyat.",
+      briefDesc: "Pusat sastra adiluhung pujangga Ronggowarsito, tari sakral Bedhaya Ketawang, serta perlawanan patriotik semesta Pangeran Diponegoro.",
+      contextTitle: "Konteks Renaisans Seni Kraton & Perang Gerilya",
+      contextDesc: "Kraton Surakarta menjadi laboratorium kebudayaan sastra dan gamelan ageng. Di sisi lain, perlawanan gerilya Diponegoro di perbukitan Menoreh didukung ulama Kyai Mojo dan Sentot Alibasya, memaksa Belanda menerapkan taktik Benteng Stelsel.",
+      heroImage: "assets/images/tokoh-diponegoro.webp",
+      heroImageAlt: "Pangeran Diponegoro memimpin Perang Jawa",
+      spineBg: "linear-gradient(to bottom, #181214 0%, #291518 50%, #0d090a 100%)",
+      spineColor: "#f4efe4",
+      spineTitle: "1755–1830 M · Surakarta & Perang Jawa",
+      location: "Surakarta, Magelang, Kedu & Menoreh",
       heroPlaque: {
-        tag: "Pusaka Karaton Jawa",
-        title: "Kasunanan Surakarta & Budaya Adiluhung",
-        location: "Kota Surakarta"
+        tag: "Monumen Heroisme & Pusaka Kraton",
+        title: "Kraton Surakarta & Perang Jawa",
+        location: "Surakarta & Magelang"
       },
       events: [
         {
           year: "13 Feb 1755",
           title: "Perjanjian Giyanti Membagi Bumi Mataram",
-          desc: "Perjanjian damai di Desa Giyanti, Karanganyar, yang secara resmi menetapkan pembagian wilayah Mataram antara Kasunanan Surakarta dan Kesultanan Yogyakarta.",
+          desc: "Perjanjian damai di Desa Giyanti Karanganyar menetapkan pembagian wilayah Mataram antara Kasunanan Surakarta dan Kesultanan Yogyakarta.",
           significance: "Titik tolak berdirinya tatanan budaya Kraton Surakarta Hadiningrat.",
           location: "Karanganyar & Solo",
-          image: "assets/images/warisan-bedhaya-ketawang.jpg"
+          image: "assets/images/warisan-bedhaya-ketawang.webp"
         },
         {
           year: "1757 M",
           title: "Perjanjian Salatiga & Berdirinya Praja Mangkunegaran",
-          desc: "Raden Mas Said (Pangeran Sambernyawa) berdamai dan mendirikan Kadipaten Mangkunegaran di Solo dengan semboyan Tiji Tibeh.",
+          desc: "Raden Mas Said (Pangeran Sambernyawa) mendirikan Kadipaten Mangkunegaran di Solo dengan semboyan patriotik Tiji Tibeh.",
           significance: "Lahirnya kekuatan militer dan kesenian istana Mangkunegaran yang legendaris.",
           location: "Salatiga & Surakarta",
-          image: "assets/images/warisan-bedhaya-ketawang.jpg"
+          image: "assets/images/warisan-bedhaya-ketawang.webp"
         },
         {
           year: "Abad ke-19 M",
@@ -267,84 +244,57 @@
           desc: "Ronggowarsito melahirkan karya sastra filosofis monumental seperti Serat Kalatidha, Serat Jayengbaya, dan Serat Wirid Hidayat Jati.",
           significance: "Puncak pencapaian kesusastraan dan filsafat etika Jawa modern.",
           location: "Surakarta",
-          image: "assets/images/warisan-bedhaya-ketawang.jpg"
-        }
-      ]
-    },
-    {
-      id: "diponegoro",
-      index: 5,
-      number: "06",
-      shortTitle: "Perang Diponegoro",
-      stepperLabel: "Diponegoro",
-      periodRange: "1825 – 1830 M",
-      badgeText: "Perang Semesta Membela Martabat",
-      mainHeading: "Perang Jawa Pangeran Diponegoro",
-      introLead: "Campur tangan kolonial Belanda dalam urusan kraton, beban pajak yang mencekik rakyat, dan penodaan makam leluhur di Tegalrejo memicu perlawanan semesta Pangeran Diponegoro. Perang gerilya lima tahun ini menjadi perang paling dahsyat yang pernah dihadapi pemerintah kolonial di Hindia Belanda.",
-      briefDesc: "Perlawanan patriotik rakyat dan bangsawan di bawah pimpinan Diponegoro yang nyaris membangkrutkan kas Belanda.",
-      contextTitle: "Konteks Perang Gerilya & Taktik Benteng Stelsel",
-      contextDesc: "Dengan taktik gerilya berpindah markas di perbukitan Menoreh, Magelang, dan Kedu, Diponegoro didukung ulama Kyai Mojo dan panglima muda Sentot Alibasya Prawirodirdjo. Belanda terpaksa mengerahkan ribuan pasukan dan sistem Benteng Stelsel.",
-      heroImage: "assets/images/tokoh-diponegoro.jpg",
-      heroImageAlt: "Pangeran Diponegoro memimpin Perang Jawa",
-      spineBg: "linear-gradient(to bottom, #3B1109 0%, #5C1A0E 50%, #2B0C06 100%)",
-      spineColor: "#F0D9A7",
-      spineTitle: "1825–1830 M · Perang Jawa Pangeran Diponegoro",
-      location: "Magelang, Kedu & Karanganyar",
-      heroPlaque: {
-        tag: "Monumen Heroisme Nasional",
-        title: "Perang Jawa Pangeran Diponegoro",
-        location: "Kedu & Magelang"
-      },
-      events: [
+          image: "assets/images/warisan-bedhaya-ketawang.webp"
+        },
         {
           year: "Juli 1825",
           title: "Pecahnya Perang Jawa di Tegalrejo & Gua Selarong",
-          desc: "Pangeran Diponegoro menetapkan markas gerilya di perbukitan Selarong dan mengobarkan seruan perlawanan semesta.",
+          desc: "Pangeran Diponegoro menetapkan markas gerilya di perbukitan Selarong dan mengobarkan seruan perlawanan semesta melawan penjajah.",
           significance: "Permulaan perlawanan gerilya terbesar yang melumpuhkan pos-pos militer Belanda di Jawa Tengah.",
-          location: "Kedu & Yogyakarta",
-          image: "assets/images/tokoh-diponegoro.jpg"
+          location: "Kedu & Magelang",
+          image: "assets/images/tokoh-diponegoro.webp"
         },
         {
           year: "1827–1829 M",
           title: "Penerapan Taktik Benteng Stelsel oleh Belanda",
           desc: "Jenderal De Kock mendirikan ratusan benteng kecil saling terhubung (Benteng Stelsel) untuk mempersempit ruang gerak pasukan Diponegoro.",
           significance: "Bukti kepanikan militer kolonial yang menghabiskan lebih dari 20 juta gulden kas kerajaan Belanda.",
-          location: "Jawa Tengah & Jawa Timur",
-          image: "assets/images/highlight-benteng-ambarawa.jpg"
+          location: "Jawa Tengah",
+          image: "assets/images/highlight-benteng-ambarawa.webp"
         },
         {
           year: "28 Maret 1830",
           title: "Perundingan Jebakan di Rumah Residen Magelang",
-          desc: "Dalam suasana gencatan senjata bulan Ramadhan di Magelang, Diponegoro ditangkap melalui muslihat perundingan licik dan diasingkan ke Manado lalu Makassar.",
-          significance: "Perang Jawa berakhir namun semangat patriotisme Diponegoro menjadi obor perjuangan kemerdekaan Indonesia.",
+          desc: "Dalam suasana gencatan senjata bulan Ramadhan di Magelang, Diponegoro ditangkap melalui muslihat perundingan licik dan diasingkan.",
+          significance: "Semangat patriotisme Diponegoro menjadi obor perjuangan kemerdekaan bangsa Indonesia.",
           location: "Kota Magelang",
-          image: "assets/images/tokoh-diponegoro.jpg"
+          image: "assets/images/tokoh-diponegoro.webp"
         }
       ]
     },
     {
-      id: "kemerdekaan",
-      index: 6,
-      number: "07",
-      shortTitle: "Masa Kemerdekaan",
-      stepperLabel: "Kemerdekaan",
-      periodRange: "1945 – 1950 M",
-      badgeText: "Palagan Patriotik Menegakkan NKRI",
-      mainHeading: "Heroisme Palagan Kemerdekaan Jawa Tengah",
-      introLead: "Pasca Proklamasi 17 Agustus 1945, Jawa Tengah menjadi kancah pertempuran sengit mempertahankan kedaulatan republik. Dari darah para pemuda dalam Pertempuran Lima Hari Semarang hingga taktik jitu Supit Urang di Ambarawa, rakyat Jawa Tengah membuktikan kesetiaan tanpa batas kepada Merah Putih.",
-      briefDesc: "Pertempuran Lima Hari Semarang, Palagan Ambarawa pimpinan Soedirman, hingga penetapan resmi Provinsi Jawa Tengah.",
-      contextTitle: "Konteks Militer Rakyat & Kepemimpinan Soedirman",
-      contextDesc: "Tentara Keamanan Rakyat (TKR) bersama laskar pemuda bersatu dalam strategi perang semesta. Keberhasilan Kolonel Soedirman memukul mundur tentara Sekutu bersenjata lengkap di Ambarawa mengukuhkan kapasitas militer Republik Indonesia.",
-      heroImage: "assets/images/era-kemerdekaan.jpg",
+      id: "kemerdekaan-unesco",
+      index: 4,
+      number: "05",
+      shortTitle: "Kemerdekaan & UNESCO",
+      stepperLabel: "Era Modern",
+      periodRange: "1945 – Sekarang",
+      badgeText: "Palagan Patriotik & Pusaka Dunia",
+      mainHeading: "Palagan Kemerdekaan & Pusaka UNESCO",
+      introLead: "Pasca Proklamasi 1945, Jawa Tengah menjadi kancah pertempuran sengit mempertahankan republik dari Pertempuran Lima Hari Semarang hingga Palagan Ambarawa. Di era modern, Jawa Tengah bertransformasi menjadi episentrum kebudayaan adiluhung internasional dengan konsentrasi warisan UNESCO terlengkap di dunia.",
+      briefDesc: "Pertempuran Lima Hari Semarang, Palagan Ambarawa Soedirman, serta pengakuan UNESCO atas Candi Borobudur, Prambanan, Sangiran, Wayang, Keris, dan Batik.",
+      contextTitle: "Konteks Kedaulatan Bangsa & Diplomasi Budaya Dunia",
+      contextDesc: "Kemenangan taktik Supit Urang di Ambarawa mengukuhkan kapasitas militer Republik Indonesia. Di panggung global, kekayaan arsitektur andesit dan kriya batik adiluhung Jawa Tengah diakui UNESCO sebagai mahakarya warisan kemanusiaan.",
+      heroImage: "assets/images/era-kemerdekaan.webp",
       heroImageAlt: "Tugu Muda Semarang monumen pertempuran lima hari kemerdekaan",
-      spineBg: "linear-gradient(to bottom, #4A140B 0%, #6E1B0D 50%, #330C06 100%)",
-      spineColor: "#FFFFFF",
-      spineTitle: "1945–1950 M · Palagan Ambarawa & Tugu Muda",
-      location: "Semarang & Ambarawa",
+      spineBg: "linear-gradient(to bottom, #191410 0%, #2c2014 50%, #0e0b08 100%)",
+      spineColor: "#e1ca7a",
+      spineTitle: "1945–Kini · Kemerdekaan & Pusaka Dunia UNESCO",
+      location: "Semarang, Ambarawa & Seluruh Jawa Tengah",
       heroPlaque: {
-        tag: "Episentrum Perjuangan Nasional",
-        title: "Tugu Muda & Palagan Ambarawa",
-        location: "Semarang & Ambarawa"
+        tag: "Episentrum Patriotisme & Warisan Dunia",
+        title: "Palagan Ambarawa & Pusaka UNESCO",
+        location: "Semarang & Seluruh Jawa Tengah"
       },
       events: [
         {
@@ -353,7 +303,7 @@
           desc: "Bentrokan berdarah antara pemuda pejuang Jawa Tengah melawan batalion Kido Butai Jepang di Simpang Lima dan Tugu Muda, dipicu gugurnya dr. Kariadi.",
           significance: "Simbol keteguhan pantang menyerah angkatan muda Semarang dalam mempertahankan proklamasi.",
           location: "Kawasan Tugu Muda, Semarang",
-          image: "assets/images/era-kemerdekaan.jpg"
+          image: "assets/images/era-kemerdekaan.webp"
         },
         {
           year: "20 Nov – 15 Des 1945",
@@ -361,7 +311,7 @@
           desc: "Kolonel Soedirman memimpin pasukan gabungan mengepung Sekutu di Ambarawa dengan strategi penjepit 'Supit Urang', memaksa Sekutu mundur ke Semarang.",
           significance: "Kemenangan militer gemilang pertama TNI yang diabadikan sebagai Hari Juang Kartika TNI AD.",
           location: "Ambarawa, Semarang",
-          image: "assets/images/era-kemerdekaan.jpg"
+          image: "assets/images/era-kemerdekaan.webp"
         },
         {
           year: "15 Agustus 1950",
@@ -370,34 +320,7 @@
           significance: "Tonggak yuridis formal pemerintahan modern Jawa Tengah yang menaungi 35 kabupaten dan kota.",
           location: "Semarang, Jawa Tengah",
           image: "assets/images/slide-1-prambanan.webp"
-        }
-      ]
-    },
-    {
-      id: "modern",
-      index: 7,
-      number: "08",
-      shortTitle: "Jawa Tengah Modern",
-      stepperLabel: "Era Modern",
-      periodRange: "1950 – Sekarang",
-      badgeText: "Harmoni Pusaka UNESCO & Kemajuan",
-      mainHeading: "Pusaka UNESCO & Jawa Tengah Modern",
-      introLead: "Di era kontemporer, Jawa Tengah bertransformasi menjadi episentrum kebudayaan adiluhung internasional, lumbung pangan nasional, dan kawasan pariwisata terpadu tanpa pernah melupakan akar tradisi luhur para leluhur.",
-      briefDesc: "Pengakuan UNESCO atas Candi Borobudur, Prambanan, Sangiran, Wayang Kulit, Keris, dan Batik Tulis Jawa Tengah.",
-      contextTitle: "Konteks Diplomasi Budaya Dunia UNESCO",
-      contextDesc: "Melalui pelestarian Candi Borobudur, Prambanan, Sangiran, Wayang Kulit, Keris, dan Batik Tulis, Jawa Tengah mengukuhkan statusnya sebagai salah satu wilayah dengan konsentrasi warisan peradaban dunia terlengkap di muka bumi.",
-      heroImage: "assets/images/highlight-batik-keris.jpg",
-      heroImageAlt: "Warisan budaya adiluhung batik, keris dan wayang kulit Jawa Tengah",
-      spineBg: "linear-gradient(to bottom, #7A551E 0%, #A6752C 50%, #5C3E14 100%)",
-      spineColor: "#180F0A",
-      spineTitle: "1950–Kini · Pusaka Dunia UNESCO & Modernitas",
-      location: "35 Kabupaten & Kota Jawa Tengah",
-      heroPlaque: {
-        tag: "Diplomasi Budaya Dunia UNESCO",
-        title: "Pusaka Dunia & Kriya Adiluhung",
-        location: "Seluruh Jawa Tengah"
-      },
-      events: [
+        },
         {
           year: "1991 & 1996",
           title: "Penetapan Warisan Dunia UNESCO (Borobudur, Prambanan, Sangiran)",
@@ -412,12 +335,12 @@
           desc: "Warisan takbenda Jawa Tengah diakui dunia: Wayang Kulit (2003), Keris Nusantara (2005), dan Batik Indonesia (2009) yang berpusat di Solo, Pekalongan, dan Lasem.",
           significance: "Pengukuhan kriya dan seni pertunjukan Jawa sebagai masterpiece warisan kemanusiaan.",
           location: "Surakarta, Pekalongan & Rembang",
-          image: "assets/images/highlight-batik-keris.jpg"
+          image: "assets/images/highlight-batik-keris.webp"
         },
         {
           year: "Masa Kini",
           title: "Pariwisata Berkelanjutan & Ekosistem Budaya Digital",
-          desc: "Revitalisasi Kota Lama Semarang, pelestarian desa wisata Dieng, serta pergelaran seni berskala dunia mewujudkan harmoni modernitas dan konservasi sejarah.",
+          desc: "Revitalisasi Kota Lama Semarang, pelestarian desa wisata Dieng, serta inovasi Wayang Motion digital mewujudkan harmoni modernitas dan konservasi sejarah.",
           significance: "Mewujudkan pelestarian sejarah yang adaptif dan inklusif di era digital.",
           location: "Seluruh Jawa Tengah",
           image: "assets/images/slide-2-wayang.webp"
@@ -430,7 +353,7 @@
    * 2. TIMELINE STATE
    */
   const state = {
-    currentIndex: 1, // Default to Borobudur (Index 1) so both left and right panels are visible!
+    currentIndex: 1, // Default to Panel 02 (Era Candi) for balanced 3D perspective
     isPlayingTour: false,
     tourInterval: null,
     isDragging: false,
@@ -443,8 +366,7 @@
   }
 
   /**
-   * 3. RENDER 3D SLABS INTO THE PERSPECTIVE TRACK
-   * Each slab features both a left spine and right spine face, plus the front artwork face.
+   * 3. RENDER 3D PANELS INTO THE PERSPECTIVE TRACK
    */
   function render3DSlabs() {
     const track = document.getElementById('coverflow-track');
@@ -472,24 +394,27 @@
 
       slab.innerHTML = `
         <div class="slab-3d-box">
-          <!-- Left Spine Face (Prominent on left perspective panels) -->
+          <!-- Left Spine Face -->
           <div class="slab-spine spine-left" aria-hidden="true">
             <span class="spine-text">${escapeHtml(spineLabel)}</span>
           </div>
 
-          <!-- Front Cover Face (Focal point of each era) -->
+          <!-- Front Cover Face -->
           <div class="slab-cover">
-            <img src="${escapeHtml(coverImg)}" alt="${escapeHtml(coverTitle)}" class="slab-cover-img" loading="eager">
+            <img src="${escapeHtml(coverImg)}" alt="${escapeHtml(coverTitle)}" class="slab-cover-img" width="234" height="390" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async">
             <div class="slab-cover-overlay">
               <span class="slab-tag">${escapeHtml(coverTag)}</span>
               <h3 class="slab-title">${escapeHtml(coverTitle)}</h3>
               <p class="slab-subtitle">${escapeHtml(coverSubtitle)}</p>
               <p class="slab-desc-brief">${escapeHtml(coverDesc)}</p>
+              <div class="slab-cta-indicator">
+                <span class="slab-explore-hint"><i class="bi bi-compass"></i> Buka Rincian Sejarah</span>
+              </div>
             </div>
             <div class="slab-bevel-glare" aria-hidden="true"></div>
           </div>
 
-          <!-- Right Spine Face (Prominent on right perspective panels) -->
+          <!-- Right Spine Face -->
           <div class="slab-spine spine-right" aria-hidden="true">
             <span class="spine-text">${escapeHtml(spineLabel)}</span>
           </div>
@@ -499,7 +424,7 @@
         </div>
       `;
 
-      // Slab Click Event
+      // Click Event
       slab.addEventListener('click', () => {
         if (state.currentIndex !== index) {
           goToIndex(index);
@@ -523,16 +448,13 @@
       track.appendChild(slab);
     });
 
-    // Populate Top Milestone Stepper & Bottom Progress Dots
     renderMilestoneStepper();
-    renderProgressDots();
-
-    // Position in 3D perspective
     update3DPositions();
+    updateCuratorialDock();
   }
 
   /**
-   * 4. RENDER TOP CHRONOLOGICAL MILESTONE STEPPER
+   * 4. RENDER TOP CHRONOLOGICAL MILESTONE STEPPER (5 PANELS)
    */
   function renderMilestoneStepper() {
     const stepper = document.getElementById('milestone-stepper');
@@ -546,6 +468,7 @@
       btn.dataset.index = index;
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', index === state.currentIndex ? 'true' : 'false');
+      btn.setAttribute('aria-label', `Pilih Babak ${item.number}: ${item.shortTitle}`);
       btn.innerHTML = `
         <span class="pill-number">${item.number}</span>
         <span class="pill-title">${escapeHtml(item.stepperLabel)}</span>
@@ -557,35 +480,13 @@
   }
 
   /**
-   * 5. RENDER BOTTOM CURATORIAL PROGRESS DOTS
-   */
-  function renderProgressDots() {
-    const dotsContainer = document.getElementById('dock-progress-dots');
-    if (!dotsContainer) return;
-
-    dotsContainer.innerHTML = '';
-    HISTORICAL_ERAS_DATA.forEach((item, index) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'dock-dot' + (index === state.currentIndex ? ' active' : '');
-      dot.dataset.index = index;
-      dot.setAttribute('aria-label', `Pindah ke ${item.shortTitle}`);
-      dot.addEventListener('click', () => goToIndex(index));
-      dotsContainer.appendChild(dot);
-    });
-  }
-
-  /**
-   * 6. CALCULATE & APPLY 3D POSITIONING (CINEMATIC GALLERY PERSPECTIVE)
-   * Faithfully recreates the symmetrical perspective rack from the reference image:
-   * Left panels face inward right showing left spines; right panels face inward left showing right spines;
-   * Active center panel is prominently stepped forward in front of all panels.
+   * 5. CALCULATE & APPLY 3D POSITIONING (CINEMATIC PERSPECTIVE)
    */
   function update3DPositions() {
     const track = document.getElementById('coverflow-track');
     if (!track) return;
 
-    const slabs = track.querySelectorAll('.timeline-slab');
+    const slabs = state._cachedSlabs || (state._cachedSlabs = track.querySelectorAll('.timeline-slab'));
     const total = slabs.length;
     if (total === 0) return;
 
@@ -593,10 +494,10 @@
     const isMobile = viewportWidth < 768;
     const isTablet = viewportWidth >= 768 && viewportWidth < 1200;
 
-    // Responsive geometric spacing metrics
-    const stepX = isMobile ? 55 : (isTablet ? 82 : 100);
-    const activeClearance = isMobile ? 60 : (isTablet ? 90 : 115);
-    const stepZ = isMobile ? 16 : (isTablet ? 20 : 22);
+    // Responsive spacing tailored for 5 primary panels
+    const stepX = isMobile ? 70 : (isTablet ? 110 : 135);
+    const activeClearance = isMobile ? 80 : (isTablet ? 120 : 155);
+    const stepZ = isMobile ? 22 : (isTablet ? 30 : 38);
 
     slabs.forEach((slab, i) => {
       const offset = i - state.currentIndex;
@@ -608,247 +509,167 @@
       let opacity = 1;
       let zIndex = 10;
 
-      // Remove directional classes
       slab.classList.remove('is-left', 'is-active', 'is-right');
 
       if (offset === 0) {
-        // Active Center Panel:
-        // Stands proudly in the center, facing the viewer, stepped forward in Z, higher scale.
-        x = 0;
-        z = isMobile ? 48 : (isTablet ? 85 : 115);
-        rotY = 0;
-        scale = isMobile ? 1.05 : 1.1;
-        opacity = 1;
-        zIndex = 100; // Directly in front of all receding cards
-
         slab.classList.add('is-active');
+        x = 0;
+        z = isMobile ? 30 : 65;
+        rotY = 0;
+        scale = isMobile ? 1.02 : 1.07;
+        opacity = 1;
+        zIndex = 30;
       } else if (offset < 0) {
-        // Panels to the Left of Active:
-        // Stepped to the left, angled clockwise (rotateY positive) so left spine is visible
-        // and front cover angles inward toward center.
-        x = (offset * stepX) - activeClearance;
-        z = offset * stepZ;
-        rotY = isMobile ? 38 : (isTablet ? 42 : 44);
-        scale = Math.max(0.82, 1 + offset * 0.035);
-        opacity = Math.max(0.42, 1 + offset * 0.1);
-        zIndex = 20 + i; // Left cards stack upward towards center
-
         slab.classList.add('is-left');
+        const absOffset = Math.abs(offset);
+        x = -(absOffset * stepX + activeClearance);
+        z = -absOffset * stepZ;
+        rotY = isMobile ? 22 : 30;
+        scale = Math.max(0.72, 1 - absOffset * 0.08);
+        opacity = Math.max(0.40, 1 - absOffset * 0.22);
+        zIndex = 20 - absOffset;
       } else {
-        // Panels to the Right of Active:
-        // Stepped to the right, angled counter-clockwise (rotateY negative) so right spine is visible
-        // and front cover angles inward toward center.
-        x = (offset * stepX) + activeClearance;
-        z = -offset * stepZ;
-        rotY = isMobile ? -38 : (isTablet ? -42 : -44);
-        scale = Math.max(0.82, 1 - offset * 0.035);
-        opacity = Math.max(0.42, 1 - offset * 0.1);
-        zIndex = 20 + (total - i); // Right cards stack upward towards center
-
         slab.classList.add('is-right');
+        const absOffset = Math.abs(offset);
+        x = (absOffset * stepX + activeClearance);
+        z = -absOffset * stepZ;
+        rotY = isMobile ? -22 : -30;
+        scale = Math.max(0.72, 1 - absOffset * 0.08);
+        opacity = Math.max(0.40, 1 - absOffset * 0.22);
+        zIndex = 20 - absOffset;
       }
 
       slab.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
-      slab.style.zIndex = zIndex;
       slab.style.opacity = opacity;
+      slab.style.zIndex = zIndex;
     });
 
-    // Synchronize UI Elements
-    syncUIWithActiveItem();
-  }
+    // Update Top Status Period Tag
+    const current = getCurrentItem();
+    const statusTag = document.getElementById('status-period-tag');
+    const statusLabel = document.getElementById('status-period-label');
+    if (statusTag) statusTag.textContent = `Babak ${current.number} / 0${total}`;
+    if (statusLabel) statusLabel.textContent = `· ${current.periodRange} · ${current.location}`;
 
-  /**
-   * 7. SYNCHRONIZE ALL SURROUNDING UI WITH ACTIVE ITEM
-   */
-  function syncUIWithActiveItem() {
-    const item = getCurrentItem();
-    if (!item) return;
-
-    const totalNum = String(HISTORICAL_ERAS_DATA.length).padStart(2, '0');
-
-    // 1. Status Indicator in Top Rail
-    const tagEl = document.getElementById('status-period-tag');
-    if (tagEl) {
-      tagEl.textContent = `Babak ${item.number} / ${totalNum}`;
-    }
-
-    const labelEl = document.getElementById('status-period-label');
-    if (labelEl) {
-      labelEl.textContent = `· ${item.periodRange}`;
-    }
-
-    // 2. Center Action Button Label
-    const actionLabel = document.getElementById('center-action-label');
-    if (actionLabel) {
-      actionLabel.textContent = `Telusuri ${item.shortTitle}`;
-    }
-
-    // 3. Milestone Stepper Pills Active State
-    const stepperBtns = document.querySelectorAll('.milestone-pill-btn');
+    // Update active pill in milestone stepper
+    const stepperBtns = state._cachedStepperBtns || (state._cachedStepperBtns = document.querySelectorAll('.milestone-pill-btn'));
     stepperBtns.forEach((btn, idx) => {
-      if (idx === state.currentIndex) {
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        // Scroll stepper into view on mobile
+      const isActive = idx === state.currentIndex;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive && btn.scrollIntoView && state._lastScrolledIndex !== state.currentIndex) {
+        state._lastScrolledIndex = state.currentIndex;
         btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      } else {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
       }
     });
 
-    // 4. Progress Dots Active State
-    const dots = document.querySelectorAll('.dock-dot');
-    dots.forEach((dot, idx) => {
-      if (idx === state.currentIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-
-    // 5. Curatorial Dock Metadata
-    const dockThumb = document.getElementById('dock-thumbnail');
-    if (dockThumb) {
-      dockThumb.src = item.heroImage;
-      dockThumb.alt = item.mainHeading;
-    }
-
-    const dockTitle = document.getElementById('dock-title');
-    if (dockTitle) {
-      dockTitle.textContent = item.mainHeading;
-    }
-
-    const dockSubtitle = document.getElementById('dock-subtitle');
-    if (dockSubtitle) {
-      dockSubtitle.textContent = `${item.periodRange} · ${item.location}`;
-    }
-
-    // 6. Update Hidden Fallbacks for Legacy Automated Tests
-    const fallbackImg = document.getElementById('era-showcase-img');
-    if (fallbackImg) fallbackImg.src = item.heroImage;
-
-    const plaqueTag = document.getElementById('plaque-tag');
-    if (plaqueTag) plaqueTag.textContent = item.heroPlaque?.tag || '';
-
-    const plaqueTitle = document.getElementById('plaque-title');
-    if (plaqueTitle) plaqueTitle.textContent = item.heroPlaque?.title || '';
-
-    const plaqueLoc = document.getElementById('plaque-location');
-    if (plaqueLoc) plaqueLoc.textContent = item.heroPlaque?.location || '';
+    // Update Dock
+    updateCuratorialDock();
   }
 
   /**
-   * 8. NAVIGATION TRANSITION HANDLERS
+   * 6. UPDATE DOCK (CURATORIAL METADATA)
    */
-  function goToIndex(index) {
-    const total = HISTORICAL_ERAS_DATA.length;
-    if (index < 0) index = 0;
-    if (index >= total) index = total - 1;
+  function updateCuratorialDock() {
+    const current = getCurrentItem();
+    if (!current) return;
 
-    state.currentIndex = index;
+    const thumb = document.getElementById('dock-thumbnail');
+    const title = document.getElementById('dock-title');
+    const subtitle = document.getElementById('dock-subtitle');
+
+    if (thumb) {
+      thumb.src = current.heroImage;
+      thumb.alt = current.mainHeading;
+    }
+    if (title) title.textContent = current.mainHeading;
+    if (subtitle) subtitle.textContent = `${current.periodRange} · ${current.badgeText}`;
+  }
+
+  /**
+   * 7. GO TO SPECIFIC PANEL INDEX
+   */
+  function goToIndex(newIndex) {
+    const total = HISTORICAL_ERAS_DATA.length;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= total) newIndex = total - 1;
+
+    if (state.currentIndex === newIndex) return;
+    state.currentIndex = newIndex;
+
     update3DPositions();
   }
 
-  function nextItem() {
-    const total = HISTORICAL_ERAS_DATA.length;
-    if (state.currentIndex < total - 1) {
-      goToIndex(state.currentIndex + 1);
-    } else {
-      goToIndex(0); // Smooth loop
-    }
+  function nextPanel() {
+    const nextIdx = (state.currentIndex + 1) % HISTORICAL_ERAS_DATA.length;
+    goToIndex(nextIdx);
   }
 
-  function prevItem() {
-    const total = HISTORICAL_ERAS_DATA.length;
-    if (state.currentIndex > 0) {
-      goToIndex(state.currentIndex - 1);
-    } else {
-      goToIndex(total - 1);
-    }
+  function prevPanel() {
+    const prevIdx = (state.currentIndex - 1 + HISTORICAL_ERAS_DATA.length) % HISTORICAL_ERAS_DATA.length;
+    goToIndex(prevIdx);
   }
 
   /**
-   * 9. AUTOMATIC CINEMATIC TOUR
-   */
-  function toggleTour() {
-    state.isPlayingTour = !state.isPlayingTour;
-    const tourBtn = document.getElementById('btn-dock-play');
-    const tourIcon = document.getElementById('dock-play-icon');
-
-    if (state.isPlayingTour) {
-      if (tourBtn) tourBtn.classList.add('is-playing');
-      if (tourIcon) tourIcon.className = 'bi bi-pause-circle-fill';
-
-      state.tourInterval = setInterval(() => {
-        nextItem();
-      }, 4200);
-    } else {
-      if (tourBtn) tourBtn.classList.remove('is-playing');
-      if (tourIcon) tourIcon.className = 'bi bi-compass';
-
-      if (state.tourInterval) {
-        clearInterval(state.tourInterval);
-        state.tourInterval = null;
-      }
-    }
-  }
-
-  /**
-   * 10. HISTORICAL CHRONICLE DETAIL MODAL
+   * 8. DETAILED HISTORICAL CHRONICLE MODAL
    */
   function openDetailModal() {
+    const current = getCurrentItem();
     const modal = document.getElementById('timeline-detail-modal');
     const body = document.getElementById('timeline-modal-body');
-    if (!modal || !body) return;
-
-    const item = getCurrentItem();
-    const eventsList = item.events || [];
-
-    let eventsHtml = '';
-    eventsList.forEach(ev => {
-      eventsHtml += `
-        <div class="modal-event-item">
-          <div class="event-item-header">
-            <span class="event-year-tag">${escapeHtml(ev.year)}</span>
-            <span class="event-location-text"><i class="bi bi-geo-alt-fill me-1"></i>${escapeHtml(ev.location)}</span>
-          </div>
-          <h4 class="event-title-text">${escapeHtml(ev.title)}</h4>
-          <p class="event-desc-text">${escapeHtml(ev.desc)}</p>
-          <p class="event-significance-text"><strong>Makna Sejarah:</strong> ${escapeHtml(ev.significance)}</p>
-        </div>
-      `;
-    });
+    if (!modal || !body || !current) return;
 
     body.innerHTML = `
-      <div class="modal-hero-banner">
-        <img src="${escapeHtml(item.heroImage)}" alt="${escapeHtml(item.mainHeading)}">
-        <div class="modal-hero-scrim">
-          <span class="modal-period-badge">BABAK ${item.number} · ${escapeHtml(item.periodRange)}</span>
-          <h2 class="modal-chronicle-title" id="modal-chronicle-title">${escapeHtml(item.mainHeading)}</h2>
+      <div class="modal-era-hero">
+        <div class="modal-era-img-wrap">
+          <img src="${escapeHtml(current.heroImage)}" alt="${escapeHtml(current.heroImageAlt || current.mainHeading)}" class="modal-era-img" width="800" height="450" loading="lazy" decoding="async">
+          <div class="modal-era-scrim"></div>
+          <div class="modal-era-badge-row">
+            <span class="modal-badge-epoch">BABAK ${current.number} · ${escapeHtml(current.periodRange)}</span>
+            <span class="modal-badge-loc"><i class="bi bi-geo-alt-fill"></i> ${escapeHtml(current.location)}</span>
+          </div>
+        </div>
+        <div class="modal-era-headline">
+          <h2 class="modal-era-title" id="modal-chronicle-title">${escapeHtml(current.mainHeading)}</h2>
+          <p class="modal-era-lead">${escapeHtml(current.introLead)}</p>
         </div>
       </div>
 
-      <p class="modal-intro-lead">${escapeHtml(item.introLead)}</p>
-
-      <div class="modal-context-callout">
-        <div class="context-callout-title">
-          <i class="bi bi-compass-fill"></i>
-          <span>${escapeHtml(item.contextTitle)}</span>
-        </div>
-        <p class="context-callout-desc">${escapeHtml(item.contextDesc)}</p>
+      <div class="modal-era-context-card">
+        <h3 class="modal-context-title"><i class="bi bi-compass-fill"></i> ${escapeHtml(current.contextTitle)}</h3>
+        <p class="modal-context-body">${escapeHtml(current.contextDesc)}</p>
       </div>
 
-      <h3 style="font-family: var(--kp-font-serif); font-size: 19px; color: #FFFFFF; margin: 26px 0 14px;">
-        Kronik Peristiwa &amp; Warisan Peradaban
-      </h3>
-
-      <div class="modal-events-list">
-        ${eventsHtml}
+      <div class="modal-events-section">
+        <h3 class="modal-events-heading">Peristiwa Bersejarah &amp; Jejak Peninggalan</h3>
+        <div class="modal-events-timeline">
+          ${current.events.map(ev => `
+            <div class="event-timeline-node">
+              <div class="event-node-aside">
+                <span class="event-node-year">${escapeHtml(ev.year)}</span>
+                <span class="event-node-loc"><i class="bi bi-geo-alt"></i> ${escapeHtml(ev.location)}</span>
+              </div>
+              <div class="event-node-card">
+                ${ev.image ? `
+                  <div class="event-node-thumb-wrap">
+                    <img src="${escapeHtml(ev.image)}" alt="${escapeHtml(ev.title)}" class="event-node-thumb" width="120" height="90" loading="lazy" decoding="async">
+                  </div>
+                ` : ''}
+                <div class="event-node-content">
+                  <h4 class="event-node-title">${escapeHtml(ev.title)}</h4>
+                  <p class="event-node-desc">${escapeHtml(ev.desc)}</p>
+                  <div class="event-node-significance">
+                    <span class="significance-label">Signifikansi Sejarah:</span> ${escapeHtml(ev.significance)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </div>
     `;
 
-    modal.classList.add('is-open');
+    modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
@@ -856,277 +677,178 @@
   function closeDetailModal() {
     const modal = document.getElementById('timeline-detail-modal');
     if (!modal) return;
-    modal.classList.remove('is-open');
+    modal.classList.remove('show');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
   /**
-   * 11. OVERVIEW CHRONICLE DRAWER
+   * 9. CHRONOLOGICAL OVERVIEW DRAWER (FULL MATRIX)
    */
-  function toggleOverviewDrawer() {
-    const drawer = document.getElementById('timeline-overview-drawer');
-    if (!drawer) return;
-    if (drawer.classList.contains('is-open')) {
-      closeOverviewDrawer();
-    } else {
-      openOverviewDrawer();
-    }
-  }
-
   function openOverviewDrawer() {
     const drawer = document.getElementById('timeline-overview-drawer');
     const scrim = document.getElementById('drawer-scrim');
     const list = document.getElementById('drawer-milestones-list');
     if (!drawer || !list) return;
 
-    list.innerHTML = '';
-    HISTORICAL_ERAS_DATA.forEach((item, index) => {
-      const card = document.createElement('div');
-      card.className = 'drawer-milestone-card' + (index === state.currentIndex ? ' is-active' : '');
-      card.innerHTML = `
-        <img src="${escapeHtml(item.heroImage)}" alt="" class="drawer-card-thumb">
-        <div class="drawer-card-text">
-          <div class="drawer-card-date">Babak ${item.number} · ${escapeHtml(item.periodRange)}</div>
-          <h4 class="drawer-card-title">${escapeHtml(item.shortTitle)}</h4>
-        </div>
-      `;
+    list.innerHTML = `
+      <div class="drawer-matrix-list">
+        ${HISTORICAL_ERAS_DATA.map((era, idx) => `
+          <div class="drawer-era-item ${idx === state.currentIndex ? 'active' : ''}" data-index="${idx}">
+            <div class="drawer-era-badge">
+              <span class="drawer-num">${era.number}</span>
+            </div>
+            <div class="drawer-era-info">
+              <div class="drawer-era-range">${escapeHtml(era.periodRange)}</div>
+              <h4 class="drawer-era-title">${escapeHtml(era.mainHeading)}</h4>
+              <p class="drawer-era-desc">${escapeHtml(era.briefDesc)}</p>
+              <div class="drawer-events-count">
+                <i class="bi bi-check-circle-fill"></i> ${era.events.length} Peristiwa Utama Terdokumentasi
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
 
-      card.addEventListener('click', () => {
-        goToIndex(index);
+    // Click handler for drawer items
+    const items = list.querySelectorAll('.drawer-era-item');
+    items.forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.dataset.index, 10);
+        goToIndex(idx);
         closeOverviewDrawer();
       });
-
-      list.appendChild(card);
     });
 
-    drawer.classList.add('is-open');
+    drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
-    if (scrim) {
-      scrim.classList.add('is-open');
-      scrim.setAttribute('aria-hidden', 'false');
-    }
+    if (scrim) scrim.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 
   function closeOverviewDrawer() {
     const drawer = document.getElementById('timeline-overview-drawer');
     const scrim = document.getElementById('drawer-scrim');
     if (drawer) {
-      drawer.classList.remove('is-open');
+      drawer.classList.remove('open');
       drawer.setAttribute('aria-hidden', 'true');
     }
-    if (scrim) {
-      scrim.classList.remove('is-open');
-      scrim.setAttribute('aria-hidden', 'true');
-    }
+    if (scrim) scrim.classList.remove('open');
+    document.body.style.overflow = '';
   }
 
   /**
-   * 12. SEARCH & QUICK JUMP
+   * 10. DRAG & TOUCH SUPPORT FOR 3D PERSPECTIVE GALLERY
    */
-  function initSearch() {
-    const toggleBtn = document.getElementById('btn-toggle-search');
-    const searchBox = document.getElementById('stage-search-box');
-    const searchInput = document.getElementById('stage-search-input');
-    const clearBtn = document.getElementById('btn-clear-search');
-
-    if (!toggleBtn || !searchBox || !searchInput) return;
-
-    toggleBtn.addEventListener('click', () => {
-      const isVisible = searchBox.classList.contains('is-active');
-      if (isVisible) {
-        searchBox.classList.remove('is-active');
-        searchBox.setAttribute('aria-hidden', 'true');
-      } else {
-        searchBox.classList.add('is-active');
-        searchBox.setAttribute('aria-hidden', 'false');
-        searchInput.focus();
-      }
-    });
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        searchBox.classList.remove('is-active');
-        searchBox.setAttribute('aria-hidden', 'true');
-      });
-    }
-
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      if (!q) return;
-
-      const matchIdx = HISTORICAL_ERAS_DATA.findIndex(item => {
-        const text = `${item.mainHeading} ${item.shortTitle} ${item.periodRange} ${item.location} ${item.briefDesc} ${item.introLead}`.toLowerCase();
-        return text.includes(q);
-      });
-
-      if (matchIdx !== -1) {
-        goToIndex(matchIdx);
-      }
-    });
-  }
-
-  /**
-   * 13. TOUCH, MOUSE DRAG & GESTURE NAVIGATION
-   */
-  function initGestures() {
+  function setupDragAndTouch() {
     const viewport = document.getElementById('coverflow-viewport');
     if (!viewport) return;
 
-    let startX = 0;
-    let isDown = false;
-    let deltaX = 0;
+    function onMouseMove(e) {
+      if (!state.isDragging) return;
+      state.dragDeltaX = e.clientX - state.dragStartX;
+    }
+
+    function onMouseUp() {
+      if (!state.isDragging) return;
+      state.isDragging = false;
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      const threshold = 50;
+      if (state.dragDeltaX > threshold) {
+        prevPanel();
+      } else if (state.dragDeltaX < -threshold) {
+        nextPanel();
+      }
+      state.dragDeltaX = 0;
+    }
 
     viewport.addEventListener('mousedown', (e) => {
-      // Don't trigger drag on buttons
-      if (e.target.closest('button')) return;
-      isDown = true;
-      startX = e.pageX;
-      deltaX = 0;
+      // Ignore clicks on buttons
+      if (e.target.closest('button') || e.target.closest('.stage-center-action-wrapper')) return;
+      state.isDragging = true;
+      state.dragStartX = e.clientX;
+      state.dragDeltaX = 0;
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      window.addEventListener('mouseup', onMouseUp);
     });
 
-    window.addEventListener('mouseup', () => {
-      if (!isDown) return;
-      isDown = false;
-      if (deltaX > 45) {
-        prevItem();
-      } else if (deltaX < -45) {
-        nextItem();
-      }
-      deltaX = 0;
-    });
-
-    viewport.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      deltaX = e.pageX - startX;
-    });
+    // Touch support for phones & tablets
+    let touchStartX = 0;
+    let touchDeltaX = 0;
 
     viewport.addEventListener('touchstart', (e) => {
-      if (e.target.closest('button')) return;
-      if (e.touches.length === 1) {
-        startX = e.touches[0].pageX;
-        deltaX = 0;
-      }
+      if (e.target.closest('button') || e.target.closest('.stage-center-action-wrapper')) return;
+      touchStartX = e.touches[0].clientX;
+      touchDeltaX = 0;
     }, { passive: true });
 
     viewport.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 1) {
-        deltaX = e.touches[0].pageX - startX;
-      }
+      touchDeltaX = e.touches[0].clientX - touchStartX;
     }, { passive: true });
 
     viewport.addEventListener('touchend', () => {
-      if (deltaX > 40) {
-        prevItem();
-      } else if (deltaX < -40) {
-        nextItem();
+      const threshold = 40;
+      if (touchDeltaX > threshold) {
+        prevPanel();
+      } else if (touchDeltaX < -threshold) {
+        nextPanel();
       }
-      deltaX = 0;
-    });
-
-    // Horizontal wheel scroll
-    let wheelTimeout = null;
-    viewport.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      if (wheelTimeout) return;
-      if (Math.abs(e.deltaX) > 20 || Math.abs(e.deltaY) > 20) {
-        if (e.deltaX > 0 || e.deltaY > 0) {
-          nextItem();
-        } else {
-          prevItem();
-        }
-        wheelTimeout = setTimeout(() => {
-          wheelTimeout = null;
-        }, 320);
-      }
-    }, { passive: false });
+      touchDeltaX = 0;
+    }, { passive: true });
   }
 
   /**
-   * 14. INITIALIZATION & URL QUERY SUPPORT
+   * 11. KEYBOARD NAVIGATION
    */
-  function init() {
-    // Stage Lateral Floating Arrows
-    const btnStagePrev = document.getElementById('btn-stage-prev');
-    const btnStageNext = document.getElementById('btn-stage-next');
-    if (btnStagePrev) btnStagePrev.addEventListener('click', prevItem);
-    if (btnStageNext) btnStageNext.addEventListener('click', nextItem);
-
-    // Center Action Pill Button
-    const btnCenter = document.getElementById('btn-open-era-detail');
-    if (btnCenter) btnCenter.addEventListener('click', openDetailModal);
-
-    // Dock Controller Navigation Buttons
-    const btnDockPrev = document.getElementById('btn-dock-prev');
-    const btnDockNext = document.getElementById('btn-dock-next');
-    const btnTour = document.getElementById('btn-dock-play');
-    const btnOverview = document.getElementById('btn-dock-overview');
-
-    if (btnDockPrev) btnDockPrev.addEventListener('click', prevItem);
-    if (btnDockNext) btnDockNext.addEventListener('click', nextItem);
-    if (btnTour) btnTour.addEventListener('click', toggleTour);
-    if (btnOverview) btnOverview.addEventListener('click', toggleOverviewDrawer);
-
-    // Legacy Fallback Buttons for Tests
-    const legacyPrev = document.getElementById('btn-prev-era');
-    const legacyNext = document.getElementById('btn-next-era');
-    if (legacyPrev) legacyPrev.addEventListener('click', prevItem);
-    if (legacyNext) legacyNext.addEventListener('click', nextItem);
-
-    // Modal & Drawer Close Triggers
-    const modalClose = document.getElementById('btn-close-timeline-modal');
-    if (modalClose) modalClose.addEventListener('click', closeDetailModal);
-
-    const modalBackdrop = document.getElementById('timeline-detail-modal');
-    if (modalBackdrop) {
-      modalBackdrop.addEventListener('click', (e) => {
-        if (e.target === modalBackdrop) closeDetailModal();
-      });
-    }
-
-    const drawerClose = document.getElementById('btn-close-drawer');
-    if (drawerClose) drawerClose.addEventListener('click', closeOverviewDrawer);
-
-    const drawerScrim = document.getElementById('drawer-scrim');
-    if (drawerScrim) drawerScrim.addEventListener('click', closeOverviewDrawer);
-
-    // Global Keyboard Navigation
+  function setupKeyboardNav() {
     window.addEventListener('keydown', (e) => {
+      // If modal is open, escape closes it
+      const modal = document.getElementById('timeline-detail-modal');
+      if (modal && modal.classList.contains('show')) {
+        if (e.key === 'Escape') closeDetailModal();
+        return;
+      }
+
+      // If drawer is open, escape closes it
+      const drawer = document.getElementById('timeline-overview-drawer');
+      if (drawer && drawer.classList.contains('open')) {
+        if (e.key === 'Escape') closeOverviewDrawer();
+        return;
+      }
+
+      // Arrow keys on main timeline
       if (e.key === 'ArrowLeft') {
-        prevItem();
+        e.preventDefault();
+        prevPanel();
       } else if (e.key === 'ArrowRight') {
-        nextItem();
-      } else if (e.key === 'Escape') {
-        closeDetailModal();
-        closeOverviewDrawer();
+        e.preventDefault();
+        nextPanel();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToIndex(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToIndex(HISTORICAL_ERAS_DATA.length - 1);
       }
     });
+  }
 
-    // Window Resize Handler
-    window.addEventListener('resize', () => {
-      update3DPositions();
-    });
-
-    // Support URL Query Parameter (e.g., timeline.html?era=demak)
+  /**
+   * 12. URL ERA PARAMETER SUPPORT (e.g. ?era=kuno)
+   */
+  function checkUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const eraParam = urlParams.get('era');
-    if (eraParam) {
-      const foundIdx = HISTORICAL_ERAS_DATA.findIndex(e => e.id.toLowerCase() === eraParam.toLowerCase());
-      if (foundIdx !== -1) {
-        state.currentIndex = foundIdx;
-      }
-    } else {
-      // Default initial index: show Era 1 or 2 so there are receding slabs on both left and right!
-      state.currentIndex = 1;
+    if (!eraParam) return;
+
+    const foundIdx = HISTORICAL_ERAS_DATA.findIndex(item => 
+      item.id === eraParam || item.shortTitle.toLowerCase().includes(eraParam.toLowerCase())
+    );
+    if (foundIdx !== -1) {
+      goToIndex(foundIdx);
     }
-
-    // Initialize search & gestures
-    initSearch();
-    initGestures();
-
-    // Initial render
-    render3DSlabs();
   }
 
   function escapeHtml(str) {
@@ -1139,14 +861,55 @@
       .replace(/'/g, '&#39;');
   }
 
-  // Execute on DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  /**
+   * 13. INITIALIZE TIMELINE ENGINE
+   */
+  function initTimeline() {
+    render3DSlabs();
+    setupDragAndTouch();
+    setupKeyboardNav();
+    checkUrlParams();
+
+    // Lateral button controls
+    const btnPrev = document.getElementById('btn-stage-prev');
+    const btnNext = document.getElementById('btn-stage-next');
+    if (btnPrev) btnPrev.addEventListener('click', prevPanel);
+    if (btnNext) btnNext.addEventListener('click', nextPanel);
+
+    // Center action button: "Telusuri Jejak Sejarah"
+    const btnOpenDetail = document.getElementById('btn-open-era-detail');
+    if (btnOpenDetail) btnOpenDetail.addEventListener('click', openDetailModal);
+
+    // Close detail modal
+    const btnCloseModal = document.getElementById('btn-close-timeline-modal');
+    const modalBackdrop = document.getElementById('timeline-detail-modal');
+    if (btnCloseModal) btnCloseModal.addEventListener('click', closeDetailModal);
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeDetailModal();
+      });
+    }
+
+    // Overview drawer toggle & close
+    const btnOverview = document.getElementById('btn-dock-overview');
+    const btnCloseDrawer = document.getElementById('btn-close-drawer');
+    const scrim = document.getElementById('drawer-scrim');
+    if (btnOverview) btnOverview.addEventListener('click', openOverviewDrawer);
+    if (btnCloseDrawer) btnCloseDrawer.addEventListener('click', closeOverviewDrawer);
+    if (scrim) scrim.addEventListener('click', closeOverviewDrawer);
+
+    // Window resize handler for 3D geometric responsiveness
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(update3DPositions, 100);
+    });
   }
 
-  // Expose global dataset
-  window.HISTORICAL_TIMELINE_DATA = HISTORICAL_ERAS_DATA;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimeline);
+  } else {
+    initTimeline();
+  }
 
 })();

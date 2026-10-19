@@ -1,211 +1,98 @@
 /**
  * ==============================================================================
- * KARSA POTRET — REDESIGN DESIGN SYSTEM & MANDATORY COLOR PALETTE
+ * KARSAKALA — GLOBAL COLOR SYSTEM: TRANSPARENT BLACK, ANTIQUE GOLD & SUBTLE RED
  * ==============================================================================
- * Applied strictly to redesigned non-Home pages:
- * (timeline.html, peta.html, photobooth.html, wayang-motion.html)
+ * Applied consistently throughout EVERY page in Karsakala.
  * 
- * MANDATORY FIVE-COLOR PALETTE:
- * 1. Deep brown   : #611F0A (Primary text, strong headings, dark backgrounds, navigation elements)
- * 2. Warm brown   : #8D4B1F (Secondary headings, emphasized elements, selected component backgrounds)
- * 3. Terracotta   : #B46F39 (Accent colors, links, interactive elements, selected highlights)
- * 4. Sand         : #D6AE7C (Secondary backgrounds, subtle surface differentiation, decorative accents)
- * 5. Cream        : #F0D9A7 (Main light surfaces, highlighted areas, warm background sections)
+ * DESIGN TOKENS:
+ * - Background primary   : Deep black (#080808) & near-black charcoal (#11100e)
+ * - Primary accent       : Antique gold (#c5a44d) & luminous gold (#e1ca7a)
+ * - Secondary accent     : Deep burgundy / subtle red (#741d2b), transparent
+ * - Text                 : Warm ivory (#f4efe4) & muted antique sand (#c2b9a7)
+ * - Borders & Lines      : Understated translucent gold (rgba(197, 164, 77, 0.28))
+ * - Glass surfaces       : Semi-transparent black with restrained blur
  * ==============================================================================
  */
 
 :root {
-  /* Mandatory Core Five-Color Palette */
-  --color-deep-brown: #611F0A;
-  --color-warm-brown: #8D4B1F;
-  --color-terracotta: #B46F39;
-  --color-sand: #D6AE7C;
-  --color-cream: #F0D9A7;
+  /* 1. Core Specified Design Tokens */
+  --color-background: #080808;
+  --color-background-soft: #11100e;
+  --color-gold: #c5a44d;
+  --color-gold-light: #e1ca7a;
+  --color-red: #741d2b;
+  --color-text: #f4efe4;
+  --color-text-muted: #c2b9a7;
+  --glass-black: rgba(8, 8, 8, 0.72);
+  --glass-black-soft: rgba(8, 8, 8, 0.55);
+  --gold-border: rgba(197, 164, 77, 0.28);
+  --red-overlay: rgba(116, 29, 43, 0.16);
 
-  /* Semantic Color Mappings */
-  --kp-bg-main: #F7EBD2;              /* Warmest ivory/cream canvas */
-  --kp-bg-cream: #F0D9A7;             /* Main light surface */
-  --kp-bg-sand: #D6AE7C;              /* Secondary accent surface */
-  --kp-bg-dark: #611F0A;              /* Primary dark grounding surface */
-  --kp-bg-dark-alt: #4D1807;          /* Deepest contrast anchor */
-  --kp-bg-warm-brown: #8D4B1F;        /* Secondary dark / component container */
-  --kp-bg-card-light: #FFF8EB;        /* Luminous cream card background */
+  /* 2. Backward-Compatibility Aliases (Mapping Old 5-Color System to New Theme) */
+  --color-deep-brown: #11100e;
+  --color-warm-brown: #161513;
+  --color-terracotta: #c5a44d;
+  --color-sand: #c2b9a7;
+  --color-cream: #f4efe4;
+
+  /* 3. Semantic Color Mappings */
+  --kp-bg-main: #080808;
+  --kp-bg-cream: #11100e;
+  --kp-bg-sand: rgba(197, 164, 77, 0.12);
+  --kp-bg-dark: #080808;
+  --kp-bg-dark-alt: #050505;
+  --kp-bg-warm-brown: #161513;
+  --kp-bg-card-light: #12110f;
   
-  --kp-text-primary: #611F0A;         /* Primary high-contrast text on light */
-  --kp-text-secondary: #8D4B1F;       /* Secondary descriptive text on light */
-  --kp-text-muted: #9E653D;           /* Muted caption text on light */
+  /* 4. Atmospheric Curatorial Surfaces (Semi-transparent Black + Fine Gold) */
+  --kp-surface-ground: #080808;
+  --kp-surface-elevated: rgba(17, 16, 14, 0.85);
+  --kp-surface-card: rgba(17, 16, 14, 0.88);
+  --kp-surface-card-hover: rgba(24, 22, 19, 0.94);
+  --kp-surface-glass: rgba(8, 8, 8, 0.72);
+  --kp-surface-input: rgba(14, 13, 11, 0.85);
   
-  --kp-text-on-dark: #F0D9A7;         /* Primary text on dark surfaces */
-  --kp-text-on-dark-dim: #D6AE7C;     /* Secondary text on dark surfaces */
-  --kp-text-on-dark-muted: #B89A78;   /* Muted text on dark surfaces */
+  /* 5. Text Tokens */
+  --kp-text-primary: #f4efe4;
+  --kp-text-secondary: #c2b9a7;
+  --kp-text-muted: #8e8779;
   
-  --kp-accent: #B46F39;               /* Terracotta accent for buttons, active state */
-  --kp-accent-hover: #965324;         /* Deepened terracotta on hover */
-  --kp-border-sand: rgba(214, 174, 124, 0.45);
-  --kp-border-warm: rgba(141, 75, 31, 0.35);
-  --kp-border-dark: rgba(97, 31, 10, 0.25);
+  --kp-text-on-dark: #f4efe4;
+  --kp-text-on-dark-dim: #c2b9a7;
+  --kp-text-on-dark-muted: #8e8779;
   
-  /* Typography Tokens */
-  --kp-font-serif: 'Playfair Display', Georgia, serif;
-  --kp-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  /* 6. Accents & Borders */
+  --kp-accent: #c5a44d;
+  --kp-accent-hover: #e1ca7a;
+  --kp-border-sand: rgba(197, 164, 77, 0.28);
+  --kp-border-warm: rgba(197, 164, 77, 0.22);
+  --kp-border-dark: rgba(197, 164, 77, 0.15);
+  --kp-border-subtle: rgba(197, 164, 77, 0.18);
+  --kp-border-medium: rgba(197, 164, 77, 0.32);
+  --kp-border-focus: rgba(225, 202, 122, 0.65);
   
-  /* Radii Tokens */
+  /* 7. Typography Tokens — Mandatory 3-Font System */
+  --kp-font-serif: 'Inria Serif', Georgia, serif;
+  --kp-font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --kp-font-logo: 'Imperial Script', cursive;
+  
+  /* 8. Radii Tokens */
   --kp-radius-xs: 4px;
   --kp-radius-sm: 8px;
   --kp-radius-md: 14px;
   --kp-radius-lg: 20px;
   --kp-radius-pill: 9999px;
   
-  /* Elevation Shadows */
-  --kp-shadow-soft: 0 4px 18px rgba(97, 31, 10, 0.08);
-  --kp-shadow-md: 0 8px 28px rgba(97, 31, 10, 0.14);
-  --kp-shadow-dark: 0 12px 36px rgba(45, 12, 3, 0.35);
+  /* 9. Restrained Natural Elevation Shadows (No Fake Neon AI Glows) */
+  --kp-shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.35);
+  --kp-shadow-md: 0 10px 28px rgba(0, 0, 0, 0.55);
+  --kp-shadow-dark: 0 18px 46px rgba(0, 0, 0, 0.75);
+  --kp-shadow-card: 0 14px 38px rgba(0, 0, 0, 0.65);
+  --kp-shadow-popover: 0 24px 64px rgba(0, 0, 0, 0.85);
   
-  /* Transitions */
+  /* 10. Transitions */
   --kp-transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --kp-transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ==============================================================================
-   SHARED EDITORIAL NAVBAR (FOR REDESIGNED NON-HOME PAGES)
-   ============================================================================== */
-.desktop-header-timeline,
-.desktop-header-karsa {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
-  padding: 14px 0;
-  transition: background var(--kp-transition-fast);
-}
-
-.desktop-header-timeline .container-fluid,
-.desktop-header-karsa .container-fluid {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 36px;
-}
-
-.navbar-inner-timeline,
-.navbar-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* Brand Emblem */
-.brand-wrapper .brand-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.brand-wrapper .brand-logo-img {
-  height: 44px;
-  width: auto;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
-  transition: transform var(--kp-transition-fast);
-}
-
-.brand-wrapper .brand-link:hover .brand-logo-img {
-  transform: scale(1.03);
-}
-
-/* Primary Nav Links */
-.nav-center-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-links-list {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  list-style: none;
-  margin: 0;
-  padding: 4px 8px;
-  background: rgba(26, 6, 9, 0.65);
-  border: 1px solid rgba(214, 174, 124, 0.28);
-  border-radius: var(--kp-radius-pill);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.nav-links-list li {
-  margin: 0;
-}
-
-.nav-links-list .nav-item-link {
-  display: inline-block;
-  padding: 7px 18px;
-  font-family: var(--kp-font-sans);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #FAF6ED;
-  text-decoration: none;
-  border-radius: var(--kp-radius-pill);
-  transition: all var(--kp-transition-fast);
-  white-space: nowrap;
-  position: relative;
-}
-
-.nav-links-list .nav-item-link:hover {
-  color: #FFFFFF;
-  background: rgba(180, 111, 57, 0.25);
-}
-
-.nav-links-list .nav-item-link.active {
-  color: #E5C378;
-  font-weight: 700;
-  background: rgba(212, 175, 55, 0.12);
-  text-shadow: 0 0 12px rgba(229, 195, 120, 0.6);
-}
-
-.nav-links-list .nav-item-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 16px;
-  right: 16px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #E5C378, transparent);
-  box-shadow: 0 0 8px rgba(229, 195, 120, 0.85);
-  border-radius: 2px;
-}
-
-/* Right Photobooth Button */
-.btn-photobooth {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
-  background: var(--color-terracotta);
-  color: #FFFFFF !important;
-  font-family: var(--kp-font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: var(--kp-radius-pill);
-  border: 1px solid rgba(240, 217, 167, 0.35);
-  box-shadow: 0 4px 14px rgba(180, 111, 57, 0.35);
-  transition: all var(--kp-transition-fast);
-}
-
-.btn-photobooth:hover {
-  background: var(--color-warm-brown);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(141, 75, 31, 0.45);
-}
-
-.btn-photobooth.active {
-  background: var(--color-sand);
-  color: var(--color-deep-brown) !important;
-  border-color: var(--color-cream);
 }
 
 /* ==============================================================================
@@ -213,11 +100,13 @@
    ============================================================================== */
 .desktop-footer-timeline,
 .desktop-footer-karsa {
-  background: var(--color-deep-brown);
-  color: var(--color-cream);
-  border-top: 1px solid rgba(214, 174, 124, 0.25);
+  background: var(--color-background-soft, #11100e);
+  color: var(--color-text, #f4efe4);
+  border-top: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
   padding: 60px 0 28px;
   font-family: var(--kp-font-sans);
+  position: relative;
+  z-index: 10;
 }
 
 .desktop-footer-timeline .container-fluid,
@@ -232,19 +121,20 @@
   grid-template-columns: 1.2fr 2fr;
   gap: 60px;
   padding-bottom: 40px;
-  border-bottom: 1px solid rgba(214, 174, 124, 0.18);
+  border-bottom: 1px solid rgba(197, 164, 77, 0.16);
 }
 
 .footer-brand-col .footer-logo-img {
-  height: 52px;
+  height: 48px;
   width: auto;
   margin-bottom: 18px;
+  display: block;
 }
 
 .footer-tagline {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--color-sand);
+  color: var(--color-text-muted, #c2b9a7);
   max-width: 380px;
 }
 
@@ -258,7 +148,7 @@
   font-family: var(--kp-font-serif);
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-sand);
+  color: var(--color-gold, #c5a44d);
   margin-bottom: 16px;
   letter-spacing: 0.02em;
 }
@@ -273,15 +163,16 @@
 }
 
 .footer-nav-link {
-  color: rgba(240, 217, 167, 0.8);
+  color: rgba(244, 239, 228, 0.75);
   font-size: 13.5px;
   text-decoration: none;
-  transition: color var(--kp-transition-fast);
+  transition: color var(--kp-transition-fast), transform var(--kp-transition-fast);
 }
 
 .footer-nav-link:hover,
 .footer-nav-link.active {
-  color: var(--color-sand);
+  color: var(--color-gold-light, #e1ca7a);
+  transform: translateX(2px);
 }
 
 .footer-bottom-bar {
@@ -290,7 +181,8 @@
   align-items: center;
   padding-top: 24px;
   font-size: 12.5px;
-  color: rgba(214, 174, 124, 0.7);
+  color: var(--color-text-muted, #c2b9a7);
+  opacity: 0.8;
 }
 
 .footer-bottom-links {
@@ -299,11 +191,27 @@
 }
 
 .footer-bottom-link {
-  color: rgba(214, 174, 124, 0.7);
+  color: var(--color-text-muted, #c2b9a7);
   text-decoration: none;
   transition: color var(--kp-transition-fast);
 }
 
 .footer-bottom-link:hover {
-  color: var(--color-cream);
+  color: var(--color-gold-light, #e1ca7a);
+}
+
+@media (max-width: 768px) {
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-nav-col {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .footer-bottom-bar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
 }

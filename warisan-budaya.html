@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warisan Budaya Jawa Tengah — Eksplorasi Pusaka Adiluhung Karsa Potret</title>
-  <meta name="description" content="Menjelajahi mahakarya arsitektur candi dunia, kehalusan seni kriya keraton, dan filosofi luhur seni pertunjukan warisan UNESCO Jawa Tengah bersama Karsa Potret.">
+  <title>Warisan Budaya Jawa Tengah — Eksplorasi Pusaka Adiluhung Karsakala (Karsa Potret)</title>
+  <meta name="description" content="Menjelajahi mahakarya arsitektur candi dunia, kehalusan seni kriya keraton, dan filosofi luhur seni pertunjukan warisan UNESCO Jawa Tengah bersama Karsakala.">
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -20,6 +20,9 @@
   <!-- Base Project & Color Tokens Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/redesign-palette.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/karsakala-logo.svg">
   
   <!-- Dedicated Warisan Budaya Cultural Exhibition Stylesheet -->
   <link rel="stylesheet" href="css/warisan.css">
@@ -39,10 +42,11 @@
     <div class="container-fluid">
       <div class="navbar-inner-global">
         
-        <!-- Left: Brand Emblem -->
+        <!-- Left: Brand Emblem & Wordmark -->
         <div class="brand-wrapper">
-          <a href="index.html" class="brand-link" aria-label="Karsa Potret - Kembali ke Beranda">
-            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret" class="brand-logo-img">
+          <a href="index.html" class="brand-link" aria-label="Karsakala - Kembali ke Beranda">
+            <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+            <span class="brand-wordmark visually-hidden">Karsakala</span>
           </a>
         </div>
 
@@ -54,7 +58,6 @@
             <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
             <li><a href="peta.html" class="nav-item-link">Peta</a></li>
             <li><a href="warisan-budaya.html" class="nav-item-link active" aria-current="page">Warisan Budaya</a></li>
-            <li><a href="kuliner.html" class="nav-item-link">Kuliner</a></li>
           </ul>
         </nav>
 
@@ -78,13 +81,8 @@
        FEATURE INTRODUCTION (PETA PRESENTATION STYLE)
        ========================================================================== -->
   <section class="page-intro container">
-    <div class="provenance-badge">
-      <span class="badge-dot"></span>
-      <span>Adab, Estetika &amp; Pusaka Abadi</span>
-    </div>
     <h1 class="page-hero-title" id="warisan-main-heading">Warisan Budaya <span>Jawa Tengah</span></h1>
     <p class="page-hero-lead">Jelajahi mahakarya arsitektur candi dunia, kriya adiluhung berstatus warisan UNESCO, serta filosofi luhur seni tradisi yang abadi.</p>
-    <div class="intro-rule" aria-hidden="true"><span></span><span></span><span></span></div>
   </section>
 
   <!-- ==========================================================================
@@ -95,7 +93,7 @@
 
     <!-- Archival Background with Atmosphere Scrim -->
     <div class="warisan-hero-backdrop" id="warisan-hero-backdrop" aria-hidden="true">
-      <img src="assets/images/slide-3-borobudur.webp" id="hero-dynamic-backdrop-img" alt="Pameran Kurasi Warisan Budaya Jawa Tengah">
+      <img src="assets/images/slide-3-borobudur.webp" id="hero-dynamic-backdrop-img" alt="Pameran Kurasi Warisan Budaya Jawa Tengah" width="1440" height="600" fetchpriority="high" decoding="async">
       <div class="warisan-hero-gradient"></div>
     </div>
 
@@ -136,7 +134,6 @@
     <!-- Gallery Section Title & Counter -->
     <div class="warisan-gallery-heading-row">
       <div class="gallery-heading-text">
-        <span class="gallery-sub-badge"><i class="bi bi-collection-play" aria-hidden="true"></i> INDEKS PUSAKA ADILUHUNG</span>
         <h2 class="gallery-section-title">Paviliun Koleksi Warisan Budaya</h2>
         <p class="gallery-section-desc">Telusuri katalog lengkap dokumentasi sejarah peradaban dan pusaka Jawa Tengah.</p>
       </div>
@@ -168,8 +165,8 @@
       
       <div class="warisan-footer-grid">
         <div class="warisan-footer-brand">
-          <a href="index.html" aria-label="Karsa Potret">
-            <img src="assets/images/logo-karsa-potret.png" alt="Karsa Potret">
+          <a href="index.html" class="brand-link footer-brand-link" aria-label="Karsakala - Beranda">
+            <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="footer-logo-img" width="94" height="48" loading="lazy" decoding="async">
           </a>
           <p class="warisan-footer-desc">
             Media interaktif dokumentasi dan apresiasi kekayaan sejarah, tokoh, serta warisan peradaban adiluhung Jawa Tengah dari masa ke masa.
@@ -184,7 +181,6 @@
               <li><a href="timeline.html">Timeline Sejarah</a></li>
               <li><a href="tokoh.html">Tokoh Bersejarah</a></li>
               <li><a href="warisan-budaya.html">Warisan Budaya</a></li>
-              <li><a href="kuliner.html">Kuliner Tradisional</a></li>
             </ul>
           </div>
           <div>
@@ -215,7 +211,7 @@
   </footer>
 
   <!-- Vanilla JavaScript Controller -->
-  <script src="js/warisan.js"></script>
-  <script src="js/nav.js"></script>
+  <script src="js/warisan.js" defer></script>
+  <script src="js/nav.js" defer></script>
 </body>
 </html>
