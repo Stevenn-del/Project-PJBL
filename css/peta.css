@@ -55,10 +55,10 @@ body.peta-page {
 .page-intro .page-hero-title,
 .page-intro h1 {
   font-family: var(--kp-font-serif);
-  font-size: clamp(34px, 3.6vw, 48px);
+  font-size: clamp(32px, 3.4vw, 44px);
   font-weight: 700;
   line-height: 1.18;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--color-cream);
   margin: 0 0 12px;
 }
@@ -71,10 +71,10 @@ body.peta-page {
 
 .page-intro .page-hero-lead,
 .page-intro p {
-  font-size: 15.5px;
+  font-size: 15px;
   line-height: 1.65;
   color: rgba(240, 217, 167, 0.85);
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
@@ -123,6 +123,7 @@ body.peta-page {
    ========================================================================== */
 .map-panel {
   min-width: 0;
+  scroll-margin-top: 86px;
   border-radius: var(--kp-radius-md);
   background: var(--glass-black, rgba(8, 8, 8, 0.85));
   border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
@@ -219,9 +220,11 @@ body.peta-page {
 }
 
 .search-result {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding: 9px 12px;
+  min-height: 44px;
+  padding: 10px 14px;
   border: none;
   background: transparent;
   text-align: left;
@@ -247,7 +250,7 @@ body.peta-page {
 
 .reset-button {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   padding: 0 16px;
@@ -447,6 +450,7 @@ body.peta-page {
    ========================================================================== */
 .info-card {
   min-width: 0;
+  scroll-margin-top: 86px;
   border-radius: var(--kp-radius-md);
   background: var(--glass-black, rgba(12, 11, 9, 0.92));
   border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.35));
@@ -919,30 +923,192 @@ body.peta-page {
     margin-bottom: 40px;
   }
   .map-wrap {
-    height: 460px;
+    height: 440px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .page-intro {
-    padding: 24px 16px 16px;
+    padding: 28px 16px 16px;
   }
   .page-intro .page-hero-title {
-    font-size: 26px;
+    font-size: clamp(24px, 5.5vw, 32px);
+  }
+  .page-intro .page-hero-lead {
+    font-size: 14px;
+    line-height: 1.6;
   }
   .explorer {
     padding: 0 14px;
+    margin-bottom: 32px;
+  }
+  .map-toolbar {
+    padding: 10px 14px;
+    gap: 10px;
+    min-height: 56px;
+  }
+  .search-box {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 42px;
+    padding: 0 12px;
+  }
+  .search-box kbd {
+    display: none !important;
+  }
+  .reset-button {
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: 12px;
+    flex-shrink: 0;
+    touch-action: manipulation;
   }
   .map-wrap {
-    height: 360px;
+    height: clamp(330px, 48vh, 400px);
   }
   .heritage-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+  .heritage-section {
+    padding: 48px 16px;
+  }
+  .heritage-section .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-intro {
+    padding: 20px 12px 14px;
+  }
+  .page-intro .provenance-badge {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .explorer {
+    padding: 0 10px;
+    gap: 20px;
+  }
+  .map-toolbar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .reset-button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .reset-button span {
+    display: none;
+  }
+  .map-wrap {
+    height: 330px;
+  }
+  .map-legend {
+    padding: 8px 10px;
+    font-size: 10px;
+    bottom: 8px;
+    left: 8px;
+    gap: 3px;
+    max-width: calc(100% - 130px);
+    border-radius: 4px;
+  }
+  .map-credit {
+    bottom: 8px;
+    right: 8px;
+    font-size: 9.5px;
+    padding: 2px 6px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-content {
+    padding: 18px 14px;
+  }
+  .empty-card {
+    padding: 28px 10px;
+  }
+  .empty-card h2 {
+    font-size: 20px;
+  }
+  .empty-card p {
+    font-size: 13.5px;
+  }
+  .region-image {
+    height: 160px;
+    margin-bottom: 16px;
+  }
+  .details-button {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .heritage-section {
+    padding: 36px 12px;
+  }
   .history-modal {
-    padding: 24px 18px;
+    padding: 20px 14px;
     max-height: 92vh;
+    border-radius: 6px;
+  }
+  .modal-close {
+    width: 44px;
+    height: 44px;
+    top: 10px;
+    right: 10px;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-intro .page-hero-title {
+    font-size: 21px;
+  }
+  .page-intro .page-hero-lead {
+    font-size: 13px;
+  }
+  .explorer {
+    padding: 0 6px;
+    gap: 16px;
+  }
+  .map-wrap {
+    height: 280px;
+  }
+  .map-legend {
+    display: none;
+  }
+  .map-credit {
+    display: none;
+  }
+  .card-content {
+    padding: 14px 10px;
+  }
+  .empty-card {
+    padding: 20px 6px;
+  }
+  .empty-card h2 {
+    font-size: 18px;
+  }
+  .region-image {
+    height: 135px;
+  }
+  .heritage-card {
+    padding: 16px 12px;
+  }
+  .modal-backdrop {
+    padding: 6px;
+  }
+  .history-modal {
+    padding: 16px 10px;
   }
 }
 

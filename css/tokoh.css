@@ -108,7 +108,7 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
 
 .page-intro .page-hero-title {
   font-family: var(--tk-font-serif);
-  font-size: clamp(32px, 3.6vw, 48px);
+  font-size: clamp(32px, 3.4vw, 44px);
   font-weight: 700;
   color: var(--tk-ivory);
   line-height: 1.18;
@@ -124,9 +124,9 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
 .page-intro .page-hero-lead {
   font-family: var(--tk-font-sans);
   color: var(--tk-text-muted);
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   max-width: 680px;
   margin: 0 auto;
 }
@@ -386,15 +386,18 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
 .btn-deck-nav {
   background: transparent;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   color: var(--tk-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 16px;
+  touch-action: manipulation;
   transition: all 0.2s ease;
 }
 
@@ -467,10 +470,10 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   width: 320px;
   height: 480px;
   position: relative;
-  transition: transform 0.52s cubic-bezier(0.2, 0.8, 0.2, 1),
-              opacity 0.45s ease,
-              filter 0.45s ease,
-              box-shadow 0.45s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.48s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.48s ease,
+              box-shadow 0.48s ease;
   will-change: transform, opacity, filter;
   user-select: none;
   cursor: pointer;
@@ -1173,20 +1176,24 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
 
 @media (max-width: 768px) {
   .tokoh-showcase-section {
-    padding: 20px 0 44px;
+    padding: 16px 0 36px;
     align-items: flex-start;
+    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   .tokoh-showcase-container {
-    padding: 0 16px;
+    padding: 0 clamp(12px, 3.5vw, 20px);
+    overflow-x: hidden;
   }
 
   .tokoh-filter-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 4px 0 8px;
-    margin: 8px 0 20px;
+    margin: 6px 0 18px;
     scrollbar-width: none;
+    width: 100%;
   }
 
   .tokoh-filter-wrapper::-webkit-scrollbar {
@@ -1198,38 +1205,53 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
     flex-wrap: nowrap;
     white-space: nowrap;
     width: max-content;
+    padding: 5px 8px;
+    gap: 8px;
+  }
+
+  .tokoh-filter-pill {
+    min-height: 44px;
+    padding: 9px 16px;
+    font-size: 13px;
+    touch-action: manipulation;
   }
 
   .page-intro .page-hero-title {
-    font-size: 28px;
+    font-size: clamp(24px, 6vw, 30px);
   }
 
   .tokoh-split-stage {
-    gap: 32px;
-    margin-bottom: 32px;
+    gap: 28px;
+    margin-bottom: 28px;
+    grid-template-columns: 1fr;
   }
 
   .tokoh-gallery-panel {
-    min-height: 440px;
-    margin-top: 10px;
+    min-height: clamp(380px, 52vh, 440px);
+    margin-top: 6px;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
   }
 
   .tokoh-layered-deck {
-    min-height: 440px;
+    min-height: clamp(380px, 52vh, 440px);
     max-width: 100%;
+    overflow: hidden;
+    justify-items: center;
   }
 
   .tokoh-profile-card.deck-card {
-    width: min(290px, 82vw);
-    height: 430px;
+    width: min(280px, 78vw);
+    height: clamp(380px, 50vh, 420px);
   }
 
   .deck-card[data-slot="1"] {
-    transform: translateX(45px) translateZ(0) scale(0.92);
+    transform: translateX(36px) translateZ(0) scale(0.92);
   }
   
   .deck-card[data-slot="2"] {
-    transform: translateX(85px) translateZ(-40px) scale(0.84);
+    transform: translateX(68px) translateZ(-40px) scale(0.85);
   }
 
   .deck-card[data-slot="3"] {
@@ -1238,12 +1260,27 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   }
 
   .tokoh-modal-card {
-    padding: 24px 20px;
+    padding: 22px 16px;
+    max-height: 92dvh;
+    border-radius: 16px;
+    width: 100%;
+  }
+
+  .tokoh-modal-close {
+    width: 44px;
+    height: 44px;
+    top: 12px;
+    right: 12px;
   }
 
   .tokoh-modal-header {
     flex-direction: column;
     text-align: center;
+    gap: 16px;
+  }
+
+  .tokoh-modal-name {
+    font-size: 24px;
   }
 
   .spotlight-controls-row {
@@ -1252,13 +1289,23 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
     gap: 12px;
   }
 
+  .btn-read-tokoh-primary {
+    min-height: 44px;
+    width: 100%;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+
   .deck-nav-cluster {
     justify-content: center;
+    width: 100%;
+    padding: 4px 8px;
   }
 
   .spotlight-years-meta {
     margin-left: 0;
     text-align: center;
+    width: 100%;
   }
 
   .tokoh-roster-track {
@@ -1268,6 +1315,7 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 8px;
+    gap: 12px;
   }
 
   .tokoh-roster-track::-webkit-scrollbar {
@@ -1275,14 +1323,44 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   }
 
   .tokoh-roster-card {
-    min-width: 220px;
+    min-width: 210px;
     flex-shrink: 0;
+    min-height: 44px;
   }
 
   .tokoh-footer-bottom {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+/* Compact Mobile Screens (<= 430px down to 320px) */
+@media (max-width: 430px) {
+  .tokoh-profile-card.deck-card {
+    width: min(255px, 80vw);
+    height: clamp(345px, 48vh, 385px);
+  }
+
+  .deck-card[data-slot="1"] {
+    transform: translateX(24px) scale(0.92);
+  }
+  
+  .deck-card[data-slot="2"] {
+    transform: translateX(46px) scale(0.85);
+  }
+
+  .spotlight-quote-box {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .spotlight-title-row .figure-main-name {
+    font-size: clamp(24px, 6.5vw, 30px);
+  }
+
+  .tokoh-roster-card {
+    min-width: 185px;
   }
 }
 

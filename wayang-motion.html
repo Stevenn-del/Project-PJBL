@@ -109,14 +109,8 @@
          ====================================================================== -->
     <div class="wayang-experience-container" id="wayang-experience-container" role="region" aria-label="Area Interaksi Wayang Motion">
 
-      <!-- Top-Right Floating Controls (Matching Primary Reference) -->
+      <!-- Top-Right Essential Controls (Streamlined, Direct & Responsive) -->
       <div class="stage-floating-actions" id="stage-floating-actions" role="toolbar" aria-label="Kontrol Utama Panggung">
-        <!-- Character Selector (Reference vs Classic) -->
-        <select id="select-puppet-mode" class="select-wm-control" aria-label="Pilih Karakter Wayang" title="Pilih Karakter Wayang">
-          <option value="reference" selected>Tokoh Referensi (Reel)</option>
-          <option value="gatotkaca-arjuna">Raden Gatotkaca &amp; Arjuna</option>
-        </select>
-
         <!-- Shadow Mode Toggle Button -->
         <button type="button" class="icon-btn" id="btn-toggle-shadow" title="Ubah mode tampilan antara warna asli atau siluet bayangan tradisi" aria-label="Mode Bayangan">
           <i class="bi bi-moon-stars" aria-hidden="true"></i>
@@ -124,7 +118,7 @@
         </button>
 
         <!-- Reset Puppets Position Button -->
-        <button type="button" class="icon-btn" id="btn-reset-puppets" title="Atur ulang posisi wayang ke default panggung" aria-label="Atur Ulang Posisi">
+        <button type="button" class="icon-btn" id="btn-reset-puppets" title="Atur ulang posisi wayang ke default panggung (C)" aria-label="Atur Ulang Posisi">
           <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
           <span class="visually-hidden">Atur Ulang Posisi</span>
         </button>
@@ -135,11 +129,6 @@
           <svg class="icon-sound-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="display:none;"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7Z" transform="translate(2 0)"/></svg>
         </button>
 
-        <!-- Settings Drawer Toggle -->
-        <button type="button" id="settings-toggle" class="icon-btn" aria-label="Pengaturan Panggung" aria-expanded="false" title="Pengaturan Panggung">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.3 7.3 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.3 7.3 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.3 7.3 0 0 0 1.7 1L11 21h4l.4-2.7a7.3 7.3 0 0 0 1.7-1l2.5 1 2-3.5ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
-        </button>
-
         <!-- Dedicated Fullscreen Control -->
         <button type="button" class="icon-btn btn-wm-fullscreen" id="btn-toggle-fullscreen" title="Tampilkan panggung kelir layar penuh (Fullscreen)" aria-label="Layar Penuh" aria-pressed="false">
           <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
@@ -147,7 +136,7 @@
         </button>
 
         <!-- Guide Dialog Button -->
-        <button type="button" class="icon-btn" id="btn-open-guide" title="Buka panduan gestur tangan" aria-label="Panduan Gerakan">
+        <button type="button" class="icon-btn" id="btn-open-guide" title="Buka panduan gestur tangan dalang" aria-label="Panduan Gerakan">
           <i class="bi bi-question-circle" aria-hidden="true"></i>
         </button>
 
@@ -156,59 +145,16 @@
           <i class="bi bi-stop-circle" aria-hidden="true"></i>
           <span class="visually-hidden">Hentikan Kamera</span>
         </button>
-
-        <!-- Toggle Camera Preview (PiP) Button -->
-        <button type="button" class="icon-btn" id="btn-toggle-pip" title="Tampilkan / Sembunyikan Kamera Dalang (V)" aria-label="Kamera Dalang">
-          <i class="bi bi-camera-video" aria-hidden="true"></i>
-          <span class="visually-hidden">Kamera Dalang</span>
-        </button>
       </div>
 
-      <!-- Settings Panel Drawer (Matching Primary Reference) -->
-      <aside id="settings" class="panel settings" hidden aria-label="Pengaturan Panggung">
-        <div class="settings-header">
-          <h2>Pengaturan Panggung</h2>
-          <button type="button" class="btn-close-settings" id="btn-close-settings" aria-label="Tutup pengaturan">
-            <i class="bi bi-x"></i>
-          </button>
-        </div>
-
-        <label>Jumlah Tokoh
-          <select id="opt-characters">
-            <option value="two" selected>Dua wayang, satu per tangan</option>
-            <option value="one">Satu wayang (dua tangan)</option>
-          </select>
-        </label>
-
-        <label>Jari Tuding Lengan
-          <select id="opt-fingers">
-            <option value="thumb-index" selected>Ibu jari + telunjuk</option>
-            <option value="thumb-pinky">Ibu jari + kelingking (lengan lebar)</option>
-            <option value="index-pinky">Telunjuk + kelingking</option>
-          </select>
-        </label>
-
-        <label>Arah Hadap
-          <select id="opt-facing">
-            <option value="target" selected>Saling berhadapan</option>
-            <option value="walk">Menghadap arah berjalan</option>
-            <option value="manual">Manual (Tombol F / G)</option>
-          </select>
-        </label>
-
-        <label class="row">
-          <input type="checkbox" id="opt-camera" checked />
-          <span>Tampilkan pratinjau kamera</span>
-        </label>
-
-        <label>Ukuran Wayang
-          <input type="range" id="opt-size" min="0.36" max="0.85" step="0.01" value="0.55" />
-        </label>
-
-        <label>Volume Musik Gamelan
-          <input type="range" id="opt-volume" min="0" max="1" step="0.05" value="0.6" />
-        </label>
-      </aside>
+      <!-- Small Landscape Orientation Suggestion (Mobile Portrait) -->
+      <div class="landscape-suggestion-banner" id="landscape-suggestion" role="note" aria-live="polite">
+        <i class="bi bi-phone-landscape" aria-hidden="true"></i>
+        <span>Saran: Putar ponsel ke posisi lanskap untuk ruang gerak wayang yang lebih leluasa</span>
+        <button type="button" class="btn-dismiss-landscape" id="btn-dismiss-landscape" aria-label="Tutup saran">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
 
       <!-- The Interactive Wayang Stage (Panggung Kelir Adiluhung) -->
       <div class="stage-viewport-wrapper" id="stage-viewport" role="region" aria-label="Panggung Kelir Wayang Kulit">
@@ -648,9 +594,7 @@
   <!-- ==========================================================================
        DEPENDENCY SCRIPTS: MEDIAPIPE HANDS
        ========================================================================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous" defer></script>
 
   <!-- WAYANG MOTION JAVASCRIPT CONTROLLER -->
   <script src="js/wayang-motion.js" defer></script>

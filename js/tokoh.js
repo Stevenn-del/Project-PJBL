@@ -141,7 +141,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Purbalingga, Ambarawa & Banyumas",
     years: "1916–1950 M",
-    image: "assets/images/era-kemerdekaan.jpg",
+    image: "assets/images/era-kemerdekaan.webp",
     quote: "Robek-robeklah badanku, potong-potonglah jasad ini, tetapi jiwaku yang dilindungi benteng kemerdekaan tidak akan dapat dibunuh.",
     achievements: [
       "Memimpin kemenangan gemilang Pertempuran Palagan Ambarawa (1945) mengusir Sekutu",
@@ -211,7 +211,7 @@ class TokohEditorialController {
     const list = this.getFilteredFigures();
     if (list.length === 0) return;
     this.activeIndex = (newIndex + list.length) % list.length;
-    this.renderShowcase();
+    this.updateShowcase();
   }
 
   prevFigure() {
@@ -222,129 +222,169 @@ class TokohEditorialController {
     this.setActiveIndex(this.activeIndex + 1);
   }
 
-  renderShowcase() {
+  updateShowcase() {
     const list = this.getFilteredFigures();
     if (list.length === 0) return;
-
     const activeFig = this.getActiveFigure();
     if (!activeFig) return;
 
-    // 1. Render Left Side Information & Introduction Panel (#tokoh-spotlight)
-    if (this.dom.infoPanel) {
-      const sentences = activeFig.bio.split('. ');
-      const conciseDesc = sentences.slice(0, 2).join('. ') + (sentences.slice(0, 2).join('. ').endsWith('.') ? '' : '.');
+    this.renderInfoPanel(activeFig, list);
+    this.updateCardsPosition(list);
+    this.updateRosterTrack(list);
+  }
 
-      const currentIndexFormatted = (this.activeIndex + 1).toString().padStart(2, '0');
-      const totalCountFormatted = list.length.toString().padStart(2, '0');
+  renderShowcase() {
+    const list = this.getFilteredFigures();
+    if (list.length === 0) return;
+    const activeFig = this.getActiveFigure();
+    if (!activeFig) return;
 
-      this.dom.infoPanel.innerHTML = `
-        <div class="tokoh-info-inner">
-          <!-- Dynamic Active Figure Card Block -->
-          <div class="spotlight-active-narrative">
-            <div class="spotlight-provenance-row">
-              <span class="spotlight-role-tag">${this.escapeHtml(activeFig.title)}</span>
-              <span class="spotlight-region-pill">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(activeFig.region)}
-              </span>
-              <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
-            </div>
+    this.renderInfoPanel(activeFig, list);
+    this.renderDeckCards(list);
+    this.renderRosterTrack(list);
+  }
 
-            <h2 class="spotlight-figure-name" id="tokoh-main-heading">${this.escapeHtml(activeFig.name)}</h2>
-            
-            <p class="spotlight-concise-desc">${this.escapeHtml(conciseDesc)}</p>
+  renderInfoPanel(activeFig, list) {
+    if (!this.dom.infoPanel) return;
+    const sentences = activeFig.bio.split('. ');
+    const conciseDesc = sentences.slice(0, 2).join('. ') + (sentences.slice(0, 2).join('. ').endsWith('.') ? '' : '.');
+    const currentIndexFormatted = (this.activeIndex + 1).toString().padStart(2, '0');
+    const totalCountFormatted = list.length.toString().padStart(2, '0');
 
-            <div class="spotlight-quote-box">
-              <blockquote class="spotlight-quote-text">“${this.escapeHtml(activeFig.quote)}”</blockquote>
-            </div>
-
-            <!-- Action & Navigation Controls Bar -->
-            <div class="spotlight-controls-row">
-              <button type="button" class="btn-read-tokoh-primary btn-read-tokoh" data-open-tokoh="${activeFig.id}">
-                <span>Pelajari Kisah Lengkap</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-              </button>
-
-              <div class="deck-nav-cluster" aria-label="Navigasi Galeri Tokoh">
-                <button type="button" class="btn-deck-nav btn-deck-prev" id="btn-tokoh-prev" aria-label="Tokoh sebelumnya">
-                  <i class="bi bi-chevron-left" aria-hidden="true"></i>
-                </button>
-                <span class="deck-counter-badge" id="tokoh-counter">${currentIndexFormatted} / ${totalCountFormatted}</span>
-                <button type="button" class="btn-deck-nav btn-deck-next" id="btn-tokoh-next" aria-label="Tokoh selanjutnya">
-                  <i class="bi bi-chevron-right" aria-hidden="true"></i>
-                </button>
-              </div>
-
-              <span class="spotlight-years-meta">${this.escapeHtml(activeFig.years)}</span>
-            </div>
+    this.dom.infoPanel.innerHTML = `
+      <div class="tokoh-info-inner">
+        <div class="spotlight-active-narrative">
+          <div class="spotlight-provenance-row">
+            <span class="spotlight-role-tag">${this.escapeHtml(activeFig.title)}</span>
+            <span class="spotlight-region-pill">
+              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(activeFig.region)}
+            </span>
+            <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
           </div>
 
+          <h2 class="spotlight-figure-name" id="tokoh-main-heading">${this.escapeHtml(activeFig.name)}</h2>
+          <p class="spotlight-concise-desc">${this.escapeHtml(conciseDesc)}</p>
+
+          <div class="spotlight-quote-box">
+            <blockquote class="spotlight-quote-text">“${this.escapeHtml(activeFig.quote)}”</blockquote>
+          </div>
+
+          <div class="spotlight-controls-row">
+            <button type="button" class="btn-read-tokoh-primary btn-read-tokoh" data-open-tokoh="${activeFig.id}">
+              <span>Pelajari Kisah Lengkap</span>
+              <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </button>
+
+            <div class="deck-nav-cluster" aria-label="Navigasi Galeri Tokoh">
+              <button type="button" class="btn-deck-nav btn-deck-prev" id="btn-tokoh-prev" aria-label="Tokoh sebelumnya">
+                <i class="bi bi-chevron-left" aria-hidden="true"></i>
+              </button>
+              <span class="deck-counter-badge" id="tokoh-counter">${currentIndexFormatted} / ${totalCountFormatted}</span>
+              <button type="button" class="btn-deck-nav btn-deck-next" id="btn-tokoh-next" aria-label="Tokoh selanjutnya">
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <span class="spotlight-years-meta">${this.escapeHtml(activeFig.years)}</span>
+          </div>
         </div>
-      `;
+      </div>
+    `;
 
-      // Re-bind controls on the left panel
-      const btnPrev = document.getElementById('btn-tokoh-prev');
-      const btnNext = document.getElementById('btn-tokoh-next');
-      if (btnPrev) btnPrev.addEventListener('click', () => this.prevFigure());
-      if (btnNext) btnNext.addEventListener('click', () => this.nextFigure());
-    }
+    const btnPrev = document.getElementById('btn-tokoh-prev');
+    const btnNext = document.getElementById('btn-tokoh-next');
+    if (btnPrev) btnPrev.addEventListener('click', () => this.prevFigure());
+    if (btnNext) btnNext.addEventListener('click', () => this.nextFigure());
+  }
 
-    // 2. Render Right Side Layered Portrait Gallery Deck (#tokoh-grid)
-    if (this.dom.galleryDeck) {
-      this.dom.galleryDeck.innerHTML = list.map((fig, idx) => {
-        const slot = (idx - this.activeIndex + list.length) % list.length;
-        const isFeatured = (slot === 0);
+  renderDeckCards(list) {
+    if (!this.dom.galleryDeck) return;
+    this.dom.galleryDeck.innerHTML = list.map((fig, idx) => {
+      const slot = (idx - this.activeIndex + list.length) % list.length;
+      const isFeatured = (slot === 0);
 
-        return `
-          <article class="tokoh-profile-card deck-card ${isFeatured ? 'is-featured' : ''}"
-                   data-tokoh-id="${fig.id}"
-                   data-figure-index="${idx}"
-                   data-slot="${slot}"
-                   style="--slot-index: ${slot};">
-            <div class="deck-card-frame">
-              <div class="deck-card-inner">
-                <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" width="320" height="460" loading="${isFeatured ? 'eager' : 'lazy'}" decoding="async">
-                <div class="deck-card-vignette" aria-hidden="true"></div>
-                <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
-                
-                <!-- Bottom Frosted Scrim Bar Inspired by Reference Image -->
-                <div class="deck-card-footer">
-                  <div class="deck-card-footer-info">
-                    <span class="deck-card-title">${this.escapeHtml(fig.title)}</span>
-                    <h3 class="deck-card-name">${this.escapeHtml(fig.name)}</h3>
-                  </div>
-                  <button type="button" class="deck-card-action-btn btn-read-tokoh" data-open-tokoh="${fig.id}" aria-label="Pelajari kisah ${this.escapeHtml(fig.name)}">
-                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+      return `
+        <article class="tokoh-profile-card deck-card ${isFeatured ? 'is-featured' : ''}"
+                 data-tokoh-id="${fig.id}"
+                 data-figure-index="${idx}"
+                 data-slot="${slot}"
+                 style="--slot-index: ${slot};">
+          <div class="deck-card-frame">
+            <div class="deck-card-inner">
+              <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" width="320" height="460" loading="${isFeatured ? 'eager' : 'lazy'}" decoding="async">
+              <div class="deck-card-vignette" aria-hidden="true"></div>
+              <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
+              
+              <div class="deck-card-footer">
+                <div class="deck-card-footer-info">
+                  <span class="deck-card-title">${this.escapeHtml(fig.title)}</span>
+                  <h3 class="deck-card-name">${this.escapeHtml(fig.name)}</h3>
                 </div>
+                <button type="button" class="deck-card-action-btn btn-read-tokoh" data-open-tokoh="${fig.id}" aria-label="Pelajari kisah ${this.escapeHtml(fig.name)}">
+                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
-          </article>
-        `;
-      }).join('');
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  updateCardsPosition(list) {
+    if (!this.dom.galleryDeck) return;
+    const cards = this.dom.galleryDeck.querySelectorAll('.deck-card');
+    if (cards.length !== list.length) {
+      this.renderDeckCards(list);
+      return;
     }
 
-    // 3. Render Bottom Curatorial Archival Roster Track (#tokoh-roster-track)
-    if (this.dom.rosterTrack) {
-      this.dom.rosterTrack.innerHTML = list.map((fig, idx) => {
-        const isActive = (idx === this.activeIndex);
-        return `
-          <button type="button" 
-                  class="tokoh-roster-card ${isActive ? 'is-active' : ''}" 
-                  data-roster-index="${idx}"
-                  role="tab"
-                  aria-selected="${isActive ? 'true' : 'false'}"
-                  aria-label="Tampilkan ${this.escapeHtml(fig.name)}">
-            <div class="roster-card-avatar">
-              <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" width="48" height="48" loading="lazy" decoding="async">
-            </div>
-            <div class="roster-card-info">
-              <span class="roster-card-role">${this.escapeHtml(fig.title)}</span>
-              <h3 class="roster-card-name">${this.escapeHtml(fig.name)}</h3>
-              <span class="roster-card-years">${this.escapeHtml(fig.years.split('(')[0].trim())}</span>
-            </div>
-          </button>
-        `;
-      }).join('');
-    }
+    cards.forEach((card) => {
+      const idx = parseInt(card.dataset.figureIndex, 10);
+      const slot = (idx - this.activeIndex + list.length) % list.length;
+      const isFeatured = (slot === 0);
+
+      card.dataset.slot = slot;
+      card.style.setProperty('--slot-index', slot);
+      card.classList.toggle('is-featured', isFeatured);
+    });
+  }
+
+  renderRosterTrack(list) {
+    if (!this.dom.rosterTrack) return;
+    this.dom.rosterTrack.innerHTML = list.map((fig, idx) => {
+      const isActive = (idx === this.activeIndex);
+      return `
+        <button type="button" 
+                class="tokoh-roster-card ${isActive ? 'is-active' : ''}" 
+                data-roster-index="${idx}"
+                role="tab"
+                aria-selected="${isActive ? 'true' : 'false'}"
+                aria-label="Tampilkan ${this.escapeHtml(fig.name)}">
+          <div class="roster-card-avatar">
+            <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" width="48" height="48" loading="lazy" decoding="async">
+          </div>
+          <div class="roster-card-info">
+            <span class="roster-card-role">${this.escapeHtml(fig.title)}</span>
+            <h3 class="roster-card-name">${this.escapeHtml(fig.name)}</h3>
+            <span class="roster-card-years">${this.escapeHtml(fig.years.split('(')[0].trim())}</span>
+          </div>
+        </button>
+      `;
+    }).join('');
+  }
+
+  updateRosterTrack(list) {
+    if (!this.dom.rosterTrack) return;
+    const rosterCards = this.dom.rosterTrack.querySelectorAll('.tokoh-roster-card');
+    rosterCards.forEach((btn, idx) => {
+      const isActive = (idx === this.activeIndex);
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive && btn.scrollIntoView) {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    });
   }
 
   openModal(id) {
@@ -477,6 +517,29 @@ class TokohEditorialController {
           this.setActiveIndex(idx);
         }
       });
+    }
+
+    // 7. Touch Swipe Support for Mobile & Tablets
+    if (this.dom.galleryDeck) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      this.dom.galleryDeck.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+      }, { passive: true });
+
+      this.dom.galleryDeck.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
+        // Only trigger if horizontal swipe is dominant and exceeds threshold
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+          if (diffX > 0) this.nextFigure();
+          else this.prevFigure();
+        }
+      }, { passive: true });
     }
   }
 

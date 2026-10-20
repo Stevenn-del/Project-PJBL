@@ -265,12 +265,38 @@ function focusRegionOnMap(name) {
   }
 }
 
-function selectRegion(name, focusMap = true) {
+// Smooth Auto-scroll to region info card on mobile devices
+function scrollToRegionCardOnMobile() {
+  // Only trigger on mobile / tablet stacked layouts (<= 992px)
+  if (window.innerWidth > 992) return;
+  
+  const regionCard = document.getElementById("region-card");
+  if (!regionCard) return;
+
+  const cardRect = regionCard.getBoundingClientRect();
+  const header = document.querySelector(".desktop-header-global") || document.querySelector(".desktop-header");
+  const headerHeight = header ? header.getBoundingClientRect().height : 72;
+
+  // Only scroll if card is not already comfortably visible near top
+  if (cardRect.top > headerHeight + 60 || cardRect.top < 0) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    regionCard.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  }
+}
+
+function selectRegion(name, focusMap = true, userInitiated = false) {
   activeRegion = name;
   applyActiveStyle();
   renderRegionCard(name);
   if (focusMap) focusRegionOnMap(name);
   hideSearchResults();
+
+  if (userInitiated) {
+    window.setTimeout(scrollToRegionCardOnMobile, 140);
+  }
 }
 
 function addRegionFeature(region, geojson) {
@@ -288,7 +314,7 @@ function addRegionFeature(region, geojson) {
           featureLayer.bringToFront();
         },
         mouseout: () => applyActiveStyle(),
-        click: () => selectRegion(region.name, false)
+        click: () => selectRegion(region.name, false, true)
       });
     }
   }).addTo(map);
@@ -309,7 +335,7 @@ function addFallbackRegionMarker(region) {
   }).addTo(map);
 
   circle.bindTooltip(region.name, { sticky: true, direction: "top" });
-  circle.on("click", () => selectRegion(region.name, false));
+  circle.on("click", () => selectRegion(region.name, false, true));
   circle.on("mouseover", () => {
     if (activeRegion !== region.name) circle.setStyle({ fillOpacity: 0.8, weight: 2.5 });
   });
@@ -365,7 +391,7 @@ function addLandmarkMarkers() {
       riseOnHover: true
     });
     marker.bindPopup(`<strong>${escapeHtml(place.name)}</strong><br><span>${escapeHtml(place.region)}</span>`);
-    marker.on("click", () => selectRegion(place.region, false));
+    marker.on("click", () => selectRegion(place.region, false, true));
     markersLayer.addLayer(marker);
   });
 }
@@ -404,7 +430,7 @@ function showSearchResults(matches) {
     option.textContent = region.name;
     option.addEventListener("click", () => {
       searchInput.value = region.name;
-      selectRegion(region.name);
+      selectRegion(region.name, true, true);
     });
     searchResults.appendChild(option);
   });
@@ -457,6 +483,15 @@ document.getElementById("reset-map").addEventListener("click", () => {
     </div>`;
   if (mapBounds.isValid()) map.fitBounds(mapBounds, { padding: [24, 24], animate: true });
   else map.setView([-7.35, 110.15], 7.5, { animate: true });
+
+  // On mobile devices, smoothly scroll back to the map if user was reading the card below
+  if (window.innerWidth <= 992) {
+    const mapPanel = document.querySelector(".map-panel");
+    if (mapPanel) {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      mapPanel.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    }
+  }
 });
 
 function openDetails(name) {
@@ -540,10 +575,29 @@ document.querySelectorAll("[data-explore]").forEach(button => {
       kota: "Kota Semarang"
     }[button.dataset.explore];
     if (!categoryRegion) return;
-    selectRegion(categoryRegion);
-    document.getElementById("peta").scrollIntoView({ behavior: "smooth", block: "start" });
+    selectRegion(categoryRegion, true, true);
   });
 });
 
+// Responsif: perbarui ukuran peta Leaflet saat viewport / orientasi perangkat berubah
+let mapResizeTimer = null;
+function handleMapViewportResize() {
+  clearTimeout(mapResizeTimer);
+  mapResizeTimer = setTimeout(() => {
+    if (map) {
+      map.invalidateSize();
+      if (activeRegion) {
+        focusRegionOnMap(activeRegion);
+      } else if (mapBounds.isValid()) {
+        map.fitBounds(mapBounds, { padding: [16, 16], maxZoom: 8.5 });
+      }
+    }
+  }, 200);
+}
+
+window.addEventListener("resize", handleMapViewportResize, { passive: true });
+window.addEventListener("orientationchange", handleMapViewportResize, { passive: true });
+
 addLandmarkMarkers();
 loadRegionBoundaries();
+

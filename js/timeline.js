@@ -491,13 +491,15 @@
     if (total === 0) return;
 
     const viewportWidth = window.innerWidth;
+    const isSmallMobile = viewportWidth < 480;
     const isMobile = viewportWidth < 768;
     const isTablet = viewportWidth >= 768 && viewportWidth < 1200;
 
-    // Responsive spacing tailored for 5 primary panels
-    const stepX = isMobile ? 70 : (isTablet ? 110 : 135);
-    const activeClearance = isMobile ? 80 : (isTablet ? 120 : 155);
-    const stepZ = isMobile ? 22 : (isTablet ? 30 : 38);
+    // Responsive spacing tailored for 5 primary panels across all viewports
+    const stepX = isSmallMobile ? 44 : (isMobile ? 64 : (isTablet ? 105 : 135));
+    const activeClearance = isSmallMobile ? 48 : (isMobile ? 70 : (isTablet ? 115 : 155));
+    const stepZ = isSmallMobile ? 16 : (isMobile ? 22 : (isTablet ? 30 : 38));
+    const rotBase = isSmallMobile ? 16 : (isMobile ? 22 : (isTablet ? 28 : 30));
 
     slabs.forEach((slab, i) => {
       const offset = i - state.currentIndex;
@@ -514,9 +516,9 @@
       if (offset === 0) {
         slab.classList.add('is-active');
         x = 0;
-        z = isMobile ? 30 : 65;
+        z = isSmallMobile ? 20 : (isMobile ? 32 : 65);
         rotY = 0;
-        scale = isMobile ? 1.02 : 1.07;
+        scale = isSmallMobile ? 1.01 : (isMobile ? 1.03 : 1.07);
         opacity = 1;
         zIndex = 30;
       } else if (offset < 0) {
@@ -524,8 +526,8 @@
         const absOffset = Math.abs(offset);
         x = -(absOffset * stepX + activeClearance);
         z = -absOffset * stepZ;
-        rotY = isMobile ? 22 : 30;
-        scale = Math.max(0.72, 1 - absOffset * 0.08);
+        rotY = rotBase;
+        scale = Math.max(isSmallMobile ? 0.74 : 0.72, 1 - absOffset * 0.08);
         opacity = Math.max(0.40, 1 - absOffset * 0.22);
         zIndex = 20 - absOffset;
       } else {
@@ -533,8 +535,8 @@
         const absOffset = Math.abs(offset);
         x = (absOffset * stepX + activeClearance);
         z = -absOffset * stepZ;
-        rotY = isMobile ? -22 : -30;
-        scale = Math.max(0.72, 1 - absOffset * 0.08);
+        rotY = -rotBase;
+        scale = Math.max(isSmallMobile ? 0.74 : 0.72, 1 - absOffset * 0.08);
         opacity = Math.max(0.40, 1 - absOffset * 0.22);
         zIndex = 20 - absOffset;
       }
@@ -776,26 +778,34 @@
 
     // Touch support for phones & tablets
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchDeltaX = 0;
+    let touchDeltaY = 0;
 
     viewport.addEventListener('touchstart', (e) => {
       if (e.target.closest('button') || e.target.closest('.stage-center-action-wrapper')) return;
       touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
       touchDeltaX = 0;
+      touchDeltaY = 0;
     }, { passive: true });
 
     viewport.addEventListener('touchmove', (e) => {
       touchDeltaX = e.touches[0].clientX - touchStartX;
+      touchDeltaY = e.touches[0].clientY - touchStartY;
     }, { passive: true });
 
     viewport.addEventListener('touchend', () => {
       const threshold = 40;
-      if (touchDeltaX > threshold) {
-        prevPanel();
-      } else if (touchDeltaX < -threshold) {
-        nextPanel();
+      if (Math.abs(touchDeltaX) > Math.abs(touchDeltaY) && Math.abs(touchDeltaX) > threshold) {
+        if (touchDeltaX > 0) {
+          prevPanel();
+        } else {
+          nextPanel();
+        }
       }
       touchDeltaX = 0;
+      touchDeltaY = 0;
     }, { passive: true });
   }
 

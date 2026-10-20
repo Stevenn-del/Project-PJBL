@@ -127,15 +127,24 @@ body {
 
 /* Viewport-Focused Experience for Home */
 body.page-home-viewport {
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   background-color: var(--color-background, #080808);
 }
 
-@media (max-height: 580px) {
+@media (max-height: 680px), (max-width: 768px) {
   body.page-home-viewport {
+    height: auto;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.page-home-viewport .hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
+    max-height: none;
+    padding-bottom: 32px;
   }
 }
 
@@ -473,14 +482,18 @@ input:focus-visible,
   background: var(--glass-black, rgba(8, 8, 8, 0.72));
   border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
   color: var(--color-gold, #c5a44d);
-  font-size: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  font-size: 22px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  touch-action: manipulation;
   transition: all 0.2s ease;
+  padding: 0;
 }
 
 .mobile-nav-toggle:hover {
@@ -503,21 +516,23 @@ input:focus-visible,
 }
 
 .hero-main .container-fluid {
-  max-width: 1820px;
-  padding-left: 64px;
-  padding-right: 64px;
+  max-width: 1440px;
+  padding-left: 36px;
+  padding-right: 36px;
 }
 
 .hero-content-box {
-  max-width: 720px;
+  max-width: 680px;
+  position: relative;
+  z-index: 5;
 }
 
 /* Editorial Serif Main Heading */
 .hero-heading {
   font-family: var(--kp-font-serif);
-  font-size: clamp(38px, 4.8vw, 68px);
+  font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: -0.015em;
   color: var(--color-text, #f4efe4);
   text-transform: uppercase;
@@ -532,7 +547,7 @@ input:focus-visible,
 /* Supporting Description */
 .hero-description {
   font-family: var(--kp-font-sans);
-  font-size: clamp(16px, 1.2vw, 19px);
+  font-size: 16.5px;
   font-weight: 400;
   line-height: 1.65;
   color: var(--color-text-muted, #c2b9a7);
@@ -549,7 +564,7 @@ input:focus-visible,
   background: var(--color-gold, #c5a44d);
   color: #080808;
   font-family: var(--kp-font-sans);
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.02em;
   padding: 13px 32px;
@@ -656,9 +671,11 @@ input:focus-visible,
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (TABLET & MOBILE)
+   RESPONSIVE DESIGN (TABLET & MOBILE BREAKPOINTS)
+   Tailored for Mobile (320px-430px), Tablet (768px-1024px), Laptop (1280px-1440px+)
    ========================================================================== */
 
+/* Tablet & Smaller Screens (<= 991px) */
 @media (max-width: 991px) {
   .desktop-header-global .container-fluid,
   .desktop-header .container-fluid,
@@ -667,8 +684,8 @@ input:focus-visible,
   .desktop-header-karsa .container-fluid,
   .desktop-header-warisan .container-fluid,
   .desktop-header-motion .container-fluid {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: clamp(16px, 3.5vw, 24px);
+    padding-right: clamp(16px, 3.5vw, 24px);
   }
 
   .mobile-nav-toggle {
@@ -680,11 +697,15 @@ input:focus-visible,
     top: 68px;
     left: 0;
     width: 100%;
-    background: rgba(14, 13, 11, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
-    padding: 24px;
+    max-height: calc(100dvh - 68px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(14, 13, 11, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--gold-border, rgba(197, 164, 77, 0.35));
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
+    padding: 20px 18px 30px;
     display: none;
     flex-direction: column;
     z-index: 999;
@@ -696,8 +717,8 @@ input:focus-visible,
 
   .nav-links-list {
     flex-direction: column;
-    gap: 8px;
-    background: rgba(8, 8, 8, 0.7);
+    gap: 10px;
+    background: rgba(8, 8, 8, 0.75);
     border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
     box-shadow: none;
     padding: 12px;
@@ -707,43 +728,69 @@ input:focus-visible,
 
   .nav-item-link {
     font-size: 15px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 10px 14px;
+    min-height: 44px;
+    padding: 11px 16px;
     width: 100%;
+    border-radius: var(--kp-radius-pill);
+    touch-action: manipulation;
   }
 
   .hero-main .container-fluid {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: clamp(16px, 3.5vw, 24px);
+    padding-right: clamp(16px, 3.5vw, 24px);
   }
 
   .hero-heading {
-    font-size: 46px;
+    font-size: clamp(32px, 5.5vw, 48px);
   }
 
   .hero-description {
-    font-size: 16px;
+    font-size: 15.5px;
   }
 }
 
+/* Mobile Devices (<= 576px) */
 @media (max-width: 576px) {
+  .desktop-header-global,
+  .desktop-header,
+  .desktop-header-timeline,
+  .desktop-header-tokoh,
+  .desktop-header-karsa,
+  .desktop-header-warisan,
+  .desktop-header-motion {
+    padding: 10px 0;
+  }
+
   .brand-logo-img {
-    height: 34px;
+    height: 38px;
+  }
+
+  .hero-main {
+    padding-top: 16px;
+    padding-bottom: 24px;
   }
 
   .hero-heading {
-    font-size: 34px;
+    font-size: clamp(28px, 7.5vw, 36px);
+    margin-bottom: 16px;
+    line-height: 1.15;
   }
 
   .hero-description {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 24px;
   }
 
   .btn-explore {
-    padding: 11px 26px;
-    font-size: 15px;
+    padding: 12px 28px;
+    font-size: 14px;
+    min-height: 46px;
+    touch-action: manipulation;
   }
 
   .btn-wayang-motion span {
@@ -751,7 +798,74 @@ input:focus-visible,
   }
 
   .btn-wayang-motion {
-    padding: 8px 14px;
+    padding: 9px 13px;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+
+  .page-intro {
+    padding: 24px 16px 16px;
+  }
+
+  .page-intro .page-hero-title,
+  .page-intro h1 {
+    font-size: clamp(25px, 6.5vw, 32px);
+  }
+
+  .page-intro .page-hero-lead,
+  .page-intro p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+/* Compact Mobile Viewports (<= 375px & 320px) */
+@media (max-width: 375px) {
+  .desktop-header-global .container-fluid,
+  .desktop-header .container-fluid,
+  .desktop-header-timeline .container-fluid,
+  .desktop-header-tokoh .container-fluid,
+  .desktop-header-karsa .container-fluid,
+  .desktop-header-warisan .container-fluid,
+  .desktop-header-motion .container-fluid {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .navbar-inner-global,
+  .navbar-inner {
+    gap: 10px;
+  }
+
+  .brand-logo-img {
+    height: 32px;
+  }
+
+  .nav-right-wrapper {
+    gap: 8px;
+  }
+
+  .hero-main .container-fluid {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-heading {
+    font-size: 27px;
+  }
+
+  .hero-description {
+    font-size: 13.5px;
+    margin-bottom: 20px;
+  }
+
+  .btn-explore {
+    padding: 11px 22px;
+    font-size: 13.5px;
+    width: 100%;
+    justify-content: center;
   }
 }
 

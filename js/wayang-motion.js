@@ -1876,21 +1876,10 @@ void main() {
     btnCloseGuide: $('btn-close-guide'),
     btnUnderstoodGuide: $('btn-understood-guide'),
     guideModal: $('guide-modal'),
-    btnTogglePip: $('btn-toggle-pip'),
     btnMinimizePip: $('btn-minimize-pip'),
     btnClosePip: $('btn-close-pip'),
     previewPopout: $('preview-popout'),
     soundToggle: $('sound-toggle'),
-    settingsToggle: $('settings-toggle'),
-    settingsDrawer: $('settings'),
-    btnCloseSettings: $('btn-close-settings'),
-    selectMode: $('select-puppet-mode'),
-    optCharacters: $('opt-characters'),
-    optFingers: $('opt-fingers'),
-    optFacing: $('opt-facing'),
-    optCamera: $('opt-camera'),
-    optSize: $('opt-size'),
-    optVolume: $('opt-volume'),
     statusPill: $('status'),
     statusDot: $('status-dot'),
     statusText: $('status-text'),
@@ -1907,6 +1896,8 @@ void main() {
     badgeRightName: $('badge-right-name'),
     debogLabelLeft: $('debog-label-left'),
     debogLabelRight: $('debog-label-right'),
+    landscapeSuggestion: $('landscape-suggestion'),
+    btnDismissLandscape: $('btn-dismiss-landscape'),
   };
 
   if (!els.canvas) {
@@ -1925,7 +1916,7 @@ void main() {
   const controller = new HandController();
   const audioEl = new Audio('assets/audio/backsound.mp3');
   audioEl.loop = true;
-  audioEl.preload = 'auto';
+  audioEl.preload = 'none';
   audioEl.volume = 0.6;
   const beatClock = new BeatClock(audioEl);
   beatClock.load('assets/audio/backsound-beats.json');
@@ -2145,21 +2136,6 @@ void main() {
     puppets[0].facing = -1;
     puppets[1].facing = 1;
     showToast('Posisi wayang dikalibrasi ulang');
-  }
-
-  // Settings Drawer Toggle
-  function openSettings() {
-    if (els.settingsDrawer) {
-      els.settingsDrawer.hidden = false;
-      els.settingsToggle?.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  function closeSettings() {
-    if (els.settingsDrawer) {
-      els.settingsDrawer.hidden = true;
-      els.settingsToggle?.setAttribute('aria-expanded', 'false');
-    }
   }
 
   // Character Selector Logic
@@ -2440,7 +2416,7 @@ void main() {
     }
 
     const constraintTiers = [
-      // Tier 1: Ideal 720p 30fps user-facing webcam
+      // Tier 1: Ideal 720p 30fps user-facing webcam (phones / supported webcams)
       {
         video: {
           facingMode: 'user',
@@ -2450,7 +2426,16 @@ void main() {
         },
         audio: false,
       },
-      // Tier 2: Standard 480p user-facing webcam
+      // Tier 2: 720p generic (for laptops & desktops where webcam driver has no facingMode)
+      {
+        video: {
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          frameRate: { ideal: 30, max: 60 },
+        },
+        audio: false,
+      },
+      // Tier 3: Standard 480p user-facing webcam
       {
         video: {
           facingMode: 'user',
@@ -2460,12 +2445,16 @@ void main() {
         },
         audio: false,
       },
-      // Tier 3: Any user-facing video device
+      // Tier 4: Standard 480p generic
       {
-        video: { facingMode: 'user' },
+        video: {
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+          frameRate: { ideal: 30 },
+        },
         audio: false,
       },
-      // Tier 4: Most permissive fallback (any available camera device)
+      // Tier 5: Most permissive fallback (any available video device)
       {
         video: true,
         audio: false,
@@ -2511,7 +2500,6 @@ void main() {
   }
 
   let isSendingFrame = false;
-  let lastProcessedVideoTime = -1;
 
   function startVideoFrameProcessing() {
     stopVideoFrameProcessing();
@@ -2543,12 +2531,8 @@ void main() {
       if (isSendingFrame) return;
 
       const now = performance.now();
-      // Throttle MediaPipe processing to ~30fps (min 30ms interval) to prevent CPU starvation and queue pileup
-      if (now - lastSentTimestamp < 30) return;
-
-      // Avoid reprocessing identical duplicate video frames when currentTime is available and progressing
-      if (els.video.currentTime > 0 && els.video.currentTime === lastProcessedVideoTime) return;
-      lastProcessedVideoTime = els.video.currentTime;
+      // Throttle MediaPipe processing to smooth ~30fps (32ms interval) to maintain high framerate and prevent queue pileup
+      if (now - lastSentTimestamp < 32) return;
       lastSentTimestamp = now;
 
       isSendingFrame = true;
@@ -2757,7 +2741,7 @@ void main() {
           try {
             await Promise.race([
               hands.initialize(),
-              new Promise((resolve) => setTimeout(resolve, 800)),
+              new Promise((resolve) => setTimeout(resolve, 12000)),
             ]);
           } catch (initErr) {
             console.warn('Hands initialize race note:', initErr);
@@ -2950,6 +2934,10 @@ void main() {
     if (els.guideModal) els.guideModal.classList.remove('open');
   });
 
+  els.btnDismissLandscape?.addEventListener('click', () => {
+    if (els.landscapeSuggestion) els.landscapeSuggestion.style.display = 'none';
+  });
+
   els.btnTogglePip?.addEventListener('click', () => {
     if (!els.pipBox) return;
     const isHidden = els.pipBox.classList.contains('hidden');
@@ -2985,37 +2973,13 @@ void main() {
 
   els.previewPopout?.addEventListener('click', toggleVideoPip);
 
-  // Settings Controls
-  els.selectMode?.addEventListener('change', (e) => updateCharacterBadges(e.target.value));
-  els.optCharacters?.addEventListener('change', (e) => {
-    controller.settings.characters = e.target.value;
-    applyFacing();
-  });
-  els.optFingers?.addEventListener('change', (e) => {
-    controller.settings.fingers = e.target.value;
-    showToast(`Pemetaan tuding jari diubah: ${e.target.value}`);
-  });
-  els.optFacing?.addEventListener('change', applyFacing);
-  els.optCamera?.addEventListener('change', (e) => {
-    if (els.pipBox) els.pipBox.classList.toggle('hidden', !e.target.checked);
-  });
-  els.optSize?.addEventListener('input', (e) => {
-    const s = parseFloat(e.target.value);
-    for (const p of puppets) p.baseScale = s;
-  });
-  els.optVolume?.addEventListener('input', (e) => {
-    audioEl.volume = parseFloat(e.target.value);
-  });
-
   // Hotkeys
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (document.activeElement && typeof document.activeElement.blur === 'function') {
         document.activeElement.blur();
       }
-      if (els.settingsDrawer && !els.settingsDrawer.hidden) {
-        closeSettings();
-      } else if (els.guideModal && els.guideModal.classList.contains('open')) {
+      if (els.guideModal && els.guideModal.classList.contains('open')) {
         els.guideModal.classList.remove('open');
       } else if (state.isFullscreen || state.isFullscreenFallback || document.fullscreenElement) {
         exitFullscreen();

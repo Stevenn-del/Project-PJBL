@@ -283,11 +283,9 @@ class WarisanExhibitionController {
   }
 
   /**
-   * Generate card markup reproducing the Pinterest Voyage reference:
-   * - Top hashtag (#Central America -> #Magelang • Candi)
-   * - Center prominent typography (MACHU PICCHU - PERU -> CANDI BOROBUDUR — MAGELANG)
-   * - Horizontal accent divider line
-   * - Evocative subtitle ("Adventure is never far away" -> "Mahakarya arsitektur Buddha terbesar di dunia")
+   * Generate card markup reproducing the reference layered gallery architecture:
+   * - Inactive side cards contain ONLY their image (no text, badges, titles, or captions)
+   * - Center active card contains top-right hashtag, prominent uppercase title, tagline, and minimal CTA button
    */
   generateCardMarkup(item, index, total) {
     let diff = index - this.currentIndex;
@@ -311,22 +309,20 @@ class WarisanExhibitionController {
            tabindex="0" 
            aria-label="${this.escapeHtml(item.title)} - ${isActive ? 'Sedang Ditampilkan' : 'Klik untuk menampilkan'}">
         <div class="card-inner-stage">
-          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="card-media-img" width="420" height="520" loading="${Math.abs(diff) <= 2 ? 'eager' : 'lazy'}" decoding="async">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="card-media-img" width="420" height="540" loading="${Math.abs(diff) <= 2 ? 'eager' : 'lazy'}" decoding="async">
           
-          <!-- Dark Vignette Scrim for text legibility -->
+          <!-- Subtle Dark Vignette Scrim (Active Center Card only) -->
           <div class="card-gradient-scrim"></div>
 
-          <!-- Top-Right Hashtag (e.g. #Magelang • Candi, like #Central America) -->
+          <!-- Top-Right Hashtag (Active Center Card only) -->
           <div class="card-top-tag">${this.escapeHtml(item.hashtag)}</div>
 
-          <!-- Integrated Focal Typography (Center Active Item - Pinterest Reference) -->
+          <!-- Integrated Focal Information (Active Center Card only — Reference Layout) -->
           <div class="card-voyage-focal">
             <h2 class="${isActive ? 'masterpiece-title ' : ''}card-voyage-title">
               <span class="title-primary">${this.escapeHtml(item.titleMain)}</span>
               <span class="title-sub">— ${this.escapeHtml(item.titleRegion)}</span>
             </h2>
-
-            <div class="card-voyage-divider"></div>
 
             <p class="card-voyage-tagline">${this.escapeHtml(item.tagline)}</p>
 
@@ -334,12 +330,6 @@ class WarisanExhibitionController {
               <span>Eksplorasi Kurasi Detail</span>
               <i class="bi bi-arrow-right" aria-hidden="true"></i>
             </button>
-          </div>
-
-          <!-- Preview Flanking Caption (Displayed on secondary preview cards) -->
-          <div class="card-preview-caption">
-            <span class="card-tag">${this.escapeHtml(item.categoryLabel)}</span>
-            <h3 class="card-name">${this.escapeHtml(item.title)}</h3>
           </div>
 
         </div>
@@ -482,11 +472,13 @@ class WarisanExhibitionController {
     const stage = document.getElementById('gallery-stage');
     if (stage) {
       stage.addEventListener('touchstart', (e) => {
-        this.touchStartX = e.changedTouches[0].screenX;
+        this.touchStartX = e.changedTouches[0].clientX;
+        this.touchStartY = e.changedTouches[0].clientY;
       }, { passive: true });
 
       stage.addEventListener('touchend', (e) => {
-        this.touchEndX = e.changedTouches[0].screenX;
+        this.touchEndX = e.changedTouches[0].clientX;
+        this.touchEndY = e.changedTouches[0].clientY;
         this.handleSwipe();
       }, { passive: true });
     }
@@ -494,9 +486,10 @@ class WarisanExhibitionController {
 
   handleSwipe() {
     const threshold = 40;
-    const diff = this.touchStartX - this.touchEndX;
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) this.nextItem();
+    const diffX = this.touchStartX - this.touchEndX;
+    const diffY = (this.touchStartY || 0) - (this.touchEndY || 0);
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+      if (diffX > 0) this.nextItem();
       else this.prevItem();
     }
   }
