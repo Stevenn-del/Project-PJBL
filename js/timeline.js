@@ -19,7 +19,7 @@
    * 1. COMPLETE AUTHENTIC HISTORICAL DATASET (CENTRAL JAVA / JAWA TENGAH)
    * Five representative historical epochs preserving all authentic milestones and cultural citations.
    */
-  const HISTORICAL_ERAS_DATA = [
+  let HISTORICAL_ERAS_DATA = [
     {
       id: "kuno",
       index: 0,
@@ -33,7 +33,7 @@
       briefDesc: "Awal peradaban agraris dan spiritual Jawa, kedaulatan hukum Ratu Shima di Kerajaan Kalingga serta candi andesit tertua di Dataran Tinggi Dieng.",
       contextTitle: "Konteks Sosio-Kultural & Geografis",
       contextDesc: "Peradaban tertua berpusat di lereng pegunungan Dieng dan Gunung Wukir. Pertemuan antara animisme Jawa kuno dan spiritualitas Hindu-Buddha melahirkan dialektika religi unik yang tercermin dalam arsitektur batu paling purba di Nusantara.",
-      heroImage: "assets/images/era-kuno.webp",
+      heroImage: "assets/images/timeline/timeline-era-kuno.webp",
       heroImageAlt: "Candi Arjuna di Dataran Tinggi Dieng, peninggalan peradaban kuno Jawa Tengah",
       spineBg: "linear-gradient(to bottom, #11100e 0%, #1e1b15 50%, #080808 100%)",
       spineColor: "#e1ca7a",
@@ -51,7 +51,7 @@
           desc: "Kerajaan bercorak Buddha-Hindu tertua di pesisir utara Jawa Tengah, masyhur di bawah kepemimpinan Ratu Shima yang menegakkan supremasi hukum tanpa pandang bulu. Integritas rakyatnya tercatat dalam catatan Dinasti Tang.",
           significance: "Meletakkan fondasi etika hukum dan kedaulatan moral pertama dalam kronik sejarah Nusantara.",
           location: "Pesisir Jepara & Pekalongan",
-          image: "assets/images/tokoh-ratushima.webp"
+          image: "assets/images/tokoh/tokoh-ratushima.webp"
         },
         {
           year: "± 650 M",
@@ -59,7 +59,7 @@
           desc: "Didirikan di dataran tinggi vulkanik Dieng pada ketinggian 2.000 mdpl, kelompok Candi Arjuna dibangun sebagai mandala suci pemujaan Siwa. Kompleks ini menjadi mahakarya arsitektur batu andesit tertua di Pulau Jawa.",
           significance: "Monumen arsitektur batu andesit tertua di Jawa yang memadukan kosmologi gunung dengan teologi Siwa.",
           location: "Dataran Tinggi Dieng",
-          image: "assets/images/era-kuno.webp"
+          image: "assets/images/timeline/timeline-era-kuno.webp"
         },
         {
           year: "654–732 M",
@@ -67,7 +67,7 @@
           desc: "Penemuan Prasasti Sojomerto di Batang beraksara Pallawa menyebut Dapunta Selendra, cikal bakal Wangsa Syailendra. Disusul Prasasti Canggal (732 M) di Magelang oleh Raja Sanjaya.",
           significance: "Bukti epigrafi tertua yang mengungkap silsilah dinasti pembangun candi-candi megah Jawa Tengah.",
           location: "Batang & Magelang",
-          image: "assets/images/slide-1-prambanan.webp"
+          image: "assets/images/home/slide-1-prambanan.webp"
         }
       ]
     },
@@ -84,7 +84,7 @@
       briefDesc: "Puncak keemasan arsitektur batu andesit dunia karya Dinasti Syailendra dan Sanjaya, memadukan kosmologi mandala Borobudur dan keagungan Trimurti Prambanan.",
       contextTitle: "Konteks Kosmologi Mandala & Harmoni Lintas Keyakinan",
       contextDesc: "Borobudur membagi tingkatan alam semesta menjadi Kamadhatu, Rupadhatu, dan Arupadhatu. Sementara Prambanan menjulang 47 meter memuliakan Trimurti. Pernikahan politis Rakai Pikatan dan Pramodhawardhani menjadi teladan agung toleransi peradaban kuno Nusantara.",
-      heroImage: "assets/images/slide-3-borobudur.webp",
+      heroImage: "assets/images/home/slide-3-borobudur.webp",
       heroImageAlt: "Candi Borobudur mahakarya Dinasti Syailendra di Magelang Jawa Tengah",
       spineBg: "linear-gradient(to bottom, #161513 0%, #2a2418 50%, #0d0c0a 100%)",
       spineColor: "#f4efe4",
@@ -102,7 +102,7 @@
           desc: "Raja Samaratungga dari Wangsa Syailendra memerintahkan pembangunan monumen stupa agung di atas bukit alami di pertemuan Sungai Progo dan Elo.",
           significance: "Permulaan proyek arsitektur andesit terbesar dalam peradaban Asia Tenggara purba.",
           location: "Magelang",
-          image: "assets/images/slide-3-borobudur.webp"
+          image: "assets/images/home/slide-3-borobudur.webp"
         },
         {
           year: "± 824 M",
@@ -110,7 +110,7 @@
           desc: "Para seniman pahat Jawa kuno mengukir kisah Lalitavistara, Jataka, dan Gandavyuha serta perahu bercadik Jawa kuno dengan ketelitian mikroskopis.",
           significance: "Dokumentasi visual terlengkap mengenai sosio-kultural dan maritim Nusantara abad ke-8.",
           location: "Candi Borobudur",
-          image: "assets/images/slide-3-borobudur.webp"
+          image: "assets/images/home/slide-3-borobudur.webp"
         },
         {
           year: "± 825 M",
@@ -118,7 +118,7 @@
           desc: "Puncak stupa tunggal raksasa diselesaikan sebagai simbol kemanunggalan alam semesta dan pencapaian Nirwana tertinggi.",
           significance: "Karya puncak peradaban Buddha dunia yang diakui sebagai Warisan Dunia UNESCO nomor 592.",
           location: "Magelang",
-          image: "assets/images/slide-3-borobudur.webp"
+          image: "assets/images/home/slide-3-borobudur.webp"
         },
         {
           year: "± 850 M",
@@ -126,7 +126,7 @@
           desc: "Rakai Pikatan menginisiasi gugusan candi Trimurti dengan Candi Siwa setinggi 47 meter sebagai poros utama diiringi candi Brahma, Wisnu, dan wahana.",
           significance: "Kompleks candi Hindu terindah dan tertinggi di Indonesia.",
           location: "Klaten & Sleman",
-          image: "assets/images/slide-1-prambanan.webp"
+          image: "assets/images/home/slide-1-prambanan.webp"
         },
         {
           year: "856 M",
@@ -134,7 +134,7 @@
           desc: "Prasasti Siwagrha mencatat peresmian candi serta pengalihan aliran Sungai Opak untuk melindungi mandala suci dari banjir lahar Merapi.",
           significance: "Bukti kecakapan rekayasa hidrologi dan tata ruang terpadu peradaban Jawa kuno.",
           location: "Prambanan",
-          image: "assets/images/slide-1-prambanan.webp"
+          image: "assets/images/home/slide-1-prambanan.webp"
         },
         {
           year: "Abad ke-9 M",
@@ -142,7 +142,7 @@
           desc: "Dinding pagar langkan Candi Siwa dan Brahma dipahat dengan relief Ramayana yang hingga kini lestari dalam Sendratari Prambanan.",
           significance: "Karya sastra relief tertua yang menginspirasi seni tari Jawa lintas generasi.",
           location: "Prambanan",
-          image: "assets/images/slide-1-prambanan.webp"
+          image: "assets/images/home/slide-1-prambanan.webp"
         }
       ]
     },
@@ -159,7 +159,7 @@
       briefDesc: "Imperium Islam pesisir pertama pelopor dakwah kultural damai Walisongo, Sunan Kalijaga, dan arsitektur Masjid Agung Demak.",
       contextTitle: "Konteks Dakwah Damai Walisongo & Akulturasi",
       contextDesc: "Sunan Kalijaga dan para wali menggunakan wayang kulit, gamelan Sekaten, dan tembang mocopat sebagai media syiar. Masjid Agung Demak dengan atap tajug tumpang tiga dan saka tatal menjadi simbol agung akulturasi Islam Nusantara.",
-      heroImage: "assets/images/tokoh-kalijaga.webp",
+      heroImage: "assets/images/tokoh/tokoh-kalijaga.webp",
       heroImageAlt: "Sunan Kalijaga tokoh pelopor dakwah kultural Kesultanan Demak",
       spineBg: "linear-gradient(to bottom, #11100e 0%, #1f1b14 50%, #080808 100%)",
       spineColor: "#c5a44d",
@@ -177,7 +177,7 @@
           desc: "Raden Patah dinobatkan sebagai Sultan Demak pertama dengan gelar Senapati Jimbun Ngabdurrahman Panembahan Sayidin Panatagama.",
           significance: "Berdirinya imperium maritim Islam berdaulat pertama di Pulau Jawa.",
           location: "Demak Bintoro",
-          image: "assets/images/tokoh-kalijaga.webp"
+          image: "assets/images/tokoh/tokoh-kalijaga.webp"
         },
         {
           year: "1479 M",
@@ -185,7 +185,7 @@
           desc: "Walisongo bersama-sama mendirikan Masjid Agung Demak. Sunan Kalijaga menciptakan tiang tatal dari kepingan kayu sisa yang dipadatkan.",
           significance: "Karya puncak arsitektur vernakular atap tumpang tiga yang mendefinisikan masjid Nusantara.",
           location: "Demak",
-          image: "assets/images/tokoh-kalijaga.webp"
+          image: "assets/images/tokoh/tokoh-kalijaga.webp"
         },
         {
           year: "1513 M",
@@ -193,7 +193,7 @@
           desc: "Adipati Yunus (Pangeran Sabrang Lor) memimpin armada laut gabungan Jawa menyeberangi Selat Malaka untuk mengusir kolonial Portugis.",
           significance: "Bukti kekuatan armada maritim militer terkuat Jawa Tengah di kancah Nusantara.",
           location: "Pesisir Jepara & Malaka",
-          image: "assets/images/tokoh-kalijaga.webp"
+          image: "assets/images/tokoh/tokoh-kalijaga.webp"
         }
       ]
     },
@@ -210,7 +210,7 @@
       briefDesc: "Pusat sastra adiluhung pujangga Ronggowarsito, tari sakral Bedhaya Ketawang, serta perlawanan patriotik semesta Pangeran Diponegoro.",
       contextTitle: "Konteks Renaisans Seni Kraton & Perang Gerilya",
       contextDesc: "Kraton Surakarta menjadi laboratorium kebudayaan sastra dan gamelan ageng. Di sisi lain, perlawanan gerilya Diponegoro di perbukitan Menoreh didukung ulama Kyai Mojo dan Sentot Alibasya, memaksa Belanda menerapkan taktik Benteng Stelsel.",
-      heroImage: "assets/images/tokoh-diponegoro.webp",
+      heroImage: "assets/images/tokoh/tokoh-diponegoro.webp",
       heroImageAlt: "Pangeran Diponegoro memimpin Perang Jawa",
       spineBg: "linear-gradient(to bottom, #181214 0%, #291518 50%, #0d090a 100%)",
       spineColor: "#f4efe4",
@@ -228,7 +228,7 @@
           desc: "Perjanjian damai di Desa Giyanti Karanganyar menetapkan pembagian wilayah Mataram antara Kasunanan Surakarta dan Kesultanan Yogyakarta.",
           significance: "Titik tolak berdirinya tatanan budaya Kraton Surakarta Hadiningrat.",
           location: "Karanganyar & Solo",
-          image: "assets/images/warisan-bedhaya-ketawang.webp"
+          image: "assets/images/warisan-budaya/warisan-bedhaya-ketawang.webp"
         },
         {
           year: "1757 M",
@@ -236,7 +236,7 @@
           desc: "Raden Mas Said (Pangeran Sambernyawa) mendirikan Kadipaten Mangkunegaran di Solo dengan semboyan patriotik Tiji Tibeh.",
           significance: "Lahirnya kekuatan militer dan kesenian istana Mangkunegaran yang legendaris.",
           location: "Salatiga & Surakarta",
-          image: "assets/images/warisan-bedhaya-ketawang.webp"
+          image: "assets/images/warisan-budaya/warisan-bedhaya-ketawang.webp"
         },
         {
           year: "Abad ke-19 M",
@@ -244,7 +244,7 @@
           desc: "Ronggowarsito melahirkan karya sastra filosofis monumental seperti Serat Kalatidha, Serat Jayengbaya, dan Serat Wirid Hidayat Jati.",
           significance: "Puncak pencapaian kesusastraan dan filsafat etika Jawa modern.",
           location: "Surakarta",
-          image: "assets/images/warisan-bedhaya-ketawang.webp"
+          image: "assets/images/warisan-budaya/warisan-bedhaya-ketawang.webp"
         },
         {
           year: "Juli 1825",
@@ -252,7 +252,7 @@
           desc: "Pangeran Diponegoro menetapkan markas gerilya di perbukitan Selarong dan mengobarkan seruan perlawanan semesta melawan penjajah.",
           significance: "Permulaan perlawanan gerilya terbesar yang melumpuhkan pos-pos militer Belanda di Jawa Tengah.",
           location: "Kedu & Magelang",
-          image: "assets/images/tokoh-diponegoro.webp"
+          image: "assets/images/tokoh/tokoh-diponegoro.webp"
         },
         {
           year: "1827–1829 M",
@@ -260,7 +260,7 @@
           desc: "Jenderal De Kock mendirikan ratusan benteng kecil saling terhubung (Benteng Stelsel) untuk mempersempit ruang gerak pasukan Diponegoro.",
           significance: "Bukti kepanikan militer kolonial yang menghabiskan lebih dari 20 juta gulden kas kerajaan Belanda.",
           location: "Jawa Tengah",
-          image: "assets/images/highlight-benteng-ambarawa.webp"
+          image: "assets/images/timeline/timeline-highlight-benteng-ambarawa.webp"
         },
         {
           year: "28 Maret 1830",
@@ -268,7 +268,7 @@
           desc: "Dalam suasana gencatan senjata bulan Ramadhan di Magelang, Diponegoro ditangkap melalui muslihat perundingan licik dan diasingkan.",
           significance: "Semangat patriotisme Diponegoro menjadi obor perjuangan kemerdekaan bangsa Indonesia.",
           location: "Kota Magelang",
-          image: "assets/images/tokoh-diponegoro.webp"
+          image: "assets/images/tokoh/tokoh-diponegoro.webp"
         }
       ]
     },
@@ -285,7 +285,7 @@
       briefDesc: "Pertempuran Lima Hari Semarang, Palagan Ambarawa Soedirman, serta pengakuan UNESCO atas Candi Borobudur, Prambanan, Sangiran, Wayang, Keris, dan Batik.",
       contextTitle: "Konteks Kedaulatan Bangsa & Diplomasi Budaya Dunia",
       contextDesc: "Kemenangan taktik Supit Urang di Ambarawa mengukuhkan kapasitas militer Republik Indonesia. Di panggung global, kekayaan arsitektur andesit dan kriya batik adiluhung Jawa Tengah diakui UNESCO sebagai mahakarya warisan kemanusiaan.",
-      heroImage: "assets/images/era-kemerdekaan.webp",
+      heroImage: "assets/images/timeline/timeline-era-kemerdekaan.webp",
       heroImageAlt: "Tugu Muda Semarang monumen pertempuran lima hari kemerdekaan",
       spineBg: "linear-gradient(to bottom, #191410 0%, #2c2014 50%, #0e0b08 100%)",
       spineColor: "#e1ca7a",
@@ -303,7 +303,7 @@
           desc: "Bentrokan berdarah antara pemuda pejuang Jawa Tengah melawan batalion Kido Butai Jepang di Simpang Lima dan Tugu Muda, dipicu gugurnya dr. Kariadi.",
           significance: "Simbol keteguhan pantang menyerah angkatan muda Semarang dalam mempertahankan proklamasi.",
           location: "Kawasan Tugu Muda, Semarang",
-          image: "assets/images/era-kemerdekaan.webp"
+          image: "assets/images/timeline/timeline-era-kemerdekaan.webp"
         },
         {
           year: "20 Nov – 15 Des 1945",
@@ -311,7 +311,7 @@
           desc: "Kolonel Soedirman memimpin pasukan gabungan mengepung Sekutu di Ambarawa dengan strategi penjepit 'Supit Urang', memaksa Sekutu mundur ke Semarang.",
           significance: "Kemenangan militer gemilang pertama TNI yang diabadikan sebagai Hari Juang Kartika TNI AD.",
           location: "Ambarawa, Semarang",
-          image: "assets/images/era-kemerdekaan.webp"
+          image: "assets/images/timeline/timeline-era-kemerdekaan.webp"
         },
         {
           year: "15 Agustus 1950",
@@ -319,7 +319,7 @@
           desc: "Berdasarkan UU No. 10 Tahun 1950, Jawa Tengah ditetapkan secara sah sebagai daerah otonom tingkat satu Republik Indonesia, dipimpin Gubernur Raden Panji Soeroso.",
           significance: "Tonggak yuridis formal pemerintahan modern Jawa Tengah yang menaungi 35 kabupaten dan kota.",
           location: "Semarang, Jawa Tengah",
-          image: "assets/images/slide-1-prambanan.webp"
+          image: "assets/images/home/slide-1-prambanan.webp"
         },
         {
           year: "1991 & 1996",
@@ -327,7 +327,7 @@
           desc: "UNESCO secara resmi menetapkan Kompleks Candi Borobudur, Prambanan (1991), dan Situs Manusia Purba Sangiran (1996) sebagai Warisan Dunia.",
           significance: "Pengakuan internasional tertinggi atas kontribusi peradaban Jawa Tengah bagi warisan umat manusia.",
           location: "Magelang, Klaten & Sragen",
-          image: "assets/images/slide-3-borobudur.webp"
+          image: "assets/images/home/slide-3-borobudur.webp"
         },
         {
           year: "2003–2009",
@@ -335,7 +335,7 @@
           desc: "Warisan takbenda Jawa Tengah diakui dunia: Wayang Kulit (2003), Keris Nusantara (2005), dan Batik Indonesia (2009) yang berpusat di Solo, Pekalongan, dan Lasem.",
           significance: "Pengukuhan kriya dan seni pertunjukan Jawa sebagai masterpiece warisan kemanusiaan.",
           location: "Surakarta, Pekalongan & Rembang",
-          image: "assets/images/highlight-batik-keris.webp"
+          image: "assets/images/timeline/timeline-highlight-batik-keris.webp"
         },
         {
           year: "Masa Kini",
@@ -343,11 +343,30 @@
           desc: "Revitalisasi Kota Lama Semarang, pelestarian desa wisata Dieng, serta inovasi Wayang Motion digital mewujudkan harmoni modernitas dan konservasi sejarah.",
           significance: "Mewujudkan pelestarian sejarah yang adaptif dan inklusif di era digital.",
           location: "Seluruh Jawa Tengah",
-          image: "assets/images/slide-2-wayang.webp"
+          image: "assets/images/home/slide-2-wayang.webp"
         }
       ]
     }
   ];
+
+  // Helper penyesuaian jalur aset relatif ketika berkas dimuat dari subdirektori pages/
+  function resolveAsset(url) {
+    if (!url) return '';
+    if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('/')) return url;
+    if (window.location.pathname.includes('/pages/') && !url.startsWith('../')) {
+      return '../' + url;
+    }
+    return url;
+  }
+
+  HISTORICAL_ERAS_DATA.forEach(era => {
+    if (era.heroImage) era.heroImage = resolveAsset(era.heroImage);
+    if (era.events) {
+      era.events.forEach(ev => {
+        if (ev.image) ev.image = resolveAsset(ev.image);
+      });
+    }
+  });
 
   /**
    * 2. TIMELINE STATE
@@ -407,9 +426,6 @@
               <h3 class="slab-title">${escapeHtml(coverTitle)}</h3>
               <p class="slab-subtitle">${escapeHtml(coverSubtitle)}</p>
               <p class="slab-desc-brief">${escapeHtml(coverDesc)}</p>
-              <div class="slab-cta-indicator">
-                <span class="slab-explore-hint"><i class="bi bi-compass"></i> Buka Rincian Sejarah</span>
-              </div>
             </div>
             <div class="slab-bevel-glare" aria-hidden="true"></div>
           </div>
@@ -874,11 +890,25 @@
   /**
    * 13. INITIALIZE TIMELINE ENGINE
    */
-  function initTimeline() {
+  async function initTimeline() {
     render3DSlabs();
     setupDragAndTouch();
     setupKeyboardNav();
     checkUrlParams();
+
+    // Integrasi Supabase: Periksa ketersediaan data alur waktu dari Supabase
+    if (typeof window.fetchTimelineFromSupabase === 'function') {
+      try {
+        const supabaseData = await window.fetchTimelineFromSupabase();
+        if (supabaseData && Array.isArray(supabaseData) && supabaseData.length > 0) {
+          HISTORICAL_ERAS_DATA = supabaseData;
+          render3DSlabs();
+          checkUrlParams();
+        }
+      } catch (err) {
+        console.warn('[Timeline] Menggunakan dataset fallback lokal:', err);
+      }
+    }
 
     // Lateral button controls
     const btnPrev = document.getElementById('btn-stage-prev');

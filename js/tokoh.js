@@ -22,7 +22,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Kalingga (Jepara / Pekalongan)",
     years: "Memerintah ± 674–695 M",
-    image: "assets/images/tokoh-ratushima.webp",
+    image: "assets/images/tokoh/tokoh-ratushima.webp",
     quote: "Keadilan sejati tidak mengenal kerabat; barang siapa menyentuh hak orang lain, hukum harus ditegakkan dengan setimpal.",
     achievements: [
       "Menegakkan hukum keadilan tanpa pandang bulu di seluruh pesisir utara Jawa",
@@ -39,7 +39,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Bumi Mataram (Klaten / Magelang)",
     years: "Memerintah ± 838–856 M",
-    image: "assets/images/tokoh-3.webp",
+    image: "assets/images/tokoh/tokoh-rakai-pikatan.webp",
     quote: "Dua wangsa besar bersatu dalam cinta dan kebijaksanaan, melahirkan candi-candi megah pengayom semesta.",
     achievements: [
       "Memprakarsai pembangunan Candi Prambanan (Siwagrha) termegah di Indonesia",
@@ -56,7 +56,7 @@ const TOKOH_DATASET = [
     category: "pemimpin",
     region: "Demak Bintoro",
     years: "Memerintah 1478–1518 M",
-    image: "assets/images/tokoh-4.webp",
+    image: "assets/images/tokoh/tokoh-raden-patah.webp",
     quote: "Menegakkan kedaulatan di atas tanah beriman, merawat tali persaudaraan dan kemakmuran pesisir Nusantara.",
     achievements: [
       "Mendirikan Kesultanan Islam pelopor pertama di tanah Jawa (Demak)",
@@ -73,7 +73,7 @@ const TOKOH_DATASET = [
     category: "budaya",
     region: "Kadilangu, Demak",
     years: "± 1450–1592 M",
-    image: "assets/images/tokoh-kalijaga.webp",
+    image: "assets/images/tokoh/tokoh-kalijaga.webp",
     quote: "Urip iku urup (Hidup itu menyala memberi terang bagi sesama tanpa mencabut akar budayanya).",
     achievements: [
       "Memadukan ajaran Islam dengan seni wayang kulit purwa, tembang macapat, dan gamelan",
@@ -90,7 +90,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Jepara",
     years: "Memerintah 1549–1579 M",
-    image: "assets/images/highlight-benteng-ambarawa.webp",
+    image: "assets/images/timeline/timeline-highlight-benteng-ambarawa.webp",
     quote: "Harta dan kedaulatan tanah air tidak akan pernah tunduk kepada bangsa penjajah samudra.",
     achievements: [
       "Mengirim ratusan armada kapal perang berkekuatan ribuan prajurit melawan Portugis di Malaka (1551 & 1574)",
@@ -107,7 +107,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Kedu, Magelang & Surakarta",
     years: "1785–1855 M",
-    image: "assets/images/tokoh-diponegoro.webp",
+    image: "assets/images/tokoh/tokoh-diponegoro.webp",
     quote: "Kebenaran dan keadilan tidak dapat ditawar; tanah leluhur adalah titipan suci yang harus dibela sampai akhir hayat.",
     achievements: [
       "Memimpin Perang Jawa (1825–1830) yang mengguncang kekuasaan kolonial Hindia Belanda hingga bangkrut",
@@ -124,7 +124,7 @@ const TOKOH_DATASET = [
     category: "emansipasi",
     region: "Jepara & Rembang",
     years: "1879–1904 M",
-    image: "assets/images/tokoh-kartini.webp",
+    image: "assets/images/tokoh/tokoh-kartini.webp",
     quote: "Habis gelap terbitlah terang — Tiada awan di langit yang tetap selamanya, tiada mungkin akan terus-menerus terang cuaca.",
     achievements: [
       "Memprakarsai sekolah pertama bagi perempuan pribumi di tanah Jawa",
@@ -141,7 +141,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Purbalingga, Ambarawa & Banyumas",
     years: "1916–1950 M",
-    image: "assets/images/era-kemerdekaan.webp",
+    image: "assets/images/timeline/timeline-era-kemerdekaan.webp",
     quote: "Robek-robeklah badanku, potong-potonglah jasad ini, tetapi jiwaku yang dilindungi benteng kemerdekaan tidak akan dapat dibunuh.",
     achievements: [
       "Memimpin kemenangan gemilang Pertempuran Palagan Ambarawa (1945) mengusir Sekutu",
@@ -158,7 +158,7 @@ const TOKOH_DATASET = [
     category: "budaya",
     region: "Semarang & Surakarta",
     years: "1925–1985 M",
-    image: "assets/images/slide-2-wayang.webp",
+    image: "assets/images/home/slide-2-wayang.webp",
     quote: "Wayang iku wewayanganing ngaurip (Wayang adalah bayang-bayang kehidupan yang menuntun budi pekerti manusia).",
     achievements: [
       "Menciptakan ratusan gending Jawa legendaris (Ladrang Pangkur, Swara Suling, Gambang Suling)",
@@ -168,6 +168,20 @@ const TOKOH_DATASET = [
     bio: "Ki Nartosabdo (Soenarto) adalah seniman serba bisa legendaris kelahiran Klaten yang berkarya di Semarang dan Solo. Beliau dianugerahi berbagai penghargaan kebudayaan atas jasanya melestarikan dan memperkaya repertoar musik karawitan serta seni pedalangan wayang kulit Nusantara."
   }
 ];
+
+// Helper penyesuaian jalur gambar jika dibuka dari subdirektori pages/
+function resolveTokohAsset(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('/')) return url;
+  if (window.location.pathname.includes('/pages/') && !url.startsWith('../')) {
+    return '../' + url;
+  }
+  return url;
+}
+
+TOKOH_DATASET.forEach(t => {
+  if (t.image) t.image = resolveTokohAsset(t.image);
+});
 
 class TokohEditorialController {
   constructor() {
@@ -188,9 +202,22 @@ class TokohEditorialController {
     this.init();
   }
 
-  init() {
+  async init() {
     this.renderShowcase();
     this.bindEvents();
+
+    // Integrasi Supabase: Periksa ketersediaan data dinamis dari Supabase
+    if (typeof window.fetchTokohFromSupabase === 'function') {
+      try {
+        const supabaseData = await window.fetchTokohFromSupabase();
+        if (supabaseData && Array.isArray(supabaseData) && supabaseData.length > 0) {
+          this.dataset = supabaseData;
+          this.renderShowcase();
+        }
+      } catch (err) {
+        console.warn('[Tokoh] Menggunakan dataset fallback lokal:', err);
+      }
+    }
   }
 
   getFilteredFigures() {
@@ -256,10 +283,11 @@ class TokohEditorialController {
         <div class="spotlight-active-narrative">
           <div class="spotlight-provenance-row">
             <span class="spotlight-role-tag">${this.escapeHtml(activeFig.title)}</span>
-            <span class="spotlight-region-pill">
-              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(activeFig.region)}
-            </span>
+            <span class="spotlight-meta-divider" aria-hidden="true">·</span>
+            <span class="spotlight-region-pill">${this.escapeHtml(activeFig.region)}</span>
+            <span class="spotlight-meta-divider" aria-hidden="true">·</span>
             <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
+            ${activeFig.years ? `<span class="spotlight-meta-divider" aria-hidden="true">·</span><span class="spotlight-years-tag">${this.escapeHtml(activeFig.years)}</span>` : ''}
           </div>
 
           <h2 class="spotlight-figure-name" id="tokoh-main-heading">${this.escapeHtml(activeFig.name)}</h2>
@@ -284,8 +312,6 @@ class TokohEditorialController {
                 <i class="bi bi-chevron-right" aria-hidden="true"></i>
               </button>
             </div>
-
-            <span class="spotlight-years-meta">${this.escapeHtml(activeFig.years)}</span>
           </div>
         </div>
       </div>
@@ -313,16 +339,12 @@ class TokohEditorialController {
             <div class="deck-card-inner">
               <img src="${fig.image}" alt="${this.escapeHtml(fig.name)}" class="deck-card-img" width="320" height="460" loading="${isFeatured ? 'eager' : 'lazy'}" decoding="async">
               <div class="deck-card-vignette" aria-hidden="true"></div>
-              <span class="tokoh-card-era-tag">${this.escapeHtml(fig.era.split('(')[0].trim())}</span>
               
               <div class="deck-card-footer">
                 <div class="deck-card-footer-info">
-                  <span class="deck-card-title">${this.escapeHtml(fig.title)}</span>
                   <h3 class="deck-card-name">${this.escapeHtml(fig.name)}</h3>
+                  <span class="deck-card-era">${this.escapeHtml(fig.era.split('(')[0].trim())} · ${this.escapeHtml(fig.region.split('/')[0].trim())}</span>
                 </div>
-                <button type="button" class="deck-card-action-btn btn-read-tokoh" data-open-tokoh="${fig.id}" aria-label="Pelajari kisah ${this.escapeHtml(fig.name)}">
-                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                </button>
               </div>
             </div>
           </div>
@@ -401,7 +423,7 @@ class TokohEditorialController {
           <h2 id="tokoh-modal-title" class="tokoh-modal-name">${this.escapeHtml(fig.name)}</h2>
           <div class="tokoh-modal-title-tag">${this.escapeHtml(fig.title)}</div>
           <div class="tokoh-modal-loc">
-            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ${this.escapeHtml(fig.region)}
+            <span>${this.escapeHtml(fig.region)}</span>
           </div>
         </div>
       </div>
@@ -409,15 +431,15 @@ class TokohEditorialController {
       <blockquote class="tokoh-modal-quote">“${this.escapeHtml(fig.quote)}”</blockquote>
       
       <div class="tokoh-modal-section">
-        <h4 class="modal-section-title"><i class="bi bi-journal-text" aria-hidden="true"></i> Kisah Perjalanan &amp; Kepeloporan</h4>
+        <h4 class="modal-section-title">Kisah Perjalanan &amp; Kepeloporan</h4>
         <p class="tokoh-modal-bio">${this.escapeHtml(fig.bio)}</p>
       </div>
 
       <div class="tokoh-modal-section">
-        <h4 class="modal-section-title"><i class="bi bi-shield-check" aria-hidden="true"></i> Sumbangsih &amp; Jasa Bersejarah</h4>
+        <h4 class="modal-section-title">Sumbangsih &amp; Jasa Bersejarah</h4>
         <ul class="tokoh-modal-achieve-list">
           ${fig.achievements.map(a => `
-            <li><i class="bi bi-check2-circle" aria-hidden="true"></i> <span>${this.escapeHtml(a)}</span></li>
+            <li><span>${this.escapeHtml(a)}</span></li>
           `).join('')}
         </ul>
       </div>

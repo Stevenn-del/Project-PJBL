@@ -41,14 +41,14 @@ const regionFiles = [
   { file: "Wonosobo.geojson", name: "Kabupaten Wonosobo", center: [-7.3600, 109.9000] }
 ];
 
-const regionStories = {
+let regionStories = {
   "Kota Semarang": {
     summary: "Semarang merupakan salah satu kota penting di Jawa Tengah yang berkembang sebagai pusat perdagangan maritim dan memiliki peninggalan megah era kolonial.",
     figures: ["Ki Ageng Pandanaran", "Oei Tiong Ham"],
     heritage: ["Kota Lama Semarang", "Lawang Sewu", "Masjid Agung Semarang", "Klenteng Sam Poo Kong"],
     period: "Tumbuh sebagai bandar penting di pesisir utara Jawa sejak abad ke-15 dan berkembang pesat sebagai simpul perniagaan Hindia Belanda.",
     fact: "Di Kota Lama, jejak arsitektur bernuansa Eropa berpadu dengan denyut pelabuhan yang menghubungkan Jawa dengan peradaban dunia.",
-    image: "assets/images/highlight-benteng-ambarawa.webp"
+    image: "assets/images/timeline/timeline-highlight-benteng-ambarawa.webp"
   },
   "Kabupaten Semarang": {
     summary: "Kabupaten Semarang menyimpan kisah panjang dari pusat permukiman kuno lereng Ungaran hingga jalur logistik perkeretaapian Hindia Belanda.",
@@ -56,7 +56,7 @@ const regionStories = {
     heritage: ["Candi Gedong Songo", "Museum Kereta Api Ambarawa", "Benteng Willem I Ambarawa"],
     period: "Kawasan ini berkembang sebagai penghubung dataran tinggi, pesisir utara, dan pusat-pusat kerajaan Mataram di pedalaman.",
     fact: "Kompleks Candi Gedong Songo berdiri megah di lereng Gunung Ungaran dengan hembusan belerang dan panorama lembah berkabut.",
-    image: "assets/images/slide-1-prambanan.webp"
+    image: "assets/images/home/slide-1-prambanan.webp"
   },
   "Kabupaten Magelang": {
     summary: "Magelang memiliki kedudukan istimewa dalam peradaban Jawa kuno sebagai episentrum wangsa Syailendra pendiri mahakarya stupa Borobudur.",
@@ -64,7 +64,7 @@ const regionStories = {
     heritage: ["Candi Borobudur", "Candi Mendut", "Candi Pawon"],
     period: "Pusat spiritual peradaban Buddha Mahayana pada abad ke-8 hingga ke-9 Masehi.",
     fact: "Candi Borobudur, Pawon, dan Mendut berdiri pada satu poros garis imajiner lurus yang sarat makna filosofis peribadatan suci.",
-    image: "assets/images/slide-3-borobudur.webp"
+    image: "assets/images/home/slide-3-borobudur.webp"
   },
   "Kota Magelang": {
     summary: "Kota Magelang berada di lembah subur Kedu yang dikelilingi panca gunung dan menjadi saksi peristiwa krusial Perang Jawa.",
@@ -72,7 +72,7 @@ const regionStories = {
     heritage: ["Museum BPK RI", "Alun-alun Kota Magelang", "Menara Air Waterleiding", "Museum Diponegoro"],
     period: "Kawasan militer strategis Hindia Belanda dan pusat perundingan bersejarah tahun 1830.",
     fact: "Kota Magelang dikelilingi lima gunung legendaris: Merapi, Merbabu, Sindoro, Sumbing, dan Gunung Tidar sebagai 'Paku Tanah Jawa'.",
-    image: "assets/images/slide-3-borobudur.webp"
+    image: "assets/images/home/slide-3-borobudur.webp"
   },
   "Kabupaten Klaten": {
     summary: "Klaten adalah saksi keemasan kerajaan Mataram Kuno di mana peradaban Hindu dan Buddha hidup berdampingan dalam kemegahan arsitektur candi.",
@@ -80,7 +80,7 @@ const regionStories = {
     heritage: ["Candi Prambanan", "Candi Plaosan", "Candi Sewu", "Candi Sojiwan"],
     period: "Berkembang pesat pada abad ke-9 sebagai lambang persatuan wangsa Sanjaya dan Syailendra.",
     fact: "Candi Plaosan mencerminkan kisah cinta sejati antara Rakai Pikatan (Hindu) dan Pramodhawardhani (Buddha).",
-    image: "assets/images/slide-1-prambanan.webp"
+    image: "assets/images/home/slide-1-prambanan.webp"
   },
   "Kabupaten Demak": {
     summary: "Demak Bintoro adalah kesultanan Islam pelopor pertama di tanah Jawa yang didirikan oleh Raden Patah bersama dewan para Wali Songo.",
@@ -88,7 +88,7 @@ const regionStories = {
     heritage: ["Masjid Agung Demak", "Makam Sunan Kalijaga Kadilangu", "Pintu Bledeg"],
     period: "Masa keemasan kesultanan maritim Islam nusantara pada abad ke-15 hingga ke-16.",
     fact: "Masjid Agung Demak ditopang oleh empat saka guru kayu jati raksasa, salah satunya 'Saka Tatal' buatan Sunan Kalijaga.",
-    image: "assets/images/highlight-batik-keris.webp"
+    image: "assets/images/timeline/timeline-highlight-batik-keris.webp"
   },
   "Kabupaten Jepara": {
     summary: "Jepara adalah bandar bahari perkasa yang dipimpin figur wanita tangguh Ratu Kalinyamat dan tempat lahir pahlawan emansipasi R.A. Kartini.",
@@ -96,7 +96,7 @@ const regionStories = {
     heritage: ["Benteng Portugis", "Museum R.A. Kartini", "Masjid Mantingan", "Seni Ukir Tradisional"],
     period: "Armada maritim Jepara mampu mengirim ratusan kapal perang melawan bangsa Portugis di Selat Malaka pada abad ke-16.",
     fact: "Ratu Kalinyamat dikenal oleh bangsa Portugis sebagai 'Rainha de Japara, Senhora Poderosa e Rica' (Ratu Jepara yang kuat dan kaya raya).",
-    image: "assets/images/slide-2-wayang.webp"
+    image: "assets/images/home/slide-2-wayang.webp"
   },
   "Kota Surakarta": {
     summary: "Surakarta Hadiningrat merupakan episentrum kebudayaan Jawa klasik adiluhung yang mewarisi kejayaan monarki Mataram Islam.",
@@ -104,7 +104,7 @@ const regionStories = {
     heritage: ["Keraton Kasunanan Surakarta", "Pura Mangkunegaran", "Pasar Gede Harjonagoro", "Kampung Batik Laweyan"],
     period: "Pusat monarki, kesusastraan Jawa, seni tari bedhaya, dan tradisi batik sejak perpindahan Kartasura ke Sala tahun 1745.",
     fact: "Tradisi karawitan, tarian sakral bedhaya ketawang, dan falsafah batik adiluhung tetap lestari hidup di tengah masyarakat Solo masa kini.",
-    image: "assets/images/highlight-batik-keris.webp"
+    image: "assets/images/timeline/timeline-highlight-batik-keris.webp"
   }
 };
 
@@ -199,7 +199,7 @@ function getStory(name) {
     heritage: ["Situs Pusaka Daerah", "Tradisi Adat & Batik Khas", "Cagar Budaya Setempat"],
     period: "Pusat perjumpaan tradisi Jawa klasik, denyut perdagangan pedalaman, dan semangat perjuangan kemerdekaan.",
     fact: `Setiap jengkal tanah di ${name} menyimpan mutiara cerita yang diwariskan dari para leluhur turun-temurun.`,
-    image: "assets/images/highlight-batik-keris.webp"
+    image: "assets/images/timeline/timeline-highlight-batik-keris.webp"
   };
 }
 
@@ -248,7 +248,7 @@ function renderRegionCard(name) {
   const imgEl = cardContent.querySelector("img");
   if (imgEl) {
     imgEl.addEventListener("error", () => {
-      imgEl.src = "assets/images/highlight-batik-keris.webp";
+      imgEl.src = "assets/images/timeline/timeline-highlight-batik-keris.webp";
     }, { once: true });
   }
 }
@@ -524,7 +524,7 @@ function openDetails(name) {
   const imgEl = modalContent.querySelector("img");
   if (imgEl) {
     imgEl.addEventListener("error", () => {
-      imgEl.src = "assets/images/highlight-batik-keris.webp";
+      imgEl.src = "assets/images/timeline/timeline-highlight-batik-keris.webp";
     }, { once: true });
   }
 }
@@ -601,3 +601,16 @@ window.addEventListener("orientationchange", handleMapViewportResize, { passive:
 addLandmarkMarkers();
 loadRegionBoundaries();
 
+// Integrasi Supabase: Perbarui kisah wilayah jika Supabase aktif
+if (typeof window.fetchLokasiFromSupabase === 'function') {
+  window.fetchLokasiFromSupabase().then(res => {
+    if (res && res.stories) {
+      Object.assign(regionStories, res.stories);
+      if (activeRegion) {
+        updateCard(activeRegion);
+      }
+    }
+  }).catch(err => {
+    console.warn('[Peta] Menggunakan dataset fallback lokal:', err);
+  });
+}

@@ -13,7 +13,7 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/karsakala-logo.svg">
-  <link rel="alternate icon" type="image/png" href="assets/images/karsakala-logo-gold.png">
+  <link rel="alternate icon" type="image/x-icon" href="assets/images/favicon.ico">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -25,29 +25,29 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Preload Critical Above-The-Fold Hero Image -->
-  <link rel="preload" as="image" href="assets/images/slide-1-prambanan.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/home/slide-1-prambanan.webp" type="image/webp" fetchpriority="high">
 </head>
 <body class="page-home-viewport">
 
-  <!-- Main Hero Viewport (Simplified Viewport-Focused Experience) -->
+  <!-- BAGIAN HERO: Tampilan Utama Beranda dengan Slideshow -->
   <div class="hero-section" id="hero-section">
 
-    <!-- Automatic 3-Image Hero Background Slideshow -->
+    <!-- Slideshow Otomatis 3 Gambar Latar Budaya -->
     <div class="slideshow-container" aria-hidden="true">
-      <div class="hero-slide active" id="slide-1" style="background-image: url('assets/images/slide-1-prambanan.webp');"></div>
-      <div class="hero-slide" id="slide-2" style="background-image: url('assets/images/slide-2-wayang.webp');"></div>
-      <div class="hero-slide" id="slide-3" style="background-image: url('assets/images/slide-3-borobudur.webp');"></div>
+      <div class="hero-slide active" id="slide-1" style="background-image: url('assets/images/home/slide-1-prambanan.webp');"></div>
+      <div class="hero-slide" id="slide-2" style="background-image: url('assets/images/home/slide-2-wayang.webp');"></div>
+      <div class="hero-slide" id="slide-3" style="background-image: url('assets/images/home/slide-3-borobudur.webp');"></div>
     </div>
 
-    <!-- Scrim Overlay for Typography Legibility -->
+    <!-- Lapisan Gelap untuk Keterbacaan Tipografi -->
     <div class="hero-overlay" aria-hidden="true"></div>
 
-    <!-- Desktop Overlay Navbar -->
+    <!-- BAGIAN NAVIGASI: Bilah Navigasi Global -->
     <header class="desktop-header desktop-header-global" id="main-header">
       <div class="container-fluid">
         <div class="navbar-inner navbar-inner-global">
           
-          <!-- Left: Brand Logo -->
+          <!-- Logo & Brand Karsakala -->
           <div class="brand-wrapper">
             <a href="index.html" class="brand-link" aria-label="Karsakala - Beranda">
               <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
@@ -55,20 +55,20 @@
             </a>
           </div>
 
-          <!-- Center: Primary Navigation Links -->
+          <!-- Tautan Menu Navigasi Utama -->
           <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
             <ul class="nav-links-list">
               <li><a href="index.html" class="nav-item-link active" aria-current="page">Beranda</a></li>
-              <li><a href="timeline.html" class="nav-item-link">Timeline</a></li>
-              <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
-              <li><a href="peta.html" class="nav-item-link">Peta</a></li>
-              <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+              <li><a href="pages/timeline.html" class="nav-item-link">Timeline</a></li>
+              <li><a href="pages/tokoh.html" class="nav-item-link">Tokoh</a></li>
+              <li><a href="pages/peta.html" class="nav-item-link">Peta</a></li>
+              <li><a href="pages/warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
             </ul>
           </nav>
 
-          <!-- Right: Mobile Menu Toggle & Wayang Motion Action Button -->
+          <!-- Aksi Cepat Wayang Motion & Tombol Drawer Mobile -->
           <div class="nav-right-wrapper d-flex align-items-center gap-2">
-            <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+            <a href="pages/wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
               <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
               <span>Wayang Motion</span>
             </a>
@@ -82,13 +82,13 @@
       </div>
     </header>
 
-    <!-- Anchored Hero Typography & Primary CTA -->
+    <!-- BAGIAN KONTEN: Tipografi Utama & Tombol Penjelajahan -->
     <main class="hero-main">
       <div class="container-fluid">
         <div class="hero-content-box">
           <h1 class="hero-heading">JEJAK SEJARAH<br><span>JAWA TENGAH</span></h1>
           <p class="hero-description">Menelusuri perjalanan peradaban Jawa Tengah dari fajar kerajaan purba hingga kemegahan warisan dunia bersama Karsakala.</p>
-          <a href="timeline.html" class="btn-explore" id="btn-explore" aria-label="Mulai menjelajah jejak sejarah Jawa Tengah">
+          <a href="pages/timeline.html" class="btn-explore" id="btn-explore" aria-label="Mulai menjelajah jejak sejarah Jawa Tengah">
             <span>Mulai menjelajah</span>
             <span class="arrow" aria-hidden="true">&rarr;</span>
           </a>
@@ -98,8 +98,7 @@
 
   </div>
 
-  <!-- Vanilla JavaScript Slideshow & Navigation Controller -->
-  <script src="js/slideshow.js" defer></script>
-  <script src="js/nav.js" defer></script>
+  <!-- Skrip Utama Frontend & Kontrol Navigasi Global -->
+  <script src="js/main.js" defer></script>
 </body>
 </html>

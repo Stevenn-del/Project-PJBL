@@ -1,0 +1,167 @@
+/* ==========================================================================
+   KARSAKALA — Lembar Gaya Responsif Global (responsive.css)
+   Mengatur tata letak responsif, drawer mobile, breakpoint layar, dan target sentuh.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TARGET SENTUH MINIMAL & AKSESIBILITAS MOBILE (WCAG AA)
+   -------------------------------------------------------------------------- */
+@media (hover: none) and (pointer: coarse) {
+  /* Memastikan target sentuh pada perangkat genggam minimal 44px x 44px */
+  .btn,
+  .nav-item-link,
+  .mobile-nav-toggle,
+  .btn-wayang-motion,
+  .btn-explore,
+  .filter-pill-btn,
+  .gallery-arrow-btn,
+  .stepper-pip-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. PENGATURAN NAVIGASI GLOBAL UNTUK PERANGKAT MOBILE (< 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .desktop-header-global .navbar-inner-global {
+    padding: 0.75rem 1rem;
+    position: relative;
+  }
+
+  .nav-center-wrapper {
+    position: fixed;
+    top: 70px;
+    left: 1rem;
+    right: 1rem;
+    background: rgba(14, 13, 11, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(197, 164, 77, 0.25);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
+    display: none;
+    flex-direction: column;
+    z-index: 1050;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .nav-center-wrapper.show {
+    display: flex;
+    animation: responsiveNavFadeDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .nav-links-list {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .nav-links-list li {
+    width: 100%;
+  }
+
+  .nav-item-link {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(197, 164, 77, 0.1);
+  }
+
+  .nav-item-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(197, 164, 77, 0.12);
+    border: 1px solid rgba(197, 164, 77, 0.35);
+    color: #f4efe4;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .mobile-nav-toggle:hover,
+  .mobile-nav-toggle:focus-visible {
+    background: rgba(197, 164, 77, 0.25);
+    border-color: #c5a44d;
+    outline: none;
+  }
+}
+
+@keyframes responsiveNavFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. RESPONSIF LAYAR KECIL / PONSEL PINTAR (< 576px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 575.98px) {
+  .hero-heading {
+    font-size: 2.25rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero-description {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .btn-explore {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.9rem !important;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand-logo-img {
+    width: 72px !important;
+    height: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. RESPONSIF TABLET & PERANGKAT MENENGAH (576px - 991px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .hero-heading {
+    font-size: 3.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. RESPONSIF LAYAR LEBAR & DESKTOP (>= 992px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  .mobile-nav-toggle {
+    display: none !important;
+  }
+  
+  .nav-center-wrapper {
+    display: flex !important;
+  }
+}

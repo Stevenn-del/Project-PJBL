@@ -4,6 +4,7 @@ package-lock.json
 
 # Test outputs & screenshots
 test_screenshots/
+scratch/
 
 # Logs
 *.log

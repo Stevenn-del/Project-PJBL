@@ -30,7 +30,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Dunia UNESCO (1991)",
     region: "Kabupaten Magelang",
     period: "Wangsa Syailendra (Abad ke-8–9 M)",
-    image: "assets/images/slide-3-borobudur.webp",
+    image: "assets/images/home/slide-3-borobudur.webp",
     desc: "Monumen candi Buddha terbesar di dunia yang tersusun atas 2 juta blok batu andesit, 504 arca Buddha, dan 2.672 panel relief naratif yang membentang sepanjang 3 kilometer.",
     filosofi: "Tiga tingkatan kosmologis Buddhis: Kamadhatu (dunia nafsu), Rupadhatu (dunia berwujud), dan Arupadhatu (dunia tanpa wujud/kesempurnaan nirwana)."
   },
@@ -46,7 +46,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Dunia UNESCO (1991)",
     region: "Kabupaten Klaten",
     period: "Wangsa Sanjaya (Abad ke-9 M)",
-    image: "assets/images/slide-1-prambanan.webp",
+    image: "assets/images/home/slide-1-prambanan.webp",
     desc: "Mahakarya arsitektur Hindu terindah di Asia Tenggara yang menjulang setinggi 47 meter, dipersembahkan untuk Trimurti: Dewa Siwa (Perusak), Brahma (Pencipta), dan Wisnu (Pemelihara).",
     filosofi: "Prinsip Siwagrha melambangkan Gunung Meru sebagai poros semesta dan lambang harmoni kerukunan agama di Jawa Tengah kuno."
   },
@@ -62,7 +62,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2005)",
     region: "Surakarta & Yogyakarta",
     period: "Masa Kerajaan hingga Era Modern",
-    image: "assets/images/warisan-pusaka-keris.webp",
+    image: "assets/images/warisan-budaya/warisan-pusaka-keris.webp",
     desc: "Senjata tikam berbilah asimetris dengan pamor metalurgi multi-layer hasil tempaan pande besi empu Jawa, diakui dunia atas nilai spiritual dan estetika artistik tingginya.",
     filosofi: "Bilah lurus melambangkan keteguhan batin menyembah Tuhan; bilah luk (berkelok) melambangkan keluwesan manusia meniti liku-liku gelombang kehidupan."
   },
@@ -78,7 +78,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2009)",
     region: "Surakarta & Pekalongan",
     period: "Tradisi Keraton Mataram Islam",
-    image: "assets/images/warisan-batik-tulis.webp",
+    image: "assets/images/warisan-budaya/warisan-batik-tulis.webp",
     desc: "Seni lukis malam panas di atas kain mori halus menggunakan canting tembaga tradisional dengan ragam hias simbolik warisan keraton Jawa Tengah.",
     filosofi: "Motif Parang melambangkan ombak karang laut yang tak pernah lelah berjuang; Motif Kawung melambangkan buah kolang-kaling empat penjuru sebagai simbol kesucian hati."
   },
@@ -94,7 +94,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Masterpiece of Humanity UNESCO (2003)",
     region: "Surakarta, Kedu & Banyumas",
     period: "Abad ke-10 M hingga Sekarang",
-    image: "assets/images/slide-2-wayang.webp",
+    image: "assets/images/home/slide-2-wayang.webp",
     desc: "Teater bayangan kulit kerbau bertatah intrik beriringan orkestra gamelan Jawa, membawakan epos wiracarita Mahabarata dan Ramayana yang sarat ajaran filsafat budi pekerti luhur.",
     filosofi: "Kelir (layar putih) adalah bentang dunia; Blencong (lampu minyak) adalah sang surya; Dalang adalah penguasa takdir; dan Wayang adalah cermin watak manusia."
   },
@@ -110,7 +110,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Warisan Budaya Takbenda UNESCO (2021)",
     region: "Keraton Kasunanan Surakarta & Mangkunegaran",
     period: "Masa Mataram Kuno hingga Modern",
-    image: "assets/images/warisan-gamelan-ageng.webp",
+    image: "assets/images/warisan-budaya/warisan-gamelan-ageng.webp",
     desc: "Ansambel instrumen perunggu gong, kempul, kenong, bonang, kendang, dan rebab yang ditala dalam laras Slendro dan Pelog menghasilkan harmoni meditasi batin mendalam.",
     filosofi: "Filosofi 'Rukun Agawe Santosa': tiap bilah instrumen saling menahan diri untuk tidak menonjol sendiri demi melahirkan keselarasan rasa yang agung."
   },
@@ -126,7 +126,7 @@ const WARISAN_DATASET = [
     unescoStatus: "Pusaka Sakral Keraton Kasunanan",
     region: "Kota Surakarta",
     period: "Sultan Agung (Abad ke-17 M)",
-    image: "assets/images/warisan-bedhaya-ketawang.webp",
+    image: "assets/images/warisan-budaya/warisan-bedhaya-ketawang.webp",
     desc: "Tarian pusaka sakral yang ditarikan oleh sembilan putri berbusana dodot ageng dalam upacara Tingalan Dalem Jumenengan (peringatan naik takhta Sri Susuhunan Pakubuwono).",
     filosofi: "Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa."
   },
@@ -142,11 +142,25 @@ const WARISAN_DATASET = [
     unescoStatus: "Cagar Budaya Nasional Peringkat Satu",
     region: "Dataran Tinggi Dieng, Banjarnegara",
     period: "Abad ke-7–8 Masehi",
-    image: "assets/images/era-kuno.webp",
+    image: "assets/images/timeline/timeline-era-kuno.webp",
     desc: "Gugusan candi tertua di pulau Jawa yang berdiri di dataran tinggi vulkanik berkabut 2.000 meter di atas permukaan laut, dinamai berdasarkan ksatria Pandawa.",
     filosofi: "'Di-Hyang' bermakna tempat bersemayamnya para dewata; tempat suci pembersihan jiwa para resi dan pertapa Jawa kuno."
   }
 ];
+
+// Helper penyesuaian jalur gambar jika dibuka dari subdirektori pages/
+function resolveWarisanAsset(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('/')) return url;
+  if (window.location.pathname.includes('/pages/') && !url.startsWith('../')) {
+    return '../' + url;
+  }
+  return url;
+}
+
+WARISAN_DATASET.forEach(w => {
+  if (w.image) w.image = resolveWarisanAsset(w.image);
+});
 
 class WarisanExhibitionController {
   constructor() {
@@ -170,9 +184,22 @@ class WarisanExhibitionController {
     this.init();
   }
 
-  init() {
+  async init() {
     this.renderAll();
     this.bindEvents();
+
+    // Integrasi Supabase: Periksa ketersediaan data dinamis dari Supabase
+    if (typeof window.fetchWarisanFromSupabase === 'function') {
+      try {
+        const supabaseData = await window.fetchWarisanFromSupabase();
+        if (supabaseData && Array.isArray(supabaseData) && supabaseData.length > 0) {
+          this.dataset = supabaseData;
+          this.renderAll();
+        }
+      } catch (err) {
+        console.warn('[Warisan] Menggunakan dataset fallback lokal:', err);
+      }
+    }
   }
 
   getFilteredItems() {
@@ -314,20 +341,20 @@ class WarisanExhibitionController {
           <!-- Subtle Dark Vignette Scrim (Active Center Card only) -->
           <div class="card-gradient-scrim"></div>
 
-          <!-- Top-Right Hashtag (Active Center Card only) -->
-          <div class="card-top-tag">${this.escapeHtml(item.hashtag)}</div>
+          <!-- Top-Right Category/Region Tag (Active Center Card only) -->
+          <div class="card-top-tag">${this.escapeHtml(item.hashtag.replace(/^#/, ''))}</div>
 
           <!-- Integrated Focal Information (Active Center Card only — Reference Layout) -->
           <div class="card-voyage-focal">
             <h2 class="${isActive ? 'masterpiece-title ' : ''}card-voyage-title">
               <span class="title-primary">${this.escapeHtml(item.titleMain)}</span>
-              <span class="title-sub">— ${this.escapeHtml(item.titleRegion)}</span>
+              <span class="title-sub">· ${this.escapeHtml(item.titleRegion)}</span>
             </h2>
 
             <p class="card-voyage-tagline">${this.escapeHtml(item.tagline)}</p>
 
-            <button type="button" class="btn-explore-warisan btn-voyage-cta" data-open-warisan="${item.id}" aria-label="Eksplorasi kurasi ${this.escapeHtml(item.title)}">
-              <span>Eksplorasi Kurasi Detail</span>
+            <button type="button" class="btn-explore-warisan btn-voyage-cta" data-open-warisan="${item.id}" aria-label="Pelajari ${this.escapeHtml(item.title)}">
+              <span>Pelajari Warisan</span>
               <i class="bi bi-arrow-right" aria-hidden="true"></i>
             </button>
           </div>
@@ -518,21 +545,19 @@ class WarisanExhibitionController {
         <div class="warisan-card-media-stage">
           <img src="${item.image}" alt="${this.escapeHtml(item.title)}" class="warisan-card-media-img" width="380" height="240" loading="lazy" decoding="async">
           <div class="warisan-badges-overlay">
-            <span class="badge-unesco-pill">${this.escapeHtml(item.unescoStatus)}</span>
-            <span class="badge-category-pill">${this.escapeHtml(item.categoryLabel)}</span>
+            <span class="badge-unesco-pill">${this.escapeHtml(item.unescoStatus || item.categoryLabel)}</span>
           </div>
         </div>
         <div class="warisan-card-placard-body">
           <div>
             <div class="warisan-card-meta-row">
-              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
               <span>${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}</span>
             </div>
             <h3 class="warisan-card-item-title">${this.escapeHtml(item.title)}</h3>
             <p class="warisan-card-concise-desc">${this.escapeHtml(item.desc)}</p>
             
             <div class="warisan-card-filosofi-box">
-              <span class="filosofi-box-label"><i class="bi bi-flower1" aria-hidden="true"></i> Nilai Filosofi:</span>
+              <span class="filosofi-box-label">Nilai Filosofi:</span>
               <p class="filosofi-box-text">${this.escapeHtml(item.filosofi)}</p>
             </div>
           </div>
@@ -541,10 +566,6 @@ class WarisanExhibitionController {
             <button type="button" class="btn-explore-warisan btn-explore-pavilion" data-open-warisan="${item.id}">
               <span>Lihat Detail Kurasi</span>
               <i class="bi bi-arrow-right" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn-select-gallery" data-select-gallery="${item.id}">
-              <i class="bi bi-eye-fill" aria-hidden="true"></i>
-              <span>Buka di Galeri</span>
             </button>
           </div>
         </div>
@@ -566,7 +587,6 @@ class WarisanExhibitionController {
       </div>
       <h2 id="warisan-modal-title" class="warisan-modal-title">${this.escapeHtml(item.title)}</h2>
       <div class="warisan-modal-context-line">
-        <i class="bi bi-compass-fill" aria-hidden="true"></i>
         <span><strong>Asal &amp; Periode:</strong> ${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}</span>
       </div>
       <div class="warisan-modal-desc-box">
@@ -574,7 +594,6 @@ class WarisanExhibitionController {
       </div>
       <div class="warisan-modal-filosofi-callout">
         <div class="modal-filosofi-title">
-          <i class="bi bi-lightbulb-fill" aria-hidden="true"></i>
           <span>Filosofi &amp; Makna Kultural Adiluhung</span>
         </div>
         <p class="modal-filosofi-body">${this.escapeHtml(item.filosofi)}</p>

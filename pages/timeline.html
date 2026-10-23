@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jejak Sejarah Jawa Tengah — Timeline Kebudayaan Karsakala</title>
+  <meta name="description" content="Menelusuri perjalanan Jawa Tengah dari masa ke masa, mengenal peristiwa, peninggalan, dan perubahan yang membentuk identitasnya bersama Karsakala.">
+  
+  <!-- Preconnect ke Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Logo Karsakala -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/karsakala-logo.svg">
+  <link rel="alternate icon" type="image/x-icon" href="../assets/images/favicon.ico">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Lembar Gaya Utama & Desain Sistem Karsakala -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/redesign-palette.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  
+  <!-- Lembar Gaya Khusus Halaman Timeline (Galeri Sejarah 3D) -->
+  <link rel="stylesheet" href="../css/timeline.css">
+</head>
+<body class="timeline-body">
+
+  <!-- Latar Belakang Sinematik Statis -->
+  <div class="cinematic-backdrop-fixed" aria-hidden="true">
+    <div class="cinematic-backdrop-img"></div>
+    <div class="cinematic-backdrop-scrim"></div>
+  </div>
+
+  <!-- ==========================================================================
+       BAGIAN HEADER: Bilah Navigasi Global Karsakala
+       ========================================================================== -->
+  <header class="desktop-header-global" id="main-header">
+    <div class="container-fluid">
+      <div class="navbar-inner-global">
+        
+        <!-- Logo & Identitas Brand Karsakala -->
+        <div class="brand-wrapper">
+          <a href="../index.html" class="brand-link" aria-label="Karsakala - Kembali ke Beranda">
+            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+            <span class="visually-hidden">Karsakala</span>
+          </a>
+        </div>
+
+        <!-- Tautan Navigasi Menu Utama -->
+        <nav class="nav-center-wrapper" id="nav-center-menu" aria-label="Navigasi Utama">
+          <ul class="nav-links-list">
+            <li><a href="../index.html" class="nav-item-link">Beranda</a></li>
+            <li><a href="timeline.html" class="nav-item-link active" aria-current="page">Timeline</a></li>
+            <li><a href="tokoh.html" class="nav-item-link">Tokoh</a></li>
+            <li><a href="peta.html" class="nav-item-link">Peta</a></li>
+            <li><a href="warisan-budaya.html" class="nav-item-link">Warisan Budaya</a></li>
+          </ul>
+        </nav>
+
+        <!-- Aksi Cepat Wayang Motion & Tombol Drawer Mobile -->
+        <div class="nav-right-wrapper d-flex align-items-center gap-2">
+          <a href="wayang-motion.html" class="btn-photobooth btn-wayang-motion" id="btn-wayang-motion" aria-label="Buka Fitur Wayang Motion">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Wayang Motion</span>
+          </a>
+
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       BAGIAN INTRO: Judul dan Pengantar Halaman Timeline
+       ========================================================================== -->
+  <section class="page-intro container">
+    <h1 class="page-hero-title">Jejak Sejarah <span>Jawa Tengah</span></h1>
+    <p class="page-hero-lead">Telusuri lima babak monumental peradaban tanah Jawa dari fajar kerajaan kuno, era keemasan candi mandala, perlawanan kemerdekaan, hingga adiluhung warisan dunia dalam galeri 3D interaktif.</p>
+  </section>
+
+  <!-- ==========================================================================
+       BAGIAN UTAMA: PANGGUNG PAMERAN GALERI SEJARAH 3D (5 BABAK)
+       ========================================================================== -->
+  <main class="timeline-reference-stage" id="chapter-stage" aria-label="Galeri 3D Garis Waktu Sejarah Jawa Tengah">
+    <div class="container-fluid stage-outer-container">
+      
+      <!-- Kartu Konten Panggung Utama -->
+      <div class="stage-content-card" id="stage-content-card">
+
+        <!-- 1. Bilah Indikator Babak & Penanda Waktu -->
+        <div class="stage-top-bar" id="timeline-rail">
+          <!-- Indikator Status Periode -->
+          <div class="stage-status-meta">
+            <span class="status-period-tag" id="status-period-tag">Babak 01 / 05</span>
+            <span class="status-period-label d-none d-md-inline" id="status-period-label">· ± Abad ke-4 – ke-7 M</span>
+          </div>
+
+          <!-- Rel Penanda Pilihan Babak Sejarah -->
+          <div class="stage-milestone-stepper" id="milestone-stepper" role="tablist" aria-label="Pilih Babak Sejarah">
+            <!-- Diisi secara dinamis melalui timeline.js -->
+          </div>
+        </div>
+
+        <!-- 2. Area Pandang Galeri Perspektif 3D -->
+        <div class="coverflow-stage-viewport" id="coverflow-viewport" tabindex="0" role="region" aria-label="Panggung Galeri 3D Sejarah Jawa Tengah (Gunakan tombol panah kiri dan kanan untuk bernavigasi)">
+          
+          <!-- Pendaran Cahaya Latar Estetik -->
+          <div class="stage-ambient-glow" aria-hidden="true"></div>
+
+          <!-- Tombol Panah Navigasi Samping -->
+          <button type="button" class="gallery-nav-arrow arrow-prev" id="btn-stage-prev" aria-label="Lihat era sebelumnya">
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="gallery-nav-arrow arrow-next" id="btn-stage-next" aria-label="Lihat era berikutnya">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+
+          <!-- Lintasan Panel 3D Interaktif -->
+          <div class="coverflow-track" id="coverflow-track">
+            <!-- Diisi secara dinamis dengan 5 panel vertikal 3D via timeline.js -->
+          </div>
+
+          <!-- Efek Pantulan Lantai Estetis -->
+          <div class="stage-floor-reflection" aria-hidden="true"></div>
+
+          <!-- Tombol Aksi Utama di Tengah Panggung -->
+          <div class="stage-center-action-wrapper">
+            <button type="button" class="btn-stage-access" id="btn-open-era-detail" aria-label="Buka riwayat lengkap era ini">
+              <i class="bi bi-journal-richtext" aria-hidden="true"></i>
+              <span id="center-action-label">Telusuri Jejak Sejarah</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- 3. Dok Informasi Kurasi Bawah -->
+        <div class="stage-bottom-dock" id="stage-bottom-dock">
+          
+          <!-- Rangkuman Singkat Babak yang Sedang Aktif -->
+          <div class="dock-meta-group">
+            <div class="dock-thumb-wrapper">
+              <img src="../assets/images/timeline/timeline-era-kuno.webp" alt="Fajar Peradaban Jawa Tengah" class="dock-thumbnail" id="dock-thumbnail" width="48" height="48" loading="lazy" decoding="async">
+            </div>
+            <div class="dock-text-lockup">
+              <div class="dock-title" id="dock-title">Fajar Peradaban Jawa Tengah</div>
+              <div class="dock-subtitle" id="dock-subtitle">± Abad ke-4 – ke-7 M · Kalingga &amp; Percandian Dieng</div>
+            </div>
+          </div>
+
+          <!-- Tombol Ringkasan Kronologis Lengkap -->
+          <div class="dock-extra-group">
+            <button type="button" class="dock-btn dock-btn-overview" id="btn-dock-overview" aria-label="Buka ikhtisar kronologis lengkap" title="Ikhtisar Sejarah">
+              <i class="bi bi-journal-text me-1" aria-hidden="true"></i>
+              <span>Ikhtisar 5 Babak</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Elemen Kompatibilitas Cadangan untuk Pengujian Otomatis -->
+        <div class="era-showcase-fallback d-none" aria-hidden="true">
+          <button id="btn-dock-prev" aria-hidden="true" tabindex="-1"></button>
+          <button id="btn-dock-next" aria-hidden="true" tabindex="-1"></button>
+          <img src="../assets/images/timeline/timeline-era-kuno.webp" alt="Peninggalan Masa Kuno Jawa Tengah" id="era-showcase-img" width="300" height="200" loading="eager" decoding="async">
+          <span id="plaque-tag">Pusaka Arsitektur Abad ke-7 M</span>
+          <span id="plaque-title">Kompleks Percandian Dieng</span>
+          <span id="plaque-location">Kabupaten Banjarnegara &amp; Wonosobo</span>
+          <div id="era-events-list"></div>
+          <div id="era-developments-container"></div>
+          <button id="tab-era-0" class="milestone-button" data-index="0"></button>
+          <button id="tab-era-1" class="milestone-button" data-index="1"></button>
+          <button id="tab-era-2" class="milestone-button" data-index="2"></button>
+          <button id="tab-era-3" class="milestone-button" data-index="3"></button>
+          <button id="tab-era-4" class="milestone-button" data-index="4"></button>
+          <button id="btn-prev-era"></button>
+          <button id="btn-next-era"></button>
+          <button id="btn-journey-prev"></button>
+          <button id="btn-journey-next"></button>
+          <div id="warisan-masterpiece-timeline"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: RINCIAN KRONIK SEJARAH (Dipicu oleh "Telusuri Jejak Sejarah")
+       ========================================================================== -->
+  <div class="modal-backdrop-editorial" id="timeline-detail-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-chronicle-title">
+    <div class="timeline-detail-card">
+      <button type="button" class="timeline-modal-close" id="btn-close-timeline-modal" aria-label="Tutup rincian sejarah">&times;</button>
+      <div class="timeline-modal-body" id="timeline-modal-body">
+        <!-- Diisi secara dinamis melalui JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DRAWER: MATRIKS IKHTISAR KRONOLOGIS (Dipicu oleh tombol ikhtisar dok)
+       ========================================================================== -->
+  <div class="timeline-overview-drawer" id="timeline-overview-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title-lockup">
+        <span class="drawer-eyebrow">IKHTISAR KRONOLOGIS</span>
+        <h3 class="drawer-title">Garis Waktu Peradaban Jawa Tengah</h3>
+      </div>
+      <button type="button" class="drawer-close" id="btn-close-drawer" aria-label="Tutup ikhtisar">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawer-milestones-list">
+      <!-- Diisi secara dinamis melalui JavaScript -->
+    </div>
+  </div>
+  <div class="drawer-scrim" id="drawer-scrim" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       BAGIAN FOOTER: Navigasi Kaki & Informasi Hak Cipta
+       ========================================================================== -->
+  <footer class="desktop-footer-timeline">
+    <div class="container-fluid">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="../index.html" class="brand-link footer-brand-link" aria-label="Karsakala - Beranda">
+            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="footer-logo-img" width="94" height="48" loading="lazy" decoding="async">
+            <span class="visually-hidden">Karsakala</span>
+          </a>
+          <p class="footer-tagline">
+            Media interaktif dokumentasi dan apresiasi kekayaan sejarah, tokoh, serta warisan peradaban adiluhung Jawa Tengah dari masa ke masa.
+          </p>
+        </div>
+        <div class="footer-nav-col">
+          <div>
+            <div class="footer-nav-group-title">Eksplorasi</div>
+            <ul class="footer-nav-links">
+              <li><a href="../index.html" class="footer-nav-link">Beranda</a></li>
+              <li><a href="timeline.html" class="footer-nav-link active">Timeline Sejarah</a></li>
+              <li><a href="tokoh.html" class="footer-nav-link">Tokoh Bersejarah</a></li>
+              <li><a href="warisan-budaya.html" class="footer-nav-link">Warisan Budaya</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-nav-group-title">Babak Sejarah</div>
+            <ul class="footer-nav-links">
+              <li><a href="timeline.html?era=kuno" class="footer-nav-link">Masa Kuno &amp; Kalingga</a></li>
+              <li><a href="timeline.html?era=era-candi" class="footer-nav-link">Era Candi Klasik</a></li>
+              <li><a href="timeline.html?era=demak" class="footer-nav-link">Kesultanan Demak</a></li>
+              <li><a href="timeline.html?era=kraton-diponegoro" class="footer-nav-link">Kraton &amp; Diponegoro</a></li>
+              <li><a href="timeline.html?era=kemerdekaan-unesco" class="footer-nav-link">Kemerdekaan &amp; UNESCO</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-nav-group-title">Fitur Interaktif</div>
+            <ul class="footer-nav-links">
+              <li><a href="peta.html" class="footer-nav-link">Peta Interaktif Atlas</a></li>
+              <li><a href="wayang-motion.html" class="footer-nav-link">Wayang Motion</a></li>
+              <li><a href="warisan-budaya.html" class="footer-nav-link">Pusaka Kebudayaan</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>
+          <span>&copy; 2026 Karsakala. Seluruh hak cipta dilindungi. Melestarikan Jejak Peradaban Nusantara.</span>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#kebijakan" class="footer-bottom-link">Kebijakan Privasi</a>
+          <a href="#ketentuan" class="footer-bottom-link">Ketentuan Penggunaan</a>
+          <a href="#kontak" class="footer-bottom-link">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SKRIP JAVASCRIPT: Backend Supabase & Pengontrol Galeri
+       ========================================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-client.js"></script>
+
+  <!-- Skrip Pengontrol Interaksi Timeline & Navigasi Utama -->
+  <script src="../js/timeline.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

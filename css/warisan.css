@@ -105,12 +105,12 @@ body.warisan-page-body {
   color: #FFFFFF;
   overflow: hidden;
   border-bottom: 1px solid rgba(214, 174, 124, 0.28);
-  min-height: calc(100vh - 66px);
+  min-height: 640px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 0 20px;
+  padding: 32px 0 28px;
   box-sizing: border-box;
 }
 
@@ -537,8 +537,7 @@ body.warisan-page-body {
   width: 28px;
   height: 7px;
   border-radius: 9999px;
-  background: #b46f39;
-  box-shadow: 0 0 8px rgba(180, 111, 57, 0.55);
+  background: var(--wb-sand, #c5a44d);
 }
 
 .gallery-keyboard-hint {

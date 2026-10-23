@@ -1,0 +1,21 @@
+# Netlify Redirects & URL Rewrites for Karsakala
+# Memungkinkan URL bersih dan menjaga kompatibilitas rute lama
+
+/timeline            /pages/timeline.html        200
+/timeline.html       /pages/timeline.html        200
+/tokoh               /pages/tokoh.html           200
+/tokoh.html          /pages/tokoh.html           200
+/warisan-budaya      /pages/warisan-budaya.html  200
+/warisan-budaya.html /pages/warisan-budaya.html  200
+/warisan             /pages/warisan-budaya.html  200
+/warisan.html        /pages/warisan-budaya.html  200
+/peta                /pages/peta.html            200
+/peta.html           /pages/peta.html            200
+/wayang-motion       /pages/wayang-motion.html   200
+/wayang-motion.html  /pages/wayang-motion.html   200
+
+# Dukungan aset relatif dari subdirektori pages/
+/pages/assets/*      /assets/:splat              200
+/pages/css/*         /css/:splat                 200
+/pages/js/*          /js/:splat                  200
+

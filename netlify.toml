@@ -26,3 +26,80 @@
   for = "/js/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[redirects]]
+  from = "/timeline"
+  to = "/pages/timeline.html"
+  status = 200
+
+[[redirects]]
+  from = "/timeline.html"
+  to = "/pages/timeline.html"
+  status = 200
+
+[[redirects]]
+  from = "/tokoh"
+  to = "/pages/tokoh.html"
+  status = 200
+
+[[redirects]]
+  from = "/tokoh.html"
+  to = "/pages/tokoh.html"
+  status = 200
+
+[[redirects]]
+  from = "/warisan-budaya"
+  to = "/pages/warisan-budaya.html"
+  status = 200
+
+[[redirects]]
+  from = "/warisan-budaya.html"
+  to = "/pages/warisan-budaya.html"
+  status = 200
+
+[[redirects]]
+  from = "/warisan"
+  to = "/pages/warisan-budaya.html"
+  status = 200
+
+[[redirects]]
+  from = "/warisan.html"
+  to = "/pages/warisan-budaya.html"
+  status = 200
+
+[[redirects]]
+  from = "/peta"
+  to = "/pages/peta.html"
+  status = 200
+
+[[redirects]]
+  from = "/peta.html"
+  to = "/pages/peta.html"
+  status = 200
+
+[[redirects]]
+  from = "/wayang-motion"
+  to = "/pages/wayang-motion.html"
+  status = 200
+
+[[redirects]]
+  from = "/wayang-motion.html"
+  to = "/pages/wayang-motion.html"
+  status = 200
+
+[[redirects]]
+  from = "/pages/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/pages/css/*"
+  to = "/css/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/pages/js/*"
+  to = "/js/:splat"
+  status = 200
+
+

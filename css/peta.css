@@ -330,14 +330,15 @@ body.peta-page {
   gap: 10px;
   padding: 8px 20px;
   transform: translateX(-50%);
-  border: 1px solid var(--color-sand);
+  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.4));
   border-radius: var(--kp-radius-pill);
-  background: rgba(97, 31, 10, 0.94);
-  color: var(--color-cream);
+  background: rgba(17, 16, 14, 0.94);
+  color: var(--color-text, #f4efe4);
   font-size: 12.5px;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .map-loading:empty { display: none; }
@@ -346,13 +347,8 @@ body.peta-page {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-sand);
-  animation: pulseSandDot 1.4s infinite;
-}
-
-@keyframes pulseSandDot {
-  0%, 100% { opacity: 0.3; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.15); }
+  background: var(--color-gold, #c5a44d);
+  opacity: 0.9;
 }
 
 .map-legend {
@@ -416,7 +412,7 @@ body.peta-page {
 
 .map-credit {
   position: absolute;
-  bottom: 10px;
+  bottom: 22px;
   right: 14px;
   z-index: 500;
   font-size: 10.5px;
@@ -702,148 +698,6 @@ body.peta-page {
 }
 
 /* ==========================================================================
-   CULTURAL HERITAGE CATEGORIES SECTION (#eksplorasi)
-   ========================================================================== */
-.heritage-section {
-  padding: 64px 20px;
-  background: rgba(8, 8, 8, 0.75);
-  border-top: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
-  color: var(--color-text, #f4efe4);
-}
-
-.heritage-section .section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 32px;
-  max-width: 1320px;
-  margin: 0 auto 40px;
-}
-
-.heritage-section .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-gold, #c5a44d);
-  margin-bottom: 6px;
-}
-
-.heritage-section h2 {
-  font-family: var(--kp-font-serif);
-  font-size: clamp(28px, 2.6vw, 38px);
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-.heritage-section h2 span {
-  color: var(--color-gold-light, #e1ca7a);
-  font-style: italic;
-}
-
-.heritage-section .section-heading p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--color-text-muted, #c2b9a7);
-  max-width: 440px;
-  margin: 0;
-}
-
-.heritage-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  max-width: 1320px;
-  margin: 0 auto;
-}
-
-.heritage-card {
-  background: rgba(17, 16, 14, 0.85);
-  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
-  border-radius: 6px;
-  padding: 24px 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  transition: transform var(--kp-transition-fast), box-shadow var(--kp-transition-fast), border-color var(--kp-transition-fast);
-}
-
-.heritage-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(197, 164, 77, 0.2);
-  border-color: var(--color-gold, #c5a44d);
-}
-
-.heritage-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  background: rgba(197, 164, 77, 0.12);
-  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.3));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  color: var(--color-gold, #c5a44d);
-}
-
-.heritage-icon svg {
-  width: 28px;
-  height: 28px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  fill: none;
-}
-
-.card-kicker {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-gold, #c5a44d);
-  margin-bottom: 6px;
-}
-
-.heritage-card h3 {
-  font-family: var(--kp-font-serif);
-  font-size: 20px;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0 0 10px;
-}
-
-.heritage-card p {
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: var(--color-text-muted, #c2b9a7);
-  margin: 0 0 20px;
-  flex: 1 1 auto;
-}
-
-.explore-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(8, 8, 8, 0.9);
-  color: var(--color-text, #f4efe4);
-  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.35));
-  border-radius: 3px;
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: all var(--kp-transition-fast);
-}
-
-.explore-link:hover {
-  background: var(--color-gold, #c5a44d);
-  color: #080808;
-  border-color: var(--color-gold-light, #e1ca7a);
-}
-
-/* ==========================================================================
    DETAILS MODAL DIALOG (#history-modal)
    ========================================================================== */
 .modal-backdrop {
@@ -967,19 +821,6 @@ body.peta-page {
   .map-wrap {
     height: clamp(330px, 48vh, 400px);
   }
-  .heritage-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .heritage-section {
-    padding: 48px 16px;
-  }
-  .heritage-section .section-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1051,9 +892,6 @@ body.peta-page {
     width: 100%;
     min-height: 44px;
     justify-content: center;
-  }
-  .heritage-section {
-    padding: 36px 12px;
   }
   .history-modal {
     padding: 20px 14px;

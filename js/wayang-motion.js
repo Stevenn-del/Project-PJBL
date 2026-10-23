@@ -284,12 +284,27 @@
   // ==========================================================================
   // 3. ARTICULATED WAYANG RIG SPECIFICATION
   // ==========================================================================
+  const resolveWmAsset = (url) => {
+    if (!url) return '';
+    if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('/')) return url;
+    if (window.location.pathname.includes('/pages/') && !url.startsWith('../')) {
+      return '../' + url;
+    }
+    return url;
+  };
+
   const rot180 = (p, size) => [size[0] - p[0], size[1] - p[1]];
 
   const LEFT = {
-    upper: { src: 'assets/images/reference-rig/upper-arm-l.webp', size: [231, 89], prox: [211, 44], dist: [22, 28] },
-    fore:  { src: 'assets/images/reference-rig/forearm-l.webp',   size: [195, 109], prox: [172, 58], dist: [13, 53] },
-    hand:  { src: 'assets/images/reference-rig/hand-l.webp',      size: [108, 124], prox: [91.7, 67.5], grip: [52, 76] },
+    upper: { src: 'assets/images/wayang-motion/reference-rig/upper-arm-l.webp', size: [231, 89], prox: [211, 44], dist: [22, 28] },
+    fore:  { src: 'assets/images/wayang-motion/reference-rig/forearm-l.webp',   size: [195, 109], prox: [172, 58], dist: [13, 53] },
+    hand:  { src: 'assets/images/wayang-motion/reference-rig/hand-l.webp',      size: [108, 124], prox: [91.7, 67.5], grip: [52, 76] },
+  };
+
+  const BRAJA_LEFT = {
+    upper: { src: 'assets/images/wayang-motion/brajawisena-rig/upper-arm-l.webp', size: [231, 89], prox: [211, 44], dist: [22, 28] },
+    fore:  { src: 'assets/images/wayang-motion/brajawisena-rig/forearm-l.webp',   size: [195, 109], prox: [172, 58], dist: [13, 53] },
+    hand:  { src: 'assets/images/wayang-motion/brajawisena-rig/hand-l.webp',      size: [108, 124], prox: [91.7, 67.5], grip: [52, 76] },
   };
 
   const mirrorPiece = (p, src) => {
@@ -299,14 +314,27 @@
   };
 
   const PARTS = {
-    body:   { src: 'assets/images/reference-rig/body.webp', size: [706, 1377] },
+    body:   { src: 'assets/images/wayang-motion/reference-rig/body.webp', size: [706, 1377] },
     upperL: LEFT.upper,
     foreL:  LEFT.fore,
     handL:  LEFT.hand,
-    upperR: mirrorPiece(LEFT.upper, 'assets/images/reference-rig/upper-arm-r.webp'),
-    foreR:  mirrorPiece(LEFT.fore,  'assets/images/reference-rig/forearm-r.webp'),
-    handR:  mirrorPiece(LEFT.hand,  'assets/images/reference-rig/hand-r.webp'),
+    upperR: mirrorPiece(LEFT.upper, 'assets/images/wayang-motion/reference-rig/upper-arm-r.webp'),
+    foreR:  mirrorPiece(LEFT.fore,  'assets/images/wayang-motion/reference-rig/forearm-r.webp'),
+    handR:  mirrorPiece(LEFT.hand,  'assets/images/wayang-motion/reference-rig/hand-r.webp'),
+
+    // Authentic Traditional Opponent: Prabu Brajawisena Rig Assets
+    braja_body:   { src: 'assets/images/wayang-motion/brajawisena-rig/body.webp', size: [706, 1377] },
+    braja_upperL: BRAJA_LEFT.upper,
+    braja_foreL:  BRAJA_LEFT.fore,
+    braja_handL:  BRAJA_LEFT.hand,
+    braja_upperR: mirrorPiece(BRAJA_LEFT.upper, 'assets/images/wayang-motion/brajawisena-rig/upper-arm-r.webp'),
+    braja_foreR:  mirrorPiece(BRAJA_LEFT.fore,  'assets/images/wayang-motion/brajawisena-rig/forearm-r.webp'),
+    braja_handR:  mirrorPiece(BRAJA_LEFT.hand,  'assets/images/wayang-motion/brajawisena-rig/hand-r.webp'),
   };
+
+  for (const k in PARTS) {
+    if (PARTS[k] && PARTS[k].src) PARTS[k].src = resolveWmAsset(PARTS[k].src);
+  }
 
   const BODY_RIG = {
     anchor: [345, 760],
@@ -319,11 +347,12 @@
   const REST_POSE = { L: [-150, 250], R: [70, 330] };
 
   class Arm {
-    constructor(side) {
+    constructor(side, partPrefix = '') {
       this.side = side;
-      this.upper = PARTS['upper' + side];
-      this.fore = PARTS['fore' + side];
-      this.hand = PARTS['hand' + side];
+      this.partPrefix = partPrefix;
+      this.upper = PARTS[partPrefix + 'upper' + side] || PARTS['upper' + side];
+      this.fore = PARTS[partPrefix + 'fore' + side] || PARTS['fore' + side];
+      this.hand = PARTS[partPrefix + 'hand' + side] || PARTS['hand' + side];
       this.shoulder = BODY_RIG.shoulder[side];
 
       const u = sub(this.upper.dist, this.upper.prox);
@@ -341,6 +370,22 @@
       this.rodX = new Spring(0, 45, 0.75);
       this.solution = { rotU: 0, rotF: 0 };
       this.initialized = false;
+      this.rodInit = false;
+    }
+
+    initRestPose(B) {
+      const targetLocal = add(this.shoulder, REST_POSE[this.side]);
+      const sol = this.solve(targetLocal);
+      this.solution = sol;
+      this.rotU.snap(sol.rotU);
+      this.rotF.snap(sol.rotF);
+      this.rotH.snap(sol.rotF);
+      const targetWorld = Affine.apply(B, ...targetLocal);
+      this.target = new Spring2(targetWorld[0], targetWorld[1], 320, 0.5);
+      this.target.snap(targetWorld[0], targetWorld[1]);
+      this.rodX.snap(targetWorld[0]);
+      this.initialized = true;
+      this.rodInit = true;
     }
 
     solve(T) {
@@ -378,23 +423,42 @@
   }
 
   class Puppet {
-    constructor({ x = 960, y = 650, facing = 1 } = {}) {
+    constructor({ x = 960, y = 650, facing = 1, lookDir = null, id = null, character = null, image = null, partPrefix = '' } = {}) {
+      this.id = id;
+      this.character = character;
+      this.image = image;
+      this.partPrefix = partPrefix;
       this.baseScale = 0.53;
       this.scale = this.baseScale;
       this.home = [x, y];
-      this.pos = new Spring2(x, y, 240, 0.62);
+      this.pos = new Spring2(x, y, 260, 0.78);
       this.bodyTarget = [x, y];
-      this.tilt = new Spring(0, 60, 0.45);
-      this.depth = new Spring(0, 28, 1.0);
-      this.facing = facing; // 1 = looks left, -1 = mirrored (looks right)
-      this.flip = { from: facing, to: facing, t: 1 };
-      this.flipX = facing;
+      this.tilt = new Spring(0, 75, 0.55);
+      this.depth = new Spring(0, 32, 1.0);
+
+      // Raw image texture forward direction:
+      // Both Prabu Wahyana (reference-rig) and Prabu Brajawisena (brajawisena-rig) have their raw body/head
+      // textures drawn facing LEFT (-1). Therefore, both use rawFacing = -1.
+      this.rawFacing = -1;
+
+      // World look direction: +1 = looking RIGHT towards +X, -1 = looking LEFT towards -X
+      const initialLook = lookDir !== null ? lookDir : (facing !== undefined && facing !== null ? facing : -1);
+      this.defaultLookDir = initialLook;
+      this.lookDir = initialLook;
+      this.facing = initialLook;
+      this.defaultFacing = initialLook;
+
+      // Visual horizontal flip factor:
+      // flipX = rawFacing * lookDir
+      // Wahyana (rawFacing -1) looking RIGHT (+1): flipX = (-1) * (+1) = -1 (mirrored -> looks right towards center)
+      // Brajawisena (rawFacing -1) looking LEFT (-1): flipX = (-1) * (-1) = +1 (unmirrored -> looks left towards center)
+      this.flipX = this.rawFacing * this.lookDir;
+      this.flip = { from: this.lookDir, to: this.lookDir, t: 1 };
+
       this.facingMode = 'target';
       this.faceTargetX = null;
       this.turnTimer = 0;
       this.walkPhase = 0;
-      this.arms = { L: new Arm('L'), R: new Arm('R') };
-      this.B = Affine.identity();
       this.surfaceTilt = [0, 0];
       this.prevVel = [0, 0];
       this.dance = null;
@@ -408,6 +472,10 @@
       this.lastRot = 0;
       this.lastRotV = 0;
       this.prevFrame = new Map();
+      this.B = this.bodyMatrix(0);
+      this.arms = { L: new Arm('L', partPrefix), R: new Arm('R', partPrefix) };
+      this.arms.L.initRestPose(this.B);
+      this.arms.R.initRestPose(this.B);
     }
 
     get dancing() {
@@ -427,8 +495,10 @@
 
     turn() {
       if (this.flip.t < 1) return;
-      this.flip = { from: this.facing, to: -this.facing, t: 0 };
-      this.facing = -this.facing;
+      const targetLook = -this.lookDir;
+      this.flip = { from: this.lookDir, to: targetLook, t: 0 };
+      this.lookDir = targetLook;
+      this.facing = targetLook;
     }
 
     bodyMatrix(bob) {
@@ -441,6 +511,33 @@
     }
 
     update(dt, input, view, rhythm) {
+      if (!state.isActive) {
+        // Ready state: every puppet remains completely stationary with zero flicker or sway
+        const homeX = view.x + view.w * (this.id === 'prabu-brajawisena' ? 0.62 : 0.38);
+        const homeY = view.y + view.h * 0.6;
+        this.home = [homeX, homeY];
+        this.pos.snap(homeX, homeY);
+        this.bodyTarget = [homeX, homeY];
+        this.tilt.snap(0);
+        this.depth.snap(0);
+        this.dance = null;
+        this.danceOffset = [0, 0];
+        this.danceTilt = 0;
+        this.walkPhase = 0;
+        this.turnTimer = 0;
+        this.lookDir = this.defaultLookDir;
+        this.facing = this.defaultLookDir;
+        this.flipX = this.rawFacing * this.lookDir;
+        this.flip = { from: this.lookDir, to: this.lookDir, t: 1 };
+        this.surfaceTilt = [0, 0];
+        this.prevVel = [0, 0];
+        this.B = this.bodyMatrix(0);
+        for (const side of ['L', 'R']) {
+          const arm = this.arms[side];
+          arm.initRestPose(this.B);
+        }
+        return;
+      }
       if (input.danceTrigger && !this.dance) this.startDance(rhythm);
       let D = null, w = 0;
       if (this.dance) {
@@ -460,7 +557,7 @@
         }
       }
 
-      const fwd = -this.facing;
+      const fwd = this.lookDir;
       const kS = this.scale / this.baseScale;
       this.time += dt;
 
@@ -499,10 +596,12 @@
       let wantTurn = false;
       if (!this.dance) {
         if (this.facingMode === 'walk') {
-          wantTurn = speed > 240 && Math.sign(vx) === this.facing;
+          const walkDir = Math.sign(vx);
+          wantTurn = speed > 240 && walkDir !== 0 && this.lookDir !== walkDir;
         } else if (this.facingMode === 'target' && this.faceTargetX !== null) {
           const dx = this.faceTargetX - this.pos.x;
-          wantTurn = Math.abs(dx) > 60 && Math.sign(dx) === this.facing;
+          const targetDir = Math.sign(dx);
+          wantTurn = Math.abs(dx) > 60 && targetDir !== 0 && this.lookDir !== targetDir;
         }
       }
       if (wantTurn) {
@@ -513,9 +612,9 @@
       }
       if (this.flip.t < 1) {
         this.flip.t = Math.min(1, this.flip.t + dt / 0.42);
-        this.flipX = this.flip.from * Math.cos(Math.PI * easeInOut(this.flip.t));
+        this.flipX = this.rawFacing * this.flip.from * Math.cos(Math.PI * easeInOut(this.flip.t));
       } else {
-        this.flipX = this.facing;
+        this.flipX = this.rawFacing * this.lookDir;
       }
 
       const ax = (vx - this.prevVel[0]) / Math.max(dt, 1e-3);
@@ -615,11 +714,12 @@
       const k = this.scale / this.baseScale;
       const poses = { L: this.arms.L.pose(B), R: this.arms.R.pose(B) };
       const tilt = this.surfaceTilt;
+      const pfx = this.partPrefix || '';
 
       const armItems = (side) => [
-        { kind: 'part', id: 'upper' + side, key: 'upper' + side, m: poses[side].upperM, tilt },
-        { kind: 'part', id: 'fore' + side,  key: 'fore' + side,  m: poses[side].foreM,  tilt },
-        { kind: 'part', id: 'hand' + side,  key: 'hand' + side,  m: poses[side].handM,  tilt },
+        { kind: 'part', id: pfx + 'upper' + side, key: pfx + 'upper' + side, m: poses[side].upperM, tilt },
+        { kind: 'part', id: pfx + 'fore' + side,  key: pfx + 'fore' + side,  m: poses[side].foreM,  tilt },
+        { kind: 'part', id: pfx + 'hand' + side,  key: pfx + 'hand' + side,  m: poses[side].handM,  tilt },
       ];
 
       const top = Affine.apply(B, ...BODY_RIG.stickTop);
@@ -666,11 +766,13 @@
         };
       });
 
-      const back = this.flipX >= 0 ? 'R' : 'L';
-      const front = back === 'R' ? 'L' : 'R';
+      const sL = Affine.apply(B, ...BODY_RIG.shoulder.L);
+      const sR = Affine.apply(B, ...BODY_RIG.shoulder.R);
+      const front = (this.lookDir > 0) ? (sL[0] >= sR[0] ? 'L' : 'R') : (sL[0] <= sR[0] ? 'L' : 'R');
+      const back = front === 'L' ? 'R' : 'L';
       const items = [
         ...armItems(back),
-        { kind: 'part', id: 'body', key: 'body', m: B, tilt },
+        { kind: 'part', id: pfx + 'body', key: pfx + 'body', m: B, tilt },
         gapit,
         ...armItems(front),
         ...rods,
@@ -906,17 +1008,14 @@ uniform float uTime;
 ${NOISE}
 out vec4 outColor;
 void main() {
-  vec2 stage = vec2(uView.x + vUv.x * uView.z, uView.y + (1.0 - vUv.y) * uView.w);
-  vec2 buv = stage / vec2(${STAGE_W.toFixed(1)}, ${STAGE_H.toFixed(1)});
+  vec2 buv = vec2(vUv.x, 1.0 - vUv.y);
   vec3 bg = texture(uBg, clamp(buv, vec2(0.0), vec2(1.0))).rgb;
 
-  vec2 d = (stage - uHot) / vec2(1250.0, 820.0);
-  float glow = exp(-dot(d, d) * 1.7);
-  vec3 lit = bg * (0.64 + 0.36 * glow) * uFlicker;
-  lit += vec3(1.0, 0.62, 0.28) * glow * 0.05 * uFlicker;
-
-  float smoke = vnoise(stage * 0.004 + vec2(uTime * 0.05, -uTime * 0.03)) * vnoise(stage * 0.009 - vec2(uTime * 0.04, 0.0));
-  lit += vec3(1.0, 0.8, 0.55) * smoke * glow * 0.035;
+  // Noticeably darken stage background with deep warm brown, dark mahogany & muted antique gold tones
+  // Greatly reduces competing brightness so 3D wayang characters and gold prada stand out with theatrical clarity
+  vec3 mahoganyBase = vec3(0.08, 0.04, 0.02);
+  vec3 warmTone = vec3(0.38, 0.29, 0.21);
+  vec3 lit = mahoganyBase + bg * warmTone;
 
   vec4 s0 = texture(uShadow0, vUv);
   vec4 s1 = texture(uShadow1, vUv);
@@ -965,14 +1064,6 @@ uniform float uTime;
 out vec4 outColor;
 void main() {
   vec3 c = texture(uScene, vUv).rgb + texture(uBloom, vUv).rgb * uBloomK;
-  vec2 q = vUv - 0.5;
-  q.x *= uRes.x / uRes.y;
-  float vig = smoothstep(1.15, 0.28, length(q * vec2(0.85, 1.05)));
-  c *= mix(0.38, 1.0, vig);
-  c = c / (1.0 + 0.16 * c) * 1.12;
-  c = pow(max(c, 0.0), vec3(1.0, 1.02, 1.08));
-  float g = fract(sin(dot(floor(vUv * uRes) + fract(uTime * 7.13) * 91.7, vec2(12.9898, 78.233))) * 43758.5453);
-  c += (g - 0.5) * 0.02;
   outColor = vec4(c, 1.0);
 }`;
 
@@ -1396,21 +1487,34 @@ void main() {
     'index-pinky': { a: INDEX_TIP, aBase: INDEX_MCP, b: PINKY_TIP, bBase: PINKY_MCP },
   };
 
-  const LOST_MS = 320;
+  const LOST_MS = 600;
+  const RECOVERY_GRACE_MS = 500;
   const PINKY_HOLD_MS = 280;
   const PINKY_REARM_MS = 350;
 
   function makeSlot() {
-    const pos = () => new OneEuro(1.6, 9, 1.0);
+    const pos = () => new OneEuro(0.75, 4.0, 1.0);
     return {
       active: false,
+      isRecovering: false,
       lastSeen: 0,
       lastTs: 0,
       rawPalm: null,
-      f: { px: pos(), py: pos(), ax: pos(), ay: pos(), bx: pos(), by: pos(), size: new OneEuro(0.7, 1.5), roll: new OneEuro(1.2, 2.5) },
+      vel: [0, 0],
+      f: {
+        px: pos(),
+        py: pos(),
+        ax: new OneEuro(0.9, 4.5, 1.0),
+        ay: new OneEuro(0.9, 4.5, 1.0),
+        bx: new OneEuro(0.9, 4.5, 1.0),
+        by: new OneEuro(0.9, 4.5, 1.0),
+        size: new OneEuro(0.5, 1.5, 1.0),
+        roll: new OneEuro(0.8, 2.5, 1.0),
+      },
       leftIsA: true,
       role: null,
       data: null,
+      handedness: null,
       landmarks: null,
       pinky: false,
       pinkyOn: 0,
@@ -1422,9 +1526,13 @@ void main() {
 
   function resetSlot(s) {
     s.active = false;
+    s.isRecovering = false;
     s.data = null;
     s.rawPalm = null;
+    s.vel = [0, 0];
     s.role = null;
+    s.handedness = null;
+    s.landmarks = null;
     s.pinky = false;
     s.pinkyOn = 0;
     s.pinkyOff = 0;
@@ -1457,18 +1565,20 @@ void main() {
 
   class HandController {
     constructor() {
-      this.source = 'demo';
+      this.source = 'ready';
       this.settings = { fingers: 'thumb-index', bodyHand: 'right', characters: 'two' };
+      this._puppetCount = 2;
       this.slots = [makeSlot(), makeSlot()];
       this.bodySlot = -1;
       this.calibs = {};
       this.mouse = { x: 960, y: 640, depth: 0, seen: false, dragging: false };
-      this.status = { hands: 0, mode: 'demo', calibrating: false };
+      this.status = { hands: 0, mode: 'ready', calibrating: false };
       this.prevCount = 0;
-      this.home = [[640, 650], [1280, 650]];
+      this.home = [[740, 650], [1180, 650]];
       this.pendingDance = [false, false];
       this.demoDance = -1;
       this.aspect = 16 / 9;
+      this.lastIngestTs = 0;
     }
 
     requestDance(i = null) {
@@ -1476,7 +1586,11 @@ void main() {
     }
 
     get puppetCount() {
-      return this.settings.characters === 'two' ? 2 : 1;
+      return this._puppetCount ?? 2;
+    }
+
+    set puppetCount(val) {
+      this._puppetCount = Math.max(1, Math.min(2, Number(val) || 1));
     }
 
     recalibrate() {
@@ -1489,26 +1603,137 @@ void main() {
       return [view.x + view.w * (0.06 + 0.88 * u), view.y + view.h * (0.26 + 0.62 * v)];
     }
 
-    ingest(landmarksList, ts) {
+    ingest(landmarksList, handednessList, ts) {
+      const now = ts || performance.now();
       const pair = FINGER_PAIRS[this.settings.fingers] || FINGER_PAIRS['thumb-index'];
-      const hands = landmarksList.map((lm) => ({ lm, h: analyzeHand(lm, this.aspect, pair) }));
 
-      const used = new Set();
-      const assign = new Map();
-      const dist = (s, h) => (s.rawPalm ? Math.hypot(s.rawPalm[0] - h.palm[0], s.rawPalm[1] - h.palm[1]) : 1e9);
-      const pairs = [];
-      hands.forEach((hd, hi) => this.slots.forEach((s, si) => pairs.push({ hi, si, d: s.active ? dist(s, hd.h) : 1e6 + si })));
-      pairs.sort((p, q) => p.d - q.d);
-      for (const p of pairs) {
-        if (assign.has(p.hi) || used.has(p.si)) continue;
-        assign.set(p.hi, p.si);
-        used.add(p.si);
+      // Parse all detected hands (up to maxNumHands = 4)
+      const detected = (landmarksList || []).map((lm, i) => {
+        const handInfo = (handednessList && handednessList[i]) ? handednessList[i] : null;
+        return {
+          idx: i,
+          lm,
+          handedness: handInfo?.label || null,
+          confidence: handInfo?.score || 0.5,
+          h: analyzeHand(lm, this.aspect, pair),
+        };
+      });
+
+      const assignments = new Map(); // handIndex -> slotIndex
+      const usedSlots = new Set();
+      const usedHands = new Set();
+
+      // Priority 1: Match existing active slots or slots in recovery grace period to continuing hands
+      const candidates = [];
+      this.slots.forEach((s, si) => {
+        if (!s.active && now - s.lastSeen > RECOVERY_GRACE_MS) return;
+        detected.forEach((d, hi) => {
+          let cost = 1e6;
+          if (s.rawPalm) {
+            // Motion prediction using slot velocity
+            const dtPred = clamp((now - s.lastTs) / 1000, 0.01, 0.12);
+            const predX = s.rawPalm[0] + (s.vel ? s.vel[0] * dtPred * 0.6 : 0);
+            const predY = s.rawPalm[1] + (s.vel ? s.vel[1] * dtPred * 0.6 : 0);
+            const dx = d.h.palm[0] - predX;
+            const dy = d.h.palm[1] - predY;
+            const dist = Math.hypot(dx, dy);
+
+            // Gating radius: 0.70 normalized aspect space allows rapid hand movement
+            if (dist < 0.70) {
+              cost = dist;
+              // Handedness consistency penalty
+              if (s.handedness && d.handedness && s.handedness !== d.handedness) {
+                cost += 0.20;
+              }
+              // Hand size consistency penalty
+              if (s.data && s.data.size) {
+                const sizeRatio = d.h.size / (s.data.size || 1);
+                if (sizeRatio < 0.5 || sizeRatio > 2.0) cost += 0.20;
+              }
+              // Spatial continuity: Slot 0 (Wahyana) prefers left half; Slot 1 (Brajawisena) prefers right half
+              const normX = d.h.palm[0] / this.aspect;
+              if (si === 0 && normX > 0.65) cost += 0.15;
+              if (si === 1 && normX < 0.35) cost += 0.15;
+            }
+          }
+          if (cost < 0.75) {
+            candidates.push({ hi, si, cost });
+          }
+        });
+      });
+
+      candidates.sort((a, b) => a.cost - b.cost);
+      for (const c of candidates) {
+        if (usedHands.has(c.hi) || usedSlots.has(c.si)) continue;
+        assignments.set(c.hi, c.si);
+        usedHands.add(c.hi);
+        usedSlots.add(c.si);
       }
 
-      for (const [hi, si] of assign) {
+      // Priority 2: For any remaining unassigned slots that are completely inactive, assign available hands
+      // Evaluate all (slot, hand) pairs globally so slot 0 does not greedily steal a hand on the right
+      const newCandidates = [];
+      this.slots.forEach((s, si) => {
+        if (usedSlots.has(si)) return;
+        if (s.active && now - s.lastSeen <= RECOVERY_GRACE_MS) return;
+
+        const targetNormX = si === 0 ? 0.30 : 0.70;
+        detected.forEach((d, hi) => {
+          if (usedHands.has(hi)) return;
+          const normX = d.h.palm[0] / this.aspect;
+          let cost = Math.abs(normX - targetNormX);
+          // Penalty if hand is placed on the opposite person's half
+          if (si === 0 && normX > 0.52) cost += 0.40;
+          if (si === 1 && normX < 0.48) cost += 0.40;
+          newCandidates.push({ hi, si, cost });
+        });
+      });
+
+      newCandidates.sort((a, b) => a.cost - b.cost);
+      for (const c of newCandidates) {
+        if (usedHands.has(c.hi) || usedSlots.has(c.si)) continue;
+        assignments.set(c.hi, c.si);
+        usedHands.add(c.hi);
+        usedSlots.add(c.si);
+      }
+
+      // Update matched slots
+      for (const [hi, si] of assignments.entries()) {
         const s = this.slots[si];
-        const { h, lm } = hands[hi];
-        const dt = s.active ? clamp((ts - s.lastTs) / 1000, 1 / 240, 0.2) : 1 / 30;
+        const d = detected[hi];
+        const h = d.h;
+        const dt = s.active ? clamp((now - s.lastTs) / 1000, 0.005, 0.1) : 0.033;
+
+        // Adaptive outlier rejection & plausible speed clamping (supports fast dalang action)
+        let clampedPalmX = h.palm[0];
+        let clampedPalmY = h.palm[1];
+        if (s.rawPalm) {
+          const maxSpeed = 10.0; // Normalized units per second
+          const maxDisplacement = maxSpeed * Math.max(dt, 0.016);
+          const dx = clampedPalmX - s.rawPalm[0];
+          const dy = clampedPalmY - s.rawPalm[1];
+          const dist = Math.hypot(dx, dy);
+          if (dist > maxDisplacement) {
+            clampedPalmX = s.rawPalm[0] + (dx / dist) * maxDisplacement;
+            clampedPalmY = s.rawPalm[1] + (dy / dist) * maxDisplacement;
+          }
+          const vx = (clampedPalmX - s.rawPalm[0]) / Math.max(dt, 0.005);
+          const vy = (clampedPalmY - s.rawPalm[1]) / Math.max(dt, 0.005);
+          s.vel = [
+            s.vel ? lerp(s.vel[0], vx, 0.35) : vx,
+            s.vel ? lerp(s.vel[1], vy, 0.35) : vy,
+          ];
+        } else {
+          s.vel = [0, 0];
+        }
+
+        s.rawPalm = [clampedPalmX, clampedPalmY];
+        s.active = true;
+        s.isRecovering = false;
+        s.lastSeen = now;
+        s.lastTs = now;
+        s.handedness = d.handedness;
+        s.landmarks = d.lm;
 
         s.pinky = h.pinkySign;
         if (h.pinkySign) {
@@ -1525,11 +1750,6 @@ void main() {
             s.pinkyArmed = true;
           }
         }
-        s.active = true;
-        s.lastSeen = ts;
-        s.lastTs = ts;
-        s.rawPalm = h.palm;
-        s.landmarks = lm;
 
         const f = s.f;
         const side = (h.bBase[0] - h.aBase[0]) / (h.size || 1e-4);
@@ -1537,20 +1757,32 @@ void main() {
         else if (side < -0.12) s.leftIsA = false;
 
         s.data = {
-          palm: [f.px.filter(h.palm[0], dt), f.py.filter(h.palm[1], dt)],
+          palm: [f.px.filter(clampedPalmX, dt), f.py.filter(clampedPalmY, dt)],
           a: [f.ax.filter(h.a[0], dt), f.ay.filter(h.a[1], dt)],
           b: [f.bx.filter(h.b[0], dt), f.by.filter(h.b[1], dt)],
           size: f.size.filter(h.size, dt),
           roll: f.roll.filter(h.roll, dt),
         };
       }
-      for (const s of this.slots) {
-        if (s.active && ts - s.lastSeen > LOST_MS) resetSlot(s);
-      }
+
+      // Mark unassigned slots as recovering or expired
+      this.slots.forEach((s, si) => {
+        if (!usedSlots.has(si) && s.active) {
+          const elapsed = now - s.lastSeen;
+          if (elapsed > 1200) {
+            resetSlot(s);
+          } else {
+            s.isRecovering = true;
+            s.vel = [0, 0];
+          }
+        }
+      });
     }
 
     activeSlots(now) {
-      return this.slots.map((s, i) => ({ s, i })).filter(({ s }) => s.active && s.data && now - s.lastSeen <= LOST_MS);
+      return this.slots
+        .map((s, i) => ({ s, i }))
+        .filter(({ s }) => s.active && s.data && (now - s.lastSeen <= RECOVERY_GRACE_MS || s.isRecovering));
     }
 
     depthFor(key, size) {
@@ -1592,50 +1824,49 @@ void main() {
     }
 
     twoPuppetInput(active, view) {
-      const fresh = active.length === 2 && (this.prevCount < 2 || active[0].s.role === active[1].s.role || active.some((a) => a.s.role === null));
-      if (fresh) {
-        const [p, q] = active;
-        const pLeft = p.s.data.palm[0] < q.s.data.palm[0];
-        p.s.role = pLeft ? 0 : 1;
-        q.s.role = pLeft ? 1 : 0;
-      } else if (active.length === 1 && active[0].s.role === null) {
-        const s = active[0].s;
-        s.role = s.data.palm[0] / this.aspect < 0.5 ? 0 : 1;
-      }
+      this.slots[0].role = 0;
+      this.slots[1].role = 1;
+
       this.status.mode = active.length ? 'two puppets' : 'no hands';
-      const out = [{ active: false }, { active: false }];
-      for (const { s } of active) out[s.role] = this.handInput(s, view, `p${s.role}`);
+      const out = [this.idleInput(0), this.idleInput(1)];
+
+      for (const { s, i } of active) {
+        if (s.data) {
+          out[i] = this.handInput(s, view, `p${i}`);
+        }
+      }
       return out;
     }
 
     onePuppetInput(active, view) {
+      const activeIdx = state.selectedCharacter === 'prabu-brajawisena' ? 1 : 0;
       if (!active.length) {
-        this.bodySlot = -1;
         this.status.mode = 'no hands';
-        return [{ active: false }];
+        return [this.idleInput(activeIdx)];
       }
-      if (active.length === 1) {
+
+      if (this.bodySlot === -1 || !active.some((a) => a.i === this.bodySlot)) {
         this.bodySlot = active[0].i;
-      } else if (!active.some((a) => a.i === this.bodySlot) || this.prevCount < 2) {
-        const [p, q] = active;
-        const pRight = p.s.data.palm[0] > q.s.data.palm[0];
-        const wantRight = this.settings.bodyHand === 'right';
-        this.bodySlot = pRight === wantRight ? p.i : q.i;
       }
-      const input = this.handInput(this.slots[this.bodySlot], view, 'one');
+
+      const bodySlotObj = this.slots[this.bodySlot];
+      const input = this.handInput(bodySlotObj, view, 'one');
+
       if (active.length === 1) {
         this.status.mode = 'one hand';
       } else {
-        const aspect = this.aspect;
-        const rod = active.find((a) => a.i !== this.bodySlot).s;
-        const abs = (tip) => {
-          const [x, y] = this.toStage(tip[0] / aspect, tip[1], view);
-          return { type: 'abs', x, y, rodX: x };
-        };
-        const A = abs(rod.data.a), B = abs(rod.data.b);
-        input.arms = { left: rod.leftIsA ? A : B, right: rod.leftIsA ? B : A };
-        input.danceTrigger = input.danceTrigger || rod.danceTrigger;
-        rod.danceTrigger = false;
+        const rodSlotObj = active.find((a) => a.i !== this.bodySlot)?.s;
+        if (rodSlotObj && rodSlotObj.data) {
+          const aspect = this.aspect;
+          const abs = (tip) => {
+            const [x, y] = this.toStage(tip[0] / aspect, tip[1], view);
+            return { type: 'abs', x, y, rodX: x };
+          };
+          const A = abs(rodSlotObj.data.a), B = abs(rodSlotObj.data.b);
+          input.arms = { left: rodSlotObj.leftIsA ? A : B, right: rodSlotObj.leftIsA ? B : A };
+          input.danceTrigger = input.danceTrigger || rodSlotObj.danceTrigger;
+          rodSlotObj.danceTrigger = false;
+        }
       }
       return [input];
     }
@@ -1649,10 +1880,30 @@ void main() {
       return out;
     }
 
+    readyInput(view) {
+      return [
+        {
+          active: false,
+          body: { x: this.home[0][0], y: this.home[0][1] },
+          tilt: 0,
+          depth: 0,
+          arms: null,
+          danceTrigger: false,
+        },
+        {
+          active: false,
+          body: { x: this.home[1][0], y: this.home[1][1] },
+          tilt: 0,
+          depth: 0,
+          arms: null,
+          danceTrigger: false,
+        },
+      ];
+    }
+
     demoInput(t, view) {
       const cx = view.x + view.w / 2;
       const drift = Math.sin(t * 0.13) * view.w * 0.08;
-      const gap = view.w * (0.36 + 0.14 * Math.sin(t * 0.42));
       const floor = view.y + view.h * 0.6;
       const talk = (phase, amp) => ({
         left: { type: 'rel', dx: -0.95 + Math.sin(t * 1.7 + phase) * 0.35 * amp, dy: -0.25 + Math.sin(t * 1.1 + phase) * 0.8 * amp },
@@ -1662,57 +1913,83 @@ void main() {
       const m = (s) => ({ ...s, dx: -s.dx });
       const mirrorArms = (arms) => ({ left: m(arms.right), right: m(arms.left) });
 
-      const inputs = [
+      if (this.puppetCount === 1) {
+        return [{
+          active: true,
+          body: { x: cx + drift * 0.4, y: floor + Math.sin(t * 0.9) * 16 },
+          tilt: Math.sin(t * 0.55) * 0.05,
+          depth: Math.max(0, Math.sin(t * 0.21 - 1.2)) * 0.5,
+          arms: talk(1, 0.75),
+        }];
+      }
+
+      return [
         {
           active: true,
-          body: { x: cx + drift - gap / 2, y: floor + Math.sin(t * 0.9) * 18 },
-          tilt: Math.sin(t * 0.55) * 0.06,
-          depth: Math.max(0, Math.sin(t * 0.21 - 1.2)) * 0.6,
-          arms: mirrorArms(talk(0, turn > 0 ? 1 : 0.35)),
+          body: { x: view.x + view.w * 0.38 + drift * 0.35, y: floor + Math.sin(t * 0.9) * 12 },
+          tilt: Math.sin(t * 0.55) * 0.04,
+          depth: Math.max(0, Math.sin(t * 0.21 - 1.2)) * 0.35,
+          arms: talk(1, turn < 0 ? 0.95 : 0.4),
         },
         {
           active: true,
-          body: { x: cx + drift + gap / 2, y: floor + Math.sin(t * 0.8 + 2) * 18 },
-          tilt: Math.sin(t * 0.47 + 1) * 0.06,
-          depth: Math.max(0, Math.sin(t * 0.19 + 1.5)) * 0.6,
-          arms: talk(2, turn < 0 ? 1 : 0.35),
+          body: { x: view.x + view.w * 0.65 - drift * 0.35, y: floor + Math.cos(t * 0.85) * 12 },
+          tilt: -Math.sin(t * 0.6) * 0.04,
+          depth: Math.max(0, Math.cos(t * 0.23 - 0.8)) * 0.35,
+          arms: mirrorArms(talk(2.2, turn > 0 ? 0.95 : 0.4)),
         },
       ];
-
-      const n = Math.floor((t - 6) / 24);
-      if (n >= 0 && n !== this.demoDance) {
-        this.demoDance = n;
-        inputs[n % this.puppetCount].danceTrigger = true;
-      }
-      return inputs.slice(0, this.puppetCount);
     }
 
-    idleInput(t, i) {
+    idleInput(i = 0) {
+      const homePos = this.home[i] || this.home[0] || [960, 650];
       return {
         active: true,
-        body: { x: this.home[i][0], y: this.home[i][1] + Math.sin(t * 0.8 + i) * 6 },
+        body: {
+          x: homePos[0],
+          y: homePos[1],
+        },
         tilt: 0,
         depth: 0,
-        arms: {
-          left: { type: 'rel', dx: -0.7 + Math.sin(t * 0.9 + i) * 0.15, dy: 0.55 + Math.sin(t * 0.6) * 0.2 },
-          right: { type: 'rel', dx: 0.35 + Math.sin(t * 0.8 + 1 + i) * 0.12, dy: 0.85 + Math.sin(t * 0.5) * 0.1 },
-        },
+        arms: null,
+        danceTrigger: false,
       };
     }
 
     mouseInput(t) {
-      const idle0 = this.idleInput(t, 0);
-      const first = this.mouse.seen
-        ? { ...idle0, body: { x: this.mouse.x, y: this.mouse.y }, depth: this.mouse.depth }
-        : { active: false };
-      return this.puppetCount === 2 ? [first, this.idleInput(t, 1)] : [first];
+      const activeIdx = state.selectedCharacter === 'prabu-brajawisena' ? 1 : 0;
+      const idle0 = this.idleInput(0);
+      const idle1 = this.idleInput(1);
+      if (this.puppetCount === 2) {
+        if (activeIdx === 0) {
+          return [
+            this.mouse.seen ? { ...idle0, body: { x: this.mouse.x, y: this.mouse.y }, depth: this.mouse.depth } : idle0,
+            idle1,
+          ];
+        } else {
+          return [
+            idle0,
+            this.mouse.seen ? { ...idle1, body: { x: this.mouse.x, y: this.mouse.y }, depth: this.mouse.depth } : idle1,
+          ];
+        }
+      }
+      return [
+        this.mouse.seen ? { ...(activeIdx === 1 ? idle1 : idle0), body: { x: this.mouse.x, y: this.mouse.y }, depth: this.mouse.depth } : { active: false },
+      ];
     }
 
     update(t, view) {
-      this.home = [
-        [view.x + view.w * 0.3, view.y + view.h * 0.6],
-        [view.x + view.w * 0.7, view.y + view.h * 0.6],
-      ];
+      if (this.puppetCount === 1) {
+        this.home = [
+          [view.x + view.w * 0.5, view.y + view.h * 0.6],
+          [view.x + view.w * 0.5, view.y + view.h * 0.6],
+        ];
+      } else {
+        this.home = [
+          [view.x + view.w * 0.38, view.y + view.h * 0.6],
+          [view.x + view.w * 0.62, view.y + view.h * 0.6],
+        ];
+      }
       let inputs;
       if (this.source === 'camera') {
         inputs = this.cameraInput(performance.now(), view);
@@ -1720,8 +1997,8 @@ void main() {
         this.status.mode = 'mouse';
         inputs = this.mouseInput(t);
       } else {
-        this.status.mode = 'demo';
-        inputs = this.demoInput(t, view);
+        this.status.mode = 'ready';
+        inputs = this.readyInput(view);
       }
       inputs.forEach((inp, i) => {
         if (this.pendingDance[i]) inp.danceTrigger = true;
@@ -1760,24 +2037,17 @@ void main() {
       const h = this.canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // 1. Background
+      // 1. Background (Noticeably darker with deep warm brown & dark mahogany tones)
       if (this.images.background) {
         ctx.drawImage(this.images.background, 0, 0, w, h);
+        ctx.fillStyle = 'rgba(28, 14, 6, 0.62)';
+        ctx.fillRect(0, 0, w, h);
       } else {
-        ctx.fillStyle = '#F5EADB';
+        ctx.fillStyle = '#3a2214';
         ctx.fillRect(0, 0, w, h);
       }
 
-      // Blencong Hotspot Glow
-      const lampX = w * 0.5;
-      const lampY = h * 0.20;
-      const lampRadius = Math.max(w, h) * 0.62 * f.flicker;
-      const lampGrad = ctx.createRadialGradient(lampX, lampY, 30, lampX, lampY, lampRadius);
-      lampGrad.addColorStop(0, 'rgba(255, 248, 225, 0.5)');
-      lampGrad.addColorStop(0.4, 'rgba(240, 195, 110, 0.2)');
-      lampGrad.addColorStop(1, 'rgba(65, 24, 7, 0.0)');
-      ctx.fillStyle = lampGrad;
-      ctx.fillRect(0, 0, w, h);
+
 
       // 2. Render each puppet's items with depth-based soft shadows
       const scaleX = w / f.view.w;
@@ -1809,7 +2079,22 @@ void main() {
             ctx.restore();
           }
         }
-        ctx.restore();
+        // Subtle selection aura for selected character
+        if (layer.charId && layer.charId === state.selectedCharacter && layer.puppet) {
+          const auraX = (layer.puppet.pos.x - f.view.x) * scaleX;
+          const auraY = (layer.puppet.pos.y - 120 - f.view.y) * scaleY;
+          const auraRadius = Math.max(70, 220 * scaleX * layer.puppet.scale);
+          const auraGrad = ctx.createRadialGradient(auraX, auraY, 20, auraX, auraY, auraRadius);
+          auraGrad.addColorStop(0, 'rgba(214, 174, 124, 0.28)');
+          auraGrad.addColorStop(0.5, 'rgba(197, 164, 77, 0.12)');
+          auraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          ctx.save();
+          ctx.fillStyle = auraGrad;
+          ctx.beginPath();
+          ctx.arc(auraX, auraY, auraRadius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
 
         // Lit Puppet Pass
         for (const item of layer.items) {
@@ -1870,12 +2155,7 @@ void main() {
     btnStop: $('btn-stop-camera'),
     btnRetry: $('btn-retry-camera'),
     btnReset: $('btn-reset-puppets'),
-    btnShadow: $('btn-toggle-shadow'),
     btnFullscreen: $('btn-toggle-fullscreen'),
-    btnGuide: $('btn-open-guide'),
-    btnCloseGuide: $('btn-close-guide'),
-    btnUnderstoodGuide: $('btn-understood-guide'),
-    guideModal: $('guide-modal'),
     btnMinimizePip: $('btn-minimize-pip'),
     btnClosePip: $('btn-close-pip'),
     previewPopout: $('preview-popout'),
@@ -1887,17 +2167,64 @@ void main() {
     handCountBadge: $('hand-count-badge'),
     toast: $('toast'),
     fullscreenHudHelper: $('fullscreen-hud-helper'),
+    puppetBadgeWahyana: $('puppet-badge-wahyana'),
+    puppetBadgeBrajawisena: $('puppet-badge-brajawisena'),
     puppetBadgeLeft: $('puppet-badge-left'),
     puppetBadgeRight: $('puppet-badge-right'),
     puppetBadgeCenter: $('puppet-badge-center'),
+    badgeWahyanaRole: $('badge-wahyana-role'),
+    badgeWahyanaName: $('badge-wahyana-name'),
+    badgeBrajawisenaRole: $('badge-brajawisena-role'),
+    badgeBrajawisenaName: $('badge-brajawisena-name'),
     badgeLeftRole: $('badge-left-role'),
     badgeLeftName: $('badge-left-name'),
     badgeRightRole: $('badge-right-role'),
     badgeRightName: $('badge-right-name'),
     debogLabelLeft: $('debog-label-left'),
     debogLabelRight: $('debog-label-right'),
-    landscapeSuggestion: $('landscape-suggestion'),
-    btnDismissLandscape: $('btn-dismiss-landscape'),
+    mobileOrientationModal: $('mobile-orientation-modal'),
+    orientationModalTitle: $('orientation-modal-title'),
+    orientationModalDesc: $('orientation-modal-desc'),
+    orientationHintNote: $('orientation-hint-note'),
+    btnOrientationContinue: $('btn-orientation-continue'),
+    // On-Stage Character Selector & Badges
+    stageCharSelector: $('stage-char-selector'),
+    btnSelectWahyana: $('btn-select-wahyana'),
+    btnSelectBrajawisena: $('btn-select-brajawisena'),
+    btnDuelToggle: $('btn-duel-toggle'),
+    duelStatusLabel: $('duel-status-label'),
+    btnOpenCharInfo: $('btn-open-char-info'),
+    btnReelInfo: $('btn-reel-info'),
+    // Character Information & Voice Narration Modal
+    charModal: $('character-info-modal'),
+    charModalCard: $('character-info-card'),
+    btnCloseCharModal: $('btn-close-char-modal'),
+    modalTabWahyana: $('modal-tab-wahyana'),
+    modalTabBrajawisena: $('modal-tab-brajawisena'),
+    charModalSideTag: $('char-modal-side-tag'),
+    charModalImg: $('char-modal-img'),
+    charModalRole: $('char-modal-role'),
+    charModalName: $('char-modal-name'),
+    charModalEpithet: $('char-modal-epithet'),
+    charModalIntro: $('char-modal-intro'),
+    charModalStory: $('char-modal-story'),
+    charModalPersonality: $('char-modal-personality'),
+    charModalMoral: $('char-modal-moral'),
+    charModalSources: $('char-modal-sources'),
+    charAudioBox: $('char-audio-box'),
+    btnAudioPrimary: $('btn-audio-primary'),
+    audioPrimaryIcon: $('audio-primary-icon'),
+    audioPrimaryText: $('audio-primary-text'),
+    btnAudioStop: $('btn-audio-stop'),
+    audioStatusLabel: $('audio-status-label'),
+    audioProgressWrap: $('audio-progress-wrap'),
+    audioProgressBar: $('audio-progress-bar'),
+    audioProgressFill: $('audio-progress-fill'),
+    audioTimeCurr: $('audio-time-curr'),
+    audioTimeTotal: $('audio-time-total'),
+    audioErrorMsg: $('audio-error-msg'),
+    audioErrorText: $('audio-error-text'),
+    btnRetryNarration: $('btn-retry-narration'),
   };
 
   if (!els.canvas) {
@@ -1911,15 +2238,20 @@ void main() {
     [9, 13], [13, 14], [14, 15], [15, 16], [13, 17], [17, 18], [18, 19], [19, 20], [0, 17],
   ];
 
-  // Initialize Dual Puppets Facing Center
-  const puppets = [new Puppet({ x: 640, facing: -1 }), new Puppet({ x: 1280, facing: 1 })];
+  // Initialize Both Stage Puppets: Prabu Wahyana & Prabu Brajawisena (Opponent)
+  // Wahyana (left) looks right (+1 towards center); Brajawisena (right) looks left (-1 towards center)
+  const puppets = [
+    new Puppet({ x: 729.6, y: 648, lookDir: 1, id: 'prabu-wahyana', partPrefix: '' }),
+    new Puppet({ x: 1190.4, y: 648, lookDir: -1, id: 'prabu-brajawisena', partPrefix: 'braja_' })
+  ];
   const controller = new HandController();
-  const audioEl = new Audio('assets/audio/backsound.mp3');
+  controller.puppetCount = 2; // Duel stage interaction default
+  const audioEl = new Audio(resolveWmAsset('assets/audio/backsound.mp3'));
   audioEl.loop = true;
   audioEl.preload = 'none';
   audioEl.volume = 0.6;
   const beatClock = new BeatClock(audioEl);
-  beatClock.load('assets/audio/backsound-beats.json');
+  beatClock.load(resolveWmAsset('assets/audio/backsound-beats.json'));
 
   let renderer = null;
   let isWebglActive = false;
@@ -1929,7 +2261,7 @@ void main() {
       renderer = new WebGL2Renderer(els.canvas);
       isWebglActive = true;
       await Promise.all([
-        renderer.loadTexture('background', 'assets/images/reference-rig/background.webp'),
+        renderer.loadTexture('background', resolveWmAsset('assets/images/wayang-motion/wayang-stage-reference.jpg')),
         ...Object.entries(PARTS).map(([key, part]) => renderer.loadTexture(key, part.src)),
       ]);
     } catch (err) {
@@ -1937,24 +2269,137 @@ void main() {
       renderer = new Canvas2DFallbackRenderer(els.canvas);
       isWebglActive = false;
       await Promise.all([
-        renderer.loadTexture('background', 'assets/images/reference-rig/background.webp'),
+        renderer.loadTexture('background', resolveWmAsset('assets/images/wayang-motion/wayang-stage-reference.jpg')),
         ...Object.entries(PARTS).map(([key, part]) => renderer.loadTexture(key, part.src)),
       ]);
     }
   }
 
+  // ==========================================================================
+  // MOBILE ORIENTATION & ENTRY FLOW CONTROLLER
+  // ==========================================================================
+  let hasAcknowledgedOrientation = false;
+  let portraitReminderGiven = false;
+
+  function isMobileOrTablet() {
+    const ua = navigator.userAgent || '';
+    const isMobileOrTabletUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Tablet|Silk/i.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const minDim = Math.min(window.screen?.width || window.innerWidth, window.screen?.height || window.innerHeight);
+    
+    // Any touch device where the smaller dimension is <= 1024px is a mobile phone or tablet
+    const isTouchDeviceScreen = isTouch && (minDim <= 1024 || window.innerWidth <= 1024);
+
+    return isMobileOrTabletUA || isTouchDeviceScreen;
+  }
+
+  function isLandscapeOrientation() {
+    if (screen.orientation && typeof screen.orientation.type === 'string') {
+      return screen.orientation.type.includes('landscape');
+    }
+    if (typeof window.orientation !== 'undefined') {
+      return Math.abs(window.orientation) === 90;
+    }
+    return window.innerWidth > window.innerHeight;
+  }
+
+  function updateMobileOrientationFlow() {
+    const isMobileTablet = isMobileOrTablet();
+    const isLandscape = isLandscapeOrientation();
+
+    if (!isMobileTablet) {
+      // Desktop / Laptop behavior:
+      // Skip mobile orientation screen, show ready-to-start screen directly (camera stays idle until user clicks)
+      if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
+      if (!state.isActive && !state.isCameraRunning && !state.isStartingCamera) {
+        if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
+      }
+      return;
+    }
+
+    // Mobile phone and tablet behavior:
+    if (!hasAcknowledgedOrientation) {
+      // Step 1: Initial visit on mobile/tablet - show single orientation guidance screen
+      if (els.mobileOrientationModal) els.mobileOrientationModal.classList.remove('hidden');
+      if (els.overlayIntro) els.overlayIntro.classList.add('hidden', 'gone');
+
+      if (isLandscape) {
+        if (els.orientationModalTitle) els.orientationModalTitle.textContent = 'Orientasi Siap';
+        if (els.orientationModalDesc) {
+          els.orientationModalDesc.textContent = 'Perangkat Anda sudah dalam posisi horizontal. Ketuk Lanjutkan untuk memulai.';
+        }
+        if (els.orientationHintNote) els.orientationHintNote.style.display = 'none';
+      } else {
+        if (els.orientationModalTitle) els.orientationModalTitle.textContent = 'Miringkan Perangkat Anda';
+        if (portraitReminderGiven) {
+          if (els.orientationModalDesc) {
+            els.orientationModalDesc.textContent = 'Panggung wayang dirancang untuk posisi horizontal. Silakan miringkan HP atau tablet Anda.';
+          }
+          if (els.orientationHintNote) els.orientationHintNote.style.display = 'block';
+        } else {
+          if (els.orientationModalDesc) {
+            els.orientationModalDesc.textContent = 'Untuk menikmati pengalaman Wayang Motion, miringkan HP atau tablet Anda ke posisi horizontal.';
+          }
+          if (els.orientationHintNote) els.orientationHintNote.style.display = 'none';
+        }
+      }
+      return;
+    }
+
+    // Step 2: Visitor acknowledged orientation and entered ready-to-start screen
+    if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
+    if (!state.isActive && !state.isCameraRunning && !state.isStartingCamera) {
+      if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
+    }
+  }
+
+  function handleOrientationContinue() {
+    const isLandscape = isLandscapeOrientation();
+
+    if (isLandscape) {
+      // Device is horizontal: advance to ready screen
+      hasAcknowledgedOrientation = true;
+      updateMobileOrientationFlow();
+      resizeStage();
+      return;
+    }
+
+    // Device is still vertical (portrait):
+    if (!portraitReminderGiven) {
+      // First tap in portrait: prompt to tilt with a non-blocking note for locked screens
+      portraitReminderGiven = true;
+      updateMobileOrientationFlow();
+      return;
+    }
+
+    // Second tap in portrait: user cannot or does not want to rotate (e.g. rotation lock active)
+    // Never trap the visitor indefinitely; advance to ready screen
+    hasAcknowledgedOrientation = true;
+    updateMobileOrientationFlow();
+    resizeStage();
+    showToast('Melanjutkan ke panggung wayang');
+  }
+
   // View state calculation
   let view = { x: 0, y: 0, w: STAGE_W, h: STAGE_H };
   function resizeStage() {
-    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || state.isFullscreen || state.isFullscreenFallback);
+    const isFs = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      state.isFullscreen ||
+      state.isFullscreenFallback
+    );
     let w, h;
     if (isFs) {
       w = window.innerWidth;
       h = window.innerHeight;
     } else {
       const rect = els.stageViewport ? els.stageViewport.getBoundingClientRect() : { width: 1440, height: 640 };
-      w = Math.max(640, Math.round(rect.width || 1440));
-      h = Math.max(480, Math.round(rect.height || 640));
+      // Allow flexible mobile dimensions without clipping to desktop-only 640x480 minimum
+      w = Math.max(320, Math.round(rect.width || window.innerWidth || 1440));
+      h = Math.max(220, Math.round(rect.height || 480));
     }
     renderer?.resize(w, h);
     const aspect = w / h;
@@ -1965,11 +2410,26 @@ void main() {
       const vw = STAGE_H * aspect;
       view = { x: (STAGE_W - vw) * 0.5, y: 0, w: vw, h: STAGE_H };
     }
+
+    // Synchronize camera landmark preview canvas and aspect ratio with current video stream dimensions
+    if (els.video && els.video.videoWidth > 0 && els.video.videoHeight > 0) {
+      controller.aspect = els.video.videoWidth / els.video.videoHeight;
+      if (els.previewCanvas) {
+        if (els.previewCanvas.width !== els.video.videoWidth || els.previewCanvas.height !== els.video.videoHeight) {
+          els.previewCanvas.width = els.video.videoWidth;
+          els.previewCanvas.height = els.video.videoHeight;
+        }
+      }
+    }
   }
-  window.addEventListener('resize', resizeStage);
+  window.addEventListener('resize', () => {
+    resizeStage();
+    updateMobileOrientationFlow();
+  });
 
   // Runtime State
   const state = {
+    isReady: false,
     isActive: false,
     isCameraRunning: false,
     isStartingCamera: false,
@@ -1977,7 +2437,8 @@ void main() {
     isFullscreen: false,
     isFullscreenFallback: false,
     shadowMode: false,
-    characterMode: 'reference',
+    characterMode: 'heritage',
+    selectedCharacter: 'prabu-wahyana',
     handsInstance: null,
     cameraInstance: null,
     mediaStream: null,
@@ -2020,11 +2481,13 @@ void main() {
         if (text) text.textContent = 'Keluar Layar Penuh';
         els.btnFullscreen.setAttribute('aria-pressed', 'true');
         els.btnFullscreen.setAttribute('aria-label', 'Keluar Layar Penuh');
+        els.btnFullscreen.setAttribute('title', 'Keluar Layar Penuh (ESC)');
       } else {
         if (icon) icon.className = 'bi bi-arrows-fullscreen';
         if (text) text.textContent = 'Layar Penuh';
         els.btnFullscreen.setAttribute('aria-pressed', 'false');
         els.btnFullscreen.setAttribute('aria-label', 'Layar Penuh');
+        els.btnFullscreen.setAttribute('title', 'Tampilkan panggung kelir layar penuh (Fullscreen)');
       }
     }
 
@@ -2037,19 +2500,27 @@ void main() {
       }
     }
 
-    resizeStage();
+    requestAnimationFrame(() => {
+      resizeStage();
+      setTimeout(resizeStage, 80);
+      setTimeout(resizeStage, 250);
+    });
   }
 
   function enterFullscreen() {
     const container = els.stageContainer || document.documentElement;
-    updateFullscreenLayout(true);
     if (container.requestFullscreen) {
       container.requestFullscreen().catch(() => {
         state.isFullscreenFallback = true;
         updateFullscreenLayout(true);
       });
     } else if (container.webkitRequestFullscreen) {
-      container.webkitRequestFullscreen();
+      try {
+        container.webkitRequestFullscreen();
+      } catch (e) {
+        state.isFullscreenFallback = true;
+        updateFullscreenLayout(true);
+      }
     } else {
       state.isFullscreenFallback = true;
       updateFullscreenLayout(true);
@@ -2057,14 +2528,28 @@ void main() {
   }
 
   function exitFullscreen() {
-    state.isFullscreenFallback = false;
-    updateFullscreenLayout(false);
-    try {
-      if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    const isNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (isNativeFs) {
+      try {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {
+            state.isFullscreen = false;
+            state.isFullscreenFallback = false;
+            updateFullscreenLayout(false);
+          });
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      } catch (e) {
+        state.isFullscreen = false;
+        state.isFullscreenFallback = false;
+        updateFullscreenLayout(false);
       }
-    } catch (e) {}
+    } else {
+      state.isFullscreen = false;
+      state.isFullscreenFallback = false;
+      updateFullscreenLayout(false);
+    }
   }
 
   function toggleFullscreen() {
@@ -2078,14 +2563,17 @@ void main() {
     else exitFullscreen();
   }
 
-  document.addEventListener('fullscreenchange', () => {
-    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || state.isFullscreenFallback);
+  function onFullscreenChange() {
+    const isNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (!isNativeFs) {
+      state.isFullscreenFallback = false;
+    }
+    const isFs = isNativeFs || state.isFullscreenFallback;
     updateFullscreenLayout(isFs);
-  });
-  document.addEventListener('webkitfullscreenchange', () => {
-    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || state.isFullscreenFallback);
-    updateFullscreenLayout(isFs);
-  });
+  }
+
+  document.addEventListener('fullscreenchange', onFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', onFullscreenChange);
 
   // Facing Mode
   function applyFacing() {
@@ -2094,69 +2582,601 @@ void main() {
     for (const p of puppets) p.facingMode = mode === 'target' && !two ? 'manual' : mode;
   }
 
-  function turnPuppet(i) {
-    if (i >= controller.puppetCount) return;
+  function turnPuppet(i = null) {
+    const targetIdx = (typeof i === 'number') ? i : (state.selectedCharacter === 'prabu-brajawisena' ? 1 : 0);
+    if (!puppets[targetIdx]) return;
     if (els.optFacing && els.optFacing.value !== 'manual') {
       els.optFacing.value = 'manual';
       applyFacing();
     }
-    puppets[i].turn();
-  }
-
-  // Audio Playback
-  function syncSoundUi() {
-    if (!els.soundToggle) return;
-    const isMuted = audioEl.muted || audioEl.paused;
-    els.soundToggle.setAttribute('aria-pressed', String(!isMuted));
-    els.soundToggle.classList.toggle('playing', !isMuted);
-    const onIcon = els.soundToggle.querySelector('.icon-sound-on');
-    const offIcon = els.soundToggle.querySelector('.icon-sound-off');
-    if (onIcon) onIcon.style.display = isMuted ? 'none' : 'block';
-    if (offIcon) offIcon.style.display = isMuted ? 'block' : 'none';
-  }
-
-  function toggleMusic() {
-    if (audioEl.paused) {
-      audioEl.play().then(() => {
-        audioEl.muted = false;
-        syncSoundUi();
-        showToast('Musik Gamelan Dimainkan');
-      }).catch(() => {});
-    } else {
-      audioEl.muted = !audioEl.muted;
-      syncSoundUi();
-      showToast(audioEl.muted ? 'Musik Gamelan Dibisukan' : 'Musik Gamelan Aktif');
+    puppets[targetIdx].turn();
+    if (els.charModal && !els.charModal.classList.contains('hidden') && typeof syncModalOrientation === 'function') {
+      syncModalOrientation(puppets[targetIdx], state.selectedCharacter);
     }
   }
 
-  // Reset Puppets Position
-  function resetPuppetsPosition() {
-    puppets[0].pos.snap(view.x + view.w * 0.3, view.y + view.h * 0.6);
-    puppets[1].pos.snap(view.x + view.w * 0.7, view.y + view.h * 0.6);
-    puppets[0].facing = -1;
-    puppets[1].facing = 1;
-    showToast('Posisi wayang dikalibrasi ulang');
+  // Audio Playback
+  let userExplicitlyMuted = false;
+
+  function syncSoundUi() {
+    if (!els.soundToggle) return;
+    const isPlaying = !audioEl.paused && !audioEl.muted;
+    els.soundToggle.setAttribute('aria-pressed', String(isPlaying));
+    els.soundToggle.classList.toggle('playing', isPlaying);
+    els.soundToggle.setAttribute('aria-label', isPlaying ? 'Bisukan musik gamelan' : 'Putar musik gamelan');
+    els.soundToggle.setAttribute('title', isPlaying ? 'Bisukan Musik Gamelan (M)' : 'Putar Musik Gamelan (M)');
+    const onIcon = els.soundToggle.querySelector('.icon-sound-on');
+    const offIcon = els.soundToggle.querySelector('.icon-sound-off');
+    if (onIcon) onIcon.style.display = isPlaying ? 'block' : 'none';
+    if (offIcon) offIcon.style.display = isPlaying ? 'none' : 'block';
   }
 
-  // Character Selector Logic
-  function updateCharacterBadges(mode) {
-    state.characterMode = mode;
-    if (mode === 'reference') {
-      if (els.badgeLeftRole) els.badgeLeftRole.textContent = 'Wayang Kulit Tradisional';
-      if (els.badgeLeftName) els.badgeLeftName.textContent = 'Tokoh Utama Referensi';
-      if (els.badgeRightRole) els.badgeRightRole.textContent = 'Wayang Kulit Tradisional';
-      if (els.badgeRightName) els.badgeRightName.textContent = 'Tokoh Utama Referensi';
-      if (els.puppetBadgeCenter) {
-        els.puppetBadgeCenter.innerHTML = '<span class="reel-style-pill"><i class="bi bi-stars"></i> Dua Wayang · Satu Per Tangan</span>';
+  audioEl.addEventListener('play', syncSoundUi);
+  audioEl.addEventListener('pause', syncSoundUi);
+  audioEl.addEventListener('volumechange', syncSoundUi);
+  syncSoundUi();
+
+  function toggleMusic() {
+    if (audioEl.paused) {
+      audioEl.muted = false;
+      userExplicitlyMuted = false;
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          syncSoundUi();
+          showToast('Musik Gamelan Dimainkan');
+        }).catch((err) => {
+          console.warn('Audio playback error:', err);
+          syncSoundUi();
+          showToast('Ketuk layar untuk mengizinkan audio');
+        });
+      } else {
+        syncSoundUi();
       }
+    } else if (audioEl.muted) {
+      audioEl.muted = false;
+      userExplicitlyMuted = false;
+      syncSoundUi();
+      showToast('Musik Gamelan Aktif');
     } else {
-      if (els.badgeLeftRole) els.badgeLeftRole.textContent = 'Ksatria Pringgandani';
-      if (els.badgeLeftName) els.badgeLeftName.textContent = 'Raden Gatotkaca';
-      if (els.badgeRightRole) els.badgeRightRole.textContent = 'Ksatria Madukara';
-      if (els.badgeRightName) els.badgeRightName.textContent = 'Raden Arjuna';
-      if (els.puppetBadgeCenter) {
-        els.puppetBadgeCenter.innerHTML = '<span class="reel-style-pill"><i class="bi bi-shield-shaded"></i> Raden Gatotkaca &amp; Arjuna</span>';
+      audioEl.muted = true;
+      userExplicitlyMuted = true;
+      syncSoundUi();
+      showToast('Musik Gamelan Dibisukan');
+    }
+  }
+
+  // Reset Puppets Position (Both Wahyana and Brajawisena to stage home)
+  function resetPuppetsPosition() {
+    if (puppets[0]) {
+      puppets[0].defaultLookDir = 1;
+      puppets[0].lookDir = 1;
+      puppets[0].facing = 1;
+      puppets[0].defaultFacing = 1;
+      puppets[0].pos.snap(view.x + view.w * 0.38, view.y + view.h * 0.6);
+      puppets[0].bodyTarget = [view.x + view.w * 0.38, view.y + view.h * 0.6];
+      puppets[0].flip = { from: 1, to: 1, t: 1 };
+      puppets[0].flipX = puppets[0].rawFacing * 1;
+      puppets[0].tilt.snap(0);
+      puppets[0].depth.snap(0);
+      puppets[0].dance = null;
+      puppets[0].danceOffset = [0, 0];
+      puppets[0].danceTilt = 0;
+      puppets[0].walkPhase = 0;
+      puppets[0].turnTimer = 0;
+      puppets[0].surfaceTilt = [0, 0];
+      puppets[0].prevVel = [0, 0];
+      puppets[0].B = puppets[0].bodyMatrix(0);
+      if (puppets[0].arms) {
+        puppets[0].arms.L.initRestPose(puppets[0].B);
+        puppets[0].arms.R.initRestPose(puppets[0].B);
       }
+    }
+    if (puppets[1]) {
+      puppets[1].defaultLookDir = -1;
+      puppets[1].lookDir = -1;
+      puppets[1].facing = -1;
+      puppets[1].defaultFacing = -1;
+      puppets[1].pos.snap(view.x + view.w * 0.62, view.y + view.h * 0.6);
+      puppets[1].bodyTarget = [view.x + view.w * 0.62, view.y + view.h * 0.6];
+      puppets[1].flip = { from: -1, to: -1, t: 1 };
+      puppets[1].flipX = puppets[1].rawFacing * (-1);
+      puppets[1].tilt.snap(0);
+      puppets[1].depth.snap(0);
+      puppets[1].dance = null;
+      puppets[1].danceOffset = [0, 0];
+      puppets[1].danceTilt = 0;
+      puppets[1].walkPhase = 0;
+      puppets[1].turnTimer = 0;
+      puppets[1].surfaceTilt = [0, 0];
+      puppets[1].prevVel = [0, 0];
+      puppets[1].B = puppets[1].bodyMatrix(0);
+      if (puppets[1].arms) {
+        puppets[1].arms.L.initRestPose(puppets[1].B);
+        puppets[1].arms.R.initRestPose(puppets[1].B);
+      }
+    }
+    if (controller && typeof controller.recalibrate === 'function') {
+      controller.recalibrate();
+    }
+    const currentSelected = state.selectedCharacter === 'prabu-brajawisena' ? puppets[1] : puppets[0];
+    if (els.charModal && !els.charModal.classList.contains('hidden') && typeof syncModalOrientation === 'function') {
+      syncModalOrientation(currentSelected, state.selectedCharacter);
+    }
+    showToast('Posisi kedua wayang di panggung dikalibrasi ulang');
+  }
+
+  // ==========================================================================
+  // CHARACTER REGISTRY & INDONESIAN VOICE NARRATION CONTROLLER
+  // ==========================================================================
+  const WAYANG_CHARACTERS = {
+    'prabu-wahyana': {
+      id: 'prabu-wahyana',
+      name: 'Prabu Wahyana',
+      title: 'Raja Luhur Penjaga Marwah Praja',
+      roleBadge: 'Tokoh Utama Kelir',
+      role: 'Prabu Ageng Karaton',
+      puppetIndex: 0,
+      image: 'assets/images/wayang-motion/wayang-wahyana.webp',
+      audioUrl: 'assets/audio/narration-prabu-wahyana.mp3',
+      intro: 'Prabu Wahyana adalah raja agung yang berwibawa dalam khazanah pewayangan Jawa, memimpin praja dengan ketegasan prinsip, keluhuran budi, dan keberanian membela kebenaran serta kedaulatan rakyatnya.',
+      story: 'Dalam lakon wayang kulit purwa Jawa Tengah, figur Prabu Wahyana merepresentasikan kepemimpinan ksatria yang kokoh berdaulat. Ditempa dalam kearifan tradisi pedalangan, ia mengarungi berbagai pergolakan panggung kelir dengan keteguhan hati, menjunjung marwah kerajaan, dan senantiasa mendahulukan ketenteraman kawula alit.',
+      personality: 'Berwibawa, bijaksana, tangguh, berani mengambil keputusan sulit, menjunjung tinggi keadilan, setia pada darma kepemimpinan, dan pantang surut dalam menghadapi mara bahaya.',
+      moralLesson: 'Kepemimpinan sejati bukanlah tentang kekuasaan mutlak, melainkan pengabdian suci untuk menegakkan keadilan, menjaga martabat negeri, dan melindungi harkat sesama manusia dengan hati yang ikhlas.',
+      narration: 'Namaku Prabu Wahyana, penguasa praja yang menjunjung tinggi keluhuran budi dan keadilan. Dalam panggung kelir kehidupan, kekuasaan adalah amanah luhur untuk mengayomi sesama, bukan untuk meninggikan diri. Kisahku mengajarkan bahwa keberanian berpadu keteguhan prinsip adalah perisai paling sejati dalam menjaga martabat tanah air dan menegakkan darma kebenaran.',
+      sources: 'Serat Pedalangan Wayang Kulit Purwa Jawa Tengah & Tradisi Seni Tutur Nusantara'
+    },
+    'prabu-brajawisena': {
+      id: 'prabu-brajawisena',
+      name: 'Prabu Brajawisena',
+      title: 'Raja Ksatria Perkasa Sabrang (Lawan Tanding Orisinal)',
+      roleBadge: 'Tokoh Lawan Tanding',
+      role: 'Prabu Sabrang Wirayudha (Kreasi Orisinal)',
+      puppetIndex: 1,
+      image: 'assets/images/wayang-motion/wayang-brajawisena.webp',
+      audioUrl: 'assets/audio/narration-brajawisena.mp3',
+      intro: 'Prabu Brajawisena adalah raja ksatria perkasa berwatak gagah dan bertekad baja dari seberang samudra, hadir sebagai lawan tanding tangguh bagi Prabu Wahyana dalam lakon tanding kehormatan praja.',
+      story: 'Dalam lakon panggung kelir (tokoh kreasi orisinal bertradisi wayang kulit purwa sabrang), Prabu Brajawisena digambarkan memimpin bala tentara dengan disiplin perang yang tak tergoyahkan. Mahkota prada keemasan, badong sayap ksatria, dan sorot matanya yang tajam melambangkan tekad pantang menyerah sebelum ujian watak dan kebenaran terbukti di hadapan sang Dalang.',
+      personality: 'Tegas, pantang gentar, menjunjung tinggi harga diri dan kejujuran laga, berjiwa ksatria sejati yang menghormati keunggulan lawan, serta pantang berkhianat.',
+      moralLesson: 'Kekuatan lahiriah dan keberanian tanpa kompromi hanyalah kehampaan bila tidak dibimbing oleh kerendahan hati. Lawan tanding dalam kehidupan hadir bukan semata untuk dihancurkan, melainkan untuk menguji sejauh mana kita mampu menjaga keluhuran budi pekerti di tengah badai perselisihan.',
+      narration: 'Akulah Prabu Brajawisena! Raja ksatria yang pantang surut selangkah jua dalam menuntut kebenaran. Pedang dan gada ksatria tidak pernah diayunkan demi angkara murka, melainkan demi membuktikan keteguhan janji dan kehormatan tanah pusaka. Hadapilah tantanganku dengan keluhuran budi, karena ksatria sejati diuji bukan saat ia menang, melainkan saat ia mampu menghormati lawannya di atas panggung kehidupan!',
+      sources: 'Kreasi Orisinal Terinspirasi Tipologi Wayang Sabrang Purwa & Ragam Sungging Tradisi Jawa'
+    }
+  };
+  WAYANG_CHARACTERS.wahyana = WAYANG_CHARACTERS['prabu-wahyana'];
+  WAYANG_CHARACTERS.brajawisena = WAYANG_CHARACTERS['prabu-brajawisena'];
+
+  for (const id in WAYANG_CHARACTERS) {
+    if (WAYANG_CHARACTERS[id].image) WAYANG_CHARACTERS[id].image = resolveWmAsset(WAYANG_CHARACTERS[id].image);
+    if (WAYANG_CHARACTERS[id].audioUrl) WAYANG_CHARACTERS[id].audioUrl = resolveWmAsset(WAYANG_CHARACTERS[id].audioUrl);
+  }
+
+  // Connect stage puppet instances with character registry & asset reference
+  if (puppets[0]) {
+    puppets[0].id = 'prabu-wahyana';
+    puppets[0].character = WAYANG_CHARACTERS['prabu-wahyana'];
+    puppets[0].image = WAYANG_CHARACTERS['prabu-wahyana'].image;
+    puppets[0].defaultFacing = 1;
+    puppets[0].defaultLookDir = 1;
+    WAYANG_CHARACTERS['prabu-wahyana'].puppet = puppets[0];
+  }
+  if (puppets[1]) {
+    puppets[1].id = 'prabu-brajawisena';
+    puppets[1].character = WAYANG_CHARACTERS['prabu-brajawisena'];
+    puppets[1].image = WAYANG_CHARACTERS['prabu-brajawisena'].image;
+    puppets[1].defaultFacing = -1;
+    puppets[1].defaultLookDir = -1;
+    WAYANG_CHARACTERS['prabu-brajawisena'].puppet = puppets[1];
+  }
+
+  function getStageCharacter(query) {
+    if (!query) return WAYANG_CHARACTERS[state.selectedCharacter] || WAYANG_CHARACTERS['prabu-wahyana'];
+    if (typeof query === 'number') {
+      return puppets[query]?.character || WAYANG_CHARACTERS['prabu-wahyana'];
+    }
+    if (typeof query === 'object' && query instanceof Puppet) {
+      return query.character || WAYANG_CHARACTERS[query.id] || WAYANG_CHARACTERS['prabu-wahyana'];
+    }
+    const id = String(query).toLowerCase();
+    return WAYANG_CHARACTERS[id] || WAYANG_CHARACTERS['prabu-wahyana'];
+  }
+
+  // Synchronize explanation panel orientation with stage character orientation
+  function syncModalOrientation(puppet, charId) {
+    if (!els.charModalImg) return;
+    const p = puppet || (charId === 'prabu-brajawisena' ? puppets[1] : puppets[0]);
+    const currentLook = p ? (p.lookDir ?? p.facing) : 1;
+    const defaultLook = p ? (p.defaultLookDir ?? p.defaultFacing ?? 1) : 1;
+    const isMirroredOnStage = currentLook !== defaultLook;
+    els.charModalImg.style.transform = isMirroredOnStage ? 'scaleX(-1)' : 'none';
+  }
+
+  class CharacterNarrationManager {
+    constructor() {
+      this.currentAudio = null;
+      this.currentSpeech = null;
+      this.mode = 'idle'; // 'idle' | 'playing' | 'paused' | 'error'
+      this.activeCharId = null;
+      this.engine = 'none'; // 'audio' | 'speech'
+      this.synthVoice = null;
+      this.speechStartTime = 0;
+      this.speechDurationEst = 28;
+      this.speechTimer = null;
+
+      // Detect Indonesian voice if SpeechSynthesis is available
+      if ('speechSynthesis' in window) {
+        const updateVoices = () => {
+          const voices = window.speechSynthesis.getVoices();
+          this.synthVoice = voices.find(v => (v.lang && (v.lang.startsWith('id') || v.lang.includes('ID'))) || (v.name && v.name.toLowerCase().includes('indonesia'))) || null;
+        };
+        updateVoices();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = updateVoices;
+        }
+      }
+    }
+
+    formatTime(sec) {
+      if (isNaN(sec) || sec < 0) sec = 0;
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    setUiState(mode, labelText) {
+      this.mode = mode;
+      if (els.btnAudioPrimary && els.audioPrimaryText && els.audioPrimaryIcon) {
+        if (mode === 'playing') {
+          els.btnAudioPrimary.classList.add('playing');
+          els.audioPrimaryIcon.className = 'bi bi-pause-circle-fill';
+          els.audioPrimaryText.textContent = 'Jeda Kisah';
+          if (els.btnAudioStop) els.btnAudioStop.classList.remove('hidden');
+          if (els.audioProgressWrap) els.audioProgressWrap.classList.remove('hidden');
+        } else if (mode === 'paused') {
+          els.btnAudioPrimary.classList.remove('playing');
+          els.audioPrimaryIcon.className = 'bi bi-play-circle-fill';
+          els.audioPrimaryText.textContent = 'Lanjutkan Kisah';
+          if (els.btnAudioStop) els.btnAudioStop.classList.remove('hidden');
+          if (els.audioProgressWrap) els.audioProgressWrap.classList.remove('hidden');
+        } else {
+          // Idle or error
+          els.btnAudioPrimary.classList.remove('playing');
+          els.audioPrimaryIcon.className = 'bi bi-play-circle-fill';
+          els.audioPrimaryText.textContent = 'Dengarkan Kisahku';
+          if (els.btnAudioStop) els.btnAudioStop.classList.add('hidden');
+          if (els.audioProgressWrap) els.audioProgressWrap.classList.add('hidden');
+          if (els.audioProgressFill) els.audioProgressFill.style.width = '0%';
+        }
+      }
+      if (els.audioStatusLabel && labelText) {
+        els.audioStatusLabel.textContent = labelText;
+      }
+    }
+
+    play(charId) {
+      const char = WAYANG_CHARACTERS[charId];
+      if (!char) return;
+
+      // If resuming paused character
+      if (this.mode === 'paused' && this.activeCharId === charId) {
+        this.resume();
+        return;
+      }
+
+      this.stop();
+      this.activeCharId = charId;
+      if (els.audioErrorMsg) els.audioErrorMsg.classList.add('hidden');
+
+      // Auto-duck background gamelan audio volume if currently playing
+      if (audioEl && !audioEl.paused) {
+        audioEl.volume = 0.12;
+      }
+
+      // Try HTML5 Audio file first
+      try {
+        const audio = new Audio(char.audioUrl);
+        audio.preload = 'auto';
+        this.currentAudio = audio;
+        this.engine = 'audio';
+
+        audio.addEventListener('loadedmetadata', () => {
+          if (els.audioTimeTotal) els.audioTimeTotal.textContent = this.formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+          if (!audio.duration) return;
+          const pct = (audio.currentTime / audio.duration) * 100;
+          if (els.audioProgressFill) els.audioProgressFill.style.width = `${pct}%`;
+          if (els.audioTimeCurr) els.audioTimeCurr.textContent = this.formatTime(audio.currentTime);
+          if (els.audioTimeTotal) els.audioTimeTotal.textContent = this.formatTime(audio.duration);
+        });
+
+        audio.addEventListener('ended', () => {
+          this.stop();
+          showToast(`Kisah ${char.name} selesai`);
+        });
+
+        audio.addEventListener('error', () => {
+          console.warn('Audio file playback failed, falling back to browser speech synthesis...');
+          this.fallbackSpeechSynthesis(char);
+        });
+
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              this.setUiState('playing', `Memutar narasi ${char.name} (Audio Asli)`);
+            })
+            .catch((err) => {
+              console.warn('Audio play promise rejected, falling back to speech synthesis:', err);
+              this.fallbackSpeechSynthesis(char);
+            });
+        }
+      } catch (err) {
+        console.warn('Audio construction error, falling back to speech synthesis:', err);
+        this.fallbackSpeechSynthesis(char);
+      }
+    }
+
+    fallbackSpeechSynthesis(char) {
+      if (!('speechSynthesis' in window)) {
+        this.setUiState('error', 'Audio narasi tidak didukung di peramban ini.');
+        if (els.audioErrorMsg) {
+          els.audioErrorMsg.classList.remove('hidden');
+          if (els.audioErrorText) els.audioErrorText.textContent = 'Peramban tidak mendukung pemutaran suara.';
+        }
+        return;
+      }
+
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(char.narration);
+        utterance.lang = 'id-ID';
+        if (this.synthVoice) utterance.voice = this.synthVoice;
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+
+        this.engine = 'speech';
+        this.currentSpeech = utterance;
+        this.speechStartTime = performance.now();
+        this.speechDurationEst = 28;
+
+        if (els.audioTimeTotal) els.audioTimeTotal.textContent = this.formatTime(this.speechDurationEst);
+        if (els.audioTimeCurr) els.audioTimeCurr.textContent = '0:00';
+        if (els.audioProgressFill) els.audioProgressFill.style.width = '0%';
+
+        utterance.onstart = () => {
+          this.setUiState('playing', `Memutar narasi ${char.name} (Suara Peramban)`);
+          clearInterval(this.speechTimer);
+          this.speechTimer = setInterval(() => {
+            if (this.mode !== 'playing') return;
+            const elapsed = (performance.now() - this.speechStartTime) / 1000;
+            const pct = Math.min(100, (elapsed / this.speechDurationEst) * 100);
+            if (els.audioProgressFill) els.audioProgressFill.style.width = `${pct}%`;
+            if (els.audioTimeCurr) els.audioTimeCurr.textContent = this.formatTime(elapsed);
+          }, 200);
+        };
+
+        utterance.onend = () => {
+          clearInterval(this.speechTimer);
+          this.stop();
+          showToast(`Kisah ${char.name} selesai`);
+        };
+
+        utterance.onerror = (e) => {
+          clearInterval(this.speechTimer);
+          console.warn('SpeechSynthesis error:', e);
+          this.setUiState('error', 'Gagal memutar narasi suara.');
+          if (els.audioErrorMsg) {
+            els.audioErrorMsg.classList.remove('hidden');
+            if (els.audioErrorText) els.audioErrorText.textContent = 'Gagal memutar narasi suara.';
+          }
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.error('SpeechSynthesis exception:', e);
+        this.setUiState('error', 'Gagal memutar narasi suara.');
+        if (els.audioErrorMsg) {
+          els.audioErrorMsg.classList.remove('hidden');
+        }
+      }
+    }
+
+    pause() {
+      if (this.mode !== 'playing') return;
+      if (this.engine === 'audio' && this.currentAudio) {
+        this.currentAudio.pause();
+      } else if (this.engine === 'speech' && 'speechSynthesis' in window) {
+        window.speechSynthesis.pause();
+        clearInterval(this.speechTimer);
+      }
+      this.setUiState('paused', 'Narasi dijeda · Tekan Lanjutkan untuk mendengar');
+      // Restore gamelan volume when narration is paused
+      if (audioEl) audioEl.volume = 0.6;
+    }
+
+    resume() {
+      if (this.mode !== 'paused') return;
+      if (audioEl && !audioEl.paused) audioEl.volume = 0.12;
+
+      if (this.engine === 'audio' && this.currentAudio) {
+        this.currentAudio.play().then(() => {
+          this.setUiState('playing', 'Melanjutkan narasi suara...');
+        }).catch(() => {
+          this.stop();
+        });
+      } else if (this.engine === 'speech' && 'speechSynthesis' in window) {
+        window.speechSynthesis.resume();
+        this.setUiState('playing', 'Melanjutkan narasi suara...');
+      }
+    }
+
+    stop() {
+      if (this.currentAudio) {
+        try {
+          this.currentAudio.pause();
+          this.currentAudio.currentTime = 0;
+        } catch (e) {}
+        this.currentAudio = null;
+      }
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {}
+        this.currentSpeech = null;
+      }
+      clearInterval(this.speechTimer);
+      this.setUiState('idle', 'Dengarkan kisah langsung dalam bahasa Indonesia');
+      // Restore gamelan volume
+      if (audioEl) audioEl.volume = 0.6;
+    }
+  }
+
+  const narrationManager = new CharacterNarrationManager();
+
+  // Toggle Duel / Single Mode
+  function toggleDuelMode() {
+    if (controller.puppetCount === 2) {
+      controller.puppetCount = 1;
+      state.characterMode = 'single';
+      if (els.btnDuelToggle) {
+        els.btnDuelToggle.classList.remove('active');
+        els.btnDuelToggle.setAttribute('aria-pressed', 'false');
+      }
+      if (els.duelStatusLabel) {
+        els.duelStatusLabel.textContent = 'Mode Tunggal';
+      }
+      showToast('Mode Tunggal Aktif (1 Wayang di Panggung)');
+    } else {
+      controller.puppetCount = 2;
+      state.characterMode = 'duel';
+      if (els.btnDuelToggle) {
+        els.btnDuelToggle.classList.add('active');
+        els.btnDuelToggle.setAttribute('aria-pressed', 'true');
+      }
+      if (els.duelStatusLabel) {
+        els.duelStatusLabel.textContent = 'Lakon Tanding Kelir';
+      }
+      showToast('Lakon Tanding Aktif: Prabu Wahyana & Prabu Brajawisena');
+    }
+  }
+
+  // Character Selection & Modal Logic
+  function selectCharacter(charOrPuppet, openPopup = true) {
+    let charId = typeof charOrPuppet === 'string' ? charOrPuppet : (charOrPuppet?.id || charOrPuppet?.charId);
+    let stagePuppet = (typeof charOrPuppet === 'object' && charOrPuppet instanceof Puppet) ? charOrPuppet : null;
+
+    if (!stagePuppet) {
+      stagePuppet = (charId === 'prabu-brajawisena' || charId === 'brajawisena') ? puppets[1] : puppets[0];
+    }
+
+    const char = (stagePuppet && stagePuppet.character) || WAYANG_CHARACTERS[charId] || WAYANG_CHARACTERS['prabu-wahyana'];
+    if (!char) return;
+    charId = char.id;
+
+    state.selectedCharacter = charId;
+    const isWahyana = charId === 'prabu-wahyana';
+
+    // 1. Update on-stage character selector buttons
+    if (els.btnSelectWahyana && els.btnSelectBrajawisena) {
+      els.btnSelectWahyana.classList.toggle('active', isWahyana);
+      els.btnSelectWahyana.setAttribute('aria-checked', String(isWahyana));
+      els.btnSelectBrajawisena.classList.toggle('active', !isWahyana);
+      els.btnSelectBrajawisena.setAttribute('aria-checked', String(!isWahyana));
+    }
+
+    // 2. Update bottom stage badges
+    if (els.puppetBadgeWahyana) {
+      els.puppetBadgeWahyana.classList.toggle('selected', isWahyana);
+    }
+    if (els.puppetBadgeBrajawisena) {
+      els.puppetBadgeBrajawisena.classList.toggle('selected', !isWahyana);
+    }
+    if (els.puppetBadgeCenter) els.puppetBadgeCenter.classList.add('selected');
+
+    // 3. Update modal quick-switcher tabs
+    if (els.modalTabWahyana && els.modalTabBrajawisena) {
+      els.modalTabWahyana.classList.toggle('active', isWahyana);
+      els.modalTabWahyana.setAttribute('aria-selected', String(isWahyana));
+      els.modalTabBrajawisena.classList.toggle('active', !isWahyana);
+      els.modalTabBrajawisena.setAttribute('aria-selected', String(!isWahyana));
+    }
+
+    // 4. Populate modal fields directly from the stage character data source
+    if (els.charModalName) els.charModalName.textContent = char.name;
+    if (els.charModalEpithet) els.charModalEpithet.textContent = char.title;
+    if (els.charModalSideTag) {
+      els.charModalSideTag.textContent = char.roleBadge;
+      els.charModalSideTag.classList.toggle('tag-opponent', !isWahyana);
+    }
+    if (els.charModalRole) els.charModalRole.textContent = char.role || char.roleBadge;
+
+    // Reuse existing character image and asset path from the stage
+    const charImageSrc = char.image || stagePuppet?.image || (isWahyana ? resolveWmAsset('assets/images/wayang-motion/wayang-wahyana.webp') : resolveWmAsset('assets/images/wayang-motion/wayang-brajawisena.webp'));
+    if (els.charModalImg) {
+      if (els.charModalImg.getAttribute('src') !== charImageSrc) {
+        els.charModalImg.src = charImageSrc;
+      }
+      els.charModalImg.alt = char.name;
+      syncModalOrientation(stagePuppet, charId);
+    }
+
+    if (els.charModalIntro) els.charModalIntro.textContent = char.intro;
+    if (els.charModalStory) els.charModalStory.textContent = char.story;
+    if (els.charModalPersonality) els.charModalPersonality.textContent = char.personality;
+    if (els.charModalMoral) els.charModalMoral.textContent = char.moralLesson;
+    if (els.charModalSources) els.charModalSources.textContent = char.sources;
+
+    // Reset audio status if switching to a different character
+    if (narrationManager.activeCharId && narrationManager.activeCharId !== charId) {
+      narrationManager.stop();
+    }
+    if (narrationManager.mode === 'idle') {
+      narrationManager.setUiState('idle', `Dengarkan kisah ${char.name} langsung dalam bahasa Indonesia`);
+    }
+
+    // 5. If openPopup requested, show modal
+    if (openPopup && els.charModal) {
+      els.charModal.classList.remove('hidden');
+      if (els.btnOpenCharInfo) els.btnOpenCharInfo.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeCharacterModal() {
+    if (els.charModal) els.charModal.classList.add('hidden');
+    if (els.btnOpenCharInfo) els.btnOpenCharInfo.setAttribute('aria-expanded', 'false');
+    narrationManager.stop();
+  }
+
+  // Direct canvas hit test for puppet clicking / tapping
+  function handleCanvasSelection(clientX, clientY) {
+    if (!els.canvas) return;
+    const rect = els.canvas.getBoundingClientRect();
+    const cx = clientX - rect.left;
+    const cy = clientY - rect.top;
+    if (cx < 0 || cy < 0 || cx > rect.width || cy > rect.height) return;
+
+    const stageX = view.x + (cx / rect.width) * view.w;
+    const stageY = view.y + (cy / rect.height) * view.h;
+
+    let clickedPuppet = null;
+    let minDist = Infinity;
+
+    puppets.forEach((p) => {
+      const dx = stageX - p.pos.x;
+      const dy = stageY - (p.pos.y - 120);
+      const normDist = Math.hypot(dx / 240, dy / 380);
+      if (normDist <= 1.35 && normDist < minDist) {
+        minDist = normDist;
+        clickedPuppet = p;
+      }
+    });
+
+    if (clickedPuppet) {
+      selectCharacter(clickedPuppet, true);
+      const charName = clickedPuppet.character?.name || WAYANG_CHARACTERS[clickedPuppet.id]?.name || 'Prabu Wahyana';
+      showToast(`Tokoh terpilih: ${charName}`);
     }
   }
 
@@ -2269,7 +3289,13 @@ void main() {
     lastTime = t;
 
     const inputs = controller.update(t, view);
-    const active = puppets.slice(0, controller.puppetCount);
+    let active;
+    if (controller.puppetCount === 1) {
+      const activeIdx = state.selectedCharacter === 'prabu-brajawisena' ? 1 : 0;
+      active = [puppets[activeIdx]];
+    } else {
+      active = puppets.slice(0, 2);
+    }
 
     if (active.length === 2) {
       active[0].faceTargetX = active[1].pos.x;
@@ -2294,16 +3320,19 @@ void main() {
     active.forEach((p, j) => {
       if (p.danceStarted) {
         p.danceStarted = false;
-        showToast(active.length === 2 ? `${j === 0 ? 'Wayang Kiri' : 'Wayang Kanan'} · Tari Kiprahan Aktif (Beat Gamelan)` : 'Tari Kiprahan Aktif (Beat Gamelan)');
+        const charName = p.id === 'prabu-brajawisena' ? 'Prabu Brajawisena' : 'Prabu Wahyana';
+        showToast(active.length === 2 ? `${charName} · Tari Kiprahan Aktif (Beat Gamelan)` : 'Tari Kiprahan Aktif (Beat Gamelan)');
       }
     });
 
     // Dynamic Shadow Calculation: depth dictates scale, blur, and opacity
     const layers = active
-      .map((p) => {
+      .map((p, pIdx) => {
         const depth = Math.max(0, p.depth.x);
         return {
           depth: p.depth.x,
+          puppet: p,
+          charId: p.id || 'prabu-wahyana',
           items: p.frame(view),
           shadow: {
             scale: 1.03 + 0.22 * depth,
@@ -2354,42 +3383,42 @@ void main() {
 
     if (errorName === 'NotAllowedError' || errorName === 'PermissionDeniedError') {
       return {
-        title: 'Izin Akses Kamera Ditolak',
-        desc: 'Peramban tidak memiliki izin untuk mengakses webcam Anda. Silakan klik ikon perizinan/kamera di bilah alamat peramban (URL bar) untuk mengizinkan akses webcam, lalu klik tombol "Coba Hubungkan Lagi".',
+        title: 'Kamera belum dapat diakses.',
+        desc: 'Izin akses kamera belum diberikan. Buka pengaturan izin peramban atau ketuk ikon gembok pada bilah alamat untuk mengizinkan kamera, lalu ketuk "Coba Lagi".',
       };
     }
 
     if (errorName === 'NotFoundError' || errorName === 'DevicesNotFoundError') {
       return {
-        title: 'Kamera Tidak Ditemukan',
-        desc: 'Tidak ada perangkat kamera yang terdeteksi pada komputer atau laptop Anda. Pastikan webcam terpasang dan tidak dinonaktifkan di pengaturan sistem operasi.',
+        title: 'Kamera belum dapat diakses.',
+        desc: 'Tidak ada perangkat kamera yang terdeteksi pada perangkat Anda. Pastikan kamera terpasang dan dapat digunakan.',
       };
     }
 
     if (errorName === 'NotReadableError' || errorName === 'TrackStartError') {
       return {
-        title: 'Kamera Sedang Digunakan Aplikasi Lain',
-        desc: 'Kamera Anda kemungkinan sedang digunakan oleh aplikasi lain (seperti Zoom, Google Meet, Microsoft Teams) atau tab peramban lain. Tutup aplikasi tersebut lalu coba hubungkan kembali.',
+        title: 'Kamera belum dapat diakses.',
+        desc: 'Kamera Anda sedang digunakan aplikasi lain. Tutup aplikasi yang menggunakan kamera, lalu ketuk "Coba Lagi".',
       };
     }
 
     if (errorName === 'OverconstrainedError' || errorName === 'ConstraintNotSatisfiedError') {
       return {
-        title: 'Resolusi Kamera Tidak Kompatibel',
-        desc: 'Perangkat keras webcam tidak mendukung resolusi yang diminta. Sistem telah mencoba opsi resolusi alternatif namun belum berhasil.',
+        title: 'Kamera belum dapat diakses.',
+        desc: 'Konfigurasi kamera perangkat Anda belum kompatibel dengan pengaturan video yang diminta.',
       };
     }
 
     if (errorName === 'SecurityError' || message.includes('HTTPS') || message.includes('insecure')) {
       return {
-        title: 'Koneksi Aman (HTTPS) Diperlukan',
-        desc: 'Kebijakan keamanan peramban mewajibkan koneksi HTTPS untuk membuka kamera. Pastikan situs diakses melalui alamat HTTPS yang aman atau localhost.',
+        title: 'Kamera belum dapat diakses.',
+        desc: 'Akses kamera memerlukan sambungan aman (HTTPS). Pastikan situs dibuka melalui HTTPS atau jaringan lokal aman.',
       };
     }
 
     return {
-      title: 'Kamera Tidak Dapat Dihubungkan',
-      desc: `Terjadi kendala saat menghubungkan kamera (${errorName || 'Error'}: ${message || 'Gagal memulai aliran video'}). Anda dapat mencoba menghubungkan kembali atau bermain menggunakan mode mouse.`,
+      title: 'Kamera belum dapat diakses.',
+      desc: 'Pastikan izin kamera sudah diberikan dan kamera tidak sedang digunakan aplikasi lain.',
     };
   }
 
@@ -2416,10 +3445,10 @@ void main() {
     }
 
     const constraintTiers = [
-      // Tier 1: Ideal 720p 30fps user-facing webcam (phones / supported webcams)
+      // Tier 1: Ideal 720p 30fps user-facing webcam (phones, tablets, supported webcams)
       {
         video: {
-          facingMode: 'user',
+          facingMode: { ideal: 'user' },
           width: { ideal: 1280 },
           height: { ideal: 720 },
           frameRate: { ideal: 30, max: 60 },
@@ -2438,7 +3467,7 @@ void main() {
       // Tier 3: Standard 480p user-facing webcam
       {
         video: {
-          facingMode: 'user',
+          facingMode: { ideal: 'user' },
           width: { ideal: 640 },
           height: { ideal: 480 },
           frameRate: { ideal: 30 },
@@ -2500,6 +3529,7 @@ void main() {
   }
 
   let isSendingFrame = false;
+  let lastProcessedVideoTime = -1;
 
   function startVideoFrameProcessing() {
     stopVideoFrameProcessing();
@@ -2701,10 +3731,13 @@ void main() {
           console.warn('Wayang Motion: video.play() final check:', playErr);
         }
 
-        // Synchronize preview canvas resolution with webcam video frame
-        if (els.previewCanvas && els.video && els.video.videoWidth > 0) {
-          els.previewCanvas.width = els.video.videoWidth;
-          els.previewCanvas.height = els.video.videoHeight;
+        // Synchronize preview canvas resolution and aspect ratio with webcam video frame
+        if (els.video && els.video.videoWidth > 0 && els.video.videoHeight > 0) {
+          controller.aspect = els.video.videoWidth / els.video.videoHeight;
+          if (els.previewCanvas) {
+            els.previewCanvas.width = els.video.videoWidth;
+            els.previewCanvas.height = els.video.videoHeight;
+          }
         }
       }
 
@@ -2721,7 +3754,7 @@ void main() {
           locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`,
         });
         hands.setOptions({
-          maxNumHands: 2,
+          maxNumHands: 4,
           modelComplexity: 1,
           minDetectionConfidence: 0.55,
           minTrackingConfidence: 0.5,
@@ -2730,9 +3763,9 @@ void main() {
         hands.onResults((results) => {
           if (!state.isActive || !state.isCameraRunning) return;
           if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-            controller.ingest(results.multiHandLandmarks, performance.now());
+            controller.ingest(results.multiHandLandmarks, results.multiHandedness, performance.now());
           } else {
-            controller.ingest([], performance.now());
+            controller.ingest([], [], performance.now());
           }
         });
 
@@ -2801,8 +3834,8 @@ void main() {
     state.isActive = false;
     state.isCameraRunning = false;
     state.isStartingCamera = false;
-    controller.source = 'demo';
-    controller.slots.forEach((s) => { s.active = false; s.landmarks = null; });
+    controller.source = 'ready';
+    controller.slots.forEach((s) => resetSlot(s));
     updateHud();
 
     // 1. Stop frame processing
@@ -2811,7 +3844,10 @@ void main() {
     // 2. Stop camera stream tracks cleanly
     if (state.mediaStream) {
       state.mediaStream.getTracks().forEach((track) => {
-        try { track.stop(); } catch (e) {}
+        try {
+          track.enabled = false;
+          track.stop();
+        } catch (e) {}
       });
       state.mediaStream = null;
     }
@@ -2830,11 +3866,16 @@ void main() {
       els.pipGuideText.style.opacity = '1';
     }
 
-    // 5. Update UI
+    // 5. Reset puppets to stationary resting pose
+    resetPuppetsPosition();
+
+    // 6. Update UI
     if (els.btnStop) els.btnStop.style.display = 'none';
+    if (els.pipBox) els.pipBox.classList.add('hidden');
     if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
     if (els.overlayError) els.overlayError.classList.add('hidden');
     if (els.overlayLoading) els.overlayLoading.classList.add('hidden');
+    updateMobileOrientationFlow();
 
     showToast('Sesi kamera selesai · Panggung siaga');
   }
@@ -2860,7 +3901,9 @@ void main() {
     controller.source = 'mouse';
     controller.mouse.seen = true;
     updateHud();
+    if (els.pipBox) els.pipBox.classList.add('hidden');
     if (els.overlayIntro) els.overlayIntro.classList.add('hidden', 'gone');
+    if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
     if (els.overlayError) els.overlayError.classList.add('hidden');
     if (els.overlayLoading) els.overlayLoading.classList.add('hidden');
     if (els.btnStop) els.btnStop.style.display = 'inline-flex';
@@ -2907,36 +3950,28 @@ void main() {
   els.btnStartInteractiveIntro?.addEventListener('click', startInteractiveMode);
   els.btnReset?.addEventListener('click', resetPuppetsPosition);
 
-  els.btnShadow?.addEventListener('click', () => {
-    state.shadowMode = !state.shadowMode;
-    els.stageViewport?.classList.toggle('shadow-mode', state.shadowMode);
-    els.btnShadow.classList.toggle('active', state.shadowMode);
-    showToast(state.shadowMode ? 'Mode Bayangan Siluet Kelir Aktif' : 'Mode Warna Asli Aktif');
+  // Mobile Orientation Flow Handlers
+  els.btnOrientationContinue?.addEventListener('click', handleOrientationContinue);
+
+  // Listen to mobile orientation changes
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      updateMobileOrientationFlow();
+      resizeStage();
+    }, 150);
   });
+  if (screen.orientation && typeof screen.orientation.addEventListener === 'function') {
+    screen.orientation.addEventListener('change', () => {
+      setTimeout(() => {
+        updateMobileOrientationFlow();
+        resizeStage();
+      }, 150);
+    });
+  }
 
   els.btnFullscreen?.addEventListener('click', toggleFullscreen);
 
   els.soundToggle?.addEventListener('click', toggleMusic);
-
-  els.settingsToggle?.addEventListener('click', () => {
-    if (els.settingsDrawer?.hidden) openSettings();
-    else closeSettings();
-  });
-  els.btnCloseSettings?.addEventListener('click', closeSettings);
-
-  els.btnGuide?.addEventListener('click', () => {
-    if (els.guideModal) els.guideModal.classList.add('open');
-  });
-  els.btnCloseGuide?.addEventListener('click', () => {
-    if (els.guideModal) els.guideModal.classList.remove('open');
-  });
-  els.btnUnderstoodGuide?.addEventListener('click', () => {
-    if (els.guideModal) els.guideModal.classList.remove('open');
-  });
-
-  els.btnDismissLandscape?.addEventListener('click', () => {
-    if (els.landscapeSuggestion) els.landscapeSuggestion.style.display = 'none';
-  });
 
   els.btnTogglePip?.addEventListener('click', () => {
     if (!els.pipBox) return;
@@ -2973,16 +4008,91 @@ void main() {
 
   els.previewPopout?.addEventListener('click', toggleVideoPip);
 
+  // Direct Canvas Selection & Click/Touch Hit-Testing
+  let touchStartData = null;
+  els.canvas.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      touchStartData = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: performance.now() };
+    }
+  }, { passive: true });
+
+  els.canvas.addEventListener('touchend', (e) => {
+    if (!touchStartData) return;
+    const dt = performance.now() - touchStartData.t;
+    if (dt < 350 && e.changedTouches && e.changedTouches[0]) {
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartData.x);
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartData.y);
+      if (dx < 16 && dy < 16) {
+        handleCanvasSelection(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      }
+    }
+    touchStartData = null;
+  });
+
+  els.canvas.addEventListener('click', (e) => {
+    handleCanvasSelection(e.clientX, e.clientY);
+  });
+
+  // Stage Badges & Actions
+  els.puppetBadgeWahyana?.addEventListener('click', () => selectCharacter('prabu-wahyana', true));
+  els.puppetBadgeBrajawisena?.addEventListener('click', () => selectCharacter('prabu-brajawisena', true));
+  els.btnSelectWahyana?.addEventListener('click', () => selectCharacter('prabu-wahyana', false));
+  els.btnSelectBrajawisena?.addEventListener('click', () => selectCharacter('prabu-brajawisena', false));
+  els.btnDuelToggle?.addEventListener('click', toggleDuelMode);
+  els.modalTabWahyana?.addEventListener('click', () => selectCharacter('prabu-wahyana', false));
+  els.modalTabBrajawisena?.addEventListener('click', () => selectCharacter('prabu-brajawisena', false));
+
+  els.puppetBadgeLeft?.addEventListener('click', () => selectCharacter('prabu-wahyana', true));
+  els.puppetBadgeRight?.addEventListener('click', () => selectCharacter('prabu-brajawisena', true));
+  els.btnReelInfo?.addEventListener('click', () => {
+    selectCharacter(state.selectedCharacter || 'prabu-wahyana', true);
+  });
+  els.btnOpenCharInfo?.addEventListener('click', () => {
+    if (els.charModal && !els.charModal.classList.contains('hidden')) {
+      closeCharacterModal();
+    } else {
+      selectCharacter(state.selectedCharacter || 'prabu-wahyana', true);
+    }
+  });
+
+  // Character Modal Close
+  els.btnCloseCharModal?.addEventListener('click', closeCharacterModal);
+  els.charModal?.addEventListener('click', (e) => {
+    if (e.target === els.charModal) closeCharacterModal();
+  });
+
+  // Audio Narration Player Controls
+  els.btnAudioPrimary?.addEventListener('click', () => {
+    if (narrationManager.mode === 'playing') {
+      narrationManager.pause();
+    } else if (narrationManager.mode === 'paused') {
+      narrationManager.resume();
+    } else {
+      narrationManager.play(state.selectedCharacter || 'prabu-wahyana');
+    }
+  });
+
+  els.btnAudioStop?.addEventListener('click', () => {
+    narrationManager.stop();
+  });
+
+  els.btnRetryNarration?.addEventListener('click', () => {
+    narrationManager.play(state.selectedCharacter || 'prabu-wahyana');
+  });
+
   // Hotkeys
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      if (els.charModal && !els.charModal.classList.contains('hidden')) {
+        closeCharacterModal();
+        return;
+      }
       if (document.activeElement && typeof document.activeElement.blur === 'function') {
         document.activeElement.blur();
       }
-      if (els.guideModal && els.guideModal.classList.contains('open')) {
-        els.guideModal.classList.remove('open');
-      } else if (state.isFullscreen || state.isFullscreenFallback || document.fullscreenElement) {
+      if (state.isFullscreen || state.isFullscreenFallback || document.fullscreenElement || document.webkitFullscreenElement) {
         exitFullscreen();
+        return;
       }
       return;
     }
@@ -2990,15 +4100,18 @@ void main() {
     if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
     const key = e.key.toUpperCase();
-    if (key === 'D') {
+    if (key === 'I') {
+      if (els.charModal && !els.charModal.classList.contains('hidden')) {
+        closeCharacterModal();
+      } else {
+        selectCharacter(state.selectedCharacter || 'prabu-wahyana', true);
+      }
+    } else if (key === 'D') {
       controller.requestDance();
       showToast('Tari Kiprahan Aktif (Beat Gamelan)');
-    } else if (key === 'F') {
-      turnPuppet(0);
-      showToast('Arah hadap wayang kiri dibalik');
-    } else if (key === 'G') {
-      turnPuppet(1);
-      showToast('Arah hadap wayang kanan dibalik');
+    } else if (key === 'F' || key === 'G') {
+      turnPuppet();
+      showToast('Arah hadap wayang dibalik');
     } else if (key === 'H') {
       document.body.classList.toggle('ui-hidden');
       const isHidden = document.body.classList.contains('ui-hidden');
@@ -3018,8 +4131,9 @@ void main() {
     }
   });
 
-  // Autoplay music gesture listener
+  // Autoplay music gesture listener (respects user explicit mute)
   const startMusicOnInteraction = (e) => {
+    if (userExplicitlyMuted) return;
     if (e.target?.closest?.('#sound-toggle') || e.key?.toLowerCase() === 'm') return;
     audioEl.play().then(() => {
       syncSoundUi();
@@ -3054,10 +4168,29 @@ void main() {
   });
 
   // Initialize and Launch
+  if (els.pipBox) {
+    els.pipBox.classList.add('hidden');
+  }
   initRenderer().then(() => {
     resizeStage();
+    updateMobileOrientationFlow();
+    resetPuppetsPosition();
+    const shouldKeepModalOpen = els.charModal && !els.charModal.classList.contains('hidden');
+    selectCharacter(puppets[0] || 'prabu-wahyana', shouldKeepModalOpen);
+    state.isReady = true;
     rafId = requestAnimationFrame(tick);
   });
 
-  window.wayang = { puppets, controller, beatClock, renderer, audio: audioEl };
+  window.wayang = {
+    state,
+    puppets,
+    controller,
+    beatClock,
+    renderer,
+    audio: audioEl,
+    selectCharacter,
+    narrationManager,
+    characters: WAYANG_CHARACTERS,
+    getStageCharacter,
+  };
 })();

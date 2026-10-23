@@ -5,6 +5,7 @@
    ========================================================================== */
 
 @import url('./redesign-palette.css');
+@import url('./responsive.css');
 
 /* Base Design Tokens */
 :root {
@@ -88,7 +89,7 @@
   /* Shadows */
   --kp-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.45);
   --kp-shadow-button: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --kp-shadow-button-hover: 0 8px 24px rgba(197, 164, 77, 0.28), 0 4px 16px rgba(0, 0, 0, 0.5);
+  --kp-shadow-button-hover: 0 8px 24px rgba(0, 0, 0, 0.65);
   --kp-shadow-card: 0 16px 40px rgba(0, 0, 0, 0.75);
   --kp-shadow-heading: 0 4px 24px rgba(0, 0, 0, 0.85);
   --kp-shadow-body: 0 1px 8px rgba(0, 0, 0, 0.75);
@@ -260,7 +261,7 @@ input:focus-visible,
 .cinematic-backdrop-img {
   position: absolute;
   inset: -20px;
-  background-image: url('../assets/images/slide-1-prambanan.webp');
+  background-image: url('../assets/images/home/slide-1-prambanan.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -453,7 +454,7 @@ input:focus-visible,
   text-decoration: none;
   border-radius: var(--kp-radius-pill);
   border: 1px solid var(--color-gold-light, #e1ca7a);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 14px rgba(197, 164, 77, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
   transition: all var(--kp-transition-fast);
   white-space: nowrap;
 }
@@ -465,7 +466,7 @@ input:focus-visible,
   background: var(--color-gold-light, #e1ca7a);
   color: #080808 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(197, 164, 77, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
 
 .btn-wayang-pill i,
@@ -571,7 +572,7 @@ input:focus-visible,
   border-radius: var(--kp-radius-pill);
   text-decoration: none;
   border: 1px solid var(--color-gold-light, #e1ca7a);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 16px rgba(197, 164, 77, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
   transition: transform var(--kp-transition-fast), 
               box-shadow var(--kp-transition-fast), 
               background var(--kp-transition-fast),
@@ -590,7 +591,7 @@ input:focus-visible,
   background: var(--color-gold-light, #e1ca7a);
   color: #080808;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(197, 164, 77, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
 }
 
 .btn-explore:hover .arrow {
