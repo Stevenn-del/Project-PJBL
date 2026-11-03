@@ -6,10 +6,14 @@
   <title>Karsakala — Jejak Sejarah Jawa Tengah</title>
   <meta name="description" content="Menelusuri perjalanan Jawa Tengah dari kerajaan hingga masa kini. Eksplorasi keindahan dan warisan budaya Jawa Tengah bersama Karsakala.">
   
-  <!-- Preconnect to Google Fonts -->
+  <!-- Resource Preconnects for CDN & Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- Google Fonts: Inria Serif, Poppins, Imperial Script -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/karsakala-logo.svg">
@@ -24,8 +28,10 @@
   <!-- Core Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Preload Critical Above-The-Fold Hero Image -->
+  <!-- Preload Critical Above-The-Fold Hero Image & Prefetch Next Slides -->
   <link rel="preload" as="image" href="assets/images/home/slide-1-prambanan.webp" type="image/webp" fetchpriority="high">
+  <link rel="prefetch" as="image" href="assets/images/home/slide-2-wayang.webp" type="image/webp">
+  <link rel="prefetch" as="image" href="assets/images/home/slide-3-borobudur.webp" type="image/webp">
 </head>
 <body class="page-home-viewport">
 
@@ -50,7 +56,7 @@
           <!-- Logo & Brand Karsakala -->
           <div class="brand-wrapper">
             <a href="index.html" class="brand-link" aria-label="Karsakala - Beranda">
-              <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+              <img src="assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44" decoding="async" fetchpriority="high">
               <span class="visually-hidden">Karsakala</span>
             </a>
           </div>

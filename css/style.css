@@ -222,7 +222,7 @@ input:focus-visible,
   }
 }
 
-/* Hero Overlay Scrim (Dark Museum Atmosphere with Subtle Red Accent) */
+/* Hero Overlay Scrim (Dark Museum Atmosphere with Centered Cinematic Vignette) */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -232,16 +232,13 @@ input:focus-visible,
   z-index: 2;
   pointer-events: none;
   background: 
-    radial-gradient(ellipse at 40% 40%, rgba(116, 29, 43, 0.14) 0%, transparent 60%),
+    radial-gradient(circle at 50% 48%, rgba(116, 29, 43, 0.15) 0%, transparent 65%),
     linear-gradient(180deg, 
       rgba(8, 8, 8, 0.75) 0%, 
-      rgba(8, 8, 8, 0.35) 30%, 
+      rgba(8, 8, 8, 0.38) 32%, 
       rgba(8, 8, 8, 0.65) 70%, 
       rgba(8, 8, 8, 0.96) 100%),
-    linear-gradient(90deg, 
-      rgba(8, 8, 8, 0.88) 0%, 
-      rgba(8, 8, 8, 0.55) 50%, 
-      rgba(8, 8, 8, 0.35) 100%);
+    radial-gradient(ellipse at 50% 50%, rgba(8, 8, 8, 0.35) 0%, rgba(8, 8, 8, 0.82) 100%);
 }
 
 /* ==============================================================================
@@ -256,6 +253,10 @@ input:focus-visible,
   z-index: -999;
   pointer-events: none;
   overflow: hidden;
+  contain: strict;
+  isolation: isolate;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .cinematic-backdrop-img {
@@ -266,8 +267,8 @@ input:focus-visible,
   background-position: center center;
   background-repeat: no-repeat;
   filter: blur(14px) brightness(0.28);
-  transform: scale(1.06);
-  will-change: transform, filter;
+  transform: scale(1.06) translateZ(0);
+  backface-visibility: hidden;
 }
 
 .cinematic-backdrop-scrim {
@@ -512,6 +513,7 @@ input:focus-visible,
   flex: 1 1 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-top: 20px;
   padding-bottom: 24px;
 }
@@ -520,24 +522,34 @@ input:focus-visible,
   max-width: 1440px;
   padding-left: 36px;
   padding-right: 36px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .hero-content-box {
-  max-width: 680px;
+  max-width: 900px;
+  width: 100%;
   position: relative;
   z-index: 5;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Editorial Serif Main Heading */
 .hero-heading {
   font-family: var(--kp-font-serif);
-  font-size: clamp(38px, 4.5vw, 64px);
+  font-size: clamp(38px, 5.2vw, 68px);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.15;
   letter-spacing: -0.015em;
   color: var(--color-text, #f4efe4);
   text-transform: uppercase;
   margin: 0 0 20px 0;
+  max-width: 860px;
   text-shadow: var(--kp-shadow-heading);
 }
 
@@ -548,19 +560,20 @@ input:focus-visible,
 /* Supporting Description */
 .hero-description {
   font-family: var(--kp-font-sans);
-  font-size: 16.5px;
+  font-size: clamp(16px, 1.25vw, 18px);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.68;
   color: var(--color-text-muted, #c2b9a7);
-  margin: 0 0 32px 0;
+  margin: 0 auto 32px auto;
   text-shadow: var(--kp-shadow-body);
-  max-width: 560px;
+  max-width: 660px;
 }
 
 /* Start Exploring CTA Button */
 .btn-explore {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   background: var(--color-gold, #c5a44d);
   color: #080808;
@@ -568,7 +581,7 @@ input:focus-visible,
   font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 13px 32px;
+  padding: 13px 34px;
   border-radius: var(--kp-radius-pill);
   text-decoration: none;
   border: 1px solid var(--color-gold-light, #e1ca7a);

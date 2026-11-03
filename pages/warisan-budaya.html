@@ -6,10 +6,14 @@
   <title>Warisan Budaya Jawa Tengah — Eksplorasi Pusaka Adiluhung Karsakala</title>
   <meta name="description" content="Menjelajahi mahakarya arsitektur candi dunia, kehalusan seni kriya keraton, dan filosofi luhur seni pertunjukan warisan UNESCO Jawa Tengah bersama Karsakala.">
   
-  <!-- Preconnect ke Google Fonts -->
+  <!-- Resource Preconnects for CDN & Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- Google Fonts: Inria Serif, Poppins, Imperial Script -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
   
   <!-- Bootstrap 5.3 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -46,7 +50,7 @@
         <!-- Logo & Identitas Brand Karsakala -->
         <div class="brand-wrapper">
           <a href="../index.html" class="brand-link" aria-label="Karsakala - Kembali ke Beranda">
-            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44" decoding="async" fetchpriority="high">
             <span class="brand-wordmark visually-hidden">Karsakala</span>
           </a>
         </div>
@@ -127,13 +131,12 @@
       </button>
     </div>
     
-    <!-- Judul Seksi Galeri & Penghitung Jumlah Koleksi -->
+    <!-- Judul Seksi Galeri Koleksi -->
     <div class="warisan-gallery-heading-row">
       <div class="gallery-heading-text">
         <h2 class="gallery-section-title">Paviliun Koleksi Warisan Budaya</h2>
         <p class="gallery-section-desc">Telusuri katalog lengkap dokumentasi sejarah peradaban dan pusaka Jawa Tengah.</p>
       </div>
-      <span class="gallery-count-badge" id="warisan-count-badge">Memuat kurasi...</span>
     </div>
 
     <!-- Kisi Paviliun Museum 2 Kolom yang Lega -->
@@ -218,10 +221,10 @@
   <!-- ==========================================================================
        SKRIP JAVASCRIPT: Backend Supabase & Pengontrol Warisan Budaya
        ========================================================================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/supabase-client.js"></script>
-  <script src="../js/supabase-config.js"></script>
-  <script src="../js/supabase-service.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../js/supabase-client.js" defer></script>
+  <script src="../js/supabase-config.js" defer></script>
+  <script src="../js/supabase-service.js" defer></script>
 
   <!-- Skrip Pengontrol Interaksi Galeri Warisan & Navigasi Utama -->
   <script src="../js/warisan-budaya.js" defer></script>

@@ -136,6 +136,9 @@ const map = L.map("history-map", {
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
+  keepBuffer: 2,
+  updateWhenIdle: true,
+  updateWhenZooming: false,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>'
 }).addTo(map);
 
@@ -350,18 +353,32 @@ async function loadRegionBoundaries() {
   const batchSize = 6;
   const sourceRoot = "https://raw.githubusercontent.com/AdiAryantoM/kabupaten-kota-di-jawa-tengah/89aa9844978d2c0de54fe6b669d8c099c0be06ab/";
 
-  // Muat GeoJSON dalam kelompok kecil dengan batas timeout wajar
+  // Muat GeoJSON dalam kelompok kecil dengan batas timeout wajar & cache sesi cepat
   for (let index = 0; index < regionFiles.length; index += batchSize) {
     const batch = regionFiles.slice(index, index + batchSize);
     await Promise.all(batch.map(async region => {
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
-        const response = await fetch(`${sourceRoot}${encodeURIComponent(region.file)}`, { signal: controller.signal });
-        clearTimeout(timeoutId);
+        const cacheKey = 'karsakala_geo_v1_' + region.file;
+        let geojson = null;
+        const storage = window.localStorage || window.sessionStorage;
+        try {
+          const cached = storage ? storage.getItem(cacheKey) : null;
+          if (cached) geojson = JSON.parse(cached);
+        } catch (e) {}
 
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const geojson = await response.json();
+        if (!geojson) {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 4000);
+          const response = await fetch(`${sourceRoot}${encodeURIComponent(region.file)}`, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          geojson = await response.json();
+          try {
+            if (storage) storage.setItem(cacheKey, JSON.stringify(geojson));
+          } catch (e) {}
+        }
+
         if (!geojson.features || !geojson.features.length) throw new Error("GeoJSON kosong");
         addRegionFeature(region, geojson);
         loaded += 1;

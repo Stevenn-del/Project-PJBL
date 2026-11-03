@@ -484,11 +484,8 @@
       btn.dataset.index = index;
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', index === state.currentIndex ? 'true' : 'false');
-      btn.setAttribute('aria-label', `Pilih Babak ${item.number}: ${item.shortTitle}`);
-      btn.innerHTML = `
-        <span class="pill-number">${item.number}</span>
-        <span class="pill-title">${escapeHtml(item.stepperLabel)}</span>
-      `;
+      btn.setAttribute('aria-label', `Pilih Babak ${escapeHtml(item.stepperLabel)}`);
+      btn.innerHTML = `<span class="milestone-pill-text">${escapeHtml(item.stepperLabel)}</span>`;
 
       btn.addEventListener('click', () => goToIndex(index));
       stepper.appendChild(btn);
@@ -720,9 +717,6 @@
               <div class="drawer-era-range">${escapeHtml(era.periodRange)}</div>
               <h4 class="drawer-era-title">${escapeHtml(era.mainHeading)}</h4>
               <p class="drawer-era-desc">${escapeHtml(era.briefDesc)}</p>
-              <div class="drawer-events-count">
-                <i class="bi bi-check-circle-fill"></i> ${era.events.length} Peristiwa Utama Terdokumentasi
-              </div>
             </div>
           </div>
         `).join('')}

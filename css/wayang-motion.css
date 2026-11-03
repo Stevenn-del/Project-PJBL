@@ -486,30 +486,28 @@ body.wayang-motion-page {
 
 /* ==========================================================================
    AUTHENTIC ROYAL MANUSCRIPT STAGE (PANGGUNG KELIR NASKAH KUNO)
-   Directly matching the provided stage reference photo with noticeably darker
-   deep warm brown, dark mahogany, and muted antique-gold tones
+   Directly matching the provided stage reference photo with natural, authentic
+   warm parchment, vibrant heritage details, and antique-gold tones
    ========================================================================== */
 .stage-viewport-wrapper {
   position: relative;
   width: 100%;
   height: 640px;
-  background-color: #2b170a;
-  background-image: 
-    linear-gradient(rgba(24, 11, 4, 0.62), rgba(24, 11, 4, 0.62)),
-    url('../assets/images/wayang-motion/wayang-stage-reference.jpg');
+  background-color: #f5eadb;
+  background-image: url('../assets/images/wayang-motion/wayang-stage-reference.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  border: 2px solid #4a270f;
-  outline: 1px solid rgba(197, 164, 77, 0.32);
+  border: 2px solid #5a3418;
+  outline: 1px solid rgba(197, 164, 77, 0.45);
   outline-offset: -3px;
   border-radius: var(--kp-radius-md);
   overflow: hidden;
   box-shadow: 
-    inset 0 0 70px rgba(16, 6, 2, 0.65),
-    0 24px 60px rgba(12, 3, 1, 0.95),
-    0 6px 24px rgba(0, 0, 0, 0.9);
+    inset 0 0 40px rgba(120, 65, 20, 0.16),
+    0 16px 48px rgba(0, 0, 0, 0.55);
   transition: all 0.3s ease;
+  contain: layout;
 }
 
 /* Shadow Mode Styling (Backlit Shadow Theater) */
@@ -870,7 +868,7 @@ body.wayang-motion-page {
   align-items: center;
   gap: 10px;
   z-index: 60;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
 }
 
@@ -879,13 +877,15 @@ body.wayang-motion-page {
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   border: 1px solid var(--line, rgba(214, 174, 124, 0.28));
   background: var(--panel, rgba(22, 13, 7, 0.85));
   color: var(--ink, #f4e7cd);
   font-size: 18px;
+  line-height: 1;
   cursor: pointer;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -1102,12 +1102,15 @@ body.wayang-motion-page {
   scrollbar-color: rgba(214, 174, 124, 0.4) transparent;
   padding: 22px 22px 18px;
   z-index: 50;
-  background: var(--panel, rgba(22, 13, 7, 0.88));
+  background: var(--panel, rgba(22, 13, 7, 0.92));
   border: 1px solid var(--line, rgba(214, 174, 124, 0.28));
-  border-radius: 14px;
+  border-radius: 18px;
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: normal;
   transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
 }
 
@@ -1129,6 +1132,7 @@ body.wayang-motion-page {
   text-transform: uppercase;
   font-weight: 700;
   font-family: var(--sans);
+  overflow-wrap: break-word;
 }
 
 .intro h1,
@@ -1136,17 +1140,21 @@ body.wayang-motion-page {
   margin: 0 0 8px;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(24px, 2.2vw, 30px);
-  line-height: 1.1;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.2;
   color: #fbeed3;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .intro .lede,
 .intro .intro-desc {
   margin: 0 0 12px;
   color: var(--ink-dim, #cdb894);
-  line-height: 1.45;
+  line-height: 1.5;
   font-size: 13px;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .intro .howto {
@@ -1154,16 +1162,21 @@ body.wayang-motion-page {
   margin: 0 0 14px;
   padding: 0;
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  box-sizing: border-box;
 }
 
 .intro .howto li {
   display: grid;
-  grid-template-columns: 118px 1fr;
-  gap: 8px;
-  line-height: 1.35;
+  grid-template-columns: minmax(110px, auto) 1fr;
+  gap: 10px;
+  align-items: baseline;
+  line-height: 1.4;
   color: var(--ink, #f4e7cd);
   font-size: 12px;
+  overflow-wrap: break-word;
+  word-break: normal;
+  box-sizing: border-box;
 }
 
 .intro .howto .k {
@@ -1171,6 +1184,7 @@ body.wayang-motion-page {
   font-weight: 600;
   font-size: 11.5px;
   padding-top: 1px;
+  white-space: nowrap;
 }
 
 .intro .actions {
@@ -1256,12 +1270,27 @@ body.wayang-motion-page {
   color: var(--ink-dim, #cdb894);
   margin-top: 10px;
   line-height: 1.45;
-  opacity: 0.85;
+  opacity: 0.95;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(214, 174, 124, 0.08);
+  border: 1px solid rgba(214, 174, 124, 0.18);
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.intro-privacy-note i {
+  color: #8fdc7a;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* Floating Bottom-Left HUD Bar (Matching Primary Reference) */
 .hud {
-  position: absolute;
+  display: none !important;
   left: 20px;
   bottom: 20px;
   display: flex;
@@ -1277,15 +1306,42 @@ body.wayang-motion-page {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 999px;
-  background: var(--panel, rgba(22, 13, 7, 0.8));
-  border: 1px solid var(--line, rgba(214, 174, 124, 0.28));
+  background: var(--panel, rgba(22, 13, 7, 0.88));
+  border: 1px solid var(--line, rgba(214, 174, 124, 0.32));
   font-size: 12px;
   font-weight: 600;
   color: var(--ink, #f4e7cd);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  overflow-wrap: break-word;
+}
+
+.hud .pill #status-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hand-count-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  padding: 2px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  background: rgba(36, 22, 14, 0.9) !important;
+  border: 1px solid rgba(214, 174, 124, 0.38) !important;
+  color: #f4e7cd !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .hud .dot {
@@ -1385,15 +1441,40 @@ body.wayang-motion-page {
 }
 
 .stage-floating-actions .icon-btn.stop-btn {
-  background: rgba(180, 40, 20, 0.75);
-  border-color: rgba(230, 80, 60, 0.6);
-  color: #ffcccc;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(185, 28, 28, 0.95), rgba(136, 19, 19, 0.98)) !important;
+  border: 1.5px solid rgba(252, 165, 165, 0.7) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.45) !important;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
+
+.stage-floating-actions .icon-btn.stop-btn i {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+}
+
 .stage-floating-actions .icon-btn.stop-btn:hover {
-  background: rgba(220, 45, 25, 0.95);
-  border-color: #ff8888;
-  color: #ffffff;
-  transform: scale(1.06);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 1), rgba(153, 27, 27, 1)) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.65) !important;
 }
 
 /* Floating Top-Center Toast (Matching Primary Reference) */
@@ -1403,22 +1484,30 @@ body.wayang-motion-page {
   top: 24px;
   left: 50%;
   transform: translate(-50%, -10px);
-  padding: 8px 24px;
-  border-radius: 999px;
-  background: var(--panel, rgba(22, 13, 7, 0.85));
-  border: 1px solid var(--line, rgba(214, 174, 124, 0.28));
-  font-family: var(--serif);
+  width: auto !important;
+  max-width: min(90vw, 640px) !important;
+  box-sizing: border-box !important;
+  padding: 8px 24px !important;
+  border-radius: 999px !important;
+  background: var(--panel, rgba(22, 13, 7, 0.88)) !important;
+  border: 1px solid var(--line, rgba(214, 174, 124, 0.35)) !important;
+  font-family: var(--serif) !important;
   font-style: italic;
-  font-size: 19px;
+  font-size: clamp(13px, 1.6vw, 17px) !important;
   font-weight: 600;
-  color: var(--gold-hi, #f2c76b);
+  color: var(--gold-hi, #f2c76b) !important;
   letter-spacing: 0.02em;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  white-space: nowrap;
   z-index: 40;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .toast.show,
@@ -2203,6 +2292,14 @@ body.is-fullscreen-active .wayang-motion-main {
   .hud .pill {
     padding: 5px 12px;
     font-size: 11px;
+  }
+
+  .toast,
+  #toast {
+    top: 14px;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    max-width: calc(100vw - 24px) !important;
   }
 
   #webcam-pip-card.webcam-pip-container {
@@ -3193,5 +3290,16 @@ body.is-fullscreen-active .wayang-motion-main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Explicitly hide removed stage elements across all screens */
+.stage-char-selector,
+.stage-puppet-badges,
+#stage-char-selector,
+#stage-puppet-badges {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 
 

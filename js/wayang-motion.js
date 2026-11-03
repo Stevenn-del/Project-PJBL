@@ -336,24 +336,39 @@
     if (PARTS[k] && PARTS[k].src) PARTS[k].src = resolveWmAsset(PARTS[k].src);
   }
 
-  const BODY_RIG = {
+  const WAHYANA_RIG = {
     anchor: [345, 760],
     shoulder: { L: [247.5, 432.5], R: [442.5, 432.5] },
     stickTop: [346, 318],
     stickFoot: [346, 1334],
     ties: [470, 1010, 1262],
+    baseScale: 0.53,
+    feetY: 1327,
   };
 
-  const REST_POSE = { L: [-150, 250], R: [70, 330] };
+  const BRAJA_RIG = {
+    anchor: [345, 644],
+    shoulder: { L: [247.5, 432.5], R: [442.5, 432.5] },
+    stickTop: [346, 18],
+    stickFoot: [346, 1168],
+    ties: [450, 780, 1100],
+    baseScale: 0.58,
+    feetY: 1162,
+  };
+
+  const BODY_RIG = WAHYANA_RIG;
+
+  const REST_POSE = { L: [-130, 240], R: [-35, 275] };
 
   class Arm {
-    constructor(side, partPrefix = '') {
+    constructor(side, partPrefix = '', rig = null) {
       this.side = side;
       this.partPrefix = partPrefix;
+      this.rig = rig || (partPrefix === 'braja_' ? BRAJA_RIG : WAHYANA_RIG);
       this.upper = PARTS[partPrefix + 'upper' + side] || PARTS['upper' + side];
       this.fore = PARTS[partPrefix + 'fore' + side] || PARTS['fore' + side];
       this.hand = PARTS[partPrefix + 'hand' + side] || PARTS['hand' + side];
-      this.shoulder = BODY_RIG.shoulder[side];
+      this.shoulder = this.rig.shoulder[side];
 
       const u = sub(this.upper.dist, this.upper.prox);
       this.Lu = len(u);
@@ -423,12 +438,13 @@
   }
 
   class Puppet {
-    constructor({ x = 960, y = 650, facing = 1, lookDir = null, id = null, character = null, image = null, partPrefix = '' } = {}) {
+    constructor({ x = 960, y = 650, facing = 1, lookDir = null, id = null, character = null, image = null, partPrefix = '', rig = null } = {}) {
       this.id = id;
       this.character = character;
       this.image = image;
       this.partPrefix = partPrefix;
-      this.baseScale = 0.53;
+      this.rig = rig || (partPrefix === 'braja_' || id === 'prabu-brajawisena' ? BRAJA_RIG : WAHYANA_RIG);
+      this.baseScale = this.rig.baseScale || 0.53;
       this.scale = this.baseScale;
       this.home = [x, y];
       this.pos = new Spring2(x, y, 260, 0.78);
@@ -473,7 +489,7 @@
       this.lastRotV = 0;
       this.prevFrame = new Map();
       this.B = this.bodyMatrix(0);
-      this.arms = { L: new Arm('L', partPrefix), R: new Arm('R', partPrefix) };
+      this.arms = { L: new Arm('L', partPrefix, this.rig), R: new Arm('R', partPrefix, this.rig) };
       this.arms.L.initRestPose(this.B);
       this.arms.R.initRestPose(this.B);
     }
@@ -506,7 +522,7 @@
         Affine.translate(this.pos.x + this.danceOffset[0], this.pos.y + bob + this.danceOffset[1]),
         Affine.rotate(this.tilt.x + this.danceTilt),
         Affine.scale(this.scale * this.flipX, this.scale),
-        Affine.translate(-BODY_RIG.anchor[0], -BODY_RIG.anchor[1]),
+        Affine.translate(-this.rig.anchor[0], -this.rig.anchor[1]),
       );
     }
 
@@ -574,8 +590,18 @@
       this.danceTilt = (ds.tilt.x + quiverT) * fwd;
 
       if (input.body) {
+        let minX = view.x + 80;
+        let maxX = view.x + view.w - 80;
+        // In duel stage, preserve stage balance and prevent body collision from occluding hands
+        if (controller && controller.puppetCount === 2) {
+          if (this.id === 'prabu-wahyana') {
+            maxX = view.x + view.w * 0.53;
+          } else if (this.id === 'prabu-brajawisena') {
+            minX = view.x + view.w * 0.47;
+          }
+        }
         this.bodyTarget = [
-          clamp(input.body.x, view.x + 40, view.x + view.w - 40),
+          clamp(input.body.x, minX, maxX),
           clamp(input.body.y, view.y + view.h * 0.12, view.y + view.h * 1.1),
         ];
       }
@@ -649,8 +675,8 @@
       };
       const snappy = D !== null;
 
-      const sL = Affine.apply(B, ...BODY_RIG.shoulder.L);
-      const sR = Affine.apply(B, ...BODY_RIG.shoulder.R);
+      const sL = Affine.apply(B, ...this.rig.shoulder.L);
+      const sR = Affine.apply(B, ...this.rig.shoulder.R);
       const leftArm = sL[0] <= sR[0] ? 'L' : 'R';
       const specs = {
         [leftArm]: input.arms?.left,
@@ -675,6 +701,14 @@
           const g = (arm.Lu + arm.Lf) * this.scale * 0.82;
           const dtgt = [shoulderW[0] + fwd * v[0] * g, shoulderW[1] - v[1] * g];
           tgt = [lerp(tgt[0], dtgt[0], w), lerp(tgt[1], dtgt[1], w)];
+        }
+
+        // Keep arm target within visible forward operational zone (never lost behind the spine)
+        const spineLimit = shoulderW[0] + (this.lookDir > 0 ? -arm.Lu * 0.25 * this.scale : arm.Lu * 0.25 * this.scale);
+        if (this.lookDir > 0) {
+          tgt[0] = Math.max(spineLimit, tgt[0]);
+        } else {
+          tgt[0] = Math.min(spineLimit, tgt[0]);
         }
 
         if (!arm.initialized) {
@@ -722,8 +756,8 @@
         { kind: 'part', id: pfx + 'hand' + side,  key: pfx + 'hand' + side,  m: poses[side].handM,  tilt },
       ];
 
-      const top = Affine.apply(B, ...BODY_RIG.stickTop);
-      const foot = Affine.apply(B, ...BODY_RIG.stickFoot);
+      const top = Affine.apply(B, ...this.rig.stickTop);
+      const foot = Affine.apply(B, ...this.rig.stickFoot);
       const axis = sub(foot, top);
       const axisLen = len(axis) || 1;
       const dir = [axis[0] / axisLen, axis[1] / axisLen];
@@ -744,7 +778,7 @@
           { p: handleStart, w: 26 * s },
           { p: end, w: 30 * s },
         ],
-        ties: BODY_RIG.ties.map((y) => [(y - BODY_RIG.stickTop[1] + 10) * s, 9 * s]),
+        ties: this.rig.ties.map((y) => [(y - this.rig.stickTop[1] + 10) * s, 9 * s]),
       };
 
       const rods = ['L', 'R'].map((side) => {
@@ -766,14 +800,16 @@
         };
       });
 
-      const sL = Affine.apply(B, ...BODY_RIG.shoulder.L);
-      const sR = Affine.apply(B, ...BODY_RIG.shoulder.R);
+      const sL = Affine.apply(B, ...this.rig.shoulder.L);
+      const sR = Affine.apply(B, ...this.rig.shoulder.R);
       const front = (this.lookDir > 0) ? (sL[0] >= sR[0] ? 'L' : 'R') : (sL[0] <= sR[0] ? 'L' : 'R');
       const back = front === 'L' ? 'R' : 'L';
       const items = [
-        ...armItems(back),
+        { kind: 'part', id: pfx + 'upper' + back, key: pfx + 'upper' + back, m: poses[back].upperM, tilt },
         { kind: 'part', id: pfx + 'body', key: pfx + 'body', m: B, tilt },
         gapit,
+        { kind: 'part', id: pfx + 'fore' + back,  key: pfx + 'fore' + back,  m: poses[back].foreM,  tilt },
+        { kind: 'part', id: pfx + 'hand' + back,  key: pfx + 'hand' + back,  m: poses[back].handM,  tilt },
         ...armItems(front),
         ...rods,
       ];
@@ -1011,11 +1047,8 @@ void main() {
   vec2 buv = vec2(vUv.x, 1.0 - vUv.y);
   vec3 bg = texture(uBg, clamp(buv, vec2(0.0), vec2(1.0))).rgb;
 
-  // Noticeably darken stage background with deep warm brown, dark mahogany & muted antique gold tones
-  // Greatly reduces competing brightness so 3D wayang characters and gold prada stand out with theatrical clarity
-  vec3 mahoganyBase = vec3(0.08, 0.04, 0.02);
-  vec3 warmTone = vec3(0.38, 0.29, 0.21);
-  vec3 lit = mahoganyBase + bg * warmTone;
+  // Normal authentic stage background color (pure, natural kelir tones matching reference image)
+  vec3 lit = bg;
 
   vec4 s0 = texture(uShadow0, vUv);
   vec4 s1 = texture(uShadow1, vUv);
@@ -1145,6 +1178,9 @@ void main() {
 
       this.emptyVao = gl.createVertexArray();
       gl.bindVertexArray(null);
+
+      this.stickBufData = new Float32Array(512);
+      this.tiesArray = new Float32Array(8);
 
       this.tex = {};
       this.rt = {};
@@ -1277,7 +1313,11 @@ void main() {
     drawStick(prog, item, f, proj, lit) {
       const gl = this.gl;
       const pts = item.pts;
-      const data = [];
+      const requiredLen = pts.length * 12;
+      if (this.stickBufData.length < requiredLen) {
+        this.stickBufData = new Float32Array(requiredLen);
+      }
+      let idx = 0;
       let v = 0;
       for (let i = 0; i < pts.length; i++) {
         const a = pts[Math.max(0, i - 1)].p, b = pts[Math.min(pts.length - 1, i + 1)].p;
@@ -1290,21 +1330,32 @@ void main() {
         const w = pts[i].w;
         const pad = 1 + 1.5 / Math.max(w, 0.5);
         const [px, py] = pts[i].p;
-        data.push(px - nx * w * pad, py - ny * w * pad, -pad, v, nx, ny);
-        data.push(px + nx * w * pad, py + ny * w * pad, pad, v, nx, ny);
+        this.stickBufData[idx++] = px - nx * w * pad;
+        this.stickBufData[idx++] = py - ny * w * pad;
+        this.stickBufData[idx++] = -pad;
+        this.stickBufData[idx++] = v;
+        this.stickBufData[idx++] = nx;
+        this.stickBufData[idx++] = ny;
+
+        this.stickBufData[idx++] = px + nx * w * pad;
+        this.stickBufData[idx++] = py + ny * w * pad;
+        this.stickBufData[idx++] = pad;
+        this.stickBufData[idx++] = v;
+        this.stickBufData[idx++] = nx;
+        this.stickBufData[idx++] = ny;
       }
       gl.bindVertexArray(this.stickVao);
       gl.bindBuffer(gl.ARRAY_BUFFER, this.stickBuf);
-      gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(data));
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.stickBufData.subarray(0, idx));
       gl.uniform4f(prog.u('uView'), f.view.x, f.view.y, f.view.w, f.view.h);
       gl.uniform4f(prog.u('uProj'), ...proj);
       if (lit) {
-        const ties = new Float32Array(8);
+        this.tiesArray.fill(0);
         item.ties.slice(0, 4).forEach((t, i) => {
-          ties[i * 2] = t[0];
-          ties[i * 2 + 1] = t[1];
+          this.tiesArray[i * 2] = t[0];
+          this.tiesArray[i * 2 + 1] = t[1];
         });
-        gl.uniform2fv(prog.u('uTies'), ties);
+        gl.uniform2fv(prog.u('uTies'), this.tiesArray);
         gl.uniform1i(prog.u('uTieCount'), Math.min(4, item.ties.length));
         if (item.style === 'gapit') {
           gl.uniform3f(prog.u('uColorA'), 0.075, 0.045, 0.03);
@@ -1403,6 +1454,24 @@ void main() {
       gl.uniform2f(p.final.u('uRes'), W, H);
       gl.uniform1f(p.final.u('uTime'), f.time);
       this.fullscreen(p.final);
+    }
+
+    destroy() {
+      const gl = this.gl;
+      if (!gl) return;
+      for (const rt of Object.values(this.rt || {})) {
+        if (rt.tex) gl.deleteTexture(rt.tex);
+        if (rt.fb) gl.deleteFramebuffer(rt.fb);
+      }
+      for (const t of Object.values(this.tex || {})) {
+        if (t.tex) gl.deleteTexture(t.tex);
+      }
+      if (this.stickBuf) gl.deleteBuffer(this.stickBuf);
+      if (this.stickVao) gl.deleteVertexArray(this.stickVao);
+      if (this.quadVao) gl.deleteVertexArray(this.quadVao);
+      if (this.emptyVao) gl.deleteVertexArray(this.emptyVao);
+      this.rt = {};
+      this.tex = {};
     }
   }
 
@@ -2031,27 +2100,28 @@ void main() {
       this.canvas.height = h;
     }
 
+    destroy() {
+      this.images = {};
+    }
+
     render(f) {
       const ctx = this.ctx;
       const w = this.canvas.width;
       const h = this.canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // 1. Background (Noticeably darker with deep warm brown & dark mahogany tones)
+      // 1. Background (Normal authentic stage colors matching reference image)
       if (this.images.background) {
         ctx.drawImage(this.images.background, 0, 0, w, h);
-        ctx.fillStyle = 'rgba(28, 14, 6, 0.62)';
-        ctx.fillRect(0, 0, w, h);
       } else {
-        ctx.fillStyle = '#3a2214';
+        ctx.fillStyle = '#f5eadb';
         ctx.fillRect(0, 0, w, h);
       }
-
-
 
       // 2. Render each puppet's items with depth-based soft shadows
       const scaleX = w / f.view.w;
       const scaleY = h / f.view.h;
+      const lampX = f.lamp ? f.lamp[0] : w * 0.5;
 
       for (const layer of f.layers) {
         const depth = Math.max(0, layer.depth || 0);
@@ -2648,11 +2718,18 @@ void main() {
 
   // Reset Puppets Position (Both Wahyana and Brajawisena to stage home)
   function resetPuppetsPosition() {
+    if (controller && controller.mouse) {
+      controller.mouse.seen = false;
+      controller.mouse.dragging = false;
+      controller.mouse.x = view.x + view.w * 0.38;
+      controller.mouse.y = view.y + view.h * 0.6;
+    }
     if (puppets[0]) {
       puppets[0].defaultLookDir = 1;
       puppets[0].lookDir = 1;
       puppets[0].facing = 1;
       puppets[0].defaultFacing = 1;
+      puppets[0].scale = puppets[0].baseScale;
       puppets[0].pos.snap(view.x + view.w * 0.38, view.y + view.h * 0.6);
       puppets[0].bodyTarget = [view.x + view.w * 0.38, view.y + view.h * 0.6];
       puppets[0].flip = { from: 1, to: 1, t: 1 };
@@ -2677,6 +2754,7 @@ void main() {
       puppets[1].lookDir = -1;
       puppets[1].facing = -1;
       puppets[1].defaultFacing = -1;
+      puppets[1].scale = puppets[1].baseScale;
       puppets[1].pos.snap(view.x + view.w * 0.62, view.y + view.h * 0.6);
       puppets[1].bodyTarget = [view.x + view.w * 0.62, view.y + view.h * 0.6];
       puppets[1].flip = { from: -1, to: -1, t: 1 };
@@ -3180,10 +3258,17 @@ void main() {
     }
   }
 
-  // HUD Update
+  // HUD Update with Dirty Checking (prevents redundant 60fps DOM recalculations)
+  let lastHudText = null;
+  let lastHudTrackingText = null;
+  let lastHudCls = null;
+  let lastHandCount = null;
+
   function updateHud() {
     const { source, status } = controller;
     let text = '', trackingText = '', cls = '';
+    let handCountDisplay = null;
+
     if (source === 'camera') {
       if (status.hands === 0) {
         text = 'Mencari Tangan di Depan Kamera...';
@@ -3197,25 +3282,40 @@ void main() {
         trackingText = text;
         cls = 'live';
       }
-      if (els.handCountBadge) {
-        els.handCountBadge.textContent = `${status.hands} Tangan`;
-        els.handCountBadge.style.display = 'inline-block';
-      }
+      handCountDisplay = `${status.hands} Tangan`;
     } else if (source === 'mouse') {
       text = 'Mode Interaktif Mouse / Kursor (Simulasi)';
       trackingText = 'Mode Interaktif Kursor Dalang (Simulasi)';
-      if (els.handCountBadge) els.handCountBadge.style.display = 'none';
     } else {
       text = 'Siap Dimainkan · Panggung Siaga';
       trackingText = 'Panggung Siaga';
-      if (els.handCountBadge) els.handCountBadge.style.display = 'none';
     }
 
-    if (els.statusText) els.statusText.textContent = text;
-    if (els.trackingStatusText) els.trackingStatusText.textContent = trackingText;
-    if (els.statusPill) els.statusPill.className = `pill ${cls}`;
-    if (els.statusDot) {
-      els.statusDot.className = cls === 'live' ? 'dot dot-active' : (cls === 'warn' ? 'dot dot-tracking' : 'dot');
+    if (lastHudText !== text) {
+      lastHudText = text;
+      if (els.statusText) els.statusText.textContent = text;
+    }
+    if (lastHudTrackingText !== trackingText) {
+      lastHudTrackingText = trackingText;
+      if (els.trackingStatusText) els.trackingStatusText.textContent = trackingText;
+    }
+    if (lastHudCls !== cls) {
+      lastHudCls = cls;
+      if (els.statusPill) els.statusPill.className = `pill ${cls}`;
+      if (els.statusDot) {
+        els.statusDot.className = cls === 'live' ? 'dot dot-active' : (cls === 'warn' ? 'dot dot-tracking' : 'dot');
+      }
+    }
+    if (lastHandCount !== handCountDisplay) {
+      lastHandCount = handCountDisplay;
+      if (els.handCountBadge) {
+        if (handCountDisplay) {
+          els.handCountBadge.textContent = handCountDisplay;
+          els.handCountBadge.style.display = 'inline-block';
+        } else {
+          els.handCountBadge.style.display = 'none';
+        }
+      }
     }
   }
 
@@ -3278,12 +3378,81 @@ void main() {
   let lastTime = performance.now() / 1000;
   const PHYS_DT = 1 / 120;
   let rafId = null;
+  let isStageInViewport = true;
+
+  if ('IntersectionObserver' in window && els.stageViewport) {
+    const stageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isStageInViewport = entry.isIntersecting;
+        if (isStageInViewport && !rafId && !document.hidden && state.isReady) {
+          lastTime = performance.now() / 1000;
+          rafId = requestAnimationFrame(tick);
+        }
+      });
+    }, { threshold: 0.05 });
+    stageObserver.observe(els.stageViewport);
+  }
+
+  // Render a clean single frame of the stage without running the continuous 60fps RAF loop
+  function renderSingleFrame() {
+    if (!renderer) return;
+    const t = performance.now() / 1000;
+    const active = controller.puppetCount === 1
+      ? [puppets[state.selectedCharacter === 'prabu-brajawisena' ? 1 : 0]]
+      : puppets.slice(0, 2);
+
+    if (active.length === 2) {
+      active[0].faceTargetX = active[1].pos.x;
+      active[1].faceTargetX = active[0].pos.x;
+    }
+
+    const layers = active
+      .map((p) => {
+        const depth = Math.max(0, p.depth.x);
+        return {
+          depth: p.depth.x,
+          puppet: p,
+          charId: p.id || 'prabu-wahyana',
+          items: p.frame(view),
+          shadow: {
+            scale: 1.03 + 0.22 * depth,
+            dy: 8 + 36 * depth,
+            blur: 3 + 32 * clamp(p.depth.x + 0.08, 0, 1.2),
+            strength: state.shadowMode ? 0.95 : (0.82 - 0.22 * clamp(depth, 0, 1)),
+          },
+        };
+      })
+      .sort((a, b) => a.depth - b.depth);
+
+    const frame = {
+      view,
+      layers,
+      time: t,
+      lamp: [STAGE_W / 2, -560, 1300],
+      eye: [STAGE_W / 2, STAGE_H * 0.55, 2300],
+      lampColor: [1.0, 0.8, 0.56],
+      intensity: 1.08,
+      flicker: 1.0,
+      hot: [STAGE_W / 2, 440],
+    };
+
+    renderer.render(frame);
+    updateHud();
+  }
 
   function tick(nowMs) {
-    if (document.hidden) {
+    if (document.hidden || !isStageInViewport) {
       rafId = null;
       return;
     }
+
+    // When inactive (intro screen or stopped session), render once and sleep RAF to save 100% CPU/GPU
+    if (!state.isActive) {
+      renderSingleFrame();
+      rafId = null;
+      return;
+    }
+
     const t = nowMs / 1000;
     const dt = clamp(t - lastTime, 0, 1 / 15);
     lastTime = t;
@@ -3790,6 +3959,10 @@ void main() {
       controller.source = 'camera';
       controller.recalibrate();
       updateHud();
+      if (!rafId && !document.hidden && isStageInViewport) {
+        lastTime = performance.now() / 1000;
+        rafId = requestAnimationFrame(tick);
+      }
 
       // Dismiss loading overlay immediately and display camera controls
       if (els.overlayLoading) els.overlayLoading.classList.add('hidden');
@@ -3866,8 +4039,13 @@ void main() {
       els.pipGuideText.style.opacity = '1';
     }
 
-    // 5. Reset puppets to stationary resting pose
+    // 5. Reset puppets to stationary resting pose and sleep RAF loop
     resetPuppetsPosition();
+    renderSingleFrame();
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
 
     // 6. Update UI
     if (els.btnStop) els.btnStop.style.display = 'none';
@@ -3907,21 +4085,33 @@ void main() {
     if (els.overlayError) els.overlayError.classList.add('hidden');
     if (els.overlayLoading) els.overlayLoading.classList.add('hidden');
     if (els.btnStop) els.btnStop.style.display = 'inline-flex';
+    if (!rafId && !document.hidden && isStageInViewport) {
+      lastTime = performance.now() / 1000;
+      rafId = requestAnimationFrame(tick);
+    }
     showToast('Mode Mouse Aktif · Geser kursor untuk memainkan wayang');
   }
 
   // ==========================================================================
   // 11. EVENT LISTENERS & HOTKEYS
   // ==========================================================================
-  // Mouse & Pointer interaction on canvas
+  let cachedCanvasRect = null;
+  function updateCanvasRect() {
+    if (els.canvas) cachedCanvasRect = els.canvas.getBoundingClientRect();
+  }
+  window.addEventListener('resize', updateCanvasRect, { passive: true });
+  window.addEventListener('scroll', updateCanvasRect, { passive: true });
+
+  // Mouse & Pointer interaction on canvas (passive & throttled without layout reflows)
   els.canvas.addEventListener('pointermove', (e) => {
-    const rect = els.canvas.getBoundingClientRect();
+    if (!state.isActive) return;
+    const rect = cachedCanvasRect || els.canvas.getBoundingClientRect();
     const nx = (e.clientX - rect.left) / (rect.width || 1);
     const ny = (e.clientY - rect.top) / (rect.height || 1);
     controller.mouse.x = view.x + nx * view.w;
     controller.mouse.y = view.y + ny * view.h;
     controller.mouse.seen = true;
-  });
+  }, { passive: true });
 
   els.canvas.addEventListener('pointerdown', (e) => {
     controller.mouse.dragging = true;
@@ -4144,9 +4334,22 @@ void main() {
   window.addEventListener('pointerdown', startMusicOnInteraction, true);
   window.addEventListener('keydown', startMusicOnInteraction, true);
 
-  // Safe camera stream cleanup on page navigation / exit
-  window.addEventListener('beforeunload', stopWebcam);
-  window.addEventListener('pagehide', stopWebcam);
+  // Safe camera stream & hardware resource cleanup on page navigation / exit
+  function cleanupAllResources() {
+    stopWebcam();
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    if (audioEl) {
+      try { audioEl.pause(); } catch (e) {}
+    }
+    if (renderer && typeof renderer.destroy === 'function') {
+      try { renderer.destroy(); } catch (e) {}
+    }
+  }
+  window.addEventListener('beforeunload', cleanupAllResources);
+  window.addEventListener('pagehide', cleanupAllResources);
 
   // Background tab optimization: pause RAF & camera inference when hidden to save CPU/battery
   document.addEventListener('visibilitychange', () => {
@@ -4158,11 +4361,15 @@ void main() {
       stopVideoFrameProcessing();
     } else {
       lastTime = performance.now() / 1000;
-      if (!rafId) {
-        rafId = requestAnimationFrame(tick);
-      }
-      if (state.isActive && state.isCameraRunning) {
-        startVideoFrameProcessing();
+      if (state.isActive) {
+        if (!rafId) {
+          rafId = requestAnimationFrame(tick);
+        }
+        if (state.isCameraRunning) {
+          startVideoFrameProcessing();
+        }
+      } else {
+        renderSingleFrame();
       }
     }
   });
@@ -4178,7 +4385,7 @@ void main() {
     const shouldKeepModalOpen = els.charModal && !els.charModal.classList.contains('hidden');
     selectCharacter(puppets[0] || 'prabu-wahyana', shouldKeepModalOpen);
     state.isReady = true;
-    rafId = requestAnimationFrame(tick);
+    renderSingleFrame();
   });
 
   window.wayang = {

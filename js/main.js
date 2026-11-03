@@ -110,11 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (instant) {
-        // Memicu reflow tata letak lalu mengembalikan transisi
-        void slides[0].offsetHeight;
-        setTimeout(() => {
+        // Mengembalikan transisi pada frame berikutnya tanpa memicu forced synchronous reflow
+        requestAnimationFrame(() => {
           slides.forEach(s => s.style.transition = '');
-        }, 50);
+        });
       }
 
       currentIndex = index;
@@ -150,4 +149,33 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(initialIndex, true);
     startSlideshow();
   }
+
+  // ==========================================================================
+  // BAGIAN 3: PREFETCH INTELIGEN UNTUK NAVIGASI INSTAN ANTAR-HALAMAN (ZERO DELAY)
+  // Memuat awal dokumen HTML saat kursor melayang atau jari menyentuh tautan menu
+  // sehingga perpindahan halaman terasa instan dan bebas lag/stuttering.
+  // ==========================================================================
+  const prefetchedUrls = new Set();
+  function prefetchUrl(url) {
+    if (!url || prefetchedUrls.has(url) || url.startsWith('#') || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('javascript:')) return;
+    prefetchedUrls.add(url);
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url;
+    document.head.appendChild(link);
+  }
+
+  document.addEventListener('mouseover', (e) => {
+    const a = e.target.closest('a[href]');
+    if (a && a.origin === window.location.origin) {
+      prefetchUrl(a.href);
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchstart', (e) => {
+    const a = e.target.closest('a[href]');
+    if (a && a.origin === window.location.origin) {
+      prefetchUrl(a.href);
+    }
+  }, { passive: true });
 });

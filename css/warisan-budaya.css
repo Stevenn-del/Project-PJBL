@@ -605,7 +605,7 @@ body.warisan-page-body {
   border-color: var(--color-gold-light, #e1ca7a);
   color: #080808;
   font-weight: 600;
-  box-shadow: 0 2px 10px rgba(197, 164, 77, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .warisan-gallery-heading-row {
@@ -650,16 +650,7 @@ body.warisan-page-body {
   margin: 0;
 }
 
-.gallery-count-badge {
-  font-size: 12.5px;
-  color: #F0D9A7;
-  font-weight: 600;
-  background: rgba(30, 12, 8, 0.85);
-  padding: 6px 16px;
-  border-radius: var(--wb-radius-pill);
-  border: 1px solid rgba(214, 174, 124, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
+
 
 /* Spacious 2-Column Grid (Preserves Clean Editorial Rhythm) */
 .warisan-pavilion-grid {
@@ -916,8 +907,10 @@ body.warisan-page-body {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   background: rgba(17, 16, 14, 0.85);
   border: 1px solid var(--color-gold, #c5a44d);
   border-radius: 50%;
@@ -928,6 +921,7 @@ body.warisan-page-body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.2s ease;
   z-index: 10;
 }

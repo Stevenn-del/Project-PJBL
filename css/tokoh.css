@@ -184,7 +184,7 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   border-color: var(--tk-gold-light);
   color: #080808;
   font-weight: 600;
-  box-shadow: 0 2px 12px rgba(197, 164, 77, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .tokoh-filter-pill.active i {
@@ -347,14 +347,14 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   align-items: center;
   gap: 8px;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 16px rgba(198, 164, 91, 0.22);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 .btn-read-tokoh-primary:hover {
   background: linear-gradient(135deg, var(--tk-gold-light) 0%, var(--tk-gold) 100%);
   color: #080808;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(198, 164, 91, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
 }
 
 /* Deck Navigation Control Cluster */
@@ -821,7 +821,7 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   width: 100%;
   max-height: 88vh;
   overflow-y: auto;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(83, 24, 34, 0.3);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
   position: relative;
   transform: scale(0.96) translateY(12px);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -839,8 +839,10 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   background: rgba(17, 16, 15, 0.85);
   border: 1px solid var(--tk-gold);
   border-radius: 50%;
@@ -851,6 +853,7 @@ body.tokoh-page-body .cinematic-backdrop-scrim {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.2s ease;
 }
 

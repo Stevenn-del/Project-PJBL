@@ -6,10 +6,14 @@
   <title>Jejak Sejarah Jawa Tengah — Timeline Kebudayaan Karsakala</title>
   <meta name="description" content="Menelusuri perjalanan Jawa Tengah dari masa ke masa, mengenal peristiwa, peninggalan, dan perubahan yang membentuk identitasnya bersama Karsakala.">
   
-  <!-- Preconnect ke Google Fonts -->
+  <!-- Resource Preconnects for CDN & Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- Google Fonts: Inria Serif & Poppins -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
   
   <!-- Favicon Logo Karsakala -->
   <link rel="icon" type="image/svg+xml" href="../assets/images/karsakala-logo.svg">
@@ -47,7 +51,7 @@
         <!-- Logo & Identitas Brand Karsakala -->
         <div class="brand-wrapper">
           <a href="../index.html" class="brand-link" aria-label="Karsakala - Kembali ke Beranda">
-            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44">
+            <img src="../assets/images/karsakala-logo.svg" alt="Karsakala" class="brand-logo-img" width="86" height="44" decoding="async" fetchpriority="high">
             <span class="visually-hidden">Karsakala</span>
           </a>
         </div>
@@ -96,17 +100,14 @@
       <!-- Kartu Konten Panggung Utama -->
       <div class="stage-content-card" id="stage-content-card">
 
-        <!-- 1. Bilah Indikator Babak & Penanda Waktu -->
+        <!-- 1. Bilah Pilihan Babak Sejarah -->
         <div class="stage-top-bar" id="timeline-rail">
-          <!-- Indikator Status Periode -->
-          <div class="stage-status-meta">
-            <span class="status-period-tag" id="status-period-tag">Babak 01 / 05</span>
-            <span class="status-period-label d-none d-md-inline" id="status-period-label">· ± Abad ke-4 – ke-7 M</span>
-          </div>
-
-          <!-- Rel Penanda Pilihan Babak Sejarah -->
           <div class="stage-milestone-stepper" id="milestone-stepper" role="tablist" aria-label="Pilih Babak Sejarah">
-            <!-- Diisi secara dinamis melalui timeline.js -->
+            <button type="button" class="milestone-pill-btn active" data-index="0" role="tab" aria-selected="true" aria-label="Pilih babak Masa Kuno"><span class="milestone-pill-text">Masa Kuno</span></button>
+            <button type="button" class="milestone-pill-btn" data-index="1" role="tab" aria-selected="false" aria-label="Pilih babak Era Candi"><span class="milestone-pill-text">Era Candi</span></button>
+            <button type="button" class="milestone-pill-btn" data-index="2" role="tab" aria-selected="false" aria-label="Pilih babak Demak Islam"><span class="milestone-pill-text">Demak Islam</span></button>
+            <button type="button" class="milestone-pill-btn" data-index="3" role="tab" aria-selected="false" aria-label="Pilih babak Perang Jawa"><span class="milestone-pill-text">Perang Jawa</span></button>
+            <button type="button" class="milestone-pill-btn" data-index="4" role="tab" aria-selected="false" aria-label="Pilih babak Era Modern"><span class="milestone-pill-text">Era Modern</span></button>
           </div>
         </div>
 
@@ -154,14 +155,6 @@
               <div class="dock-title" id="dock-title">Fajar Peradaban Jawa Tengah</div>
               <div class="dock-subtitle" id="dock-subtitle">± Abad ke-4 – ke-7 M · Kalingga &amp; Percandian Dieng</div>
             </div>
-          </div>
-
-          <!-- Tombol Ringkasan Kronologis Lengkap -->
-          <div class="dock-extra-group">
-            <button type="button" class="dock-btn dock-btn-overview" id="btn-dock-overview" aria-label="Buka ikhtisar kronologis lengkap" title="Ikhtisar Sejarah">
-              <i class="bi bi-journal-text me-1" aria-hidden="true"></i>
-              <span>Ikhtisar 5 Babak</span>
-            </button>
           </div>
 
         </div>
@@ -283,8 +276,8 @@
   <!-- ==========================================================================
        SKRIP JAVASCRIPT: Backend Supabase & Pengontrol Galeri
        ========================================================================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/supabase-client.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../js/supabase-client.js" defer></script>
 
   <!-- Skrip Pengontrol Interaksi Timeline & Navigasi Utama -->
   <script src="../js/timeline.js" defer></script>

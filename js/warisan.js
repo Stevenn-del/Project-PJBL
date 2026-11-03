@@ -175,7 +175,6 @@ class WarisanExhibitionController {
       masterpieceContainer: document.getElementById('warisan-masterpiece'),
       backdropImg: document.getElementById('hero-dynamic-backdrop-img'),
       pavilionGrid: document.getElementById('warisan-grid'),
-      pavilionCount: document.getElementById('warisan-count-badge'),
       modal: document.getElementById('warisan-modal'),
       modalContent: document.getElementById('warisan-modal-content'),
       modalCloseBtn: document.getElementById('btn-close-warisan-modal')
@@ -526,14 +525,9 @@ class WarisanExhibitionController {
    */
   renderPavilionGrid() {
     const grid = this.dom.pavilionGrid;
-    const countBadge = this.dom.pavilionCount;
     if (!grid) return;
 
     const filtered = this.getFilteredItems();
-
-    if (countBadge) {
-      countBadge.textContent = `Menampilkan ${filtered.length} Pusaka Adiluhung Terkurasi`;
-    }
 
     if (filtered.length === 0) {
       grid.innerHTML = `<div class="empty-pavilion-state">Tidak ada item ditemukan.</div>`;
