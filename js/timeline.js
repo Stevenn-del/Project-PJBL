@@ -30,19 +30,19 @@
       badgeText: "Awal Fajar Peradaban Jawa",
       mainHeading: "Fajar Peradaban & Kerajaan Kalingga",
       introLead: "Di dataran vulkanik subur Jawa Tengah, peradaban agraris dan spiritual mulai bersemi. Sebelum kemegahan candi-candi raksasa Mataram Kuno, masyarakat kuno Jawa telah mengembangkan sistem irigasi, kepercayaan kosmologis, dan pertukaran maritim dengan India serta Tiongkok melalui pesisir utara.",
-      briefDesc: "Awal peradaban agraris dan spiritual Jawa, kedaulatan hukum Ratu Shima di Kerajaan Kalingga serta candi andesit tertua di Dataran Tinggi Dieng.",
+      briefDesc: "Awal peradaban agraris dan spiritual Jawa, kedaulatan hukum Ratu Shima di Kerajaan Kalingga serta kemegahan Candi Arjuna di Dataran Tinggi Dieng.",
       contextTitle: "Konteks Sosio-Kultural & Geografis",
       contextDesc: "Peradaban tertua berpusat di lereng pegunungan Dieng dan Gunung Wukir. Pertemuan antara animisme Jawa kuno dan spiritualitas Hindu-Buddha melahirkan dialektika religi unik yang tercermin dalam arsitektur batu paling purba di Nusantara.",
       heroImage: "assets/images/timeline/timeline-era-kuno.webp",
       heroImageAlt: "Candi Arjuna di Dataran Tinggi Dieng, peninggalan peradaban kuno Jawa Tengah",
       spineBg: "linear-gradient(to bottom, #11100e 0%, #1e1b15 50%, #080808 100%)",
       spineColor: "#e1ca7a",
-      spineTitle: "± Abad 4–7 M · Kalingga & Percandian Dieng",
-      location: "Dataran Tinggi Dieng & Pesisir Jepara",
+      spineTitle: "± Abad ke-7–8 M · Kalingga & Candi Arjuna",
+      location: "Dataran Tinggi Dieng, Banjarnegara & Pesisir Jepara",
       heroPlaque: {
-        tag: "Pusaka Arsitektur Abad ke-7 M",
-        title: "Kompleks Percandian Dieng",
-        location: "Banjarnegara & Wonosobo"
+        tag: "Pusaka Arsitektur Abad ke-8 M",
+        title: "Candi Arjuna",
+        location: "Dataran Tinggi Dieng, Banjarnegara"
       },
       events: [
         {
@@ -54,11 +54,11 @@
           image: "assets/images/tokoh/tokoh-ratushima.webp"
         },
         {
-          year: "± 650 M",
-          title: "Pembangunan Kompleks Candi Tertua Dieng",
-          desc: "Didirikan di dataran tinggi vulkanik Dieng pada ketinggian 2.000 mdpl, kelompok Candi Arjuna dibangun sebagai mandala suci pemujaan Siwa. Kompleks ini menjadi mahakarya arsitektur batu andesit tertua di Pulau Jawa.",
-          significance: "Monumen arsitektur batu andesit tertua di Jawa yang memadukan kosmologi gunung dengan teologi Siwa.",
-          location: "Dataran Tinggi Dieng",
+          year: "± Abad ke-8 M",
+          title: "Pembangunan Candi Arjuna & Gugusan Percandian Dieng",
+          desc: "Didirikan di dataran tinggi vulkanik Dieng pada elevasi 2.093 mdpl, kelompok Candi Arjuna dibangun sebagai mandala suci pemujaan Siwa di bawah naungan Wangsa Sanjaya era Mataram Kuno. Candi Arjuna menjadi salah satu mahakarya candi batu andesit tertua yang masih kokoh berdiri di Pulau Jawa.",
+          significance: "Monumen arsitektur batu andesit tertua di Jawa yang memadukan kosmologi poros pegunungan dengan teologi Siwa.",
+          location: "Desa Dieng Kulon, Banjarnegara",
           image: "assets/images/timeline/timeline-era-kuno.webp"
         },
         {
@@ -686,6 +686,8 @@
 
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
+    const card = modal.querySelector('.timeline-detail-card');
+    if (card) card.scrollTop = 0;
     document.body.style.overflow = 'hidden';
   }
 
@@ -937,6 +939,11 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(update3DPositions, 100);
+    });
+
+    // Cleanup when leaving page to avoid memory leaks
+    window.addEventListener('pagehide', () => {
+      clearTimeout(resizeTimer);
     });
   }
 

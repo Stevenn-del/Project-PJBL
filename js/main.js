@@ -152,26 +152,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================================
   // BAGIAN 3: PREFETCH INTELIGEN UNTUK NAVIGASI INSTAN ANTAR-HALAMAN (ZERO DELAY)
-  // Memuat awal dokumen HTML saat kursor melayang atau jari menyentuh tautan menu
-  // sehingga perpindahan halaman terasa instan dan bebas lag/stuttering.
+  // Memuat awal dokumen HTML saat kursor melayang secara stabil di atas tautan
+  // dijadwalkan saat thread idle agar tidak membebani animasi atau transisi halaman.
   // ==========================================================================
   const prefetchedUrls = new Set();
   function prefetchUrl(url) {
     if (!url || prefetchedUrls.has(url) || url.startsWith('#') || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('javascript:')) return;
+    if (navigator.connection && (navigator.connection.saveData || (navigator.connection.effectiveType && navigator.connection.effectiveType.includes('2g')))) return;
     prefetchedUrls.add(url);
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = url;
-    document.head.appendChild(link);
+    const schedule = window.requestIdleCallback || ((cb) => setTimeout(cb, 120));
+    schedule(() => {
+      if (document.querySelector(`link[rel="prefetch"][href="${url}"]`)) return;
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      link.as = 'document';
+      document.head.appendChild(link);
+    });
   }
 
+  let hoverTimer = null;
   document.addEventListener('mouseover', (e) => {
     const a = e.target.closest('a[href]');
     if (a && a.origin === window.location.origin) {
-      prefetchUrl(a.href);
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => prefetchUrl(a.href), 70);
     }
   }, { passive: true });
 
+  document.addEventListener('mouseout', () => {
+    clearTimeout(hoverTimer);
+  }, { passive: true });
+
+  // Mobile touchscreen instant prefetch on initial touch contact
   document.addEventListener('touchstart', (e) => {
     const a = e.target.closest('a[href]');
     if (a && a.origin === window.location.origin) {

@@ -90,7 +90,7 @@ const TOKOH_DATASET = [
     category: "pejuang",
     region: "Jepara",
     years: "Memerintah 1549–1579 M",
-    image: "assets/images/timeline/timeline-highlight-benteng-ambarawa.webp",
+    image: "assets/images/tokoh/tokoh-ratu-kalinyamat.webp",
     quote: "Harta dan kedaulatan tanah air tidak akan pernah tunduk kepada bangsa penjajah samudra.",
     achievements: [
       "Mengirim ratusan armada kapal perang berkekuatan ribuan prajurit melawan Portugis di Malaka (1551 & 1574)",
@@ -285,9 +285,6 @@ class TokohEditorialController {
             <span class="spotlight-role-tag">${this.escapeHtml(activeFig.title)}</span>
             <span class="spotlight-meta-divider" aria-hidden="true">·</span>
             <span class="spotlight-region-pill">${this.escapeHtml(activeFig.region)}</span>
-            <span class="spotlight-meta-divider" aria-hidden="true">·</span>
-            <span class="spotlight-era-plaque">${this.escapeHtml(activeFig.era)}</span>
-            ${activeFig.years ? `<span class="spotlight-meta-divider" aria-hidden="true">·</span><span class="spotlight-years-tag">${this.escapeHtml(activeFig.years)}</span>` : ''}
           </div>
 
           <h2 class="spotlight-figure-name" id="tokoh-main-heading">${this.escapeHtml(activeFig.name)}</h2>
@@ -447,6 +444,8 @@ class TokohEditorialController {
 
     this.dom.modal.classList.add('is-open');
     this.dom.modal.setAttribute('aria-hidden', 'false');
+    const modalCard = this.dom.modal.querySelector('.tokoh-modal-card');
+    if (modalCard) modalCard.scrollTop = 0;
     document.body.style.overflow = 'hidden';
     if (this.dom.modalCloseBtn) this.dom.modalCloseBtn.focus();
   }

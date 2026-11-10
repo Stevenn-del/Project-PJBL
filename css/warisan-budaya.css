@@ -371,17 +371,18 @@ body.warisan-page-body {
   pointer-events: none;
 }
 
-/* Top-Right Hashtag (Active Center Card only) */
+/* Top-Right Provenance Tag (Active Center Card only) */
 .layered-card.is-active .card-top-tag {
   position: absolute;
   top: 22px;
   right: 22px;
   font-family: var(--wb-font-sans, 'Poppins', sans-serif);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: #FFFFFF;
-  letter-spacing: 0.03em;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  color: var(--wb-gold-light, #e1ca7a);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
   z-index: 5;
   background: transparent;
   border: none;
@@ -482,14 +483,7 @@ body.warisan-page-body {
 }
 
 .gallery-counter-box {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  background: #140e0c;
-  border: 1px solid rgba(168, 134, 96, 0.35);
-  padding: 5px 16px;
-  border-radius: 9999px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+  display: none !important;
 }
 
 .current-index-num {
@@ -541,13 +535,7 @@ body.warisan-page-body {
 }
 
 .gallery-keyboard-hint {
-  font-family: var(--wb-font-sans, 'Poppins', sans-serif);
-  font-size: 12.5px;
-  color: #a89375;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  user-select: none;
+  display: none !important;
 }
 
 /* ------------------------------------------------------------------------------
@@ -713,29 +701,29 @@ body.warisan-page-body {
 }
 
 .badge-unesco-pill {
-  background: rgba(20, 8, 5, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(14, 13, 11, 0.90);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--wb-cream);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 4px 12px;
-  border-radius: var(--wb-radius-pill);
-  border: 1px solid rgba(214, 174, 124, 0.38);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(214, 174, 124, 0.32);
 }
 
 .badge-category-pill {
   background: var(--wb-terracotta);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #FFFFFF;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.04em;
-  padding: 4px 12px;
-  border-radius: var(--wb-radius-pill);
-  border: 1px solid rgba(240, 217, 167, 0.3);
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(240, 217, 167, 0.28);
 }
 
 .warisan-card-placard-body {
@@ -874,6 +862,7 @@ body.warisan-page-body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.28s ease, visibility 0.28s ease;
+  overflow-y: auto;
 }
 
 .modal-backdrop-warisan.is-open {
@@ -882,21 +871,45 @@ body.warisan-page-body {
 }
 
 .warisan-modal-card {
-  background: rgba(12, 11, 9, 0.95);
+  background: rgba(12, 11, 9, 0.96);
   border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.38));
   border-radius: var(--wb-radius-lg);
   max-width: 820px;
   width: 100%;
-  max-height: 88vh;
+  max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(197, 164, 77, 0.15);
   position: relative;
   transform: scale(0.96) translateY(12px);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 36px 40px;
+  padding: 32px 36px 36px;
   color: var(--color-text, #f4efe4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197, 164, 77, 0.45) rgba(12, 11, 9, 0.7);
+  -webkit-overflow-scrolling: touch;
+}
+
+.warisan-modal-card::-webkit-scrollbar {
+  width: 7px;
+}
+
+.warisan-modal-card::-webkit-scrollbar-track {
+  background: rgba(12, 11, 9, 0.7);
+  border-radius: 9999px;
+  margin: 10px 0;
+}
+
+.warisan-modal-card::-webkit-scrollbar-thumb {
+  background: rgba(197, 164, 77, 0.4);
+  border-radius: 9999px;
+  border: 1px solid rgba(12, 11, 9, 0.85);
+}
+
+.warisan-modal-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(197, 164, 77, 0.65);
 }
 
 .modal-backdrop-warisan.is-open .warisan-modal-card {
@@ -905,39 +918,39 @@ body.warisan-page-body {
 
 .warisan-modal-close {
   position: absolute;
-  top: 20px;
+  top: 18px;
   right: 20px;
   width: 44px;
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  background: rgba(17, 16, 14, 0.85);
-  border: 1px solid var(--color-gold, #c5a44d);
-  border-radius: 50%;
-  color: var(--color-gold, #c5a44d);
-  font-size: 22px;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.35));
+  border-radius: 6px;
+  color: var(--color-gold-light, #e1ca7a);
+  font-size: 20px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   touch-action: manipulation;
-  transition: all 0.2s ease;
+  transition: all var(--kp-transition-fast, 0.2s ease);
   z-index: 10;
 }
 
 .warisan-modal-close:hover {
   background: var(--color-gold, #c5a44d);
   color: #080808;
-  transform: rotate(90deg);
+  border-color: var(--color-gold-light, #e1ca7a);
 }
 
 .warisan-modal-media {
   width: 100%;
-  height: 300px;
+  height: clamp(180px, 25vh, 240px);
   border-radius: var(--wb-radius-md);
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   background-color: var(--wb-bg-card-stage);
   border: 1px solid rgba(197, 164, 77, 0.35);
 }
@@ -980,7 +993,15 @@ body.warisan-page-body {
   font-size: 28px;
   font-weight: 700;
   color: #FFFFFF;
-  margin: 0 0 10px;
+  margin: 0 0 6px;
+}
+
+.warisan-modal-tagline {
+  font-size: 14.5px;
+  font-style: italic;
+  color: var(--color-gold-light, #e1ca7a);
+  margin: 0 0 12px;
+  line-height: 1.5;
 }
 
 .warisan-modal-context-line {
@@ -996,15 +1017,27 @@ body.warisan-page-body {
   font-size: 15px;
   line-height: 1.75;
   color: var(--color-text, #f4efe4);
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  word-break: break-word;
+}
+
+.warisan-modal-desc-box p {
+  margin-bottom: 14px;
+  line-height: 1.75;
+  color: #ebe3d5;
+}
+
+.warisan-modal-desc-box p:last-child {
+  margin-bottom: 0;
 }
 
 .warisan-modal-filosofi-callout {
   background: rgba(17, 16, 14, 0.7);
   border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.25));
   border-left: 4px solid var(--color-gold, #c5a44d);
-  padding: 18px 22px;
+  padding: 16px 20px;
   border-radius: 0 var(--wb-radius-md) var(--wb-radius-md) 0;
+  margin-bottom: 6px;
 }
 
 .modal-filosofi-title {
@@ -1020,11 +1053,12 @@ body.warisan-page-body {
 }
 
 .modal-filosofi-body {
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 14.5px;
+  line-height: 1.7;
   color: var(--color-text, #f4efe4);
   margin: 0;
   font-style: italic;
+  word-break: break-word;
 }
 
 /* ------------------------------------------------------------------------------
@@ -1502,6 +1536,17 @@ body.warisan-page-body {
 
   .warisan-modal-title {
     font-size: 20px;
+  }
+}
+
+/* Mobile & Low-End GPU Performance Optimization: light blur passes */
+@media (max-width: 768px) {
+  .warisan-filter-pill,
+  .warisan-card-media-stage,
+  .badge-unesco-pill,
+  .warisan-pavilion-card {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
 }
 

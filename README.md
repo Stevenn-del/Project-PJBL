@@ -36,50 +36,66 @@ Platform Karsakala menggunakan arsitektur modern berbobot ringan (*Jamstack*):
 ```text
 Project-PJBL/
 ├── index.html                   # Halaman beranda & kurasi pengalaman budaya
-├── tokoh.html                   # Showcase interaktif tokoh bersejarah Jawa Tengah
-├── warisan-budaya.html          # Pameran 3D berlapis galeri warisan budaya
-├── timeline.html                # Alur waktu kronologis peradaban Jawa Tengah
-├── peta.html                    # Peta interaktif & atlas cerita 35 kabupaten/kota
-├── wayang-motion.html           # Panggung kelir digital 3D & pelacak gestur tangan
+├── wayang-motion.html           # Akses cepat fitur Wayang Motion (akar direktori)
+│
+├── pages/                       # Halaman-halaman utama Karsakala
+│   ├── peta.html                # Peta interaktif & atlas cerita 35 kabupaten/kota
+│   ├── timeline.html            # Alur waktu kronologis peradaban Jawa Tengah
+│   ├── tokoh.html               # Showcase interaktif tokoh bersejarah Jawa Tengah
+│   ├── warisan-budaya.html      # Galeri interaktif warisan budaya adiluhung
+│   └── wayang-motion.html       # Panggung kelir digital & pelacak gestur tangan
 │
 ├── assets/
 │   ├── audio/                   # Musik latar gamelan & berkas narasi suara tokoh
 │   │   ├── backsound.mp3        # Instrumen tradisional gamelan ambient
 │   │   ├── backsound-beats.json # Sinkronisasi ketukan ritme audio
-│   │   └── narration-*.mp3      # Rekaman narasi biografi tokoh wayang
+│   │   ├── narration-brajawisena.mp3
+│   │   └── narration-prabu-wahyana.mp3
 │   │
 │   └── images/                  # Aset visual terstruktur semantik (WebP/SVG/JPG)
-│       ├── home/                # Background hero slideshow beranda (slide-1..3)
+│       ├── home/                # Background hero slideshow & flank gunungan
+│       ├── peta/                # 35 foto bangunan bersejarah asli 35 kabupaten/kota
+│       │   ├── KATALOG_FOTO_REALISTIS.md
+│       │   ├── PANDUAN_GANTI_FOTO.txt
+│       │   └── peta-*.webp
+│       ├── timeline/            # Ilustrasi visual babak sejarah & highlight peristiwa
 │       ├── tokoh/               # Foto potret otentik figur bersejarah (tokoh-*.webp)
-│       ├── warisan-budaya/      # Dokumentasi pusaka keris, batik, gamelan (warisan-*.webp)
-│       ├── timeline/            # Ilustrasi visual babak sejarah (timeline-*.webp)
-│       ├── wayang-motion/       # Panggung kelir, motif batik ambient, rig anatomi & wayang webp
+│       ├── warisan-budaya/      # Foto warisan budaya peninggalan adiluhung
+│       ├── wayang-motion/       # Panggung kelir, tekstur, & rig anatomi wayang
+│       │   ├── brajawisena-rig/
+│       │   └── reference-rig/
 │       ├── karsakala-logo.svg   # Identitas visual vektor utama
 │       └── favicon.ico          # Favicon website
 │
 ├── css/
 │   ├── style.css                # Tipografi global, navigasi, & utilitas
 │   ├── redesign-palette.css     # Palet warna tematik emas & temaram keraton
-│   ├── tokoh.css                # Tata letak showcase editorial tokoh
-│   ├── warisan.css              # Galeri berlapis perspektif 3D warisan budaya
-│   ├── timeline.css             # Slab kronologis & laci ikhtisar peristiwa
+│   ├── responsive.css           # Penyesuaian responsif mobile, tablet, & desktop
 │   ├── peta.css                 # Modul peta Leaflet & kartu atlas wilayah
+│   ├── timeline.css             # Slab kronologis & laci ikhtisar peristiwa
+│   ├── tokoh.css                # Tata letak showcase editorial tokoh
+│   ├── warisan-budaya.css       # Galeri berlapis perspektif 3D warisan budaya
 │   └── wayang-motion.css        # Panggung kelir digital & antarmuka kamera
 │
 ├── js/
-│   ├── nav.js                   # Kontroler navigasi responsif & drawer mobile
-│   ├── slideshow.js             # Kontroler transisi slideshow beranda
-│   ├── supabase-config.js       # Konfigurasi URL & anon key Supabase
-│   ├── supabase-service.js      # Lapisan query database Supabase & fallback
-│   ├── tokoh.js                 # Logika interaksi tokoh & modal biografi
-│   ├── warisan.js               # Logika galeri 3D & filter kategori pusaka
+│   ├── main.js                  # Navigasi global, drawer mobile, & slideshow beranda
+│   ├── peta.js                  # Inisialisasi peta Leaflet & batas wilayah 35 daerah
 │   ├── timeline.js              # Fisika 3D slab waktu & laci ikhtisar
-│   ├── peta.js                  # Inisialisasi peta Leaflet & batas wilayah
-│   └── wayang-motion.js         # Inverse kinematics & pelacakan tangan MediaPipe
+│   ├── tokoh.js                 # Logika interaksi tokoh & modal biografi
+│   ├── warisan-budaya.js        # Logika galeri 3D & filter kategori pusaka
+│   ├── wayang-motion.js         # Inverse kinematics & pelacakan tangan MediaPipe
+│   ├── supabase-client.js       # Client loader Supabase SDK
+│   ├── supabase-config.js       # Konfigurasi URL & anon key Supabase
+│   └── supabase-service.js      # Lapisan query database Supabase & graceful fallback
+│
+├── supabase/                    # Skrip inisialisasi & dokumentasi database Supabase
+│   ├── supabase_setup.sql       # Skrip DDL tabel, kebijakan RLS, & seed data
+│   └── README.md                # Panduan teknis setup database Supabase
 │
 ├── netlify.toml                 # Konfigurasi deployment & cache header Netlify
 ├── _headers                     # Kebijakan keamanan & caching CDN
-├── supabase_setup.sql           # Skrip inisialisasi tabel, RLS, & seed data
+├── _redirects                   # Aturan routing & URL rewriting
+├── .gitignore                   # Konfigurasi pengecualian git
 └── README.md                    # Dokumentasi lengkap proyek
 ```
 
@@ -94,7 +110,7 @@ Project-PJBL/
 
 ### 2. Eksekusi Skrip SQL Setup
 1. Masuk ke menu **SQL Editor** pada panel navigasi Supabase.
-2. Buka berkas [`supabase_setup.sql`](supabase_setup.sql) dari proyek ini, salin seluruh isinya, dan tempelkan ke SQL Editor.
+2. Buka berkas [`supabase/supabase_setup.sql`](supabase/supabase_setup.sql) dari proyek ini, salin seluruh isinya, dan tempelkan ke SQL Editor.
 3. Klik tombol **Run**. Skrip ini secara otomatis akan:
    - Membuat 5 tabel utama: `tokoh`, `warisan_budaya`, `timeline_eras`, `timeline_events`, dan `lokasi`.
    - Mengaktifkan kebijakan keamanan **Row Level Security (RLS)** untuk membaca data secara publik tanpa login.
@@ -131,7 +147,7 @@ Proyek ini telah dikonfigurasi penuh untuk Netlify:
 - Untuk mempublikasikan:
   ```bash
   git add .
-  git commit -m "feat: organize project structure and complete supabase integration"
+  git commit -m "chore: clean up and organize project structure"
   git push origin main
   ```
 - Netlify akan secara otomatis mendeteksi perubahan dan memperbarui website secara instan.

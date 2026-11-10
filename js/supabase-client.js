@@ -122,20 +122,21 @@
       if (error || !Array.isArray(data) || data.length === 0) return null;
 
       return data.map(item => ({
-        id: item.slug,
+        id: item.slug || item.id,
         title: item.title,
-        titleMain: item.title_main,
-        titleRegion: item.title_region,
+        titleMain: item.title_main || item.titleMain,
+        titleRegion: item.title_region || item.titleRegion,
         tagline: item.tagline,
         hashtag: item.hashtag,
         category: item.category,
-        categoryLabel: item.category_label,
-        unescoStatus: item.unesco_status,
+        categoryLabel: item.category_label || item.categoryLabel,
+        unescoStatus: item.unesco_status || item.unescoStatus,
         region: item.region,
         period: item.period,
         image: item.image,
-        desc: item.description,
-        filosofi: item.filosofi
+        desc: item.description || item.desc || '',
+        filosofi: item.filosofi || '',
+        ...item
       }));
     } catch (err) {
       console.warn('[Supabase Client] Menggunakan fallback lokal untuk Warisan Budaya:', err.message);
@@ -206,20 +207,30 @@
     if (!client) return null;
 
     try {
-      const query = client.from('wilayah').select('*');
-      const { data, error } = await withTimeout(query, SUPABASE_CONFIG.timeoutMs);
+      let query = client.from('lokasi').select('*');
+      let { data, error } = await withTimeout(query, SUPABASE_CONFIG.timeoutMs);
+      if (error || !Array.isArray(data) || data.length === 0) {
+        query = client.from('wilayah').select('*');
+        const res = await withTimeout(query, SUPABASE_CONFIG.timeoutMs);
+        data = res.data;
+        error = res.error;
+      }
       if (error || !Array.isArray(data) || data.length === 0) return null;
 
       const result = {};
       data.forEach(item => {
-        result[item.name] = {
-          summary: item.summary,
-          figures: Array.isArray(item.figures) ? item.figures : (typeof item.figures === 'string' ? JSON.parse(item.figures) : []),
-          heritage: Array.isArray(item.heritage) ? item.heritage : (typeof item.heritage === 'string' ? JSON.parse(item.heritage) : []),
-          period: item.period_info,
-          fact: item.fact,
-          image: item.image
-        };
+        const heritage = Array.isArray(item.heritage) ? item.heritage : (typeof item.heritage === 'string' ? JSON.parse(item.heritage) : []);
+        const hasSpecificHeritage = heritage && heritage.length > 0 && !heritage.some(h => typeof h === 'string' && h.includes('Situs Pusaka Daerah'));
+        if (hasSpecificHeritage) {
+          result[item.name] = {
+            summary: item.summary,
+            figures: Array.isArray(item.figures) ? item.figures : (typeof item.figures === 'string' ? JSON.parse(item.figures) : []),
+            heritage: heritage,
+            period: item.period_info || item.period,
+            fact: item.fact,
+            image: item.image
+          };
+        }
       });
       return result;
     } catch (err) {
@@ -233,6 +244,7 @@
   window.fetchWarisanFromSupabase = fetchWarisan;
   window.fetchTimelineFromSupabase = fetchTimeline;
   window.fetchWilayahFromSupabase = fetchWilayah;
+  window.fetchLokasiFromSupabase = fetchWilayah;
 
   // Ekspor API Klien ke window global
   window.KarsakalaSupabase = {
@@ -242,7 +254,8 @@
     fetchTokoh,
     fetchWarisan,
     fetchTimeline,
-    fetchWilayah
+    fetchWilayah,
+    fetchLokasi: fetchWilayah
   };
 
   // Kompatibilitas dengan nama modul lama
@@ -252,6 +265,7 @@
     fetchTokohFromSupabase: fetchTokoh,
     fetchWarisanFromSupabase: fetchWarisan,
     fetchTimelineFromSupabase: fetchTimeline,
-    fetchWilayahFromSupabase: fetchWilayah
+    fetchWilayahFromSupabase: fetchWilayah,
+    fetchLokasiFromSupabase: fetchWilayah
   };
 })();

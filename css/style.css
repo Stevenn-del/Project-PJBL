@@ -362,13 +362,14 @@ input:focus-visible,
   max-width: 150px;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 2px 10px rgba(197, 164, 77, 0.28));
-  transition: transform var(--kp-transition-fast), filter var(--kp-transition-fast);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  transition: transform var(--kp-transition-fast), opacity var(--kp-transition-fast), filter var(--kp-transition-fast);
 }
 
 .brand-link:hover .brand-logo-img {
-  transform: scale(1.02);
-  filter: drop-shadow(0 2px 14px rgba(225, 202, 122, 0.45));
+  transform: translateY(-1px);
+  opacity: 0.95;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
 }
 
 .brand-wordmark {
@@ -389,12 +390,12 @@ input:focus-visible,
   list-style: none;
   margin: 0;
   padding: 5px 8px;
-  background: var(--glass-black, rgba(8, 8, 8, 0.72));
-  border: 1px solid var(--gold-border, rgba(197, 164, 77, 0.28));
+  background: rgba(14, 13, 11, 0.88);
+  border: 1px solid rgba(197, 164, 77, 0.24);
   border-radius: var(--kp-radius-pill);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(197, 164, 77, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
 }
 
 .nav-links-list li {
@@ -455,7 +456,7 @@ input:focus-visible,
   text-decoration: none;
   border-radius: var(--kp-radius-pill);
   border: 1px solid var(--color-gold-light, #e1ca7a);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   transition: all var(--kp-transition-fast);
   white-space: nowrap;
 }
@@ -467,7 +468,7 @@ input:focus-visible,
   background: var(--color-gold-light, #e1ca7a);
   color: #080808 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
 .btn-wayang-pill i,
@@ -516,6 +517,44 @@ input:focus-visible,
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 24px;
+  overflow: hidden;
+}
+
+/* Adiluhung Cultural Flanks: Gunungan Wayang & Traditional Awan Ukir (Corner Anchored) */
+.hero-cultural-flank {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+  transform: translateZ(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-cultural-flank.flank-left {
+  left: 0;
+}
+
+.hero-cultural-flank.flank-right {
+  right: 0;
+}
+
+.hero-cultural-flank .flank-ornament-img {
+  width: clamp(260px, 25vw, 420px);
+  height: auto;
+  max-height: clamp(380px, 68vh, 620px);
+  object-fit: contain;
+  display: block;
+  opacity: 0.95;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.70));
+}
+
+.hero-cultural-flank.flank-left .flank-ornament-img {
+  transform-origin: bottom left;
+}
+
+.hero-cultural-flank.flank-right .flank-ornament-img {
+  transform-origin: bottom right;
 }
 
 .hero-main .container-fluid {
@@ -582,10 +621,10 @@ input:focus-visible,
   font-weight: 600;
   letter-spacing: 0.02em;
   padding: 13px 34px;
-  border-radius: var(--kp-radius-pill);
+  border-radius: 8px;
   text-decoration: none;
   border: 1px solid var(--color-gold-light, #e1ca7a);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   transition: transform var(--kp-transition-fast), 
               box-shadow var(--kp-transition-fast), 
               background var(--kp-transition-fast),
@@ -604,7 +643,7 @@ input:focus-visible,
   background: var(--color-gold-light, #e1ca7a);
   color: #080808;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
 }
 
 .btn-explore:hover .arrow {
@@ -638,12 +677,12 @@ input:focus-visible,
   box-shadow: none;
   color: var(--color-gold, #c5a44d);
   font-family: var(--kp-font-sans, 'Poppins', sans-serif);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 12px;
-  opacity: 0.95;
+  opacity: 0.92;
 }
 
 .page-intro .provenance-badge .badge-dot,
@@ -688,6 +727,27 @@ input:focus-visible,
    RESPONSIVE DESIGN (TABLET & MOBILE BREAKPOINTS)
    Tailored for Mobile (320px-430px), Tablet (768px-1024px), Laptop (1280px-1440px+)
    ========================================================================== */
+
+/* Laptops & Medium Screens (<= 1200px) */
+@media (max-width: 1200px) {
+  .hero-cultural-flank {
+    bottom: 0;
+  }
+
+  .hero-cultural-flank.flank-left {
+    left: 0;
+  }
+
+  .hero-cultural-flank.flank-right {
+    right: 0;
+  }
+
+  .hero-cultural-flank .flank-ornament-img {
+    width: clamp(210px, 22vw, 300px);
+    max-height: 56vh;
+    opacity: 0.92;
+  }
+}
 
 /* Tablet & Smaller Screens (<= 991px) */
 @media (max-width: 991px) {
@@ -764,6 +824,48 @@ input:focus-visible,
 
   .hero-description {
     font-size: 15.5px;
+  }
+
+  .hero-cultural-flank {
+    opacity: 0.86;
+    bottom: 0;
+  }
+
+  .hero-cultural-flank.flank-left {
+    left: 0;
+  }
+
+  .hero-cultural-flank.flank-right {
+    right: 0;
+  }
+
+  .hero-cultural-flank .flank-ornament-img {
+    width: clamp(160px, 20vw, 220px);
+    max-height: 48vh;
+    opacity: 0.86;
+  }
+}
+
+/* Mobile Tablets & Phones (<= 767px) */
+@media (max-width: 767px) {
+  .hero-cultural-flank {
+    display: block;
+    opacity: 0.70;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .hero-cultural-flank.flank-left {
+    left: 0;
+  }
+
+  .hero-cultural-flank.flank-right {
+    right: 0;
+  }
+
+  .hero-cultural-flank .flank-ornament-img {
+    width: clamp(95px, 22vw, 135px);
+    max-height: 36vh;
   }
 }
 

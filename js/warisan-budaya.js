@@ -32,6 +32,10 @@ const WARISAN_DATASET = [
     period: "Wangsa Syailendra (Abad ke-8–9 M)",
     image: "assets/images/home/slide-3-borobudur.webp",
     desc: "Monumen candi Buddha terbesar di dunia yang tersusun atas 2 juta blok batu andesit, 504 arca Buddha, dan 2.672 panel relief naratif yang membentang sepanjang 3 kilometer.",
+    detailParagraphs: [
+      "Candi Borobudur dibangun pada kurun waktu antara tahun 780 hingga 840 Masehi di bawah kepemimpinan raja-raja wangsa Syailendra di dataran subur Lembah Kedu. Monumen megah ini didirikan tanpa menggunakan semen atau perekat modern, melainkan mengandalkan sistem kuncian interlock batu andesit vulkanik yang dipahat secara presisi untuk menopang struktur punden berundak raksasa seluas 123 x 123 meter.",
+      "Secara kosmologis dan arsitektural, rancang bangun Borobudur memvisualisasikan mandala agung dengan tiga tingkatan kesadaran manusia: Kamadhatu di bagian kaki yang menggambarkan alam hawa nafsu duniawi, Rupadhatu di lima lorong persegi berelief Lalitavistara dan Jataka yang melambangkan alam berwujud, serta Arupadhatu di pelataran bundar dengan 72 stupa berterawang yang melambangkan nirwana tanpa wujud dan pencerahan batin tertinggi."
+    ],
     filosofi: "Tiga tingkatan kosmologis Buddhis: Kamadhatu (dunia nafsu), Rupadhatu (dunia berwujud), dan Arupadhatu (dunia tanpa wujud/kesempurnaan nirwana)."
   },
   {
@@ -48,6 +52,10 @@ const WARISAN_DATASET = [
     period: "Wangsa Sanjaya (Abad ke-9 M)",
     image: "assets/images/home/slide-1-prambanan.webp",
     desc: "Mahakarya arsitektur Hindu terindah di Asia Tenggara yang menjulang setinggi 47 meter, dipersembahkan untuk Trimurti: Dewa Siwa (Perusak), Brahma (Pencipta), dan Wisnu (Pemelihara).",
+    detailParagraphs: [
+      "Kompleks Percandian Prambanan didirikan sekitar tahun 850 Masehi oleh Raja Rakai Pikatan dari wangsa Sanjaya dan disempurnakan oleh raja-raja Mataram Kuno berikutnya. Menjulang anggun setinggi 47 meter di dataran Prambanan, mahakarya ini mempersembahkan tiga candi utama bagi Trimurti: Candi Siwa di tengah, Candi Brahma di sisi selatan, dan Candi Wisnu di sisi utara, yang dikelilingi oleh ratusan candi perwara berorientasi kosmis.",
+      "Dikenal dalam Prasasti Siwagrha (856 M) sebagai replika suci Gunung Meru tempat bertahtanya para dewa, dinding langkan candi ini dihiasi deretan relief naratif epos agung Ramayana dan Krishnayana yang dipahat dengan kehalusan luar biasa. Keberadaan Prambanan berdampingan secara damai dengan candi-candi Buddhis seperti Sewu dan Plaosan menjadi saksi abadi harmoni dan toleransi keagamaan luhur di Jawa Tengah."
+    ],
     filosofi: "Prinsip Siwagrha melambangkan Gunung Meru sebagai poros semesta dan lambang harmoni kerukunan agama di Jawa Tengah kuno."
   },
   {
@@ -64,6 +72,10 @@ const WARISAN_DATASET = [
     period: "Masa Kerajaan hingga Era Modern",
     image: "assets/images/warisan-budaya/warisan-pusaka-keris.webp",
     desc: "Senjata tikam berbilah asimetris dengan pamor metalurgi multi-layer hasil tempaan pande besi empu Jawa, diakui dunia atas nilai spiritual dan estetika artistik tingginya.",
+    detailParagraphs: [
+      "Keris Jawa merupakan puncak kriya metalurgi tradisional Nusantara yang ditempa melalui proses penempaan lipat berulang (folding technique) antara besi, baja, dan batu meteorit kaya nikel. Dikerjakan oleh para empu keraton melalui laku tirakat dan doa spiritual mendalam, bilah asimetris ini menampilkan corak pamor multi-layer unik yang tidak dapat direplikasi secara mekanis.",
+      "Dalam filosofi hidup masyarakat Jawa, keris melambangkan konsep 'Curiga Manjing Warangka' yang bermakna kesatuan hakiki antara raga jasmani dan sukma rohani, serta keselarasan hamba dengan Sang Pencipta. Bilah lurus melambangkan keteguhan iman dan integritas batin, sementara lekukan luk melambangkan kearifan manusia dalam beradaptasi menghadapi liku-liku gelombang kehidupan bermasyarakat."
+    ],
     filosofi: "Bilah lurus melambangkan keteguhan batin menyembah Tuhan; bilah luk (berkelok) melambangkan keluwesan manusia meniti liku-liku gelombang kehidupan."
   },
   {
@@ -80,6 +92,10 @@ const WARISAN_DATASET = [
     period: "Tradisi Keraton Mataram Islam",
     image: "assets/images/warisan-budaya/warisan-batik-tulis.webp",
     desc: "Seni lukis malam panas di atas kain mori halus menggunakan canting tembaga tradisional dengan ragam hias simbolik warisan keraton Jawa Tengah.",
+    detailParagraphs: [
+      "Batik tulis keraton merupakan warisan adiluhung yang digoreskan secara cermat menggunakan canting tembaga dan cairan malam panas di atas tenunan mori sutra atau katun primissima. Proses pembatikan meliputi tahapan nyorek, melowong, nembok, medel, hingga nglorod yang memakan waktu berbulan-bulan, mencerminkan ketekunan, kesabaran, dan kehalusan budi para perajin putri keraton.",
+      "Motif Parang Rusak Barong yang diciptakan oleh Sultan Agung melambangkan ombak samudra pantai selatan yang pantang menyerah menghantam tebing karang, menyiratkan semangat ksatria luhur yang tak kunjung padam. Sementara motif Kawung yang terinspirasi oleh empat kelopak buah aren menyimbolkan empat penjuru mata angin serta kejujuran dan kemurnian hati manusia yang senantiasa menebarkan manfaat bagi sesama."
+    ],
     filosofi: "Motif Parang melambangkan ombak karang laut yang tak pernah lelah berjuang; Motif Kawung melambangkan buah kolang-kaling empat penjuru sebagai simbol kesucian hati."
   },
   {
@@ -96,6 +112,10 @@ const WARISAN_DATASET = [
     period: "Abad ke-10 M hingga Sekarang",
     image: "assets/images/home/slide-2-wayang.webp",
     desc: "Teater bayangan kulit kerbau bertatah intrik beriringan orkestra gamelan Jawa, membawakan epos wiracarita Mahabarata dan Ramayana yang sarat ajaran filsafat budi pekerti luhur.",
+    detailParagraphs: [
+      "Wayang Kulit Purwa adalah seni teater bayangan purba yang memadukan tatah intrik kulit kerbau berkadar ketelitian tinggi, pewarnaan emas prada sunggingan tradisional, sastra pedalangan kuna, dan ansambel karawitan. Setiap pergelaran semalam suntuk dipimpin oleh seorang ki dalang yang menghidupkan ratusan karakter dari siklus epos agung Mahabarata dan Ramayana.",
+      "Panggung kelir wayang sarat dengan metafora eksistensial: kelir kain putih menggambarkan bentang jagad semesta tempat manusia berikhtiar, blencong lampu minyak adalah lentera surya kehidupan, dalang adalah manifestasi kehendak Ilahi, sedangkan boneka wayang adalah cerminan pergulatan watak manusia antara angkara murka dan budi pekerti luhur dalam mencari kesempurnaan hidup (sangkan paraning dumadi)."
+    ],
     filosofi: "Kelir (layar putih) adalah bentang dunia; Blencong (lampu minyak) adalah sang surya; Dalang adalah penguasa takdir; dan Wayang adalah cermin watak manusia."
   },
   {
@@ -112,6 +132,10 @@ const WARISAN_DATASET = [
     period: "Masa Mataram Kuno hingga Modern",
     image: "assets/images/warisan-budaya/warisan-gamelan-ageng.webp",
     desc: "Ansambel instrumen perunggu gong, kempul, kenong, bonang, kendang, dan rebab yang ditala dalam laras Slendro dan Pelog menghasilkan harmoni meditasi batin mendalam.",
+    detailParagraphs: [
+      "Gamelan Ageng Keraton Jawa Tengah adalah orkestrasi perunggu murni (gangsa) tertua dan terlengkap di Nusantara yang berkembang sejak era kerajaan Mataram Kuno hingga disempurnakan di Keraton Surakarta. Terdiri dari puluhan instrumen seperti gong ageng, kenong, kempul, bonang barung, kendang, saron, gender, dan rebab yang ditala secara intuitif dalam laras magis Slendro dan Pelog.",
+      "Musikalitas gamelan mengedepankan etika 'Rukun Agawe Santosa', di mana setiap penabuh instrumen menahan ego pribadi agar tidak mendominasi, melainkan melebur dalam jalinan rasa yang tenang, meditatif, dan agung. Harmoni polifonik gamelan tidak sekadar dinikmati sebagai hiburan indrawi, melainkan sarana hening rasa untuk menyelaraskan gelombang batin manusia dengan ketertiban kosmos alam semesta."
+    ],
     filosofi: "Filosofi 'Rukun Agawe Santosa': tiap bilah instrumen saling menahan diri untuk tidak menonjol sendiri demi melahirkan keselarasan rasa yang agung."
   },
   {
@@ -128,23 +152,31 @@ const WARISAN_DATASET = [
     period: "Sultan Agung (Abad ke-17 M)",
     image: "assets/images/warisan-budaya/warisan-bedhaya-ketawang.webp",
     desc: "Tarian pusaka sakral yang ditarikan oleh sembilan putri berbusana dodot ageng dalam upacara Tingalan Dalem Jumenengan (peringatan naik takhta Sri Susuhunan Pakubuwono).",
+    detailParagraphs: [
+      "Bedhaya Ketawang adalah tarian pusaka paling sakral di lingkungan Keraton Kasunanan Surakarta Hadiningrat yang diciptakan pada masa Sultan Agung Hanyokrokusumo. Tarian ini hanya dipergelarkan setahun sekali saat perayaan Tingalan Dalem Jumenengan (peringatan penobatan takhta raja) di Sasana Sewaka, ditarikan oleh sembilan putri keraton yang wajib berpuasa dan menjalani penyucian batin.",
+      "Gerak gemulai sembilan penari berbusana dodot ageng bangun tulak menggambarkan konfigurasi sembilan lubang hawa nafsu pada tubuh manusia (babahan hawa sanga) serta tatanan peredaran sembilan planet tata surya. Tarian sakral ini menarasikan ikatan batin spiritual dan sumpah setia abadi antara raja Jawa dengan Kanjeng Ratu Kidul untuk senantiasa memelihara kedamaian, kesuburan, dan kesejahteraan seluruh rakyat tanah Jawa."
+    ],
     filosofi: "Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa."
   },
   {
-    id: "candi-dieng",
-    title: "Kompleks Percandian Dieng",
-    titleMain: "PERCANDIAN DIENG",
+    id: "candi-arjuna",
+    title: "Candi Arjuna",
+    titleMain: "CANDI ARJUNA",
     titleRegion: "BANJARNEGARA",
-    tagline: "Tempat suci para dewata di dataran tinggi berkabut",
-    hashtag: "#Dieng • Candi",
+    tagline: "Pusaka candi Hindu Siwa tertua di tanah Jawa",
+    hashtag: "#Banjarnegara • Candi",
     category: "candi",
     categoryLabel: "Candi & Arsitektur Megah",
     unescoStatus: "Cagar Budaya Nasional Peringkat Satu",
     region: "Dataran Tinggi Dieng, Banjarnegara",
-    period: "Abad ke-7–8 Masehi",
-    image: "assets/images/timeline/timeline-era-kuno.webp",
-    desc: "Gugusan candi tertua di pulau Jawa yang berdiri di dataran tinggi vulkanik berkabut 2.000 meter di atas permukaan laut, dinamai berdasarkan ksatria Pandawa.",
-    filosofi: "'Di-Hyang' bermakna tempat bersemayamnya para dewata; tempat suci pembersihan jiwa para resi dan pertapa Jawa kuno."
+    period: "Wangsa Sanjaya, Mataram Kuno (± Abad ke-8 M)",
+    image: "assets/images/warisan-budaya/warisan-candi-arjuna.webp",
+    desc: "Candi Hindu beraliran Siwa tertua di Pulau Jawa yang berdiri anggun pada ketinggian 2.093 mdpl di Dataran Tinggi Dieng, memimpin gugusan lima candi purba pemujaan dewa.",
+    detailParagraphs: [
+      "Candi Arjuna merupakan candi Hindu beraliran Siwa (Shaivisme) tertua di Pulau Jawa yang diperkirakan dibangun pada kurun waktu abad ke-8 Masehi di bawah naungan Wangsa Sanjaya pada era Kerajaan Mataram Kuno (Medang). Berdiri tegak di lembah Dataran Tinggi Dieng, Desa Dieng Kulon, Kabupaten Banjarnegara pada elevasi 2.093 meter di atas permukaan laut, candi batu andesit berdenah bujur sangkar seluas 6 x 6 meter ini menghadap ke barat menuju Candi Semar yang berfungsi sebagai candi perwara pendampingnya.",
+      "Gugusan kelompok Candi Arjuna berjejer pada poros utara-selatan yang menaungi lima bangunan suci: Candi Arjuna (candi induk), Candi Semar, Candi Srikandi, Candi Puntadewa, dan Candi Sembadra. Rancang bangun atapnya bersusun khas gaya arsitektur Jawa Tengah awal dengan ornamen kala-makara bertatah halus pada ambang pintu serta relung-relung dinding yang dahulu menempatkan arca Siwa Mahaguru (Agastya), Ganesha, dan Durga Mahisasuramardini. Lingkungan pegunungan berkabut 'Di-Hyang' (kediaman para dewa) dipilih secara kosmologis oleh para resi Jawa kuno sebagai mandala hening rasa untuk laku asketisme suci menyucikan batin."
+    ],
+    filosofi: "Filosofi Siwaisme pegunungan: dataran tinggi Di-Hyang dipandang sebagai replika suci poros kosmos tempat bersemayamnya para dewata dan penyucian sukma para resi Jawa kuno."
   }
 ];
 
@@ -276,14 +308,8 @@ class WarisanExhibitionController {
           </button>
         </div>
 
-        <!-- 2. Minimalist Stepper & Dots Indicator Row -->
+        <!-- 2. Minimalist Dots Indicator Row -->
         <div class="gallery-stepper-row">
-          <div class="gallery-counter-box" aria-live="polite">
-            <span class="current-index-num" id="gallery-current-num">${String(this.currentIndex + 1).padStart(2, '0')}</span>
-            <span class="counter-slash">/</span>
-            <span class="total-index-num" id="gallery-total-num">${String(filtered.length).padStart(2, '0')}</span>
-          </div>
-
           <div class="gallery-dots-indicator" id="gallery-dots-indicator" role="tablist" aria-label="Indikator Pilihan Warisan">
             ${filtered.map((item, i) => `
               <button type="button" 
@@ -294,10 +320,6 @@ class WarisanExhibitionController {
                       aria-selected="${i === this.currentIndex}">
               </button>
             `).join('')}
-          </div>
-
-          <div class="gallery-keyboard-hint">
-            <i class="bi bi-arrow-left-right" aria-hidden="true"></i> Navigasi Panah &larr; &rarr;
           </div>
         </div>
 
@@ -571,32 +593,57 @@ class WarisanExhibitionController {
     const item = this.dataset.find(w => w.id === id);
     if (!item || !this.dom.modal || !this.dom.modalContent) return;
 
+    // Pastikan narasi kurasi mendalam terbagi rapi ke dalam tepat 2 paragraf
+    let p1 = '';
+    let p2 = '';
+    if (Array.isArray(item.detailParagraphs) && item.detailParagraphs.length >= 2) {
+      p1 = item.detailParagraphs[0];
+      p2 = item.detailParagraphs[1];
+    } else if (Array.isArray(item.detail_paragraphs) && item.detail_paragraphs.length >= 2) {
+      p1 = item.detail_paragraphs[0];
+      p2 = item.detail_paragraphs[1];
+    } else {
+      const fallbackItem = WARISAN_DATASET.find(w => w.id === item.id || w.title === item.title);
+      if (fallbackItem && Array.isArray(fallbackItem.detailParagraphs) && fallbackItem.detailParagraphs.length >= 2) {
+        p1 = fallbackItem.detailParagraphs[0];
+        p2 = fallbackItem.detailParagraphs[1];
+      } else {
+        p1 = item.desc || item.description || '';
+        p2 = item.filosofi || '';
+      }
+    }
+
     this.dom.modalContent.innerHTML = `
       <div class="warisan-modal-media">
         <img src="${item.image}" alt="${this.escapeHtml(item.title)}" width="600" height="380" loading="lazy" decoding="async">
       </div>
       <div class="warisan-modal-meta-row">
-        <span class="modal-unesco-pill">${this.escapeHtml(item.unescoStatus)}</span>
-        <span class="modal-category-pill">${this.escapeHtml(item.categoryLabel)}</span>
+        ${item.unescoStatus ? `<span class="modal-unesco-pill">${this.escapeHtml(item.unescoStatus)}</span>` : ''}
+        ${item.categoryLabel ? `<span class="modal-category-pill">${this.escapeHtml(item.categoryLabel)}</span>` : ''}
       </div>
       <h2 id="warisan-modal-title" class="warisan-modal-title">${this.escapeHtml(item.title)}</h2>
+      ${item.tagline ? `<p class="warisan-modal-tagline">${this.escapeHtml(item.tagline)}</p>` : ''}
       <div class="warisan-modal-context-line">
         <span><strong>Asal &amp; Periode:</strong> ${this.escapeHtml(item.region)} &bull; ${this.escapeHtml(item.period)}</span>
       </div>
       <div class="warisan-modal-desc-box">
-        <p>${this.escapeHtml(item.desc)}</p>
+        <p class="warisan-modal-p1">${this.escapeHtml(p1)}</p>
+        <p class="warisan-modal-p2">${this.escapeHtml(p2)}</p>
       </div>
+      ${item.filosofi ? `
       <div class="warisan-modal-filosofi-callout">
         <div class="modal-filosofi-title">
           <span>Filosofi &amp; Makna Kultural Adiluhung</span>
         </div>
         <p class="modal-filosofi-body">${this.escapeHtml(item.filosofi)}</p>
-      </div>
+      </div>` : ''}
     `;
 
     this.dom.modal.classList.add('is-open');
     this.dom.modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    const card = this.dom.modal.querySelector('.warisan-modal-card');
+    if (card) card.scrollTop = 0;
     if (this.dom.modalCloseBtn) this.dom.modalCloseBtn.focus();
   }
 
@@ -688,4 +735,5 @@ class WarisanExhibitionController {
 
 document.addEventListener('DOMContentLoaded', () => {
   window.karsaWarisanApp = new WarisanExhibitionController();
+  window.warisanExhibitionController = window.karsaWarisanApp;
 });

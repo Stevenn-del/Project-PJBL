@@ -2366,6 +2366,12 @@ void main() {
   }
 
   function isLandscapeOrientation() {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mql = window.matchMedia('(orientation: landscape)');
+      if (typeof mql.matches === 'boolean') {
+        return mql.matches;
+      }
+    }
     if (screen.orientation && typeof screen.orientation.type === 'string') {
       return screen.orientation.type.includes('landscape');
     }
@@ -2373,6 +2379,24 @@ void main() {
       return Math.abs(window.orientation) === 90;
     }
     return window.innerWidth > window.innerHeight;
+  }
+
+  function tryLockLandscape() {
+    try {
+      if (screen.orientation && typeof screen.orientation.lock === 'function') {
+        screen.orientation.lock('landscape').catch(() => {
+          // Gracefully fallback on platforms that do not permit orientation lock
+        });
+      }
+    } catch (e) {}
+  }
+
+  function tryUnlockOrientation() {
+    try {
+      if (screen.orientation && typeof screen.orientation.unlock === 'function') {
+        screen.orientation.unlock();
+      }
+    } catch (e) {}
   }
 
   function updateMobileOrientationFlow() {
@@ -2390,35 +2414,39 @@ void main() {
     }
 
     // Mobile phone and tablet behavior:
-    if (!hasAcknowledgedOrientation) {
-      // Step 1: Initial visit on mobile/tablet - show single orientation guidance screen
-      if (els.mobileOrientationModal) els.mobileOrientationModal.classList.remove('hidden');
-      if (els.overlayIntro) els.overlayIntro.classList.add('hidden', 'gone');
-
-      if (isLandscape) {
-        if (els.orientationModalTitle) els.orientationModalTitle.textContent = 'Orientasi Siap';
-        if (els.orientationModalDesc) {
-          els.orientationModalDesc.textContent = 'Perangkat Anda sudah dalam posisi horizontal. Ketuk Lanjutkan untuk memulai.';
-        }
-        if (els.orientationHintNote) els.orientationHintNote.style.display = 'none';
-      } else {
-        if (els.orientationModalTitle) els.orientationModalTitle.textContent = 'Miringkan Perangkat Anda';
-        if (portraitReminderGiven) {
-          if (els.orientationModalDesc) {
-            els.orientationModalDesc.textContent = 'Panggung wayang dirancang untuk posisi horizontal. Silakan miringkan HP atau tablet Anda.';
-          }
-          if (els.orientationHintNote) els.orientationHintNote.style.display = 'block';
-        } else {
-          if (els.orientationModalDesc) {
-            els.orientationModalDesc.textContent = 'Untuk menikmati pengalaman Wayang Motion, miringkan HP atau tablet Anda ke posisi horizontal.';
-          }
-          if (els.orientationHintNote) els.orientationHintNote.style.display = 'none';
-        }
+    if (isLandscape) {
+      // Screen is in horizontal landscape:
+      // Automatically dismiss orientation modal & reveal the start screen immediately without blocking
+      hasAcknowledgedOrientation = true;
+      if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
+      if (!state.isActive && !state.isCameraRunning && !state.isStartingCamera) {
+        if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
       }
       return;
     }
 
-    // Step 2: Visitor acknowledged orientation and entered ready-to-start screen
+    // Screen is in portrait (vertical):
+    if (!hasAcknowledgedOrientation) {
+      // Show orientation guidance modal
+      if (els.mobileOrientationModal) els.mobileOrientationModal.classList.remove('hidden');
+      if (els.overlayIntro) els.overlayIntro.classList.add('hidden', 'gone');
+
+      if (els.orientationModalTitle) els.orientationModalTitle.textContent = 'Miringkan Perangkat Anda';
+      if (portraitReminderGiven) {
+        if (els.orientationModalDesc) {
+          els.orientationModalDesc.textContent = 'Panggung wayang dirancang untuk posisi horizontal. Silakan miringkan HP atau tablet Anda.';
+        }
+        if (els.orientationHintNote) els.orientationHintNote.style.display = 'block';
+      } else {
+        if (els.orientationModalDesc) {
+          els.orientationModalDesc.textContent = 'Untuk menikmati pengalaman Wayang Motion, miringkan HP atau tablet Anda ke posisi horizontal.';
+        }
+        if (els.orientationHintNote) els.orientationHintNote.style.display = 'none';
+      }
+      return;
+    }
+
+    // Visitor explicitly acknowledged and chose to proceed in current orientation
     if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
     if (!state.isActive && !state.isCameraRunning && !state.isStartingCamera) {
       if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
@@ -2426,28 +2454,12 @@ void main() {
   }
 
   function handleOrientationContinue() {
-    const isLandscape = isLandscapeOrientation();
-
-    if (isLandscape) {
-      // Device is horizontal: advance to ready screen
-      hasAcknowledgedOrientation = true;
-      updateMobileOrientationFlow();
-      resizeStage();
-      return;
-    }
-
-    // Device is still vertical (portrait):
-    if (!portraitReminderGiven) {
-      // First tap in portrait: prompt to tilt with a non-blocking note for locked screens
-      portraitReminderGiven = true;
-      updateMobileOrientationFlow();
-      return;
-    }
-
-    // Second tap in portrait: user cannot or does not want to rotate (e.g. rotation lock active)
-    // Never trap the visitor indefinitely; advance to ready screen
     hasAcknowledgedOrientation = true;
-    updateMobileOrientationFlow();
+    tryLockLandscape();
+    if (els.mobileOrientationModal) els.mobileOrientationModal.classList.add('hidden');
+    if (!state.isActive && !state.isCameraRunning && !state.isStartingCamera) {
+      if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
+    }
     resizeStage();
     showToast('Melanjutkan ke panggung wayang');
   }
@@ -2578,6 +2590,7 @@ void main() {
   }
 
   function enterFullscreen() {
+    tryLockLandscape();
     const container = els.stageContainer || document.documentElement;
     if (container.requestFullscreen) {
       container.requestFullscreen().catch(() => {
@@ -2598,6 +2611,7 @@ void main() {
   }
 
   function exitFullscreen() {
+    tryUnlockOrientation();
     const isNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
     if (isNativeFs) {
       try {
@@ -3763,6 +3777,9 @@ void main() {
   }
 
   async function startWebcam() {
+    // Attempt landscape lock on mobile/tablet after explicit user gesture
+    tryLockLandscape();
+
     // Prevent duplicate concurrent startup
     if (state.isStartingCamera) return;
     if (state.isCameraRunning) {
@@ -3792,6 +3809,7 @@ void main() {
     }
 
     try {
+      await ensureRendererInitialized();
       // 1. Acquire camera stream with progressive fallbacks
       const stream = await acquireCameraStream();
       state.mediaStream = stream;
@@ -4053,12 +4071,14 @@ void main() {
     if (els.overlayIntro) els.overlayIntro.classList.remove('hidden', 'gone');
     if (els.overlayError) els.overlayError.classList.add('hidden');
     if (els.overlayLoading) els.overlayLoading.classList.add('hidden');
+    tryUnlockOrientation();
     updateMobileOrientationFlow();
 
     showToast('Sesi kamera selesai · Panggung siaga');
   }
 
-  function startInteractiveMode() {
+  async function startInteractiveMode() {
+    await ensureRendererInitialized();
     // If camera was running, stop it first
     if (state.isCameraRunning) {
       stopVideoFrameProcessing();
@@ -4143,20 +4163,27 @@ void main() {
   // Mobile Orientation Flow Handlers
   els.btnOrientationContinue?.addEventListener('click', handleOrientationContinue);
 
-  // Listen to mobile orientation changes
-  window.addEventListener('orientationchange', () => {
+  // Listen to mobile orientation changes immediately
+  const handleOrientationChange = () => {
+    updateMobileOrientationFlow();
+    resizeStage();
     setTimeout(() => {
       updateMobileOrientationFlow();
       resizeStage();
     }, 150);
-  });
+  };
+
+  window.addEventListener('orientationchange', handleOrientationChange);
   if (screen.orientation && typeof screen.orientation.addEventListener === 'function') {
-    screen.orientation.addEventListener('change', () => {
-      setTimeout(() => {
-        updateMobileOrientationFlow();
-        resizeStage();
-      }, 150);
-    });
+    screen.orientation.addEventListener('change', handleOrientationChange);
+  }
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    const mqlLandscape = window.matchMedia('(orientation: landscape)');
+    if (typeof mqlLandscape.addEventListener === 'function') {
+      mqlLandscape.addEventListener('change', handleOrientationChange);
+    } else if (typeof mqlLandscape.addListener === 'function') {
+      mqlLandscape.addListener(handleOrientationChange);
+    }
   }
 
   els.btnFullscreen?.addEventListener('click', toggleFullscreen);
@@ -4337,6 +4364,10 @@ void main() {
   // Safe camera stream & hardware resource cleanup on page navigation / exit
   function cleanupAllResources() {
     stopWebcam();
+    tryUnlockOrientation();
+    if (narrationManager && typeof narrationManager.stop === 'function') {
+      narrationManager.stop();
+    }
     if (rafId) {
       cancelAnimationFrame(rafId);
       rafId = null;
@@ -4374,18 +4405,33 @@ void main() {
     }
   });
 
+  // Deferred / Lazy Renderer Initializer
+  let rendererInitPromise = null;
+  function ensureRendererInitialized() {
+    if (!rendererInitPromise) {
+      rendererInitPromise = initRenderer().then(() => {
+        resizeStage();
+        updateMobileOrientationFlow();
+        resetPuppetsPosition();
+        const shouldKeepModalOpen = els.charModal && !els.charModal.classList.contains('hidden');
+        selectCharacter(puppets[0] || 'prabu-wahyana', shouldKeepModalOpen);
+        state.isReady = true;
+        renderSingleFrame();
+      });
+    }
+    return rendererInitPromise;
+  }
+
   // Initialize and Launch
   if (els.pipBox) {
     els.pipBox.classList.add('hidden');
   }
-  initRenderer().then(() => {
-    resizeStage();
-    updateMobileOrientationFlow();
-    resetPuppetsPosition();
-    const shouldKeepModalOpen = els.charModal && !els.charModal.classList.contains('hidden');
-    selectCharacter(puppets[0] || 'prabu-wahyana', shouldKeepModalOpen);
-    state.isReady = true;
-    renderSingleFrame();
+  updateMobileOrientationFlow();
+
+  // Defer heavy WebGL texture loading until idle to avoid blocking critical initial page paint
+  const scheduleIdleInit = window.requestIdleCallback || ((cb) => setTimeout(cb, 600));
+  scheduleIdleInit(() => {
+    ensureRendererInitialized();
   });
 
   window.wayang = {

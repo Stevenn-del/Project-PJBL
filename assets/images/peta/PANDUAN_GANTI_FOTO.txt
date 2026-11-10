@@ -1,0 +1,53 @@
+================================================================================
+PANDUAN PRAKTIS FOTO BANGUNAN BERSEJARAH PETA JAWA TENGAH (35 DAERAH)
+================================================================================
+
+Folder ini (`assets/images/peta/`) menyimpan seluruh foto BANGUNAN BERSEJARAH ASLI
+(Candi, Benteng, Keraton, Masjid Kuno, Gedung Cagar Budaya Kolonial, Pabrik Gula Kuno)
+untuk halaman Peta Interaktif Jawa Tengah.
+
+Seluruh foto adalah FOTOGRAFI NYATA (bersumber dari dokumentasi publik Wikipedia / Wikimedia Commons,
+tanpa gambar AI dan bukan sekadar monumen tulisan/papan nama).
+
+1. DAFTAR FILE & BANGUNAN BERSEJARAH 35 WILAYAH:
+   01. Banjarnegara      -> peta-banjarnegara.webp    (Candi Arjuna Dieng abad ke-8)
+   02. Banyumas          -> peta-banyumas.webp        (Masjid Saka Tunggal Baitussalam 1288 M)
+   03. Batang            -> peta-batang.webp          (Stasiun Cagar Budaya Batang)
+   04. Blora             -> peta-blora.webp           (Stasiun Bersejarah Cepu 1901)
+   05. Boyolali          -> peta-boyolali.webp        (Candi Lawang Cepogo abad ke-9)
+   06. Brebes            -> peta-brebes.webp          (Pabrik Gula Jatibarang 1842 M)
+   07. Cilacap           -> peta-cilacap.webp         (Benteng Pendem Cilacap 1861 M)
+   08. Demak             -> peta-demak.webp           (Masjid Agung Demak 1479 M)
+   09. Grobogan          -> peta-grobogan.webp        (Stasiun Cagar Budaya Gundih 1869 M)
+   10. Jepara            -> peta-jepara.webp          (Benteng Portugis Jepara 1632 M)
+   11. Karanganyar       -> peta-karanganyar.webp     (Candi Cetho lereng Gunung Lawu abad ke-15)
+   12. Kebumen           -> peta-kebumen.webp         (Benteng Van der Wijck Gombong 1818 M)
+   13. Kendal            -> peta-kendal.webp          (Stasiun Bersejarah Weleri 1897 M)
+   14. Klaten            -> peta-klaten.webp          (Candi Kembar Plaosan Lor abad ke-9)
+   15. Kudus             -> peta-kudus.webp           (Masjid Menara Kudus 1549 M)
+   16. Magelang          -> peta-magelang.webp        (Candi Borobudur abad ke-8)
+   17. Pati              -> peta-pati.webp            (Pintu Gerbang Majapahit Pati)
+   18. Pekalongan        -> peta-pekalongan.webp      (Pendopo Kadipaten Kajen Pekalongan)
+   19. Pemalang          -> peta-pemalang.webp        (Stasiun Cagar Budaya Pemalang 1898 M)
+   20. Purbalingga       -> peta-purbalingga.webp     (Pendopo Dipokusumo Purbalingga 1831 M)
+   21. Purworejo         -> peta-purworejo.webp       (Masjid Agung Darul Muttaqien Purworejo 1834 M)
+   22. Rembang           -> peta-rembang.webp         (Museum R.A. Kartini / Rumah Dinas Bupati)
+   23. Semarang          -> peta-semarang.webp        (Benteng Willem I Ambarawa 1838 M)
+   24. Sragen            -> peta-sragen.webp          (Museum Situs Prasejarah Sangiran)
+   25. Sukoharjo         -> peta-sukoharjo.webp       (Benteng Keraton Kartasura 1680 M)
+   26. Tegal             -> peta-tegal.webp           (Pabrik Gula Pangkah 1832 M)
+   27. Temanggung        -> peta-temanggung.webp      (Candi Pringapus Temanggung 850 M)
+   28. Wonogiri          -> peta-wonogiri.webp        (Museum Karst Indonesia Wonogiri)
+   29. Wonosobo          -> peta-wonosobo.webp        (Candi Bima Dataran Tinggi Dieng)
+   30. Kota Magelang     -> peta-kota-magelang.webp   (Gereja Santo Ignatius Magelang 1865 M)
+   31. Kota Pekalongan   -> peta-kota-pekalongan.webp (Museum Batik Pekalongan 1906 M)
+   32. Kota Salatiga     -> peta-kota-salatiga.webp   (Gedung Dekranasda Salatiga)
+   33. Kota Semarang     -> peta-kota-semarang.webp   (Lawang Sewu / Kantor Pusat NIS 1904 M)
+   34. Kota Surakarta    -> peta-kota-surakarta.webp  (Keraton Kasunanan Surakarta Hadiningrat 1745 M)
+   35. Kota Tegal        -> peta-kota-tegal.webp      (Gedung Birao Tegal / SCS 1913 M)
+
+2. CARA MENGGANTI FOTO:
+   - Siapkan foto bangunan bersejarah baru Anda (rasio landscape 16:10 / 800x500 pixel).
+   - Masukkan file ke folder ini dengan nama file yang sama.
+   - Format didukung: .webp, .jpg, .jpeg, atau .png (sistem js/peta.js otomatis menangani fallback).
+================================================================================

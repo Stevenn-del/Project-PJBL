@@ -219,7 +219,7 @@ VALUES
     'pejuang',
     'Jepara',
     'Memerintah 1549–1579 M',
-    'assets/images/timeline/timeline-highlight-benteng-ambarawa.webp',
+    'assets/images/tokoh/tokoh-ratu-kalinyamat.webp',
     'Harta dan kedaulatan tanah air tidak akan pernah tunduk kepada bangsa penjajah samudra.',
     '["Mengirim ratusan armada kapal perang berkekuatan ribuan prajurit melawan Portugis di Malaka (1551 & 1574)", "Memimpin bandar Jepara sebagai pusat perniagaan maritim internasional terbesar di Jawa", "Dianugerahi gelar Pahlawan Nasional Republik Indonesia atas kepahlawanan baharinya"]'::jsonb,
     'Retna Kencana, yang bergelar Ratu Kalinyamat, adalah putri Sultan Trenggono dari Demak yang memimpin Jepara dengan kecakapan diplomasi dan militer maritim luar biasa. Bangsa Portugis dalam catatan sejarahnya menjulukinya ''Rainha de Japara, Senhora Poderosa e Rica'' (Ratu Jepara yang amat kuat dan kaya raya).'
@@ -407,20 +407,20 @@ VALUES
     'Kisah mistis perjanjian luhur antara Sultan Agung Hanyokrokusumo dengan Kanjeng Ratu Kidul penguasa Laut Selatan, lambang kesetiaan dan kosmos spiritual Jawa.'
 ),
 (
-    'candi-dieng',
-    'Kompleks Percandian Dieng',
-    'PERCANDIAN DIENG',
+    'candi-arjuna',
+    'Candi Arjuna',
+    'CANDI ARJUNA',
     'BANJARNEGARA',
-    'Tempat suci para dewata di dataran tinggi berkabut',
-    '#Dieng • Candi',
+    'Pusaka candi Hindu Siwa tertua di tanah Jawa',
+    '#Banjarnegara • Candi',
     'candi',
     'Candi & Arsitektur Megah',
     'Cagar Budaya Nasional Peringkat Satu',
     'Dataran Tinggi Dieng, Banjarnegara',
-    'Abad ke-7–8 Masehi',
-    'assets/images/timeline/timeline-era-kuno.webp',
-    'Gugusan candi tertua di pulau Jawa yang berdiri di dataran tinggi vulkanik berkabut 2.000 meter di atas permukaan laut, dinamai berdasarkan ksatria Pandawa.',
-    '''Di-Hyang'' bermakna tempat bersemayamnya para dewata; tempat suci pembersihan jiwa para resi dan pertapa Jawa kuno.'
+    'Wangsa Sanjaya, Mataram Kuno (± Abad ke-8 M)',
+    'assets/images/warisan-budaya/warisan-candi-arjuna.webp',
+    'Candi Hindu beraliran Siwa tertua di Pulau Jawa yang berdiri anggun pada ketinggian 2.093 mdpl di Dataran Tinggi Dieng, memimpin gugusan lima candi purba pemujaan dewa.',
+    'Filosofi Siwaisme pegunungan: dataran tinggi Di-Hyang dipandang sebagai replika suci poros kosmos tempat bersemayamnya para dewata dan penyucian sukma para resi Jawa kuno.'
 )
 ON CONFLICT (slug) DO UPDATE SET
     title = EXCLUDED.title,
@@ -460,11 +460,11 @@ VALUES
     'Candi Arjuna di Dataran Tinggi Dieng, peninggalan peradaban kuno Jawa Tengah',
     'linear-gradient(to bottom, #11100e 0%, #1e1b15 50%, #080808 100%)',
     '#e1ca7a',
-    '± Abad 4–7 M · Kalingga & Percandian Dieng',
+    '± Abad ke-7–8 M · Kalingga & Candi Arjuna',
     'Dataran Tinggi Dieng & Pesisir Jepara',
-    'Pusaka Arsitektur Abad ke-7 M',
-    'Kompleks Percandian Dieng',
-    'Banjarnegara & Wonosobo'
+    'Pusaka Arsitektur Abad ke-8 M',
+    'Candi Arjuna',
+    'Kabupaten Banjarnegara'
 ),
 (
     'era-candi',
@@ -634,7 +634,7 @@ VALUES
     '["Kota Lama Semarang", "Lawang Sewu", "Masjid Agung Semarang", "Klenteng Sam Poo Kong"]'::jsonb,
     'Tumbuh sebagai bandar penting di pesisir utara Jawa sejak abad ke-15 dan berkembang pesat sebagai simpul perniagaan Hindia Belanda.',
     'Di Kota Lama, jejak arsitektur bernuansa Eropa berpadu dengan denyut pelabuhan yang menghubungkan Jawa dengan peradaban dunia.',
-    'assets/images/timeline/timeline-highlight-benteng-ambarawa.webp'
+    'assets/images/peta/peta-kota-semarang.webp'
 ),
 (
     'Kabupaten Semarang',
@@ -646,7 +646,7 @@ VALUES
     '["Candi Gedong Songo", "Museum Kereta Api Ambarawa", "Benteng Willem I Ambarawa"]'::jsonb,
     'Kawasan ini berkembang sebagai penghubung dataran tinggi, pesisir utara, dan pusat-pusat kerajaan Mataram di pedalaman.',
     'Kompleks Candi Gedong Songo berdiri megah di lereng Gunung Ungaran dengan hembusan belerang dan panorama lembah berkabut.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-semarang.webp'
 ),
 (
     'Kabupaten Magelang',
@@ -658,7 +658,7 @@ VALUES
     '["Candi Borobudur", "Candi Mendut", "Candi Pawon"]'::jsonb,
     'Pusat spiritual peradaban Buddha Mahayana pada abad ke-8 hingga ke-9 Masehi.',
     'Candi Borobudur, Pawon, dan Mendut berdiri pada satu poros garis imajiner lurus yang sarat makna filosofis peribadatan suci.',
-    'assets/images/home/slide-3-borobudur.webp'
+    'assets/images/peta/peta-magelang.webp'
 ),
 (
     'Kota Magelang',
@@ -670,7 +670,7 @@ VALUES
     '["Museum BPK RI", "Alun-alun Kota Magelang", "Menara Air Waterleiding", "Museum Diponegoro"]'::jsonb,
     'Kawasan militer strategis Hindia Belanda dan pusat perundingan bersejarah tahun 1830.',
     'Kota Magelang dikelilingi lima gunung legendaris: Merapi, Merbabu, Sindoro, Sumbing, dan Gunung Tidar sebagai ''Paku Tanah Jawa''.',
-    'assets/images/home/slide-3-borobudur.webp'
+    'assets/images/peta/peta-kota-magelang.webp'
 ),
 (
     'Kabupaten Klaten',
@@ -682,7 +682,7 @@ VALUES
     '["Candi Prambanan", "Candi Plaosan", "Candi Sewu", "Candi Sojiwan"]'::jsonb,
     'Berkembang pesat pada abad ke-9 sebagai lambang persatuan wangsa Sanjaya dan Syailendra.',
     'Candi Plaosan mencerminkan kisah cinta sejati antara Rakai Pikatan (Hindu) dan Pramodhawardhani (Buddha).',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-klaten.webp'
 ),
 (
     'Kabupaten Demak',
@@ -694,7 +694,7 @@ VALUES
     '["Masjid Agung Demak", "Makam Sunan Kalijaga Kadilangu", "Pintu Bledeg"]'::jsonb,
     'Masa keemasan kesultanan maritim Islam nusantara pada abad ke-15 hingga ke-16.',
     'Masjid Agung Demak ditopang oleh empat saka guru kayu jati raksasa, salah satunya ''Saka Tatal'' buatan Sunan Kalijaga.',
-    'assets/images/timeline/timeline-highlight-batik-keris.webp'
+    'assets/images/peta/peta-demak.webp'
 ),
 (
     'Kabupaten Jepara',
@@ -706,7 +706,7 @@ VALUES
     '["Benteng Portugis", "Museum R.A. Kartini", "Masjid Mantingan", "Seni Ukir Tradisional"]'::jsonb,
     'Armada maritim Jepara mampu mengirim ratusan kapal perang melawan bangsa Portugis di Selat Malaka pada abad ke-16.',
     'Ratu Kalinyamat dikenal oleh bangsa Portugis sebagai ''Rainha de Japara, Senhora Poderosa e Rica'' (Ratu Jepara yang kuat dan kaya raya).',
-    'assets/images/home/slide-2-wayang.webp'
+    'assets/images/peta/peta-jepara.webp'
 ),
 (
     'Kota Surakarta',
@@ -718,7 +718,7 @@ VALUES
     '["Keraton Kasunanan Surakarta", "Pura Mangkunegaran", "Pasar Gede Harjonagoro", "Kampung Batik Laweyan"]'::jsonb,
     'Pusat monarki, kesusastraan Jawa, seni tari bedhaya, dan tradisi batik sejak perpindahan Kartasura ke Sala tahun 1745.',
     'Tradisi karawitan, tarian sakral bedhaya ketawang, dan falsafah batik adiluhung tetap lestari hidup di tengah masyarakat Solo masa kini.',
-    'assets/images/timeline/timeline-highlight-batik-keris.webp'
+    'assets/images/peta/peta-kota-surakarta.webp'
 ),
 (
     'Kabupaten Banjarnegara',
@@ -730,7 +730,7 @@ VALUES
     '["Kompleks Candi Arjuna", "Kawah Sikidang", "Telaga Warna", "Tradisi Ruwatan Rambut Gimbal"]'::jsonb,
     'Pusat pemujaan dewa-dewi Siwa sejak abad ke-7 hingga ke-8 Masehi.',
     'Tradisi pemotongan rambut gimbal anak Dieng menjadi ritual sakral tahunan yang sarat nilai spiritual.',
-    'assets/images/timeline/timeline-era-kuno.webp'
+    'assets/images/peta/peta-banjarnegara.webp'
 ),
 (
     'Kabupaten Banyumas',
@@ -742,7 +742,7 @@ VALUES
     '["Pusaka Kalibening", "Wayang Kulit Gagrag Banyumasan", "Situs Baturraden"]'::jsonb,
     'Kawasan kadipaten agraris bersejarah yang mandiri di lembah Gunung Slamet sejak era Pajang dan Mataram.',
     'Falsafah Bawor melambangkan watak kesatria blakasuta (jujur, apa adanya, dan teguh pendirian).',
-    'assets/images/home/slide-2-wayang.webp'
+    'assets/images/peta/peta-banyumas.webp'
 ),
 (
     'Kabupaten Batang',
@@ -754,7 +754,7 @@ VALUES
     '["Prasasti Sojomerto", "Pantai Sigandu", "Cagar Budaya Silurah"]'::jsonb,
     'Simpul maritim dan perlintasan pantai utara Jawa sejak abad ke-7 Masehi.',
     'Prasasti Sojomerto beraksara Pallawa berbahasa Melayu Kuna membuktikan hubungan kultural lintas pulau Nusantara purba.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-batang.webp'
 ),
 (
     'Kabupaten Blora',
@@ -766,7 +766,7 @@ VALUES
     '["Kampung Samin Sambongrejo", "Monumen Hutan Jati Gugur", "Sumur Minyak Tua Ledok"]'::jsonb,
     'Pusat perlawanan damai kultural tanpa kekerasan kaum Samin terhadap kolonialisme Belanda abad ke-19.',
     'Falsafah Samin mengajarkan kejujuran murni, tidak iri dengki, dan menjaga kelestarian bumi pertiwi.',
-    'assets/images/timeline/timeline-era-kemerdekaan.webp'
+    'assets/images/peta/peta-blora.webp'
 ),
 (
     'Kabupaten Boyolali',
@@ -778,7 +778,7 @@ VALUES
     '["Candi Lawang", "Situs Petirtaan Cabean Kunti", "Kawasan Selo Merapi-Merbabu"]'::jsonb,
     'Kawasan penyangga spiritual dan sumber air peradaban Mataram Kuno.',
     'Candi Lawang dan Candi Sari membuktikan denyut peribadatan suci di lereng timur Gunung Merapi.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-boyolali.webp'
 ),
 (
     'Kabupaten Brebes',
@@ -790,7 +790,7 @@ VALUES
     '["Batik Tulis Salem", "Candi Pangkuan Paguyangan", "Pabrik Gula Jatibarang"]'::jsonb,
     'Daerah perbatasan strategis yang kaya akulturasi bahasa dan seni sejak era Kerajaan Pajajaran dan Demak.',
     'Tradisi batik motif Manggar dan Kopi Pecah di Salem diwariskan turun temurun melintasi pegunungan Brebes selatan.',
-    'assets/images/warisan-budaya/warisan-batik-tulis.webp'
+    'assets/images/peta/peta-brebes.webp'
 ),
 (
     'Kabupaten Cilacap',
@@ -802,7 +802,7 @@ VALUES
     '["Benteng Pendem Cilacap", "Kawasan Segara Anakan", "Situs Makam Daun Lumbung"]'::jsonb,
     'Bandar bahari Samudra Hindia dan benteng maritim sejak abad ke-19.',
     'Benteng Pendem (Kustbatterij op de Landtong te Tjilatjap) dibangun tersembunyi di bawah bukit pasir pantai selatan.',
-    'assets/images/timeline/timeline-highlight-benteng-ambarawa.webp'
+    'assets/images/peta/peta-cilacap.webp'
 ),
 (
     'Kabupaten Grobogan',
@@ -814,7 +814,7 @@ VALUES
     '["Api Abadi Mrapen", "Bledug Kuwu", "Makam Ki Ageng Selo sang Penangkap Petir"]'::jsonb,
     'Pusat legenda Medang Kamulan dan mitologi asal muasal aksara Carakan Ha-Na-Ca-Ra-Ka.',
     'Api Abadi Mrapen menjadi sumber api obor suci pesta olahraga nasional (PON), SEA Games, dan perayaan Waisak Borobudur.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-grobogan.webp'
 ),
 (
     'Kabupaten Karanganyar',
@@ -826,7 +826,7 @@ VALUES
     '["Candi Cetho", "Candi Sukuh", "Astana Giribangun & Mangadeg", "Desa Wisata Ngargoyoso"]'::jsonb,
     'Tempat suci ruwatan pelepasan kutukan era akhir Majapahit abad ke-15.',
     'Relief Candi Sukuh dan Cetho memiliki gaya arsitektur punden berundak unik yang berbeda dari candi-candi Jawa Tengah lainnya.',
-    'assets/images/timeline/timeline-era-kuno.webp'
+    'assets/images/peta/peta-karanganyar.webp'
 ),
 (
     'Kabupaten Kebumen',
@@ -838,7 +838,7 @@ VALUES
     '["Benteng Van der Wijck Gombong", "Geopark Karangsambung", "Gua Jatijajar"]'::jsonb,
     'Penyuplai logistik utama pasukan Sultan Agung saat menyerbu VOC di Batavia.',
     'Karangsambung merupakan laboratorium geologi alam dasar samudra purba yang terangkat ke permukaan jutaan tahun silam.',
-    'assets/images/timeline/timeline-highlight-benteng-ambarawa.webp'
+    'assets/images/peta/peta-kebumen.webp'
 ),
 (
     'Kabupaten Kendal',
@@ -850,7 +850,7 @@ VALUES
     '["Makam Pahlawan Bahurekso", "Masjid Agung Kendal", "Pantai Sendang Sikucing"]'::jsonb,
     'Pangkalan armada laut dan gudang perbekalan militer Mataram abad ke-17.',
     'Tradisi Syawalan Kaliwungu menjadi salah satu ziarah keagamaan dan kebudayaan terbesar di pesisir utara.',
-    'assets/images/home/slide-2-wayang.webp'
+    'assets/images/peta/peta-kendal.webp'
 ),
 (
     'Kabupaten Kudus',
@@ -862,7 +862,7 @@ VALUES
     '["Masjid Menara Kudus", "Makam Sunan Muria", "Rumah Adat Kudus Joglo Pencu", "Museum Kretek"]'::jsonb,
     'Simbol toleransi agama tertinggi di mana Sunan Kudus melarang menyembelih sapi demi menghormati umat Hindu setempat.',
     'Menara Kudus dibangun dari batu bata merah tanpa semen dengan pola arsitektur menyerupai candi Singasari.',
-    'assets/images/tokoh/tokoh-kalijaga.webp'
+    'assets/images/peta/peta-kudus.webp'
 ),
 (
     'Kabupaten Pati',
@@ -874,7 +874,7 @@ VALUES
     '["Makam Syekh Jangkung Landoh", "Pintu Gerbang Majapahit Muktiharjo", "Kawasan Pegunungan Kendeng"]'::jsonb,
     'Wilayah otonom berdaulat sejak keruntuhan Majapahit hingga masa transisi Mataram.',
     'Pintu Gerbang Majapahit di Rendole menjadi saksi bisu adu kesaktian para kesatria Jawa kuno.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-pati.webp'
 ),
 (
     'Kabupaten Pekalongan',
@@ -886,7 +886,7 @@ VALUES
     '["Sentra Batik Pesisir Wiradesa", "Candi Rogoselo", "Curug Bajing Petungkriyono"]'::jsonb,
     'Jalur sutra perniagaan kain dan rempah-rempah sejak era Sriwijaya dan Majapahit.',
     'Hutan lindung Petungkriyono di Pekalongan atas merupakan habitat alami owa Jawa dan peninggalan megalitikum Rogoselo.',
-    'assets/images/warisan-budaya/warisan-batik-tulis.webp'
+    'assets/images/peta/peta-pekalongan.webp'
 ),
 (
     'Kota Pekalongan',
@@ -898,7 +898,7 @@ VALUES
     '["Museum Batik Pekalongan", "Kampung Batik Kauman & Pesindon", "Kawasan Jetayu"]'::jsonb,
     'Ibukota Batik Dunia dengan motif pesisir multikultural perpaduan Jawa, Arab, Tionghoa, dan Eropa.',
     'Batik Pekalongan kaya warna-warni cerah seperti motif Jlamprang yang terinspirasi kain Patola sutra India.',
-    'assets/images/warisan-budaya/warisan-batik-tulis.webp'
+    'assets/images/peta/peta-kota-pekalongan.webp'
 ),
 (
     'Kabupaten Pemalang',
@@ -910,7 +910,7 @@ VALUES
     '["Kriya Tenun Ikat Goyor", "Situs Makam Pangeran Benowo", "Pantai Widuri"]'::jsonb,
     'Bagian penting jalur perniagaan Pantura dan pusat kriya tenun tradisional alat tenun bukan mesin (ATBM).',
     'Sarung tenun goyor Pemalang memiliki sifat unik: sejuk dipakai saat cuaca panas, dan hangat saat udara dingin.',
-    'assets/images/warisan-budaya/warisan-pusaka-keris.webp'
+    'assets/images/peta/peta-pemalang.webp'
 ),
 (
     'Kabupaten Purbalingga',
@@ -922,7 +922,7 @@ VALUES
     '["Monumen Tempat Lahir Jenderal Soedirman", "Desa Wisata Lembah Asri Serang", "Situs Megalitikum Batu Tulis"]'::jsonb,
     'Wilayah bersejarah Kadipaten Onje yang berdiri sejak era Kesultanan Pajang abad ke-16.',
     'Rumah masa kecil Jenderal Soedirman di Bodas Karangjati kini diabadikan sebagai museum edukasi kepahlawanan.',
-    'assets/images/timeline/timeline-era-kemerdekaan.webp'
+    'assets/images/peta/peta-purbalingga.webp'
 ),
 (
     'Kabupaten Purworejo',
@@ -934,7 +934,7 @@ VALUES
     '["Bedug Kyai Bagelen di Masjid Darul Muttaqin", "Museum WR Soepratman", "Benteng Pendem Pendowo"]'::jsonb,
     'Pusat kebangkitan perwira militer pelopor kemerdekaan Republik Indonesia.',
     'Bedug Kyai Bagelen dibuat dari pangkal kayu jati raksasa utuh bercabang lima pada tahun 1834.',
-    'assets/images/warisan-budaya/warisan-gamelan-ageng.webp'
+    'assets/images/peta/peta-purworejo.webp'
 ),
 (
     'Kabupaten Rembang',
@@ -946,7 +946,7 @@ VALUES
     '["Kompleks Makam R.A. Kartini Bulu", "Kota Pusaka Batik Tulis Lasem", "Klenteng Cu An Kiong"]'::jsonb,
     'Pusat diplomasi akulturasi damai Jawa-Tionghoa tertua di pesisir Nusantara.',
     'Batik Tulis Tiga Negeri Lasem memadukan warna merah darah ayam khas Tionghoa, biru tua Belanda, dan sogan cokelat khas Solo-Yogya.',
-    'assets/images/tokoh/tokoh-kartini.webp'
+    'assets/images/peta/peta-rembang.webp'
 ),
 (
     'Kota Salatiga',
@@ -958,7 +958,7 @@ VALUES
     '["Prasasti Plumpungan", "Gedung Papak Peninggalan Kolonial", "Kawasan Tingkir"]'::jsonb,
     'Prasasti Plumpungan menetapkan daerah Hampran (Salatiga) sebagai tanah perdikan bebas pajak berkat kearifan warganya.',
     'Salatiga sering dinobatkan sebagai salah satu kota paling toleran di Indonesia berkat keharmonisan warganya.',
-    'assets/images/home/slide-1-prambanan.webp'
+    'assets/images/peta/peta-kota-salatiga.webp'
 ),
 (
     'Kabupaten Sragen',
@@ -970,7 +970,7 @@ VALUES
     '["Situs Manusia Purba Sangiran", "Museum Bukuran & Ngebung", "Pemandian Air Panas Bayanan"]'::jsonb,
     'Menyimpan fosil Homo erectus yang menyumbang lebih dari 50% temuan fosil manusia purba dunia.',
     'Koleksi fosil Sangiran berusia 1,5 juta tahun mengisahkan awal mula migrasi manusia di muka bumi.',
-    'assets/images/home/slide-3-borobudur.webp'
+    'assets/images/peta/peta-sragen.webp'
 ),
 (
     'Kabupaten Sukoharjo',
@@ -982,7 +982,7 @@ VALUES
     '["Desa Pengrajin Gamelan Wirun", "Sentra Jamu Nguter", "Petilasan Keraton Kartasura"]'::jsonb,
     'Kawasan cikal bakal berdirinya Keraton Kasunanan Surakarta setelah keruntuhan Kartasura.',
     'Gamelan tempaan empu Desa Wirun diekspor ke berbagai museum, universitas, dan sanggar seni di Amerika Serikat, Eropa, dan Jepang.',
-    'assets/images/warisan-budaya/warisan-gamelan-ageng.webp'
+    'assets/images/peta/peta-sukoharjo.webp'
 ),
 (
     'Kabupaten Tegal',
@@ -994,7 +994,7 @@ VALUES
     '["Makam Ki Gede Sebayu Danawarih", "Wisata Alam Air Panas Guci", "Candi Bogoresik"]'::jsonb,
     'Pusat rekayasa saluran irigasi Kali Gung yang memakmurkan pesisir barat sejak abad ke-16.',
     'Tradisi Moci (minum teh poci tanah liat berpemanis gula batu) menjadi ritual keakraban sosial warga Tegal.',
-    'assets/images/home/slide-2-wayang.webp'
+    'assets/images/peta/peta-tegal.webp'
 ),
 (
     'Kota Tegal',
@@ -1006,7 +1006,7 @@ VALUES
     '["Monumen Bahari Kota Tegal", "Gedung Lanal Tegal", "Kawasan Pelabuhan Muarareja"]'::jsonb,
     'Pusat latihan opsir laut dan cikal bakal berdirinya Korps Marinir TNI AL pada tahun 1945.',
     'Dijuluki ''Jepang-nya Indonesia'' karena kepiawaian artisan bengkel logam lokal memproduksi komponen mesin presisi.',
-    'assets/images/timeline/timeline-era-kemerdekaan.webp'
+    'assets/images/peta/peta-kota-tegal.webp'
 ),
 (
     'Kabupaten Temanggung',
@@ -1018,7 +1018,7 @@ VALUES
     '["Situs Liyangan", "Candi Pringapus", "Makam Ki Ageng Makukuhan"]'::jsonb,
     'Situs Liyangan mengungkap kota permukiman peradaban Mataram Kuno yang terkubur lahar erupsi Sindoro ribuan tahun lampau.',
     'Situs Liyangan kerap dijuluki sebagai ''Pompeii-nya Indonesia'' karena mengawetkan perkampungan batu Jawa kuno secara utuh.',
-    'assets/images/timeline/timeline-era-kuno.webp'
+    'assets/images/peta/peta-temanggung.webp'
 ),
 (
     'Kabupaten Wonogiri',
@@ -1030,7 +1030,7 @@ VALUES
     '["Monumen Tugu Bedidok Pangeran Sambernyawa", "Waduk Gajah Mungkur", "Museum Karst Wonogiri"]'::jsonb,
     'Markas taktik gerilya Pangeran Sambernyawa yang tak pernah terkalahkan dalam 250 pertempuran melawan kompeni.',
     'Kawasan karst pegunungan Sewu Wonogiri merupakan cagar biosfer dunia dengan jejaring gua prasejarah menawan.',
-    'assets/images/timeline/timeline-highlight-benteng-ambarawa.webp'
+    'assets/images/peta/peta-wonogiri.webp'
 ),
 (
     'Kabupaten Wonosobo',
@@ -1042,7 +1042,7 @@ VALUES
     '["Kesenian Musik Tradisional Bundengan", "Telaga Menjer", "Makam Tiga Tokoh Pendiri Wonosobo"]'::jsonb,
     'Pusat spiritual pegunungan Jawa tengah yang kaya kesenian agraris tari lengger dan musik kowangan.',
     'Bundengan mulanya adalah tudung kepala penggembala bebek yang dialihfungsikan menjadi instrumen musik petik unik menirukan gamelan.',
-    'assets/images/warisan-budaya/warisan-gamelan-ageng.webp'
+    'assets/images/peta/peta-wonosobo.webp'
 )
 ON CONFLICT (name) DO UPDATE SET
     geojson_file = EXCLUDED.geojson_file,
